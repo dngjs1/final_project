@@ -125,7 +125,7 @@
                 data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#">로그아웃 </a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogout.do">로그아웃 </a>|</h5>
               </li>
               
              <!--  <li class="nav-item">
