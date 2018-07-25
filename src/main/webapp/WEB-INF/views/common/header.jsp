@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
+
 <c:set var='path' value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -34,6 +37,37 @@
   </style>
 </head>
 
+
+   <!-- 로그인 창을 뜨게하는 모달 구성 -->   
+   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" 
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <!--로그인폼 : https://getbootstrap.com/docs/4.1/components/forms/#overview -->
+          <form action="${pageContext.request.contextPath}/memberLogin.do" method="post">
+         <div class="modal-body">
+             <input type="text" class="form-control" name="member_id" placeholder="아이디" required>
+             <br />
+             <input type="password" class="form-control" name="member_pw" placeholder="비밀번호" required>
+         </div>
+         <div class="modal-footer">
+           <button type="submit" class="btn btn-outline-success" >로그인</button>
+           <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+         </div>
+        </form>
+       </div>
+     </div>
+   </div>
+
+
+
+
 <body>
   <!--헤더부분 시작-->
   <header>
@@ -50,13 +84,21 @@
             </ul>
           </div>
           <div class="col-6">
+          
+          <c:if test="${memberLoggedIn==null }">
             <ul class="nav justify-content-end mt-1">
+            
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3" href="">회원가입 <i class="far fa-handshake"></i></a>|</h5>
+		           <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" 
+		               data-target="#loginModal">로그인버튼이당</button>
+	          </li>
+            
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3" href="${pageContext.request.contextPath}/memberEnroll.do">회원가입 <i class="far fa-handshake"></i></a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#">로그인 <i class="fas fa-sign-in-alt"></i></a>|</h5>
-              </li>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogin.do">로그인 <i class="fas fa-sign-in-alt"></i></a>|</h5>
+              </li>  
               <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#">ID/비밀번호 찾기 <i class="fas fa-search"></i></a>|</h5>
               </li>
@@ -69,9 +111,29 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3 dropdown-toggle" ref="#" title="장바구니" 
                 data-toggle="dropdown">장바구니 <i class="fas fa-cart-plus"></i></a></h5>
               </li> -->
-              
-           
+			</ul>
+			</c:if>
+			<c:if test="${memberLoggedIn!=null }">
+			<ul class="nav justify-content-end mt-1">
+            	
+             <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#"><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.	</a>|</h5>
+              </li>
             
+               <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
+                data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#">로그아웃 </a>|</h5>
+              </li>
+              
+             <!--  <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3 dropdown-toggle" ref="#" title="장바구니" 
+                data-toggle="dropdown">장바구니 <i class="fas fa-cart-plus"></i></a></h5>
+              </li> -->
+			</ul>
+			</c:if>
           </div>
         </div>
       </div>
