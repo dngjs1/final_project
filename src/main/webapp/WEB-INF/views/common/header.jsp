@@ -92,8 +92,6 @@
 		           <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" 
 		               data-target="#loginModal">로그인버튼이당</button>
 	          </li>
-            
-
               <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogin.do">로그인<i class="fas fa-sign-in-alt"></i></a>|</h5>
               </li>  
@@ -117,10 +115,12 @@
 			<c:if test="${memberLoggedIn!=null }">
 			<ul class="nav justify-content-end mt-1">
             	
-             <li class="nav-item">
+              <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#"><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.	</a>|</h5>
               </li>
-            
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberView.do">마이페이지 </a>|</h5>
+              </li>
                <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
                 data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>

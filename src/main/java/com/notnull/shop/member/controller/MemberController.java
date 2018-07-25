@@ -102,4 +102,10 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	
+	@RequestMapping("memberView.do")
+	public String memberView() {
+		
+		return "member/memberView";
+	}
 }
