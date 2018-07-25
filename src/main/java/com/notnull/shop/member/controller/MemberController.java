@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
@@ -95,8 +96,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberLogout.do")
-	public String memberLogout() {
-		
+	public String memberLogout(SessionStatus sessionStatus) {
+		if(!sessionStatus.isComplete()) {
+			sessionStatus.setComplete();
+		}
 		return "redirect:/";
 	}
 }
