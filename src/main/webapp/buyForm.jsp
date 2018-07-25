@@ -76,7 +76,7 @@
 		<tr>
 		<tr>
 			<td class="border-info">휴대폰 번호</td>
-			<td class="border-info">010-9779-0172</td>
+			<td class="border-info">010-1111-1111</td>
 		<tr>
 	</table>
 	<h5>상품 정보</h5>
