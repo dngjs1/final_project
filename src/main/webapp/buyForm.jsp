@@ -63,8 +63,22 @@
 			<td class="border-info">010-9779-0172</td>
 		<tr>
 	</table>
+	<br>
 	<h5>받는사람 정보</h5>
-	
+	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
+		<tr>
+			<td class="border-info">이름</td>
+			<td class="border-info">김우헌 천재</td>
+		<tr>
+		<tr>
+			<td class="border-info">이메일</td>
+			<td class="border-info">dngjs1@naver.com</td>
+		<tr>
+		<tr>
+			<td class="border-info">휴대폰 번호</td>
+			<td class="border-info">010-9779-0172</td>
+		<tr>
+	</table>
 	<h5>상품 정보</h5>
 	<table class="table table-bordered" style="font-size:13px;">
 		<tr class="tr1">
