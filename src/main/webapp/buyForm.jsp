@@ -52,7 +52,7 @@
 	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
 		<tr>
 			<td class="border-info">이름</td>
-			<td class="border-info">김우헌 천재</td>
+			<td class="border-info">김우헌</td>
 		<tr>
 		<tr>
 			<td class="border-info">이메일</td>
@@ -68,7 +68,7 @@
 	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
 		<tr>
 			<td class="border-info">이름</td>
-			<td class="border-info">김우헌 천재</td>
+			<td class="border-info">백종훈</td>
 		<tr>
 		<tr>
 			<td class="border-info">이메일</td>
