@@ -96,6 +96,7 @@ public class MemberController {
 	
 	@RequestMapping("memberLogout.do")
 	public String memberLogout() {
+		
 		return "redirect:/";
 	}
 }
