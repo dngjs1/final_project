@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+
+	
+	<!-- devLang = 객체: 배열 / DB: 문자열 => 따로 선언을 해주면 됨 -->
+	<resultMap type="productListJoin" id="productListJoinMap">			
+	</resultMap>
+	
+	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
+	<select id="selectProductList" resultMap="productListJoinMap">
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+	</select>
+ 
+ 	<select id="selectCategoryList" resultType="productCategory">
+ 		select * from product_category
+ 	</select>
+ 
+ 	
+ 
+	<insert id="insertProduct" parameterType="product">
+	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date) 
+	VALUES(PRODUCT_SEQ.NEXTVAL,#{price},#{product_name},#{release_date},#{country},#{real_size},#{p_category_code},#{p_board_content},sysdate)
+	<selectKey keyProperty="product_code" resultType="_int" order="AFTER"> SELECT PRODUCT_SEQ.CURRVAL FROM DUAL </selectKey>
+	</insert>
+	
+	<insert id="insertImgList" parameterType="productImg">
+	INSERT INTO product_img(p_img_code, p_img_path, new_p_img_path, product_code) 
+	VALUES(product_img_seq.nextval,#{p_img_path},#{new_p_img_path},#{product_code})
+	</insert>
+  
+  
+  
+  
+</mapper>
