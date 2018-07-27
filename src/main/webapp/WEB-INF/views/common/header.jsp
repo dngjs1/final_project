@@ -67,7 +67,7 @@
 
 
 
-<body>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" >
   <!--헤더부분 시작-->
   <header>
     <div class="header">

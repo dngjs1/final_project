@@ -216,14 +216,9 @@ $(window).scroll(function() {
 
 	</style>
 	
-<div class="container">
+<div class="container" >
+	
 	<div class ="row">
-
-
-	
-
-	
-
 		<div class = "col-1">
 			<nav class="col-1  show-on-scroll" id="myScrollspy">
       <ul class="nav nav-pills flex-column " style = "border:1px solid; background-color:#fafafa">
@@ -231,7 +226,7 @@ $(window).scroll(function() {
           <a class="nav-link active" href="#section1" title = "여행"><i class="fas fa-swimmer"> 수영</i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#section2"><i class="fab fa-free-code-camp"><b> 캠프</b></i></a>
+          <a class="nav-link" href="#section2"><i class="fab fa-free-code-camp"><b> 캠프</b></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#section3"><i class="fas fa-fish"></i><b> 낚시</b></a>
@@ -439,7 +434,7 @@ $(window).scroll(function() {
 
 <div class="col-4">
 						<div class="hover-box">
-						  	<img src="images/photo-6.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
+						  	<img src="./resources/images/photo-6.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -495,7 +490,7 @@ $(window).scroll(function() {
             </div>
 
             <div class="hover-box">
-						  	<img src="images/photo-2.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
+						  	<img src="./resources/images/photo-2.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -586,13 +581,13 @@ $(window).scroll(function() {
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                  <img class="d-block img-fluid" src="images/camp-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/camp-1.jpg">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block img-fluid" src="images/camp-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/camp-1.jpg">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block img-fluid" src="images/camp-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/camp-1.jpg">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -645,7 +640,7 @@ $(window).scroll(function() {
 
 					<div class="col-4">
 						<div class="hover-box">
-						  	<img src="images/camp-2.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
+						  	<img src="./resources/images/camp-2.jpg" alt="photo-2.jpeg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -699,7 +694,7 @@ $(window).scroll(function() {
             </div>
 
             <div class="hover-box">
-						  	<img src="images/camp-3.jpg" alt="camp-3.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/camp-3.jpg" alt="camp-3.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -769,7 +764,7 @@ $(window).scroll(function() {
 
 <div class="col-4">
 						<div class="hover-box">
-						  	<img src="images/camp-5.jpg" alt="camp-5.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/camp-5.jpg" alt="camp-5.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -825,7 +820,7 @@ $(window).scroll(function() {
             </div>
 
             <div class="hover-box">
-						  	<img src="images/camp-4.jpg" alt="camp-4.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/camp-4.jpg" alt="camp-4.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -902,13 +897,13 @@ $(window).scroll(function() {
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                  <img class="d-block img-fluid" src="images/swim-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/swim-1.jpg">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block img-fluid" src="images/swim-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/swim-1.jpg">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block img-fluid" src="images/swim-1.jpg">
+                  <img class="d-block img-fluid" src="./resources/images/swim-1.jpg">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -961,7 +956,7 @@ $(window).scroll(function() {
 
 					<div class="col-4">
 						<div class="hover-box">
-						  	<img src="images/swim-2.jpg" alt="swim-2.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/swim-2.jpg" alt="swim-2.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -1009,7 +1004,7 @@ $(window).scroll(function() {
             </div>
 
             <div class="hover-box">
-						  	<img src="images/swim-4.jpg" alt="swim-4.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/swim-4.jpg" alt="swim-4.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -1079,7 +1074,7 @@ $(window).scroll(function() {
 
 <div class="col-4">
 						<div class="hover-box">
-						  	<img src="images/swim-3.jpg" alt="swim-3.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/swim-3.jpg" alt="swim-3.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
@@ -1135,7 +1130,7 @@ $(window).scroll(function() {
             </div>
 
             <div class="hover-box">
-						  	<img src="images/swim-5.jpg" alt="swim-5.jpg" class="img-thumbnail" />
+						  	<img src="./resources/images/swim-5.jpg" alt="swim-5.jpg" class="img-thumbnail" />
 						  	<div class="icons">
                   <a class="m-1"><i class="text-center fas fa-search" data-toggle = "tooltip" title ="상품자세히 보기"></i></a>
 						  		<a class="m-1"><i class="text-center fas fa-cart-plus" data-toggle = "tooltip" title ="장바구니에 담기"></i></a>
