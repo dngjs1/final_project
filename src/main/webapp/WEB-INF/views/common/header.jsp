@@ -7,7 +7,6 @@
 
 
 <c:set var='path' value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
 <html>
 <head>
 <meta content="UTF-8">
@@ -68,7 +67,7 @@
 
 
 
-<body>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" >
   <!--헤더부분 시작-->
   <header>
     <div class="header">
