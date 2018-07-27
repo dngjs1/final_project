@@ -29,9 +29,11 @@
 <div class='container' align='center'>
     <form name="fileForm" action="${path }/upload.do" method="post" enctype="multipart/form-data">
     	<h3>파일업로드</h3>
-    	<div style="border: 1px solid black; width:300px;">
-        <input multiple="multiple" type="file" name="file" />
+    	<div id="fileDiv">
+        <input multiple="multiple" type="file" name="file_0" />
+        <a href="#this" name="delete" class="btn">삭제하기</a>
         </div>
+        <a href="#this" id="add" class="btn">파일 추가하기</a>
         <br><br><br>
         <h3>카테고리</h3>
                   카테고리:
@@ -100,5 +102,32 @@
     </form>
 </div>
 
+<script type="text/javascript">
+ var g_count=1;
+ $(document).ready(function(){
+	$("#add").on("click",function(e){
+		e.preventDefault();
+		fn_fileAdd();
+	});
+	$("a[name='delete']").on("click",function(e){
+        e.preventDefault();
+        fn_fileDelete($(this));
+    });
+ });
+ 
+ 
+ function fn_fileDelete(obj){
+     obj.parent().remove();
+ }
+ function fn_fileAdd(){
+     var str = "<p><input type='file' name='file_"+(g_count++)+"'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+     $("#fileDiv").append(str);
+      
+     $("a[name='delete']").on("click",function(e){
+         e.preventDefault();
+         fn_fileDelete($(this));         
+     })
+ }
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
