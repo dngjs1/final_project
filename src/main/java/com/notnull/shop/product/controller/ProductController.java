@@ -68,14 +68,13 @@ public class ProductController {
 			*/
 	
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-        String src = mtfRequest.getParameter("src");
-        System.out.println("src value : " + src);
+		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
+        
 
         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/image");
        
         List<ProductImg> productImgList= new ArrayList<ProductImg>();
-        
+        System.out.println("size"+fileList.size());
         File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
 		

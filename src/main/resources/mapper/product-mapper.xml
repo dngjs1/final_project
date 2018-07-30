@@ -9,10 +9,11 @@
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
 	<select id="selectProductList" resultMap="productListJoinMap">
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price 
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 	</select>
  
  	<select id="selectCategoryList" resultType="productCategory">
