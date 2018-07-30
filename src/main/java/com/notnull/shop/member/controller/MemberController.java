@@ -108,4 +108,9 @@ public class MemberController {
 		
 		return "member/memberView";
 	}
+	
+	@RequestMapping("emailAuth.do")
+	public void eamilAuth() {
+		System.out.println("EAMIL AUTH");
+	}
 }
