@@ -89,8 +89,7 @@
 											<div class="grid_img">
 												<div style="width: 200px; height: 150px;" class="css3">
 													<img style="width: 100%; height: 100%;"
-														src="${image.new_p_img_path }"
-														alt="" />
+														src="${pageContext.request.contextPath }/resources/upload/image/${image.new_p_img_path }" />
 												</div>
 											</div>
 										</div>

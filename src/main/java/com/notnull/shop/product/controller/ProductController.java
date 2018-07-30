@@ -37,7 +37,6 @@ public class ProductController {
 		List<ProductListJoin> list = service.selectProductList();
 		System.out.println(list);
 		m.addAttribute("list",list);	
-		
 		return "/product/shop";
 	}
 	
