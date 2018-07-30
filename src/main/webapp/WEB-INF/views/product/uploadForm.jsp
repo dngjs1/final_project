@@ -30,8 +30,8 @@
     <form name="fileForm" action="${path }/upload.do" method="post" enctype="multipart/form-data">
     	<h3>파일업로드</h3>
     	<div id="fileDiv">
-        <input multiple="multiple" type="file" name="file_0" />
-        <a href="#this" name="delete" class="btn">삭제하기</a>
+	       	<input multiple="multiple" type="file" name="file_0" />
+	        <a href="#this" name="delete" class="btn">삭제하기</a>
         </div>
         <a href="#this" id="add" class="btn">파일 추가하기</a>
         <br><br><br>
@@ -120,7 +120,7 @@
      obj.parent().remove();
  }
  function fn_fileAdd(){
-     var str = "<p><input type='file' name='file_"+(g_count++)+"'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+     var str = "<p><input type='file' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
      $("#fileDiv").append(str);
       
      $("a[name='delete']").on("click",function(e){
