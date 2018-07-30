@@ -33,7 +33,10 @@
 	VALUES(product_img_seq.nextval,#{p_img_path},#{new_p_img_path},#{product_code})
 	</insert>
   
-  
+  	<insert id="insertDetail" parameterType="productDetailImg">
+  	INSERT INTO product_detail_img(p_detail_img_code,p_detail_img_path,new_p_detail_img_path,product_code)
+  	VALUES(product_detail_img_seq.nextval,#{p_detail_img_path},#{new_p_detail_img_path},#{product_code})	
+  	</insert>
   
   
 </mapper>

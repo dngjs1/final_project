@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
+import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 @Repository
@@ -32,6 +33,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectCategoryList");
+	}
+
+	@Override
+	public int insertDetail(SqlSessionTemplate sqlSession, ProductDetailImg productDetailImg) {
+		return sqlSession.insert("product.insertDetail",productDetailImg);
 	}
 
 	
