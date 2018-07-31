@@ -78,11 +78,10 @@
 		<tr  class="tr1">
 			<th style="text-align: center;border-left:none;">사이즈 당 재고</th>
 			<td id="size_td">	
-			<b>치수:</b>
-			<input type="text"   name="size" id="size"> 
-			<b>재고:<b></b><input type="number" name="left_amount"	id="left_amount">
-			<input type="button" onclick="size_add()" class="btn" value="사이즈 추가"/>
-			
+				<b>치수: </b>
+				<input type="text"   name="size" id="size"> 
+				<b>재고: <b></b><input type="number" name="left_amount"	id="left_amount">
+				<input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>			
 			</td>
 		</tr>
 		<tr class="tr1">
@@ -114,12 +113,15 @@
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
         <br><br><br>
         <script>
+               
         function size_add(){
-        	var size_put="<br><td><b>치수:</b><input type='text'  name='size' id='size'> <b>재고:</b><input type='number' name='left_amount' id='left_amount'><br>";
+        	var size_put="<span class='size_del'><br><br><b>치수: </b><input type='text'  name='size' id='size'> <b>재고: </b><input type='number' name='left_amount' id='left_amount'>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br></span>";
 			$('#size_td').append(size_put);
         	
         }
-        
+        function size_delete(e){
+        	e.parent().remove();
+        }
         </script>
         
         
