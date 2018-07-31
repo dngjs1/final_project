@@ -176,8 +176,10 @@ public class ProductController {
 	public String productView(Model model,HttpServletRequest request) {
 		String productCode=request.getParameter("productCode");
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
-		System.out.println(joinCategory);
+		ProductOption productOption =service.selectOption(productCode);
+		System.out.println(productOption);
 		model.addAttribute("joinCategory", joinCategory);
+		model.addAttribute("productOption", productOption);
 		return "/product/productView";
 	}
 

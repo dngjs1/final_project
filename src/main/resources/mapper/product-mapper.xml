@@ -46,4 +46,7 @@
   	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 
   	</select>
   
+  	<select id="selectOption" parameterType="string" resultType="productOption">
+  	SELECT * FROM product_option WHERE product_code=#{product_code} 
+  	</select>
 </mapper>

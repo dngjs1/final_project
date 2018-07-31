@@ -29,4 +29,6 @@ public interface ProductDAO {
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
 	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
+	
+	ProductOption selectOption(SqlSessionTemplate sqlSession,String productCode);
 }

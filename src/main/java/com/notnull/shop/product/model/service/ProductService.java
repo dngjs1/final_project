@@ -19,4 +19,6 @@ public interface ProductService {
 	List<ProductCategory> selectCategoryList();
 	
 	ProductJoinCategory selectProduct(String productCode);
+	
+	ProductOption selectOption(String productCode);
 }

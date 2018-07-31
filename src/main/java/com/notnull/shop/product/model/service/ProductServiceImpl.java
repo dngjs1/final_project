@@ -85,5 +85,11 @@ public class ProductServiceImpl implements ProductService {
 	public ProductJoinCategory selectProduct(String productCode) {
 		return productDAO.selectProduct(sqlSession,productCode);
 	}
+
+	@Override
+	public ProductOption selectOption(String productCode) {
+		return productDAO.selectOption(sqlSession,productCode);
+	}
+	
 	
 }
