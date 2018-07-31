@@ -71,7 +71,12 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectCategoryList(sqlSession);
 	}
 
+	@Override
+	public Product selectProduct(String productCode) {
+		return productDAO.selectProduct(sqlSession,productCode);
+	}
 
+	
 	
 	
 	

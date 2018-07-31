@@ -72,11 +72,13 @@
 </script>
 
 <div class="container">
+
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">캠핑</span></p>
-	<div style=" float: left; width: 50%;padding-right: 20px;">
+<div class="row">
+	<div class="col-6">
 		<img style="width:100%;" alt="텐트" src="http://www.oasekorea.com/00_ADMIN/Code/goodsimg_PIC01/AAAA00120141218008MM-1.jpg">
 	</div>
-	<div style=" float: left; width: 50%;padding-left: 20px;">
+	<div class="col-6">
 		<hr style="border: 1.5px solid black;margin-top: 0px;">
 		<div style="margin-left:10px">
 			<p style="font-size:25px;font-weight:bold">4인용 A형 텐트</p>
@@ -108,6 +110,7 @@
     	</div>
 			
 		</div>
+	</div>
 	</div>
 
 

@@ -15,7 +15,6 @@ public interface ProductService {
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList);
 	
-
 	
 	List<ProductCategory> selectCategoryList();
 }

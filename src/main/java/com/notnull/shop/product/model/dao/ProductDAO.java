@@ -23,4 +23,5 @@ public interface ProductDAO {
 	int insertDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
+	
 }
