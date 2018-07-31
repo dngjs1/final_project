@@ -21,4 +21,19 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.loginCheck", member_id);
 	}
 
+	@Override
+	public void createAuthKey(SqlSessionTemplate sqlSession, String email, String esc_status) {
+		Member m = new Member();
+		m.setEmail(email);
+		m.setEsc_status(esc_status);
+		
+		sqlSession.update("member.createAuthKey", m);
+	}
+
+	@Override
+	public void userAuth(SqlSessionTemplate sqlSession, String email) {
+		
+		sqlSession.update("member.userAuth",email);
+	}
+
 }

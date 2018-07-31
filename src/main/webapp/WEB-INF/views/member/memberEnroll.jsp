@@ -76,8 +76,9 @@
 
 <script>
 	function eamilAuth() {
+
 		 var emailch=$("#email").val();
-		 var url="${path}/emailAuth.do;
+		 var url="<%=request.getContextPath()%>/emailAuth.do";
 		 var title="emailAuth";
 		 var status="left=500px,top=100px,width=600px,height=200px";
 		 var popup=window.open(url,title,status);
@@ -172,7 +173,6 @@
                 <th>이메일</th>
                 <td>   
                    <input type="email" class="form-control" placeholder="abc@xyz.com" name="email" id="email"> 
-                   <input type="button" onclick="eamilAuth()" value="이메일인증">
                 </td>
              </tr>
 			<tr>
