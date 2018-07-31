@@ -9,6 +9,7 @@ import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
+import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 
@@ -27,5 +28,5 @@ public interface ProductDAO {
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
-	Product selectProduct(SqlSessionTemplate sqlSession,String productCode);
+	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
 }

@@ -42,8 +42,8 @@
   	INSERT INTO product_option VALUES (product_option_seq.nextval,#{option_size},#{left_amount},#{product_code})
   	</insert>
   
-  	<select id="selectProduct" parameterType="string" resultType="product">
-  	SELECT * FROM product WHERE product_code=#{product_code} 
+  	<select id="selectProduct" parameterType="string" resultType="productJoinCategory">
+  	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 
   	</select>
   
 </mapper>

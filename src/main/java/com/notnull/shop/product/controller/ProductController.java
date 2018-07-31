@@ -23,6 +23,7 @@ import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
+import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 
@@ -37,7 +38,6 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		System.out.println(list);
 		m.addAttribute("list",list);	
 		return "/product/shop";
 	}
@@ -49,7 +49,6 @@ public class ProductController {
 		List<ProductCategory> categoryList=new ArrayList<ProductCategory>();
 		categoryList=service.selectCategoryList();
 		
-		System.out.println(categoryList);
 		model.addAttribute("categoryList",categoryList);
 		
 		return "/product/uploadForm";
@@ -104,10 +103,6 @@ public class ProductController {
 			int rndNum=(int)(Math.random()*1000);
 			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
 			renamedFileName+="_"+rndNum+"."+ext;
-            
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("renamedFileName : " + renamedFileName);
-            System.out.println("fileSize : " + fileSize);
 
             String safeFile = saveDir + System.currentTimeMillis() + originFileName;
             try {
@@ -138,10 +133,6 @@ public class ProductController {
 			int rndNum=(int)(Math.random()*1000);
 			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
 			renamedFileName+="_"+rndNum+"."+ext;
-            
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("renamedFileName : " + renamedFileName);
-            System.out.println("fileSize : " + fileSize);
 
             String safeFile = saveDir + System.currentTimeMillis() + originFileName;
             try {
@@ -181,12 +172,12 @@ public class ProductController {
 		mv.setViewName("common/msg");	
         return mv;
     }
-
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
 		String productCode=request.getParameter("productCode");
-		Product product=service.selectProduct(productCode);
-		model.addAttribute("product", product);
+		ProductJoinCategory joinCategory=service.selectProduct(productCode);
+		System.out.println(joinCategory);
+		model.addAttribute("joinCategory", joinCategory);
 		return "/product/productView";
 	}
 
