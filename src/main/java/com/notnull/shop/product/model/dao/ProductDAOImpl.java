@@ -10,6 +10,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductListJoin;
+import com.notnull.shop.product.model.vo.ProductOption;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -38,6 +39,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int insertDetail(SqlSessionTemplate sqlSession, ProductDetailImg productDetailImg) {
 		return sqlSession.insert("product.insertDetail",productDetailImg);
+	}
+
+	@Override
+	public int insertOption(SqlSessionTemplate sqlSession, ProductOption productOption) {
+		return sqlSession.insert("product.insertOption",productOption);
 	}
 
 	
