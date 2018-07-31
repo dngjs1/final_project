@@ -19,6 +19,9 @@
  		update member set esc_status ='N' where email =#{email}
  	</update>
  	
+ 	<select id="selectByEmail" resultType="string">
+ 		select member_name from member where email=#{email}
+ 	</select>
 
 	<select id="loginCheck" parameterType="string" resultMap="memberMap">
 		select * from member where member_id=#{userId}

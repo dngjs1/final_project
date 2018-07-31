@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: JC
 Build-Jdk: 9.0.4
-=======
-Built-By: hack5
-Build-Jdk: 1.8.0_171
->>>>>>> branch_BJH
 Created-By: Maven Integration for Eclipse
 

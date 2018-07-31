@@ -34,6 +34,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public void userAuth(SqlSessionTemplate sqlSession, String email) {
 		
 		sqlSession.update("member.userAuth",email);
+		
+	}
+
+	@Override
+	public String selectByEmail(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("member.selectByEmail",email);
 	}
 
 }

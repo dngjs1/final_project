@@ -12,6 +12,6 @@ public interface MemberService {
 	
 	Member loginCheck(String member_id);
 	
-	void userAuth(String email);
+	String userAuth(String email);
 	
 }

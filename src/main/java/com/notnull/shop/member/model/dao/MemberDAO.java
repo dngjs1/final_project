@@ -14,5 +14,8 @@ public interface MemberDAO {
 	
 	void userAuth(SqlSessionTemplate sqlSession, String email);
 	
+	String selectByEmail(SqlSessionTemplate sqlSession, String email);
+	
+	
 	
 }

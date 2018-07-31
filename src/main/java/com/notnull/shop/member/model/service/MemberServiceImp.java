@@ -55,12 +55,14 @@ public class MemberServiceImp implements MemberService {
 		
 		return memberDAO.loginCheck(sqlSession, member_id);
 	}
-
+	
+	@Transactional
 	@Override
-	public void userAuth(String email) {
+	public String userAuth(String email) {
 		
 		memberDAO.userAuth(sqlSession, email);
 		
+		return memberDAO.selectByEmail(sqlSession,email);
 	}
 
 }

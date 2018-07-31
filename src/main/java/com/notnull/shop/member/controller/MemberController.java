@@ -127,8 +127,9 @@ public class MemberController {
 	@RequestMapping("/emailConfirm.do")
 	public String emailConfirm(String email, Model model) {
 		
-		service.userAuth(email);
-		model.addAttribute("email",email);
+		String name = service.userAuth(email);
+	
+		model.addAttribute("name",name);
 		
 		return "member/emailConfirm";
 		
