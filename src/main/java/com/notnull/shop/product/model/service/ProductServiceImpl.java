@@ -12,6 +12,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductListJoin;
+import com.notnull.shop.product.model.vo.ProductOption;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int insertProduct(Product product, List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList) {
+	public int insertProduct(Product product, List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList) {
 
 		int result=0;
 		int product_code=0;
@@ -56,6 +57,14 @@ public class ProductServiceImpl implements ProductService {
 					result=productDAO.insertDetail(sqlSession,productDetailImg);
 				}
 			}
+			if(productOptionList.size()>0)
+			{
+				for(ProductOption productOption : productOptionList)
+				{
+					productOption.setProduct_code(product_code);
+					result=productDAO.insertOption(sqlSession,productOption);
+				}
+			}
 		}
 		catch(Exception e)
 		{
@@ -71,8 +80,5 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectCategoryList(sqlSession);
 	}
 
-
-	
-	
 	
 }

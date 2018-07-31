@@ -24,6 +24,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductListJoin;
+import com.notnull.shop.product.model.vo.ProductOption;
 
 @Controller
 public class ProductController {
@@ -59,15 +60,30 @@ public class ProductController {
 	@RequestMapping("/upload.do")
     public ModelAndView requestupload2(MultipartHttpServletRequest mtfRequest, HttpServletRequest request,Product product) {
 
-		/*		//재고량
 		
-		for(int i=0;i<left_amount.length;i++) {
-			System.out.println(real_size[i]);
-			System.out.println(left_amount[i]);
-		}
-			*/
 	
+		String[] sizes=request.getParameterValues("size");
+		String[] sleft_amounts=request.getParameterValues("left_amount");
 		
+		
+		int[] left_amounts = new int[sleft_amounts.length];
+		
+		for(int i=0;i<sleft_amounts.length;i++) {
+			int a= Integer.parseInt(sleft_amounts[i]);
+			left_amounts[i]=a;
+		}
+		
+		List<ProductOption> productOptionList= new ArrayList<ProductOption>();
+		for(int i =0; i<sizes.length;i++) {
+			ProductOption productOption = new ProductOption();
+			productOption.setLeft_amount(left_amounts[i]);
+			productOption.setOption_size(sizes[i]);
+			productOptionList.add(productOption);
+		}
+		
+		
+		
+ 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");	//상품 사진
 		List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");	//상품 상세 사진
 
@@ -145,7 +161,7 @@ public class ProductController {
     
         
         
-        int result= service.insertProduct(product,productImgList,productDetailImgList);
+        int result= service.insertProduct(product,productImgList,productDetailImgList,productOptionList);
         
         ModelAndView mv=new ModelAndView();
         String msg="";
