@@ -9,6 +9,7 @@ import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
+import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 @Repository
@@ -47,7 +48,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product selectProduct(SqlSessionTemplate sqlSession, String productCode) {
+	public ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession, String productCode) {
 		return sqlSession.selectOne("product.selectProduct",productCode);
 	}
 
