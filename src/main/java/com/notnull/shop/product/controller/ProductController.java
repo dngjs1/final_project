@@ -67,6 +67,15 @@ public class ProductController {
 		}
 			*/
 	
+		String[] sizes=request.getParameterValues("size");
+		String[] left_amounts=request.getParameterValues("left_amount");
+		
+		System.out.println(sizes.length);
+		for(int i=0;i<sizes.length;i++) {
+			System.out.println(sizes[i]);
+			System.out.println(left_amounts[i]);
+		}
+		
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");	//상품 사진
 		List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");	//상품 상세 사진

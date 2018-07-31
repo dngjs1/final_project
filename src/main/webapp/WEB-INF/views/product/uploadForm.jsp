@@ -69,9 +69,10 @@
 			<input type="text" class="form-control" name="country" id="country">
 			</td>
 		</tr>
-		<tr>
+		<tr class="tr1">
+			<th style="text-align: center;border-left:none;">크기</th>
 			<td>
-			 크기:<input type="text"   name="real_size" id="real_size"> 
+			 <input type="text"  class="form-control" name="real_size" id="real_size"> 
 			</td>
 		</tr>
 		<tr  class="tr1">
@@ -114,7 +115,7 @@
         <br><br><br>
         <script>
         function size_add(){
-        	var size_put="<br><td><b>크기:</b><input type='text'  name='real_size' id='real_size'> <b>재고:</b><input type='number' name='left_amount' id='left_amount'><br>";
+        	var size_put="<br><td><b>치수:</b><input type='text'  name='real_size' id='real_size'> <b>재고:</b><input type='number' name='left_amount' id='left_amount'><br>";
 			$('#size_td').append(size_put);
         	
         }
