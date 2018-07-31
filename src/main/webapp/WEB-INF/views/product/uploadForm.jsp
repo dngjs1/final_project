@@ -115,7 +115,7 @@
         <br><br><br>
         <script>
         function size_add(){
-        	var size_put="<br><td><b>치수:</b><input type='text'  name='real_size' id='real_size'> <b>재고:</b><input type='number' name='left_amount' id='left_amount'><br>";
+        	var size_put="<br><td><b>치수:</b><input type='text'  name='size' id='size'> <b>재고:</b><input type='number' name='left_amount' id='left_amount'><br>";
 			$('#size_td').append(size_put);
         	
         }
