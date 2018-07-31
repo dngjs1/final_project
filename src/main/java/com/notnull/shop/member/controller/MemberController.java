@@ -4,7 +4,9 @@ package com.notnull.shop.member.controller;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member m,Model model) throws UnsupportedEncodingException, MessagingException {
+	public String memberEnrollEnd(Member m,Model model, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 		
 		
 		if(m.getEmail_alarm()==null) {
@@ -46,8 +48,10 @@ public class MemberController {
 		
 		String pw = m.getMember_pw();
 		m.setMember_pw(bcyptPasswordEncoder.encode(pw));
-			
-		int result = service.insertMember(m);
+		
+		String ip = request.getLocalAddr();
+		
+		int result = service.insertMember(m, ip);
 		System.out.println(result);
 		
 		String msg="";
@@ -66,7 +70,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogin.do")
-	public String memberLogin(String member_id, String member_pw, Model model) {
+	public String memberLogin(String member_id, String member_pw, Model model, HttpServletRequest request) {
 		
 		System.out.println(member_id);
 		System.out.println(member_pw);
@@ -100,6 +104,9 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
 		
+		
+		System.out.println(request.getLocalAddr());
+		
 		return view;
 	}
 	
@@ -125,10 +132,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/emailConfirm.do")
-	public String emailConfirm(String email, Model model) {
+	public String emailConfirm(String email, Model model, HttpServletRequest request) {
 		
 		String name = service.userAuth(email);
 	
+		
 		model.addAttribute("name",name);
 		
 		return "member/emailConfirm";

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,14 @@ public class MemberServiceImp implements MemberService {
 	
 	@Transactional
 	@Override
-	public int insertMember(Member m) throws MessagingException, UnsupportedEncodingException {
+	public int insertMember(Member m, String ip) throws MessagingException, UnsupportedEncodingException {
+		
+		
+		if(ip.equals("0:0:0:0:0:0:0:1")) {
+			ip ="localhost";
+		}
+		
+		System.out.println("IP ADRESS : " +ip);
 		
 		int check = memberDAO.insertMember(sqlSession, m); // 회원가입 DAO
 
@@ -41,12 +49,12 @@ public class MemberServiceImp implements MemberService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[SHOP 서비스 이메일 인증]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost:9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://"+ip+":9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("euichan", "shop TEST");
 		sendMail.setTo(m.getEmail());
 		sendMail.send();
 		
-		
+
 		return check;
 	}
 
