@@ -110,7 +110,7 @@ public class MemberController {
 		return view;
 	}
 	
-	@RequestMapping("memberLogout.do")
+	@RequestMapping("/memberLogout.do")
 	public String memberLogout(SessionStatus sessionStatus) {
 		if(!sessionStatus.isComplete()) {
 			sessionStatus.setComplete();
@@ -142,6 +142,11 @@ public class MemberController {
 		return "member/emailConfirm";
 		
 		
+	}
+	
+	@RequestMapping("/findMember.do")
+	public String findMember() {
+		return "member/findMember";
 	}
 	
 	
