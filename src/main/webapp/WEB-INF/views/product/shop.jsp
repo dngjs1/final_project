@@ -85,7 +85,7 @@
 						<div style=" cursor: pointer;width: 250px;height: 250px;" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}'" class="col-3">
 							<div>
 								<div style="width: 200px; height: 150px;" class="css3">
-									<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/upload/image/${image.new_p_img_path }" />
+									<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" />
 								</div>
 									<div>
 										상품이름: ${image.product_name }
