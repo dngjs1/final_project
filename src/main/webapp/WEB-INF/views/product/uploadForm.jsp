@@ -69,11 +69,16 @@
 			<input type="text" class="form-control" name="country" id="country">
 			</td>
 		</tr>
+		<tr>
+			<td>
+			 크기:<input type="text"   name="real_size" id="real_size"> 
+			</td>
+		</tr>
 		<tr  class="tr1">
 			<th style="text-align: center;border-left:none;">사이즈 당 재고</th>
 			<td id="size_td">	
-			<b>크기:</b>
-			<input type="text"   name="real_size" id="real_size"> 
+			<b>치수:</b>
+			<input type="text"   name="size" id="size"> 
 			<b>재고:<b></b><input type="number" name="left_amount"	id="left_amount">
 			<input type="button" onclick="size_add()" class="btn" value="사이즈 추가"/>
 			
@@ -117,7 +122,7 @@
         </script>
         
         
-        <input type="submit" value="전송" class="btn" />     
+        <input type="submit" value="등록" class="btn" />     
     </form>
 </div>
 

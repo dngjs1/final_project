@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
+import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 
@@ -67,13 +68,15 @@ public class ProductController {
 			*/
 	
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
-        
+		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");	//상품 사진
+		List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");	//상품 상세 사진
 
         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/image");
        
         List<ProductImg> productImgList= new ArrayList<ProductImg>();
-        System.out.println("size"+fileList.size());
+        List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
+        System.out.println("상품사진size"+fileList.size());
+        System.out.println("상품 상세 사진size"+fileList1.size());
         File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
 		
@@ -108,8 +111,42 @@ public class ProductController {
             
             productImgList.add(productImg);
         }
+        
+        for (MultipartFile mf : fileList1) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+            
+            System.out.println("originFileName : " + originFileName);
+            System.out.println("renamedFileName : " + renamedFileName);
+            System.out.println("fileSize : " + fileSize);
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductDetailImg productDetailImg = new ProductDetailImg();
+                      
+            productDetailImg.setP_detail_img_path(originFileName);
+            productDetailImg.setNew_p_detail_img_path(renamedFileName);
+            
+            productDetailImgList.add(productDetailImg);
+        }
     
-        int result= service.insertProduct(product,productImgList);
+        
+        
+        int result= service.insertProduct(product,productImgList,productDetailImgList);
+        
         ModelAndView mv=new ModelAndView();
         String msg="";
 		if(result>0)
