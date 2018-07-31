@@ -1,6 +1,10 @@
 package com.notnull.shop.member.controller;
 
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -33,7 +37,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member m,Model model) {
+	public String memberEnrollEnd(Member m,Model model) throws UnsupportedEncodingException, MessagingException {
 		
 		
 		if(m.getEmail_alarm()==null) {
@@ -50,7 +54,7 @@ public class MemberController {
 		String loc="/";
 		
 		if(result>0) {
-			msg="회원가입 완료";
+			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
 		}else {
 			msg="회원가입 실패";
 		}
@@ -73,7 +77,7 @@ public class MemberController {
 		String loc="/";
 		String view = "/common/msg";
 		
-		if(m!=null) {
+		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
@@ -84,7 +88,11 @@ public class MemberController {
 				System.out.println("WRONG PASSWORD");
 				msg ="WRONG PASSWORD";
 			}
-		}else {
+		}else if(m!=null && m.getEsc_status().equals("Y")) {
+			System.out.println("이메일인증이 안된 아이디입니다.");
+			msg ="이메일 인증을 해주세요.";
+		}
+		else {
 			System.out.println("THERE'S NO ID");
 			msg ="WRONG ID";
 		}
@@ -110,7 +118,22 @@ public class MemberController {
 	}
 	
 	@RequestMapping("emailAuth.do")
-	public void eamilAuth() {
+	public String eamilAuth() {
 		System.out.println("EAMIL AUTH");
+		
+		return "redirect:/";
 	}
+	
+	@RequestMapping("/emailConfirm.do")
+	public String emailConfirm(String email, Model model) {
+		
+		service.userAuth(email);
+		model.addAttribute("email",email);
+		
+		return "member/emailConfirm";
+		
+		
+	}
+	
+	
 }
