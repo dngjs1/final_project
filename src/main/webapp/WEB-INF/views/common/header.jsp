@@ -9,8 +9,10 @@
 <c:set var='path' value="${pageContext.request.contextPath}"/>
 <html>
 <head>
+
 <meta content="UTF-8">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Ubuntu" rel="stylesheet">
+<link rel="stylesheet" href="../resources/css/custom.css">
   <title>파이널프로젝트 index</title>
   <!-- meta tags 필요 -->
   <meta charset="utf-8">

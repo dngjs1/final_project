@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: dngjs
 Build-Jdk: 1.8.0_121
+=======
+Built-By: GhenHungJin
+Build-Jdk: 1.8.0_161
+>>>>>>> branch_JGH
 Created-By: Maven Integration for Eclipse
 
