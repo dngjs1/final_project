@@ -13,13 +13,9 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
 	
-	
-<<<<<<< HEAD
-	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList);
-	
-=======
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
->>>>>>> SUPER_branch
 	
 	List<ProductCategory> selectCategoryList();
+	
+	Product selectProduct(String productCode);
 }

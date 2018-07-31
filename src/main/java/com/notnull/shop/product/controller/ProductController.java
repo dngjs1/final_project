@@ -182,6 +182,13 @@ public class ProductController {
         return mv;
     }
 
+	@RequestMapping("/productView.do")
+	public String productView(Model model,HttpServletRequest request) {
+		String productCode=request.getParameter("productCode");
+		Product product=service.selectProduct(productCode);
+		model.addAttribute("product", product);
+		return "/product/productView";
+	}
 
 
 }

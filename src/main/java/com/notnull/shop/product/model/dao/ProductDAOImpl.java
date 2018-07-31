@@ -46,6 +46,9 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("product.insertOption",productOption);
 	}
 
-	
+	@Override
+	public Product selectProduct(SqlSessionTemplate sqlSession, String productCode) {
+		return sqlSession.selectOne("product.selectProduct",productCode);
+	}
 
 }

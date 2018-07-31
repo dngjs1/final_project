@@ -27,4 +27,5 @@ public interface ProductDAO {
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
+	Product selectProduct(SqlSessionTemplate sqlSession,String productCode);
 }

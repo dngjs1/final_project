@@ -80,16 +80,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectCategoryList(sqlSession);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public Product selectProduct(String productCode) {
 		return productDAO.selectProduct(sqlSession,productCode);
 	}
-
-	
-	
-=======
->>>>>>> SUPER_branch
-	
 	
 }
