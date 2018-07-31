@@ -87,12 +87,10 @@ public class ProductController {
 		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");	//상품 사진
 		List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");	//상품 상세 사진
 
-        String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/image");
        
         List<ProductImg> productImgList= new ArrayList<ProductImg>();
         List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
-        System.out.println("상품사진size"+fileList.size());
-        System.out.println("상품 상세 사진size"+fileList1.size());
+        String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
         File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
 		
@@ -128,6 +126,9 @@ public class ProductController {
             productImgList.add(productImg);
         }
         
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
         for (MultipartFile mf : fileList1) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈

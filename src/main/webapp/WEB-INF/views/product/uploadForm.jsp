@@ -30,21 +30,21 @@
 
 <div class='container' >
     <form name="fileForm" action="${path }/upload.do" method="post" enctype="multipart/form-data">
-    	
-        <h3>카테고리</h3>
-        <hr style="border:2px solid #787878"><br>
-                  카테고리:
-                  
-      	<select name="p_category_code" class="form-control" style="width:500px;">
+  
+        <br>
+        <h3>상품등록</h3>
+        <hr style="border:2px solid #787878"><br>       
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
+        <tr class="tr1">
+			<th style="text-align: center;border-left:none;">카테고리</th>
+			<td>	
+			<select name="p_category_code" class="form-control" style="width:500px;">
      			<c:forEach var='category' items='${categoryList}' varStatus="vs">
                   <option value="${category.p_category_code}">${category.p_category_name }</option>
 				</c:forEach>	
         </select>
-        
-        <br><br><br>
-        <h3>상품등록</h3>
-        <hr style="border:2px solid #787878"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
+			</td>
+		</tr>       
         <tr class="tr1">
 			<th style="text-align: center;border-left:none;">상품명</th>
 			<td>	
