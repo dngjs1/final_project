@@ -39,8 +39,6 @@ public class ProductServiceImpl implements ProductService {
 		{
 			result=productDAO.insertProduct(sqlSession,product);
 			product_code=product.getProduct_code();
-			System.out.println(product_code);
-			System.out.println("상품코드 "+product_code);
 			if(productImgList.size()>0)
 			{
 				for(ProductImg productImg : productImgList)
@@ -60,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
 			}
 			if(productOptionList.size()>0)
 			{
+				System.out.println("왜안돼??");
 				for(ProductOption productOption : productOptionList)
 				{
 					productOption.setProduct_code(product_code);

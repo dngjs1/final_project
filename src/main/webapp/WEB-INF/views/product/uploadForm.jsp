@@ -48,31 +48,31 @@
         <tr class="tr1">
 			<th style="text-align: center;border-left:none;">상품명</th>
 			<td>	
-			<input type="text" class="form-control" name="product_name" id="product_name" >
+			<input type="text" class="form-control" name="product_name" id="product_name" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">가격</th>
 			<td>	
-			<input type="number"  class="form-control" name="price" id="price">
+			<input type="number"  class="form-control" name="price" id="price" required>
 			</td>
 		</tr> 
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">출시일</th>
 			<td>	
-			<input type="date" class="form-control"  name="release_date" id="release_date" >
+			<input type="date" class="form-control"  name="release_date" id="release_date" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">제조국</th>
 			<td>	
-			<input type="text" class="form-control" name="country" id="country">
+			<input type="text" class="form-control" name="country" id="country" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">크기</th>
 			<td>
-			 <input type="text"  class="form-control" name="real_size" id="real_size"> 
+			 <input type="text"  class="form-control" name="real_size" id="real_size" value="상품 상세 정보 확인"> 
 			</td>
 		</tr>
 		<tr  class="tr1">
@@ -115,7 +115,7 @@
         <script>
                
         function size_add(){
-        	var size_put="<span class='size_del'><br><br><b>치수: </b><input type='text'  name='size' id='size'> <b>재고: </b><input type='number' name='left_amount' id='left_amount'>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br></span>";
+        	var size_put="<span class='size_del'><br><br><b>치수: </b><input type='text'  name='size' id='size' required> <b>재고: </b><input type='number' name='left_amount' id='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br></span>";
 			$('#size_td').append(size_put);
         	
         }
@@ -157,7 +157,7 @@
      obj.parent().remove();
  }
  function fn_fileAdd(){
-     var str = "<p><input type='file' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+     var str = "<p><input type='file' class='add0' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
      $("#fileDiv").append(str);
       
      $("a[name='delete']").on("click",function(e){
@@ -166,7 +166,7 @@
      })
  }
  function fn_fileAdd1(){
-     var str = "<p><input type='file' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
+     var str = "<p><input type='file' class='add1' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
      $("#fileDiv1").append(str);
       
      $("a[name='delete1']").on("click",function(e){
