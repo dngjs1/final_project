@@ -65,9 +65,12 @@
 								<option value="">낮은가격부터</option>
 							</select> <a href=""><img src="images/arrow2.gif" alt=""
 								class="v-middle"></a>
+						
+								<c:if test="${memberLoggedIn.member_level eq 'admin'}">
 								
-								<input type="button" value="이미지 업로드" id='btn-add' 
+								<input style="float:right" type="button" value="상품 추가" id='btn-add' 
 								class='btn btn-outline-success' onclick='fn_goboardForm();'/>
+								</c:if>
 						<script>
 							function fn_goboardForm(){
 								location.href="${pageContext.request.contextPath}/productupload.do";
