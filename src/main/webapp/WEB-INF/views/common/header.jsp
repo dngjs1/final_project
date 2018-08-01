@@ -11,14 +11,19 @@
 <head>
 
 <meta content="UTF-8">
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Ubuntu" rel="stylesheet">
-<link rel="stylesheet" href="../resources/css/custom.css">
+<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu" rel="stylesheet">
+<!-- footer css외부참조파일 -->
+<link rel="stylesheet" href="resources/css/index.css" type="text/css">
+<link rel="stylesheet" href="resources/css/footer.css" type="text/css">
+
+<!-- index css 외부참조파일 -->
   <title>파이널프로젝트 index</title>
   <!-- meta tags 필요 -->
   <meta charset="utf-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 
   <!-- Bootstrap CSS -->
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
   <!--font Awesome 불러오기-->
@@ -69,7 +74,7 @@
 
 
 
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" >
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style = "font-family: 'Nanum Gothic','Ubuntu',sans-serif;">
   <!--헤더부분 시작-->
   <header>
     <div class="header">
