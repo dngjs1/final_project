@@ -82,7 +82,7 @@
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" method="get">
-				<c:if test="${optionList!=null}">
+				<c:if test="${optionList!=null && optionList.size()>0}">
 					<span>사이즈 </span>
 					<select name="size" style="font-size:15px;height:28px;" >
 						<c:forEach var="option" items="${optionList}">

@@ -106,10 +106,10 @@ $(document).ready(function(){
 		<c:forEach var='image' items='${list }' varStatus="vs">
 			<div class="col-3 Seller_item_secion">
 			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
-				<div  style="height:250px;" class="hover-box">
+				<div style="height:250px;cursor: pointer;" class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}';">
 					<img width="100%" height="100%" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="상품"/>
 					<div class="icons">
-						<a href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}' class="m-1">
+						<a class="m-1">
 							<i class="text-center fas fa-search" data-toggle="tooltip" title="상품자세히 보기"></i>
 						</a>
 					</div>
