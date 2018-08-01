@@ -39,6 +39,9 @@
 		이메일<input type="email" name="email" id="email" class="form-control" required="required"> <br>
 		<input type="submit" value="ID찾기"> <hr>
 		</form>
+		
+		
+		
 	</div>
 	</th>
 	</tr>

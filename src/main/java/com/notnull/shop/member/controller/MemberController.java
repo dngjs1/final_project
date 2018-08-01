@@ -156,10 +156,19 @@ public class MemberController {
 		
 		if(id==null) {
 			id="존재하지 않는 이메일주소입니다.";
+			
+			String msg=id;
+			String loc ="findMember.do";
+			String view = "/common/msg";
+			
+			model.addAttribute("msg",msg);
+			model.addAttribute("loc",loc);
+			
+			return view;
+			
 		}
 		
-		System.out.println("잘들어왔죵 ID : "  + id);
-		return "redirect:/";
+		return "member/findMember";
 	}
 	
 	@RequestMapping("/findMemberPassword.do")
