@@ -28,6 +28,7 @@
 @media (min-width: 992px) { .container {width: 970px;} }
 @media (min-width: 1200px) { .container { width: 1060px; } }
 
+.amount-font{color:aqua;}
 </style>
 <script>
 	var sell_price;
@@ -96,7 +97,7 @@
 					<span>사이즈 </span>
 					<select name="size" >
 						<c:forEach var="option" items="${optionList}">
-							<option value="${product_option_code}">${option_size}</option>
+							<option value="${option.product_option_code}">${option.option_size}<span class="amount-font"> (${option.left_amount}개)</span></option>
 						</c:forEach>
 		            </select>
 		            &emsp;&emsp;&emsp;
