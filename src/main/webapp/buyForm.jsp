@@ -19,13 +19,6 @@
 	String strdate = simpleDate.format(cal.getTime());
 %>
 <style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
 .tr1 th{text-align:center;background-color:#E1F6FA}
 .tr2 td{vertical-align:middle;text-align:center;}
 .font-price{font-weight:bold;font-size:20px;}

@@ -7,8 +7,7 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 
-<div id="carouselExampleIndicators " class="carousel slide "
-	data-ride="carousel ">
+<div id="carouselExampleIndicators " class="carousel slide " data-ride="carousel ">
 	<ol class="carousel-indicators ">
 		<li data-target="#carouselExampleIndicators " data-slide-to="0 "
 			class="active "></li>
@@ -632,8 +631,7 @@
 
 
 									<div class="col-5 item_icon text-right ">
-										<span class="item_icon"><i
-											class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
+										<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
 											title="장바구니에 담기"></i></span> <span class="item_icon"></i> <i
 											class="far fa-kiss-wink-heart mr-1" data-toggle="tooltip"
 											title="좋아요"></i></span> <span class="item_icon"><i

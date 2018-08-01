@@ -8,6 +8,7 @@
 <% response.setCharacterEncoding("UTF-8"); %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
+<<<<<<< HEAD
 <style>
 .container {
   margin-right: auto;
@@ -24,6 +25,8 @@
     div#userId-container span.error{color:red;}
 
 </style>
+=======
+>>>>>>> master
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>

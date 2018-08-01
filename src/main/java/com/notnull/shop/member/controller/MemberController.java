@@ -53,7 +53,6 @@ public class MemberController {
 		String ip = request.getLocalAddr();
 		
 		int result = service.insertMember(m, ip);
-		System.out.println(result);
 		
 		String msg="";
 		String loc="/";

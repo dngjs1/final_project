@@ -9,20 +9,17 @@
 
 
 <style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
-
 .findMember{
+<<<<<<< HEAD
 	width: 500px;
 	
 	}
 
 
+=======
+	width: 500px;	
+}
+>>>>>>> master
 
 </style>
 
