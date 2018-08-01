@@ -10,85 +10,8 @@
 
 </jsp:include>
 
-
-
-<!-- start menu -->
-
-
-<%-- <div class="container">
-	<div class="login">
-		<div class="wrap">
-
-			<div class="cont span_2_of_3">
-				<div class="mens-toolbar">
-					<div class="sort">
-						<div class="sort-by">
-							<label>Sort By</label> <select>
-								<option value="">인기순</option>
-								<option value="">높은 가격부터</option>
-								<option value="">낮은가격부터</option>
-							</select> 
-						
-								<c:if test="${memberLoggedIn.member_level eq 'admin'}">
-								
-								<input style="float:right" type="button" value="상품 추가" id='btn-add' 
-								class='btn btn-outline-success' onclick='fn_goboardForm();'/>
-								</c:if>
-						<script>
-							function fn_goboardForm(){
-								location.href="${pageContext.request.contextPath}/productupload.do";
-							}
-						</script>
-						
-						</div>
-						
-				
-					
-				</div>
-				<div class="row">
-				
-					<c:forEach var='image' items='${list }' varStatus="vs">
-						<div style=" cursor: pointer;" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}'" class="col-3">
-							<div>
-								<div  class="css3">
-									<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" />
-								</div>
-									<div>
-										상품이름: ${image.product_name }
-									</div>
-									<div>
-										별점										
-									</div>
-									<div>
-										가격 : ${image.price }
-									</div>
-								<!-- </a> -->
-							</div>
-						<!-- </a> -->
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> --%>
-
 <!-- 판메화면 전체 부분을 감싸는 container 부분 시작 -->
 <div class = "container">
-
-	<!-- 화면을 3개로 분할하는 row코드 시작 -->
-	
-	
-	<!-- 전체화면 왼쪽 영역 부분 1로 비율 설정 -->
-	
-	
-	<!-- 판매화면 가운데 영역 부분 10로 비율 설정 -->
-	
-	
-	
-	
-	<!-- 검색부분 시작 -->
-	
 	<!-- 검색 전체를 감싸는 div -->
 	<div class = "smartSearch" style = "background-color : purple;">
 	
@@ -106,8 +29,8 @@
 	
 	<style>
 		.view_type_box{
-			margin-top : 17px;
-			margin-bottom : 17px;
+			margin-top : 18px;
+			margin-bottom : 18px;
 			height : 68px;
 			border : 1px solid #e0e0e0;
 			background : #fff;
@@ -121,7 +44,7 @@
 		}
 		
 		.view_type_box .view_type{
-			float: right;
+			float: left;
 			margin-right: 20px;
 			font-size : 12px;
 			line-height : 68px;
@@ -139,22 +62,36 @@
 			padding-top: 14px;
 			padding-bottom: 14px;
 		}
+		.add {
+			display:inline-block;
+			position: absolute; 
+			margin-top: 13px;
+		}
 	</style>
 	<!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
 	
 	<div class = "view_type_box">
 		
 		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
-		<p class = "total_count">
-			총 <em>  </em>개의 상품이 있습니다
-		</p>
-		<div class = "view_type opacity" id = "listsort">
+		
+		<div class = "view_type opacity" style="display:inline-block;">
 			<a href ="#">인기상품순</a>
 			<a href ="#">신상품순</a>
 			<a href ="#">낮은가격순</a>
 			<a href ="#">높은가격순</a>
 			<a href ="#">상품평점순</a>
 		</div>
+		<div class="add">
+			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
+				<input type="button" value="상품 추가" class='btn btn-outline-success' onclick='fn_goboardForm();'/>
+			</c:if>
+		</div>
+		<script>
+			function fn_goboardForm(){
+				location.href="${pageContext.request.contextPath}/productupload.do";
+			}
+		</script>
+		
 	</div><!-- 옵션 박스 div 끝 -->
 	
 <!-- <script>
@@ -170,7 +107,7 @@ $(document).ready(function(){
 			<div class="col-3 Seller_item_secion">
 			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
 				<div  style="height:250px;" class="hover-box">
-					<img width="100%" height="100%" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="photo-2.jpeg"/>
+					<img width="100%" height="100%" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="상품"/>
 					<div class="icons">
 						<a href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}' class="m-1">
 							<i class="text-center fas fa-search" data-toggle="tooltip" title="상품자세히 보기"></i>

@@ -19,16 +19,6 @@
 	
 %>
 
-<style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
-</style>
 <script>
 	var sell_price;
 	var amount;
