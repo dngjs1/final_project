@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.omg.CORBA.Request;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -110,7 +110,7 @@ public class MemberController {
 		return view;
 	}
 	
-	@RequestMapping("memberLogout.do")
+	@RequestMapping("/memberLogout.do")
 	public String memberLogout(SessionStatus sessionStatus) {
 		if(!sessionStatus.isComplete()) {
 			sessionStatus.setComplete();
@@ -144,5 +144,31 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("/findMember.do")
+	public String findMember() {
+		return "member/findMember";
+	}
+	
+	@RequestMapping("/findMemberId.do")
+	public String findMemberId( String email, Model model) {
+		
+		String id = service.findMemberId(email);
+		
+		if(id==null) {
+			id="존재하지 않는 이메일주소입니다.";
+		}
+		
+		System.out.println("잘들어왔죵 ID : "  + id);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/findMemberPassword.do")
+	public String findMemberPassword(String id, String email, Model model) throws MessagingException {
+		
+		service.findMemberPassword(id,email);
+		
+		System.out.println("잘들어왔죵 PW : " );
+		return "redirect:/";
+	}
 	
 }

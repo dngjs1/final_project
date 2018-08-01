@@ -16,6 +16,9 @@ public interface MemberDAO {
 	
 	String selectByEmail(SqlSessionTemplate sqlSession, String email);
 	
+	String findMemberId(SqlSessionTemplate sqlSession, String email);
+	
+	int tempPassword(SqlSessionTemplate sqlSession, String id, String tempPw);
 	
 	
 }
