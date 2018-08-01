@@ -1,0 +1,169 @@
+
+
+
+
+
+
+
+/* 왼쪽 네비게이션 숨겨져 있다 일정 구역에서 나오게 하는 css */
+	
+ul.nav-pills {
+	top: 20px;
+	left: 100px;
+	position: fixed;
+}
+
+.show-on-scroll {
+	visibility: hidden;
+}
+
+.show-on-scroll.shown {
+	visibility: visible;
+}
+	
+	
+	
+		
+/* ---------인덱스 안 상품 카테고리  css부분------------*/
+
+/* 각 카테고리 안 상품 hover기능 관련된 css부분 */
+.hover-box {
+	position: relative;
+}
+
+.hover-box *, .hover-box *:before, .hover-box *:after {
+	-webkit-transition: all 0.35s ease;
+	transition: all 0.35s ease;
+}
+
+.hover-box:before {
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	content: '';
+	background-color: #232323;
+	opacity: 0;
+	-webkit-transition: all 0.35s ease;
+	transition: all 0.35s ease;
+}
+
+.hover-box .icons {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hover-box a {
+	opacity: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.hover-box a i {
+	font-size: 23px;
+	line-height: 40px;
+	width: 40px;
+	background-color: #fff;
+	color: #EB4960;
+	border-radius: 2px;
+}
+
+.hover-box a i:hover {
+	background-color: #EB4960;
+	color: #fff;
+	cursor: pointer;
+}
+
+.hover-box:hover:before, .hover-box.hover:before {
+	opacity: 0.5;
+}
+
+.hover-box:hover a, .hover-box.hover a {
+	opacity: 1;
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+}
+
+.hover-box:hover a:nth-child(2), .hover-box.hover a:nth-child(2) {
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}
+
+.hover-box:hover a:nth-child(3), .hover-box.hover a:nth-child(3) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.hover-box:hover a:nth-child(4), .hover-box.hover a:nth-child(4) {
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+
+/* <!--링크 걸린 부분 밑줄 및 색상 제어 css--> */
+a:link {
+	color: #1c1c1c;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #1c1c1c;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1c1c1c;
+	text-decoration: underline;
+}
+
+/*----------- 각 카테고리 안에 글꼴 및 상품 작업-------------- */
+
+/* 카테고리와 카테고리 사이 여백 부분 css */
+
+.Padding_Between{
+					padding: 20px 20px;
+				}
+/* 각 카테고리 전체를 감싸는 부분 배경 및 여백 조절 */
+.menu_section {
+	background: #f8f8fa;
+	padding: 20px 15px;
+}
+
+/* 인덱스 각 카테고리 품목 타이틀 밑에 테두리 및 여백 조절 */
+#menu_sider {
+	padding: 10px;
+	border-top: 1px solid #ababad;
+}
+
+/* 인덱스 각 카테고리 타이틀 폰트 및 폰트 사이즈 변경  */
+.item_title {
+	font-size: 30px;
+	color: #2d2e33;
+	padding-bottom: 10px;
+	font-family: 'Ubuntu';
+	font-weight: 500;
+}
+
+/* 각 카테고리 안 제품을 감싸고 있는 row부분 패딩 */
+#menu_inner {
+	padding: 8px 0px;
+}
+
+/* 각 카테고리 대표 상품(큰 이미지) 타이틀 글꼴 및 꾸미기 */
+.card-title {
+	font-family: 'Lato';
+	font-weight: bold;
+}
+
+/* 각 카테고리 안에 들어가 있는 장바구니, 좋아요, 상세보기 아이콘 꾸미기 */
+.item_icon {
+	color: #b3b3b5;
+	cursor: pointer;
+	font-size: 20px;
+}
