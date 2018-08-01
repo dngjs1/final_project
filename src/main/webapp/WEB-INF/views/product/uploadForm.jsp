@@ -29,7 +29,7 @@
 
 
 <div class='container' >
-    <form name="fileForm" action="${path }/upload.do" method="post" enctype="multipart/form-data">
+    <form name="fileForm" action="${path }/upload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
   
         <br>
         <h3>상품등록</h3>
@@ -97,7 +97,7 @@
         <h3>상품 사진</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv">
-	       	<input multiple="multiple" type="file" name="file_0" />
+	       	<input multiple="multiple" type="file" class="addfile0" name="file_0" />
 	        <a href="#this" name="delete" class="btn">삭제하기</a>
         </div>
         <a href="#this" id="add" class="btn">파일 추가하기</a>
@@ -107,7 +107,7 @@
         <h3>상세 설명 사진</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
-	       	<input multiple="multiple" type="file" name="file_1" />
+	       	<input multiple="multiple" type="file" class="addfile1" name="file_1" />
 	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
         </div>
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
@@ -130,50 +130,62 @@
 </div>
 
 <script type="text/javascript">
- var g_count=1;
- $(document).ready(function(){
+var g_count=1;
+$(document).ready(function(){
 	$("#add").on("click",function(e){
 		e.preventDefault();
 		fn_fileAdd();
 	});
 	$("a[name='delete']").on("click",function(e){
-        e.preventDefault();
-        fn_fileDelete($(this));
-    });
- });
- $(document).ready(function(){
-		$("#add1").on("click",function(e){
-			e.preventDefault();
-			fn_fileAdd1();
-		});
-		$("a[name='delete1']").on("click",function(e){
-	        e.preventDefault();
-	        fn_fileDelete($(this));
-	    });
-	 });
+	       e.preventDefault();
+	       fn_fileDelete($(this));
+	   });
+});
+$(document).ready(function(){
+	$("#add1").on("click",function(e){
+		e.preventDefault();
+		fn_fileAdd1();
+	});
+	$("a[name='delete1']").on("click",function(e){
+		e.preventDefault();
+		fn_fileDelete($(this));
+	});
+});
 	 
  
- function fn_fileDelete(obj){
-     obj.parent().remove();
- }
- function fn_fileAdd(){
-     var str = "<p><input type='file' class='add0' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
-     $("#fileDiv").append(str);
-      
-     $("a[name='delete']").on("click",function(e){
-         e.preventDefault();
-         fn_fileDelete($(this));         
-     })
- }
- function fn_fileAdd1(){
-     var str = "<p><input type='file' class='add1' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
-     $("#fileDiv1").append(str);
-      
-     $("a[name='delete1']").on("click",function(e){
-         e.preventDefault();
-         fn_fileDelete($(this));         
-     })
- }
+function fn_fileDelete(obj){
+	obj.parent().remove();
+}
+function fn_fileAdd(){
+    var str = "<p><input type='file' class='addfile0' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+    $("#fileDiv").append(str);
+     
+    $("a[name='delete']").on("click",function(e){
+        e.preventDefault();
+        fn_fileDelete($(this));         
+    });
+}
+function fn_fileAdd1(){
+    var str = "<p><input type='file' class='addfile1' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
+    $("#fileDiv1").append(str);
+     
+    $("a[name='delete1']").on("click",function(e){
+        e.preventDefault();
+        fn_fileDelete($(this));         
+    });
+}
+ 
+function validate(){
+	if(!$('.addfile0').val().length){
+	 	alert("상품사진은 반드시 한개 이상 추가해야 합니다.");
+		return false;
+	}
+	if(!$('.addfile1').val().length){
+		alert("상세설명사진은 반드시 한개 이상 추가해야 합니다.");
+		return false;
+	}
+	return true;
+}
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

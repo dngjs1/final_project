@@ -38,6 +38,7 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
+		System.out.println(list);
 		m.addAttribute("list",list);	
 		return "/product/shop";
 	}
@@ -79,82 +80,79 @@ public class ProductController {
 				productOptionList.add(productOption);
 			}
 		}
+		
  		/*상품사진 처리*/
         List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
         String saveDir="";
         File dir=null;
         List<ProductImg> productImgList= new ArrayList<ProductImg>();
-        if(fileList.get(0).getOriginalFilename().length()>0) {
-	        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
-	        dir=new File(saveDir);
-			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-	        for (MultipartFile mf : fileList) {
-	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            long fileSize = mf.getSize(); // 파일 사이즈
-	            
-	            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
-				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-				int rndNum=(int)(Math.random()*1000);
-				String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-				renamedFileName+="_"+rndNum+"."+ext;
-	
-	            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
-	            try {
-	                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
-	            } catch (IllegalStateException e) {
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	            
-	            ProductImg productImg = new ProductImg();
-	                      
-	            productImg.setP_img_path(originFileName);
-	            productImg.setNew_p_img_path(renamedFileName);
-	            
-	            productImgList.add(productImg);
-	            System.out.println(productImg);
-	        }
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+        dir=new File(saveDir);
+		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+		
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+            
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductImg productImg = new ProductImg();
+                      
+            productImg.setP_img_path(originFileName);
+            productImg.setNew_p_img_path(renamedFileName);
+            
+            productImgList.add(productImg);
+            System.out.println(productImg);
         }
+        
         /*상품상세정보 사진 처리*/
         List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
         List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
-        if(fileList1.get(0).getOriginalFilename().length()>0) {
-        	System.out.println("들어오니?");
-	        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
-	        dir=new File(saveDir);
-	        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-	        for (MultipartFile mf : fileList1) {
-	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            long fileSize = mf.getSize(); // 파일 사이즈
-	
-	            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
-				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-				int rndNum=(int)(Math.random()*1000);
-				String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-				renamedFileName+="_"+rndNum+"."+ext;
-	
-	            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
-	            try {
-	                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
-	            } catch (IllegalStateException e) {
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	            
-	            ProductDetailImg productDetailImg = new ProductDetailImg();
-	                      
-	            productDetailImg.setP_detail_img_path(originFileName);
-	            productDetailImg.setNew_p_detail_img_path(renamedFileName);
-	            
-	            productDetailImgList.add(productDetailImg);
-	        }
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+        
+        for (MultipartFile mf : fileList1) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductDetailImg productDetailImg = new ProductDetailImg();
+                      
+            productDetailImg.setP_detail_img_path(originFileName);
+            productDetailImg.setNew_p_detail_img_path(renamedFileName);
+            
+            productDetailImgList.add(productDetailImg);
         }
         
-        System.out.println("!!!!!!!!!!서비스 드가기전");
         int result= service.insertProduct(product,productImgList,productDetailImgList,productOptionList);
-        System.out.println("!!!!!!!!!!서비스 드간 후");
         ModelAndView mv=new ModelAndView();
         String msg="";
 		if(result>0)
