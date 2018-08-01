@@ -30,5 +30,5 @@ public interface ProductDAO {
 	
 	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
 	
-	ProductOption selectOption(SqlSessionTemplate sqlSession,String productCode);
+	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,String productCode);
 }
