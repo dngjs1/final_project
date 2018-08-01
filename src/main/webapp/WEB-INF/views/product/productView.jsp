@@ -105,15 +105,14 @@
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
 				<div style="float:right;">
-				<button class="btn btn-primary">구매</button>
-				<button class="btn btn-primary">장바구니</button>
+					<button class="btn btn-primary" onclick="fn_buy">구매</button>
+					<button class="btn btn-primary" onclick="fn_cart">장바구니</button>
 				</div>
 			</form>
     	</div>
-			
-		</div>
 	</div>
-	</div>
+</div>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
