@@ -17,6 +17,12 @@
 @media (min-width: 992px) { .container {width: 970px;} }
 @media (min-width: 1200px) { .container { width: 1060px; } }
 
+/*중복아이디체크관련*/
+    div#userId-container{position:relative; padding:0px;}
+    div#userId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
+    div#userId-container span.ok{color:green;}
+    div#userId-container span.error{color:red;}
+
 </style>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

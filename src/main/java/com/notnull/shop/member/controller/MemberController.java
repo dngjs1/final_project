@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
@@ -66,6 +67,13 @@ public class MemberController {
 		model.addAttribute("loc",loc);
 		
 		return "/common/msg";
+	}
+	
+	
+	@RequestMapping("/checkIdDuplicate.do")
+	public ModelAndView checkIdDuplicate(String memberId, ModelAndView mv) {
+		
+		return mv;
 	}
 	
 	
