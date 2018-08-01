@@ -157,15 +157,20 @@
 		</div>
 	</div><!-- 옵션 박스 div 끝 -->
 	
+<!-- <script>
 
+$(document).ready(function(){
+	sell_price = parseInt($('#price').text());
+	$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+});
+</script> -->
 
 	<div class = "row">
 		<c:forEach var='image' items='${list }' varStatus="vs">
 			<div class="col-3 Seller_item_secion">
 			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
-				<div class="hover-box">
-					<img src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="photo-2.jpeg"
-						class="img-thumbnail" />
+				<div  style="height:250px;" class="hover-box">
+					<img width="100%" height="100%" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="photo-2.jpeg"/>
 					<div class="icons">
 						<a href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}' class="m-1">
 							<i class="text-center fas fa-search" data-toggle="tooltip" title="상품자세히 보기"></i>
@@ -183,17 +188,11 @@
 					</div>
 		
 					<div class="row">
-<script>
-$(function(){
-	function init(){
-		$("#price").text($("#price").text().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	}
-});
-</script>
 						<div class="col-6 ml-2">
-							<span id="price" style="font-size: 20px; font-weight: bold;">${image.price }</span>
+							<span style="font-size: 20px; font-weight: bold;">
+								<fmt:formatNumber value="${image.price }" type="currency"/>
+							</span>
 						</div>
-		
 						<div class="point col-5 ml-1" style="text-align: center">
 							<span class="item_font">
 								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : 64P</B>
