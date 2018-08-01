@@ -58,7 +58,6 @@ public class ProductServiceImpl implements ProductService {
 			}
 			if(productOptionList.size()>0)
 			{
-				System.out.println("왜안돼??");
 				for(ProductOption productOption : productOptionList)
 				{
 					productOption.setProduct_code(product_code);
@@ -86,7 +85,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductOption selectOption(String productCode) {
+	public List<ProductOption> selectOption(String productCode) {
 		return productDAO.selectOption(sqlSession,productCode);
 	}
 	

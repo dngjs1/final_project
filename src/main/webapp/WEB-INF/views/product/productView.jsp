@@ -92,14 +92,14 @@
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" method="get">
-				<c:if test="productOption!=null">
-				<span>사이즈 </span>
-				<select name="size" >
-	               <option value="100">100cm</option>
-	               <option value="200">200cm</option>
-	               <option value="300">300cm</option>
-	            </select>
-	            &emsp;&emsp;&emsp;
+				<c:if test="${optionList!=null}">
+					<span>사이즈 </span>
+					<select name="size" >
+						<c:forEach var="option" items="${optionList}">
+							<option value="${product_option_code}">${option_size}</option>
+						</c:forEach>
+		            </select>
+		            &emsp;&emsp;&emsp;
 	            </c:if>
 				<span>수량 </span><input type="text" name="amount" value="1" size="1" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>

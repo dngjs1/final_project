@@ -53,8 +53,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public ProductOption selectOption(SqlSessionTemplate sqlSession, String productCode) {
-		return sqlSession.selectOne("product.selectOption",productCode);
+	public List<ProductOption> selectOption(SqlSessionTemplate sqlSession, String productCode) {
+		return sqlSession.selectList("product.selectOption",productCode);
 	}
 	
 	

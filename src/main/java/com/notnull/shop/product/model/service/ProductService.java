@@ -20,5 +20,5 @@ public interface ProductService {
 	
 	ProductJoinCategory selectProduct(String productCode);
 	
-	ProductOption selectOption(String productCode);
+	List<ProductOption> selectOption(String productCode);
 }

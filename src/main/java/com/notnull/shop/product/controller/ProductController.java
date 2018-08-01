@@ -38,7 +38,6 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		System.out.println(list);
 		m.addAttribute("list",list);	
 		return "/product/shop";
 	}
@@ -115,7 +114,6 @@ public class ProductController {
             productImg.setNew_p_img_path(renamedFileName);
             
             productImgList.add(productImg);
-            System.out.println(productImg);
         }
         
         /*상품상세정보 사진 처리*/
@@ -174,9 +172,9 @@ public class ProductController {
 	public String productView(Model model,HttpServletRequest request) {
 		String productCode=request.getParameter("productCode");
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
-		ProductOption productOption =service.selectOption(productCode);
+		List<ProductOption> optionList =service.selectOption(productCode);
 		model.addAttribute("joinCategory", joinCategory);
-		model.addAttribute("productOption", productOption);
+		model.addAttribute("optionList", optionList);
 		return "/product/productView";
 	}
 
