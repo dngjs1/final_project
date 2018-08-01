@@ -100,9 +100,6 @@
 		<span>검색영역</span>
 	</div><!-- 카테고리라는 이름 넣는 div 끝 -->
 	
-
-	
-	
 	</div><!-- 품목 카테고리 나오는 부분 감싸는 div 끝 -->
 	
 	</div><!-- 검색 전체를 감싸는 div 끝 -->
@@ -162,84 +159,76 @@
 	
 
 
-<div class = "row">
-	<div class="col-3 Seller_item_secion">
-	<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
-						<div class="hover-box">
-							<img src="./resources/images/photo-6.jpg" alt="photo-2.jpeg"
-								class="img-thumbnail" />
-							<div class="icons">
-								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
-							</div>
-						</div>
-						<!-- 상품 이미지에 마우스를 올렸을 때 나오는 부분 코드 끝 -->
-
-
-						<!--갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
-							<div class="product-title">
-								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">휴가가는 고양이</span></a>
-							</div>
-
-							<div class="row">
-
-								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">67.000원</span>
-								</div>
-
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 64P</B></span>
-								</div>
-
-							</div>
-
-							<div class="product-detail" style="background-color: #fafafa">
-
-								<div class="row mt-2 mb-2">
-									<div class="product-rating col-6 ml-2 mt-1 ">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-
-									<div class="col-5 item_icon text-right ">
-										<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
-											title="장바구니에 담기"></i></span> <span class="item_icon"></i> <i
-											class="far fa-kiss-wink-heart mr-1" data-toggle="tooltip"
-											title="좋아요"></i></span> <span class="item_icon"><i
-											class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
-											title="상세보기"></i></span>
-									</div>
-								</div>
-
-							</div>
-						</div>
+	<div class = "row">
+		<c:forEach var='image' items='${list }' varStatus="vs">
+			<div class="col-3 Seller_item_secion">
+			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
+				<div class="hover-box">
+					<img src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="photo-2.jpeg"
+						class="img-thumbnail" />
+					<div class="icons">
+						<a href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}' class="m-1">
+							<i class="text-center fas fa-search" data-toggle="tooltip" title="상품자세히 보기"></i>
+						</a>
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					</div><!-- 상품  진열하는  row코드 부분 끝 -->
+				</div>
+				<!-- 상품 이미지에 마우스를 올렸을 때 나오는 부분 코드 끝 -->
 	
-	
-	
-	
+				<!--갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
+				<div class="proudct-item-details">
+					<div class="product-title">
+						<a href="#" style="text-decoration: none;">
+							<span class="ml-2" style="font-size: 16px;">${image.product_name }</span>
+						</a>
+					</div>
+		
+					<div class="row">
+<script>
+$(function(){
+	function init(){
+		$("#price").text($("#price").text().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	}
+});
+</script>
+						<div class="col-6 ml-2">
+							<span id="price" style="font-size: 20px; font-weight: bold;">${image.price }</span>
+						</div>
+		
+						<div class="point col-5 ml-1" style="text-align: center">
+							<span class="item_font">
+								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : 64P</B>
+							</span>
+						</div>
+		
+					</div>
+		
+					<div class="product-detail" style="background-color: #fafafa">
+		
+						<div class="row mt-2 mb-2">
+							<div class="product-rating col-6 ml-2 mt-1 ">
+								<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+									class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+									class="fas fa-star"></i>
+							</div>
+		
+							<div class="col-5 item_icon text-right ">
+								<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
+									title="장바구니에 담기"></i></span> <span class="item_icon"></i> <i
+									class="far fa-kiss-wink-heart mr-1" data-toggle="tooltip"
+									title="좋아요"></i></span> <span class="item_icon"><i
+									class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
+									title="상세보기"></i></span>
+							</div>
+						</div>
+		
+					</div>
+				</div>
+			</div>
+		</c:forEach>		
+	</div><!-- 상품  진열하는  row코드 부분 끝 -->
 	
 	<!-- 전체화면 오른쪽 영역 부분 1로 비율 설정 -->
-	
-	
-	
-	
-	
-	
+
 </div><!-- 전체 div 를 감싸는 container  끝 -->
 
 
