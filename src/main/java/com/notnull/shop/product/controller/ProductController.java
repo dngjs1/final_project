@@ -23,7 +23,9 @@ import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
+import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
+import com.notnull.shop.product.model.vo.ProductOption;
 
 @Controller
 public class ProductController {
@@ -36,7 +38,6 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		System.out.println(list);
 		m.addAttribute("list",list);	
 		return "/product/shop";
 	}
@@ -48,7 +49,6 @@ public class ProductController {
 		List<ProductCategory> categoryList=new ArrayList<ProductCategory>();
 		categoryList=service.selectCategoryList();
 		
-		System.out.println(categoryList);
 		model.addAttribute("categoryList",categoryList);
 		
 		return "/product/uploadForm";
@@ -59,41 +59,45 @@ public class ProductController {
 	@RequestMapping("/upload.do")
     public ModelAndView requestupload2(MultipartHttpServletRequest mtfRequest, HttpServletRequest request,Product product) {
 
-		/*		//재고량
 		
-		for(int i=0;i<left_amount.length;i++) {
-			System.out.println(real_size[i]);
-			System.out.println(left_amount[i]);
+		String[] sizes=request.getParameterValues("size");
+		String[] sleft_amounts=request.getParameterValues("left_amount");
+		
+		List<ProductOption> productOptionList=new ArrayList<ProductOption>();
+		if(sizes[0].length()>0 && sleft_amounts[0].length()>0) {
+			int[] left_amounts = new int[sleft_amounts.length];
+			
+			for(int i=0;i<sleft_amounts.length;i++) {
+				int a= Integer.parseInt(sleft_amounts[i]);
+				left_amounts[i]=a;
+			}
+			
+			for(int i =0; i<sizes.length;i++) {
+				ProductOption productOption = new ProductOption();
+				productOption.setLeft_amount(left_amounts[i]);
+				productOption.setOption_size(sizes[i]);
+				productOptionList.add(productOption);
+			}
 		}
-			*/
-	
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file_0");	//상품 사진
-		List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");	//상품 상세 사진
-
-        String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/image");
-       
+ 		/*상품사진 처리*/
+        List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
+        String saveDir="";
+        File dir=null;
         List<ProductImg> productImgList= new ArrayList<ProductImg>();
-        List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
-        System.out.println("상품사진size"+fileList.size());
-        System.out.println("상품 상세 사진size"+fileList1.size());
-        File dir=new File(saveDir);
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+        dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
 		
-
         for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
-
+            
             String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 			int rndNum=(int)(Math.random()*1000);
 			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
 			renamedFileName+="_"+rndNum+"."+ext;
-            
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("renamedFileName : " + renamedFileName);
-            System.out.println("fileSize : " + fileSize);
 
             String safeFile = saveDir + System.currentTimeMillis() + originFileName;
             try {
@@ -112,6 +116,13 @@ public class ProductController {
             productImgList.add(productImg);
         }
         
+        /*상품상세정보 사진 처리*/
+        List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
+        List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+        
         for (MultipartFile mf : fileList1) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
@@ -121,10 +132,6 @@ public class ProductController {
 			int rndNum=(int)(Math.random()*1000);
 			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
 			renamedFileName+="_"+rndNum+"."+ext;
-            
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("renamedFileName : " + renamedFileName);
-            System.out.println("fileSize : " + fileSize);
 
             String safeFile = saveDir + System.currentTimeMillis() + originFileName;
             try {
@@ -142,11 +149,8 @@ public class ProductController {
             
             productDetailImgList.add(productDetailImg);
         }
-    
         
-        
-        int result= service.insertProduct(product,productImgList,productDetailImgList);
-        
+        int result= service.insertProduct(product,productImgList,productDetailImgList,productOptionList);
         ModelAndView mv=new ModelAndView();
         String msg="";
 		if(result>0)
@@ -164,7 +168,15 @@ public class ProductController {
 		mv.setViewName("common/msg");	
         return mv;
     }
-
+	@RequestMapping("/productView.do")
+	public String productView(Model model,HttpServletRequest request) {
+		String productCode=request.getParameter("productCode");
+		ProductJoinCategory joinCategory=service.selectProduct(productCode);
+		List<ProductOption> optionList =service.selectOption(productCode);
+		model.addAttribute("joinCategory", joinCategory);
+		model.addAttribute("optionList", optionList);
+		return "/product/productView";
+	}
 
 
 }

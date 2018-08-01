@@ -80,20 +80,13 @@
 					<div class="pager"></div>
 					<div class="clear"></div>
 				</div>
-				<div class="row" style="border:1px solid black">
+				<div class="row">
 					<c:forEach var='image' items='${list }' varStatus="vs">
-						<div class="col-3" style="border:1px solid black ; width: 250px; height: 250px">
-							<div style="width: 250px; height: 200px;" class="col_1_of_single1 span_1_of_single1 ">
-									<div class="view1 view-fifth1">
-										<div class="top_box">
-											<div class="grid_img">
-												<div style="width: 200px; height: 150px;" class="css3">
-													<img style="width: 100%; height: 100%;"
-														src="${pageContext.request.contextPath }/resources/upload/image/${image.new_p_img_path }" />
-												</div>
-											</div>
-										</div>
-									</div>
+						<div style=" cursor: pointer;width: 250px;height: 250px;" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}'" class="col-3">
+							<div>
+								<div style="width: 200px; height: 150px;" class="css3">
+									<img style="width: 100%; height: 100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" />
+								</div>
 									<div>
 										상품이름: ${image.product_name }
 									</div>
@@ -105,6 +98,7 @@
 									</div>
 								<!-- </a> -->
 							</div>
+						<!-- </a> -->
 						</div>
 					</c:forEach>
 				</div>

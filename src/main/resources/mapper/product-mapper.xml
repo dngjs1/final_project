@@ -14,6 +14,7 @@
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by product_code desc
 	</select>
  
  	<select id="selectCategoryList" resultType="productCategory">
@@ -38,5 +39,15 @@
   	VALUES(product_detail_img_seq.nextval,#{p_detail_img_path},#{new_p_detail_img_path},#{product_code})	
   	</insert>
   
+  	<insert id="insertOption" parameterType="productOption">
+  	INSERT INTO product_option VALUES (product_option_seq.nextval,#{option_size},#{left_amount},#{product_code})
+  	</insert>
   
+  	<select id="selectProduct" parameterType="string" resultType="productJoinCategory">
+  	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 
+  	</select>
+  
+  	<select id="selectOption" parameterType="string" resultType="productOption">
+  	SELECT * FROM product_option WHERE product_code=#{product_code} 
+  	</select>
 </mapper>

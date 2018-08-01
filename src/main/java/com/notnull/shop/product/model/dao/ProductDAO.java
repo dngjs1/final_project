@@ -9,7 +9,9 @@ import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
+import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
+import com.notnull.shop.product.model.vo.ProductOption;
 
 
 public interface ProductDAO {
@@ -22,5 +24,11 @@ public interface ProductDAO {
 	
 	int insertDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
 	
+	int insertOption(SqlSessionTemplate sqlSession,ProductOption productOption);
+	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
+	
+	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
+	
+	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,String productCode);
 }

@@ -8,5 +8,7 @@
       	<typeAlias type="com.notnull.shop.product.model.vo.ProductImg" alias="productImg"/>
       	<typeAlias type="com.notnull.shop.product.model.vo.ProductDetailImg" alias="ProductDetailImg"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductCategory" alias="productCategory"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductOption" alias="productOption"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinCategory" alias="productJoinCategory"/>
 	</typeAliases>
 </configuration>

@@ -72,17 +72,19 @@
 </script>
 
 <div class="container">
-	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">캠핑</span></p>
-	<div style=" float: left; width: 50%;padding-right: 20px;">
-		<img style="width:100%;" alt="텐트" src="http://www.oasekorea.com/00_ADMIN/Code/goodsimg_PIC01/AAAA00120141218008MM-1.jpg">
+
+	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${joinCategory.p_category_name}</span></p>
+<div class="row">
+	<div class="col-6">
+		<img style="width:100%;" alt="상품사진" src="http://www.oasekorea.com/00_ADMIN/Code/goodsimg_PIC01/AAAA00120141218008MM-1.jpg">
 	</div>
-	<div style=" float: left; width: 50%;padding-left: 20px;">
+	<div class="col-6">
 		<hr style="border: 1.5px solid black;margin-top: 0px;">
 		<div style="margin-left:10px">
-			<p style="font-size:25px;font-weight:bold">4인용 A형 텐트</p>
+			<p style="font-size:25px;font-weight:bold">${joinCategory.product_name}</p>
 			<p>별점 들어갈부분</p>
 			<hr>
-			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">9000 원</span><span> 원</span></div>
+			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">${joinCategory.price}</span><span> 원</span></div>
 			<hr>
 			<p><span style="font-size:18px;color:#148CFF;"><%=strdate%></span> 도착 예정</p>
 			<hr>
@@ -90,13 +92,15 @@
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" method="get">
-				<span>사이즈 </span>
-				<select name="size" >
-	               <option value="100">100cm</option>
-	               <option value="200">200cm</option>
-	               <option value="300">300cm</option>
-	            </select>
-	            &emsp;&emsp;&emsp;
+				<c:if test="${optionList!=null}">
+					<span>사이즈 </span>
+					<select name="size" >
+						<c:forEach var="option" items="${optionList}">
+							<option value="${product_option_code}">${option_size}</option>
+						</c:forEach>
+		            </select>
+		            &emsp;&emsp;&emsp;
+	            </c:if>
 				<span>수량 </span><input type="text" name="amount" value="1" size="1" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
@@ -108,6 +112,7 @@
     	</div>
 			
 		</div>
+	</div>
 	</div>
 
 

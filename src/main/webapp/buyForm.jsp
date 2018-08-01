@@ -9,6 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value="구매" name="pageTitle"/>
 </jsp:include>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <% 
 	Calendar cal = Calendar.getInstance();
@@ -35,6 +36,8 @@
 	var sell_price;
 	var amount;
 	$(function(){
+		var IMP = window.IMP;
+		IMP.init('imp29686371');
        	init();
    	});
 	function init () {
@@ -137,10 +140,40 @@
 	</table>
 	<br>
 	<div style="text-align:center;">
-	<button class="btn btn-primary" style="width: 150px;height:50px;">결제하기</button>
+	<button id="pay" class="btn btn-primary" style="width: 150px;height:50px;">결제하기</button>
 	</div>
 	<hr style="border:2px solid #787878">
 </div>
-
+<script>
+$(function(){
+	$('#pay').click(function(){
+		IMP.request_pay({
+		    pg : 'nice',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : 10,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'http://localhost:9191/shop/buyForm'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+	});
+});
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
