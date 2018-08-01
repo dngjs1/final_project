@@ -165,10 +165,23 @@ public class MemberController {
 	@RequestMapping("/findMemberPassword.do")
 	public String findMemberPassword(String id, String email, Model model) throws MessagingException {
 		
-		service.findMemberPassword(id,email);
+		int check = service.findMemberPassword(id,email);
 		
-		System.out.println("잘들어왔죵 PW : " );
-		return "redirect:/";
+		String msg="";
+		String loc="/";
+		String view = "/common/msg";
+		
+		if(check==1) {
+			msg="임시비밀번호가 이메일로 발송됬습니다.";
+		}else {
+			msg="존재하지않는 ID 또는 이메일주소 입니다.";
+			loc="findMember.do";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return view;
 	}
 	
 }
