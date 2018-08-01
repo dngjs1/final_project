@@ -15,4 +15,8 @@ public interface MemberService {
 	
 	String userAuth(String email);
 	
+	String findMemberId(String email);
+	
+	int findMemberPassword(String id, String email ) throws MessagingException;
+	
 }

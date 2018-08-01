@@ -26,5 +26,13 @@
 	<select id="loginCheck" parameterType="string" resultMap="memberMap">
 		select * from member where member_id=#{userId}
 	</select>
+	
+	<select id="findMemberId" parameterType="string" resultType="string">
+		select member_id from member where email=#{email}
+	</select>
+	
+	<update id="tempPassword" parameterType="member">
+		update member set member_pw=#{member_pw} where member_id=#{member_id} 
+	</update>
  
 </mapper>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ public class MemberServiceImp implements MemberService {
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcyptPasswordEncoder;
 	
 	@Inject
 	private JavaMailSender mailSender;
@@ -71,6 +75,44 @@ public class MemberServiceImp implements MemberService {
 		memberDAO.userAuth(sqlSession, email);
 		
 		return memberDAO.selectByEmail(sqlSession,email);
+	}
+
+	@Override
+	public String findMemberId(String email) {
+		
+		return memberDAO.findMemberId(sqlSession, email);
+	}
+	
+	@Transactional
+	@Override
+	public int findMemberPassword(String id, String email) throws MessagingException {
+		
+		int check=0;
+		String tempPw = ""; //암호화 이전 비밀번호
+		for (int i = 0; i < 12; i++) {
+			tempPw += (char) ((Math.random() * 26) + 97);
+		}
+		
+		System.out.println(tempPw);
+		
+		String encodedPw =  bcyptPasswordEncoder.encode(tempPw); //암호화 이후 비밀번호
+	
+		if(id.equals(memberDAO.findMemberId(sqlSession, email))) {
+			check = memberDAO.tempPassword(sqlSession, id, encodedPw);
+	
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("[SHOP 임시비밀번호 발급]");
+			sendMail.setText(id+"님의 임시비밀번호는 "+tempPw+" 입니다");			
+		//	sendMail.setFrom("euichan", "shop TEST");
+			sendMail.setTo(email);
+			sendMail.send();
+		
+		}
+		
+		
+		
+			
+		return check;
 	}
 
 }

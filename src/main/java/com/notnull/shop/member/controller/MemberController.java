@@ -149,5 +149,26 @@ public class MemberController {
 		return "member/findMember";
 	}
 	
+	@RequestMapping("/findMemberId.do")
+	public String findMemberId( String email, Model model) {
+		
+		String id = service.findMemberId(email);
+		
+		if(id==null) {
+			id="존재하지 않는 이메일주소입니다.";
+		}
+		
+		System.out.println("잘들어왔죵 ID : "  + id);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/findMemberPassword.do")
+	public String findMemberPassword(String id, String email, Model model) throws MessagingException {
+		
+		service.findMemberPassword(id,email);
+		
+		System.out.println("잘들어왔죵 PW : " );
+		return "redirect:/";
+	}
 	
 }
