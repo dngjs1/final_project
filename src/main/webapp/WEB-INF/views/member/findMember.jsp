@@ -10,16 +10,22 @@
 
 <style>
 .findMember{
-<<<<<<< HEAD
+
 	width: 500px;
 	
 	}
 
 
-=======
+
 	width: 500px;	
 }
->>>>>>> master
+master
+
+
+
+span.viewID {
+		display: none;
+	}
 
 </style>
 
@@ -35,11 +41,14 @@
 	<h3>아이디찾기</h3> <hr>
 		<form name="findId" action="${pageContext.request.contextPath}/findMemberId.do" method="post">
 		이메일<input type="email" name="email" id="email" class="form-control" required="required"> <br>
-		<input type="submit" value="ID찾기"> <hr>
+		<input type="submit" value="ID찾기"> <br><br>
+		<span class="viewID" id="viewID" > <c:out value="${id}"></c:out> </span>
+		
+		<hr>
 		</form>
-		<input type = "text">
 	</div>
 	</th>
+	
 	</tr>
 	<tr>
 	<th>

@@ -199,6 +199,8 @@ public class MemberController {
 			
 		}
 		
+		model.addAttribute("id",id);
+		
 		return "member/findMember";
 	}
 	
