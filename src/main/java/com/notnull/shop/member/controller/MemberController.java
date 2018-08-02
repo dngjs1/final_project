@@ -1,11 +1,12 @@
 package com.notnull.shop.member.controller;
 
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
@@ -66,6 +68,36 @@ public class MemberController {
 		
 		return "/common/msg";
 	}
+	
+	
+//	@RequestMapping("/checkIdDuplicate.do")
+//	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
+//
+//		System.out.println(member_Id);
+//		
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
+//		
+//		boolean check = service.idDuplicateCheck(member_Id)==0?true:false;
+//		
+//		
+//		mv.addObject(check);
+//		mv.setViewName("JsonView");
+//		
+//		return mv;
+//	}
+	
+	@RequestMapping("/checkIdDuplicate.do")
+    public void duplicateIdCheck(String member_id,HttpServletRequest req,HttpServletResponse res) throws IOException {
+	
+		System.out.println(member_id);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
+       
+       boolean check=service.idDuplicateCheck(member_id)==0?true:false;
+       
+       System.out.println(check);
+       
+       res.getWriter().print(check);
+    }
 	
 	
 	@RequestMapping("/memberLogin.do")
@@ -155,19 +187,43 @@ public class MemberController {
 		
 		if(id==null) {
 			id="존재하지 않는 이메일주소입니다.";
+			
+			String msg=id;
+			String loc ="findMember.do";
+			String view = "/common/msg";
+			
+			model.addAttribute("msg",msg);
+			model.addAttribute("loc",loc);
+			
+			return view;
+			
 		}
 		
-		System.out.println("잘들어왔죵 ID : "  + id);
-		return "redirect:/";
+		model.addAttribute("id",id);
+		
+		return "member/findMember";
 	}
 	
 	@RequestMapping("/findMemberPassword.do")
 	public String findMemberPassword(String id, String email, Model model) throws MessagingException {
 		
-		service.findMemberPassword(id,email);
+		int check = service.findMemberPassword(id,email);
 		
-		System.out.println("잘들어왔죵 PW : " );
-		return "redirect:/";
+		String msg="";
+		String loc="/";
+		String view = "/common/msg";
+		
+		if(check==1) {
+			msg="임시비밀번호가 이메일로 발송됬습니다.";
+		}else {
+			msg="존재하지않는 ID 또는 이메일주소 입니다.";
+			loc="findMember.do";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return view;
 	}
 	
 }

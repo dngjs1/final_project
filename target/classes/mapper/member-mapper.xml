@@ -35,4 +35,8 @@
 		update member set member_pw=#{member_pw} where member_id=#{member_id} 
 	</update>
  
+  	<select id="duplicateIdCheck" parameterType="string" resultType="_int">
+ 		select count(*) from member where member_id=#{id}
+	</select>
+ 
 </mapper>

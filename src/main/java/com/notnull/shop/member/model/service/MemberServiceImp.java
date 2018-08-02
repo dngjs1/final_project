@@ -93,7 +93,7 @@ public class MemberServiceImp implements MemberService {
 			tempPw += (char) ((Math.random() * 26) + 97);
 		}
 		
-		System.out.println(tempPw);
+//		System.out.println(tempPw);
 		
 		String encodedPw =  bcyptPasswordEncoder.encode(tempPw); //암호화 이후 비밀번호
 	
@@ -109,10 +109,13 @@ public class MemberServiceImp implements MemberService {
 		
 		}
 		
-		
-		
-			
 		return check;
+	}
+
+	@Override
+	public int idDuplicateCheck(String id) {
+		
+		return memberDAO.idDuplicateCheck(sqlSession, id);
 	}
 
 }
