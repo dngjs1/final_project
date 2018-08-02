@@ -19,17 +19,6 @@
 	
 %>
 
-<style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
-
-.amount-font{color:aqua;}
-</style>
 <script>
 	var sell_price;
 	var amount;
@@ -93,28 +82,27 @@
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" method="get">
-				<c:if test="${optionList!=null}">
+				<c:if test="${optionList!=null && optionList.size()>0}">
 					<span>사이즈 </span>
-					<select name="size" >
+					<select name="size" style="font-size:15px;height:28px;" >
 						<c:forEach var="option" items="${optionList}">
-							<option value="${option.product_option_code}">${option.option_size}<span class="amount-font"> (${option.left_amount}개)</span></option>
+							<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
 						</c:forEach>
 		            </select>
 		            &emsp;&emsp;&emsp;
 	            </c:if>
-				<span>수량 </span><input type="text" name="amount" value="1" size="1" style="height:25px;" readonly/>
+				<span>수량 </span><input type="text" name="amount" value="1" size="2" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
 				<div style="float:right;">
-				<button class="btn btn-primary">구매</button>
-				<button class="btn btn-primary">장바구니</button>
+					<button class="btn btn-primary" onclick="fn_buy">구매</button>
+					<button class="btn btn-primary" onclick="fn_cart">장바구니</button>
 				</div>
 			</form>
     	</div>
-			
-		</div>
 	</div>
-	</div>
+</div>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

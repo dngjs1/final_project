@@ -10,21 +10,11 @@
 <c:set var='path' value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value="" name="pageTitle"/>
-   
 </jsp:include>
+
 <style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-
-
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
 .tr1 th{text-align:center;background-color:#E1F6FA}
 .tr2 td{vertical-align:middle;text-align:center;}
-
 </style>
 
 
