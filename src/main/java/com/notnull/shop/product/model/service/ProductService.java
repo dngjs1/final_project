@@ -9,6 +9,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductReview;
 
 public interface ProductService {
 
@@ -21,4 +22,6 @@ public interface ProductService {
 	ProductJoinCategory selectProduct(String productCode);
 	
 	List<ProductOption> selectOption(String productCode);
+	
+	List<ProductReview> selectReview();
 }

@@ -26,6 +26,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductReview;
 
 @Controller
 public class ProductController {
@@ -178,5 +179,14 @@ public class ProductController {
 		return "/product/productView";
 	}
 
+	@RequestMapping("/review_star.do")
+	public String reviewStar(Model model,HttpServletRequest request) {
+		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
+		productReviewList=service.selectReview();
+		System.out.println(productReviewList.get(0));
+		
+		request.setAttribute("review", productReviewList.get(0));
+		return "product/productView";
+	}
 
 }
