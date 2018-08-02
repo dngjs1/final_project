@@ -59,6 +59,15 @@
 			}
 		}
 	}
+	
+	$(window).scroll(function() {
+		var $el = $('.show-on-scroll');
+
+		if ($(this).scrollTop() >= 549)
+			$el.addClass('shown');
+		else
+			$el.removeClass('shown');
+	});
 </script>
 
 <div class="container">
@@ -102,6 +111,73 @@
     	</div>
 	</div>
 </div>
+</div>
+<br><br>
+
+
+<div class="container">
+
+  <ul class="nav nav-tabs" role="tablist">
+     <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#section1">상품 상세</a>
+    </li>
+    <li class="nav-item">
+       <a class="nav-link" data-toggle="tab" href="#section2">상품평</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#section3">상품문의</a>
+    </li>
+  </ul>
+
+ <div class="tab-content">
+  <div id="section1" class="container tab-pane active">
+			
+  
+	
+  <b>필수 표기정보</b>
+  <table class="table table-bordered">
+  	<tr>
+  		<td width="15%" style="background-color:#D5D5D5">품명 및 모델명</td>
+  		<td width="35%">gg</td>
+  		<td width="15%" style="background-color:#D5D5D5">출시일</td>
+  		<td width="35%">gg</td>
+  	</tr>
+  	<tr>
+  		<td width="15%" style="background-color:#D5D5D5">제조국 (원산지)</td>
+  		<td width="35%">gg</td>
+  		<td width="15%" style="background-color:#D5D5D5">크기</td>
+  		<td width="35%">gg</td>
+  	</tr>
+  </table>
+  
+  	<div>
+  	<img src="//thumbnail12.coupangcdn.com/thumbnails/remote/q89/image/vendor_inventory/images/2018/05/11/11/9/d758f18b-6718-4ad3-ab4d-97b7b5cc5495.jpg" onerror="this.src='//t1a.coupangcdn.com/thumbnails/remote/622x622/image/coupang/common/no_img_1000_1000.png'" width="100%" alt="">
+ 	</div>
+  </div>
+  <div id="section2" class="container tab-pane fade">
+			
+ 
+ <hr>
+ <h4>상품평</h4>
+ <div>별점 이미지    ,참여인원</div>
+ <div>상품평 이미지</div>
+  
+  
+ <hr>
+ <div> 작성자, 작성일, 내용</div>
+  상품평 페이징 처리
+  
+   </div>
+   <div id="section3" class="container tab-pane fade">
+			
+  
+  <hr>
+  상품문의
+  <div> 문의자  , 문의날짜, 문의내용</div>
+	</div>
+</div>
+ 
+  
 </div>
 
 
