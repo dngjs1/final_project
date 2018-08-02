@@ -90,7 +90,8 @@
 			<span>배송방법 : 택배</span><br>
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
-			<form name="form" method="get">
+			<form name="form" id="frm" method="get">
+				<input type="hidden" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<span>사이즈 </span>
 					<select name="size" style="font-size:15px;height:28px;" >
@@ -104,10 +105,26 @@
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
 				<div style="float:right;">
-					<button class="btn btn-primary" onclick="fn_buy">구매</button>
-					<button class="btn btn-primary" onclick="fn_cart">장바구니</button>
+					<button class="btn btn-primary" type="button" id="buy">구매</button>
+					<button class="btn btn-primary" type="button" id="cart">장바구니</button>
 				</div>
 			</form>
+			<script>
+			$(function(){
+				$('#cart').click(function(){
+					var frm=$("#frm");
+					var url="${pageContext.request.contextPath }/cartView.do";
+					frm.attr("action",url);
+					frm.submit();
+				});
+				$('#buy').click(function(){
+					var frm=$("#frm");
+					var url="${pageContext.request.contextPath }/buyForm.do";
+					frm.attr("action",url);
+					frm.submit();
+				});
+			});
+			</script>
     	</div>
 	</div>
 </div>

@@ -168,6 +168,7 @@ public class ProductController {
 		mv.setViewName("common/msg");	
         return mv;
     }
+	
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
 		String productCode=request.getParameter("productCode");
@@ -178,5 +179,15 @@ public class ProductController {
 		return "/product/productView";
 	}
 
-
+	@RequestMapping("/cartView.do")
+	public String cartView(Model model,HttpServletRequest request) {
+		//String productCode=request.getParameter("productCode");
+		return "/product/cartView";
+	}
+	
+	@RequestMapping("/buyForm.do")
+	public String buyForm(Model model,HttpServletRequest request) {
+		//String productCode=request.getParameter("productCode");
+		return "/product/buyForm";
+	}
 }
