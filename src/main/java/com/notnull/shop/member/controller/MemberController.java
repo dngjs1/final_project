@@ -1,11 +1,12 @@
 package com.notnull.shop.member.controller;
 
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -69,11 +70,34 @@ public class MemberController {
 	}
 	
 	
+//	@RequestMapping("/checkIdDuplicate.do")
+//	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
+//
+//		System.out.println(member_Id);
+//		
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
+//		
+//		boolean check = service.idDuplicateCheck(member_Id)==0?true:false;
+//		
+//		
+//		mv.addObject(check);
+//		mv.setViewName("JsonView");
+//		
+//		return mv;
+//	}
+	
 	@RequestMapping("/checkIdDuplicate.do")
-	public ModelAndView checkIdDuplicate(String memberId, ModelAndView mv) {
-		
-		return mv;
-	}
+    public void duplicateIdCheck(String member_id,HttpServletRequest req,HttpServletResponse res) throws IOException {
+	
+		System.out.println(member_id);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
+       
+       boolean check=service.idDuplicateCheck(member_id)==0?true:false;
+       
+       System.out.println(check);
+       
+       res.getWriter().print(check);
+    }
 	
 	
 	@RequestMapping("/memberLogin.do")

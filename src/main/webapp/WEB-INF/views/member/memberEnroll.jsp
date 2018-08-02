@@ -8,15 +8,12 @@
 <% response.setCharacterEncoding("UTF-8"); %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<<<<<<< HEAD
+
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param value="" name="pageTitle"/>   
+</jsp:include>
+
 <style>
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-}
-@media (min-width: 992px) { .container {width: 970px;} }
-@media (min-width: 1200px) { .container { width: 1060px; } }
 
 /*중복아이디체크관련*/
     div#userId-container{position:relative; padding:0px;}
@@ -25,8 +22,6 @@
     div#userId-container span.error{color:red;}
 
 </style>
-=======
->>>>>>> master
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -94,9 +89,86 @@
 	}
 </script>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-   <jsp:param value="" name="pageTitle"/>   
-</jsp:include>
+
+<script>
+$(function(){
+    $('#member_id').on('keyup',function(){
+    	
+    	console.log($(this).val());
+    
+       if($(this).val().trim().length<4){
+          $('.guide').hide();
+          $('#idDuplicateCheck').val(0);
+          return;
+       }
+       
+       $.ajax({
+          url:"${pageContext.request.contextPath}/checkIdDuplicate.do",
+          data:{member_id:$(this).val()},
+          success:function(data){
+          	
+          if(data.trim()=='true'){
+                $('.guide.error').hide();
+                $('.guide.ok').show();
+                $('#idDuplicateCheck').val(1);
+             }else{
+                $('.guide.ok').hide();
+                $('.guide.error').show();
+                $('#idDuplicateCheck').val(1);
+             }
+          },
+          error:function(jpxhr,textStatus,errormsg){
+             console.log("ajax전송 실패")
+             console.log(jpxhr);
+             console.log(textStatus);
+             console.log(errormsg);
+          }
+       });
+    });
+ });
+
+</script>
+
+<!-- <script>
+
+$(function(){
+    // 회원 가입 처리
+     var flag=true;
+     $('#member_id').keyup(function(){
+          $.ajax({
+             url:"${pageContext.request.contextPath}/checkIdDuplicate.do",
+             data:{"member_id":$(this).val()},
+             type:'post',
+             success:function(data){
+                var member_id = $("#member_id").val();
+                var leng = $("#member_id").val().length;
+                if(data.trim()=='true' && chkValId(member_id)){
+                   $('#idcheck').html("사용 가능한 ID입니다");
+                   $('#idcheck').css('color','blue');
+                   flag=true;
+                }else if(data.trim()!='true'){
+                   $('#idcheck').html("중복된 아이디입니다");
+                   $('#idcheck').css('color','red');
+                   flag=false;
+                }else if(!chkValId(member_id)) {
+                   $('#idcheck').html("ID는 오직 영문과 숫자, _ 기호만 입력 가능합니다");
+                   $('#idcheck').css('color','red');
+                   flag=false;
+                }
+                if(leng<6) {
+                   $('#idcheck').html("최소 6자 이상 입력해주세요");
+                   $('#idcheck').css('color','red');
+                   flag=false;
+                }
+             }
+          
+          });
+       });
+
+</script> -->
+
+
+
 
 
 <div class="container"  >
@@ -111,7 +183,7 @@
                 <th>아이디</th>
                 <td>
                    <div id="userId-container">
-                   <input type="text" class="form-control" placeholder="4글자이상" name="member_id" id="member_id" required>
+                   <input type="text" class="form-control" placeholder="4글자이상" name="member_id" id="member_id" style="width:500px;" required>
                    <span class="guide ok">이 아이디는 사용 가능 합니다.</span>
                    <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
                    <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0/>
@@ -160,11 +232,20 @@
                 </td>
              </tr>
              <tr>
-             		<th>우편번호</th>
+             	<th></th>
+             	<td>
+             	</td>
+             </tr>
+             <tr>
+             		<th> </th>
              		<td>
-             			<input type="text" class="form-control" name="post_no" id="post_no"> 
-             			<input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
+             			<input type="button" onclick="DaumPostcode()" value="주소찾기"><br>
+             			<!-- <input type="text" class="form-control" name="post_no" id="post_no">  -->
           		</td>
+             </tr>
+             <tr>
+             	<th>우편번호<th>
+             	<input type="text" class="form-control" name="post_no" id="post_no"> 
              </tr>
               <tr>
              		<th>주소</th>

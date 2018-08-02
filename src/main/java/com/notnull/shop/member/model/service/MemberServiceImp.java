@@ -112,4 +112,10 @@ public class MemberServiceImp implements MemberService {
 		return check;
 	}
 
+	@Override
+	public int idDuplicateCheck(String id) {
+		
+		return memberDAO.idDuplicateCheck(sqlSession, id);
+	}
+
 }
