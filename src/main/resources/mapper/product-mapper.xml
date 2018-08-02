@@ -50,4 +50,8 @@
   	<select id="selectOption" parameterType="string" resultType="productOption">
   	SELECT * FROM product_option WHERE product_code=#{product_code} 
   	</select>
+  	
+  	<select id="selectReview" resultType="productReview">
+  	 select * from product_review 
+  	</select>
 </mapper>
