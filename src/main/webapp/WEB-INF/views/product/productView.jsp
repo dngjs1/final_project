@@ -175,10 +175,10 @@
 			
  
  <hr>
- <h4>상품평</h4> <input type="button" value="별점테스트" onclick="fn_star()"/>
+ <h4>상품평</h4> <input type="button" value="테스트" onclick="fn_productReview()"/>
  <script>
-	function fn_star(){
-		location.href="${pageContext.request.contextPath}/review_star.do";
+	function fn_productReview(){
+		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
  <div>별점 이미지    ,참여인원
@@ -222,7 +222,13 @@
   
   
  <hr>
- <div> 작성자, 작성일, 내용</div>
+ <div> 
+ <c:forEach var="review" items="${reviewList}">
+	 작성자:${review.member_id}<br>
+	 작성일:${review.review_date} <br> 
+	 내용 :${review.review_content} <br>	
+ </c:forEach>
+ </div>
   상품평 페이징 처리
   
    </div>

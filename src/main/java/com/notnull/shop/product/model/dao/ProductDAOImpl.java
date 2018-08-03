@@ -13,6 +13,7 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -59,6 +60,16 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectReview");
+	}
+
+	@Override
+	public int reviewInsert(SqlSessionTemplate sqlSession, ProductReview productReview) {
+		return sqlSession.insert("product.reviewInsert",productReview);
+	}
+
+	@Override
+	public int insertReviewImg(SqlSessionTemplate sqlSession, ProductReviewImg productReviewImg) {
+		return sqlSession.insert("product.insertReviewImg",productReviewImg);
 	}
 	
 	

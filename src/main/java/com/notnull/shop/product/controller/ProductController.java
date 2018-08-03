@@ -27,6 +27,7 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
 
 @Controller
 public class ProductController {
@@ -177,10 +178,15 @@ public class ProductController {
 		List<ProductOption> optionList =service.selectOption(productCode);
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
+		
+		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
+		productReviewList=service.selectReview();
+		request.setAttribute("reviewList", productReviewList);
+
 		return "/product/productView";
 	}
 
-<<<<<<< HEAD
+
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model,HttpServletRequest request) {
 		//String productCode=request.getParameter("productCode");
@@ -192,16 +198,73 @@ public class ProductController {
 		//String productCode=request.getParameter("productCode");
 		return "/product/buyForm";
 	}
-=======
-	@RequestMapping("/review_star.do")
-	public String reviewStar(Model model,HttpServletRequest request) {
-		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
-		productReviewList=service.selectReview();
-		System.out.println(productReviewList.get(0));
+
+	@RequestMapping("/productReviewInsert.do")
+	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 		
-		request.setAttribute("review", productReviewList.get(0));
-		return "product/productView";
+	    String saveDir="";
+        File dir=null;
+	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
+        List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+        
+        for (MultipartFile mf : fileList1) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductReviewImg productReviewImg = new ProductReviewImg();
+                      
+            productReviewImg.setReview_img_path(originFileName);
+            productReviewImg.setNew_review_img_path(renamedFileName);
+            
+            productReviewImgList.add(productReviewImg);
+        }
+        
+        System.out.println(productReview);
+		int result=service.reviewInsert(productReview,productReviewImgList);
+		
+		ModelAndView mv=new ModelAndView();
+        String msg="";
+		if(result>0)
+		{
+			msg="등록을 성공하였습니다.";
+		}
+		else
+		{
+			msg="등록을 실패하였습니다.";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "/productView.do");
+		
+		mv.setViewName("common/msg");	
+        return mv;
 	}
 
->>>>>>> branch_BJH
+	
+	@RequestMapping("/productReviewTest.do")
+	public String productReviewTest(Model model,HttpServletRequest request) {
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		request.setAttribute("product_code", product_code);
+		
+		return "product/productReviewTest";
+	}
+
 }

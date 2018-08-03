@@ -15,6 +15,7 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -93,6 +94,32 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductReview> selectReview() {
 		return productDAO.selectReview(sqlSession);
+	}
+
+	@Override
+	public int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList) {
+		int result=0;
+		int review_code=0;
+		try {		
+			result=productDAO.reviewInsert(sqlSession, productReview);
+			review_code=productReview.getReview_code();
+			if(productReviewImgList.size()>0)
+			{
+				for(ProductReviewImg productReviewImg : productReviewImgList)
+				{
+					productReviewImg.setReview_code(review_code);
+					result=productDAO.insertReviewImg(sqlSession,productReviewImg);
+				}
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		
+		
+		return result;
 	}
 	
 	
