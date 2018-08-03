@@ -6,7 +6,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
-<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript">
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+<script>
 $(function(){
 	var IMP = window.IMP;
 	IMP.init('imp29686371');
