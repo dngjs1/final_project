@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductReview;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -87,6 +88,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductOption> selectOption(String productCode) {
 		return productDAO.selectOption(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductReview> selectReview() {
+		return productDAO.selectReview(sqlSession);
 	}
 	
 	

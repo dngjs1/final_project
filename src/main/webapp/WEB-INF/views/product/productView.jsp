@@ -175,8 +175,49 @@
 			
  
  <hr>
- <h4>상품평</h4>
- <div>별점 이미지    ,참여인원</div>
+ <h4>상품평</h4> <input type="button" value="별점테스트" onclick="fn_star()"/>
+ <script>
+	function fn_star(){
+		location.href="${pageContext.request.contextPath}/review_star.do";
+	}
+</script>
+ <div>별점 이미지    ,참여인원
+ <c:choose>
+	<c:when test="${review.review_star eq '10' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '9' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '8' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '7' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '6' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '5' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '4' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '3' }" >
+ 	<i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '2' }" >
+ 	<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '1' }" >
+ 	<i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+	<c:when test="${review.review_star eq '0' }" >
+ 	<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+	</c:when>
+ </c:choose>
+ </div>
  <div>상품평 이미지</div>
   
   
