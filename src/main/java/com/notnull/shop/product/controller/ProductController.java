@@ -180,7 +180,6 @@ public class ProductController {
 		return "/product/productView";
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model,HttpServletRequest request) {
 		//String productCode=request.getParameter("productCode");
@@ -192,7 +191,6 @@ public class ProductController {
 		//String productCode=request.getParameter("productCode");
 		return "/product/buyForm";
 	}
-=======
 	@RequestMapping("/review_star.do")
 	public String reviewStar(Model model,HttpServletRequest request) {
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
@@ -203,5 +201,4 @@ public class ProductController {
 		return "product/productView";
 	}
 
->>>>>>> branch_BJH
 }

@@ -215,13 +215,8 @@ $(document).ready(function(){
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active mr-3" href="#"><strong>홈</strong><span class="sr-only">(current)</span></a>
-<<<<<<< HEAD
-      <a class="nav-item nav-link active mr-3" href="#"><strong>판매메뉴</strong></a>
-      <a class="nav-item nav-link active mr-3" href="${pageContext.request.contextPath}/rentalMain.do"><strong>대여메뉴</strong></a>
-=======
       <a class="nav-item nav-link active mr-3" href="${path}/product.do"><strong>판매메뉴</strong></a>
-      <a class="nav-item nav-link active mr-3" href="#"><strong>대여메뉴</strong></a>
->>>>>>> SUPER_branch
+      <a class="nav-item nav-link active mr-3" href="${path}/rentalMain.do"><strong>대여메뉴</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>사이트소개</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>상품명</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>이벤트</strong></a>
