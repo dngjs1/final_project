@@ -7,12 +7,36 @@
  	
  
  	<insert id="insertMember" parameterType="member">
- 		insert into member values(#{member_id},#{member_pw},#{member_name},#{birthday},#{gender},#{phone},#{post_no},#{address},#{detail_address},#{email},#{email_alarm},'user',sysdate,'N')
+ 		insert into member values(#{member_id},#{member_pw},#{member_name},#{birthday},#{gender},#{phone},#{post_no},#{address},#{detail_address},#{email},#{email_alarm},'user',sysdate,'Y')
 
  	</insert>
+ 	
+ 	<update id="createAuthKey" parameterType="member">
+		update member set esc_status = 'Y' where email = #{email}
+	</update>
+ 	
+ 	<update id="userAuth">
+ 		update member set esc_status ='N' where email =#{email}
+ 	</update>
+ 	
+ 	<select id="selectByEmail" resultType="string">
+ 		select member_name from member where email=#{email}
+ 	</select>
 
 	<select id="loginCheck" parameterType="string" resultMap="memberMap">
 		select * from member where member_id=#{userId}
+	</select>
+	
+	<select id="findMemberId" parameterType="string" resultType="string">
+		select member_id from member where email=#{email}
+	</select>
+	
+	<update id="tempPassword" parameterType="member">
+		update member set member_pw=#{member_pw} where member_id=#{member_id} 
+	</update>
+ 
+  	<select id="duplicateIdCheck" parameterType="string" resultType="_int">
+ 		select count(*) from member where member_id=#{id}
 	</select>
  
 </mapper>

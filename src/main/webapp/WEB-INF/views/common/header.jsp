@@ -7,17 +7,23 @@
 
 
 <c:set var='path' value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
 <html>
 <head>
+
 <meta content="UTF-8">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu" rel="stylesheet">
+<!-- footer css외부참조파일 -->
+<link rel="stylesheet" href="resources/css/index.css" type="text/css">
+<link rel="stylesheet" href="resources/css/footer.css" type="text/css">
+
+<!-- index css 외부참조파일 -->
   <title>파이널프로젝트 index</title>
   <!-- meta tags 필요 -->
   <meta charset="utf-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 
   <!-- Bootstrap CSS -->
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
   <!--font Awesome 불러오기-->
@@ -25,10 +31,11 @@
 
   <!-- Optional JavaScript -->
   <!-- 먼저 jQuery가 오고 그 다음 Popper.js 그 다음 Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
+ 
   <style>
     .container {
       width: 1240px;
@@ -68,7 +75,7 @@
 
 
 
-<body>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style = "font-family: 'Nanum Gothic','Ubuntu',sans-serif;">
   <!--헤더부분 시작-->
   <header>
     <div class="header">
@@ -88,12 +95,12 @@
           <c:if test="${memberLoggedIn==null }">
             <ul class="nav justify-content-end mt-1">
             
-              <li class="nav-item">
+              <!-- <li class="nav-item">
 		           <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" 
 		               data-target="#loginModal">로그인버튼이당</button>
-	          </li>
+	          </li> -->
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogin.do">로그인<i class="fas fa-sign-in-alt"></i></a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" data-toggle="modal"  data-target="#loginModal">로그인<i class="fas fa-sign-in-alt"></i></a>|</h5>
               </li>  
               <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath }/findMember.do">ID/비밀번호 찾기<i class="fas fa-search"></i></a>|</h5>
@@ -208,8 +215,13 @@ $(document).ready(function(){
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active mr-3" href="#"><strong>홈</strong><span class="sr-only">(current)</span></a>
+<<<<<<< HEAD
       <a class="nav-item nav-link active mr-3" href="#"><strong>판매메뉴</strong></a>
       <a class="nav-item nav-link active mr-3" href="${pageContext.request.contextPath}/rentalMain.do"><strong>대여메뉴</strong></a>
+=======
+      <a class="nav-item nav-link active mr-3" href="${path}/product.do"><strong>판매메뉴</strong></a>
+      <a class="nav-item nav-link active mr-3" href="#"><strong>대여메뉴</strong></a>
+>>>>>>> SUPER_branch
       <a class="nav-item nav-link active mr-3" href="#"><strong>사이트소개</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>상품명</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>이벤트</strong></a>

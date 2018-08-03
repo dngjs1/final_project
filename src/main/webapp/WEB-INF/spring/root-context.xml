@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 1.JDBC연결 설정하기 -->	
@@ -12,11 +16,19 @@
 		<property name="password" value="shop"/>
 	</bean>	
 	
-
+	<bean id='realDataSource' class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSource"/>			<!-- 생성자에 매개변수를 넣을때 사용 --> <!-- 위의 bean정보를 가져옴 -->
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE"/>
+				<property name="sqlPrefix" value="[SQL]"/>
+			</bean>
+		</property>
+	</bean>
 	
 	<!-- 2.mybatis설정하기 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="realDataSource"/>
 		<!-- classpath경로:C:\Jonghoon\spring\workspace\01_HelloSpring\src\main\resources  -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
@@ -25,5 +37,30 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
 	</bean>
-		
+	
+	<!-- 메일 보내기 (SEND) -->
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="euichan1991@gmail.com" />
+      <property name="password" value="shop1234shop" />
+    
+
+      <!-- email 요청시는 SMTP -->
+      <property name="javaMailProperties">
+         <props>
+            <prop key="mail.transport.protocol">smtp</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+   </bean>
+   
+   <bean id = "transactionManager" class ="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name = "dataSource" ref = "dataSource"></property>
+	</bean>
+	<tx:annotation-driven/>
+	
+	
 </beans>

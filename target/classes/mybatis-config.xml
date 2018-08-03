@@ -3,5 +3,13 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.notnull.shop.member.model.vo.Member" alias="member"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.Product" alias="product"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductListJoin" alias="productListJoin"/>
+      	<typeAlias type="com.notnull.shop.product.model.vo.ProductImg" alias="productImg"/>
+      	<typeAlias type="com.notnull.shop.product.model.vo.ProductDetailImg" alias="ProductDetailImg"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductCategory" alias="productCategory"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductOption" alias="productOption"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinCategory" alias="productJoinCategory"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductReview" alias="ProductReview"/>
 	</typeAliases>
 </configuration>
