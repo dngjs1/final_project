@@ -6,6 +6,19 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+<style>
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
+</style>
+
 <c:set var='path' value="${pageContext.request.contextPath}" />
  <form name="productReview" action="${path }/productReviewInsert.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
  	 
@@ -41,7 +54,16 @@
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">별점</th>
 			<td>	
-			<input type="number" class="form-control" name="review_star" id="review_star" required>
+		
+			<div class="starRev">
+			  <span class="starR on">1</span>
+			  <span class="starR">2</span>
+			  <span class="starR">3</span>
+			  <span class="starR">4</span>
+			  <span class="starR">5</span>
+			</div>
+			<input type="hidden" class="form-control" name="review_star" id="review_star" required>
+			
 			</td>
 		</tr>
         </table>
@@ -49,7 +71,21 @@
 
         <input type="submit" value="등록" class="btn" />   
  </form>
+ <script>
+ $('.starRev span').click(function(){
+	  $(this).parent().children('span').removeClass('on');
+	  $(this).addClass('on').prevAll('span').addClass('on');
+	  return false;
+});
+$('.starRev span').click(function(){
+	  if($(this).html()==1) $("#review_star").val("1") 
+	  else if($(this).html()==2) $("#review_star").val("2")
+	  else if($(this).html()==3) $("#review_star").val("3")
+	  else if($(this).html()==4) $("#review_star").val("4")
+	  else if($(this).html()==5) $("#review_star").val("5");	  
+}); 
  
+ </script>
   <script type="text/javascript">
 var g_count=1;
 

@@ -252,7 +252,7 @@ public class ProductController {
 		}
 		
 		mv.addObject("msg", msg);
-		mv.addObject("loc", "/productView.do");
+		mv.addObject("loc", "/product.do");
 		
 		mv.setViewName("common/msg");	
         return mv;

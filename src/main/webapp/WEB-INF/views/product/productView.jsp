@@ -6,6 +6,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<style>
+/* 별점 */
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url('http://i.imgur.com/YsyS5y8.png') 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+</style>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
@@ -68,6 +84,9 @@
 		else
 			$el.removeClass('shown');
 	});
+	
+	
+	
 </script>
 
 <div class="container">
@@ -181,42 +200,19 @@
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <div>별점 이미지    ,참여인원
- <c:choose>
-	<c:when test="${review.review_star eq '10' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '9' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '8' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '7' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '6' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '5' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '4' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '3' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '2' }" >
- 	<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '1' }" >
- 	<i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '0' }" >
- 	<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
- </c:choose>
+ <div>별점 이미지    ,참여인원<br>
+ 
+ <c:set var="total" value="0"/>
+ <c:forEach var="review" items="${reviewList}" varStatus="vs">
+	<%-- <tr>
+		<td>${review.review_star }</td><br>
+	</tr> --%>
+	<c:set var="total" value="${(total+review.review_star)}"/>
+	<c:set var="count" value="${vs.count }"/>
+ </c:forEach>
+ <c:out value="${total/count}"/>
+ <span class="star-prototype">${total/count}</span>
+ 참여인원:<c:out value="${count }"/>
  </div>
  <div>상품평 이미지</div>
   
@@ -227,7 +223,19 @@
 	 작성자:${review.member_id}<br>
 	 작성일:${review.review_date} <br> 
 	 내용 :${review.review_content} <br>	
+	별점:<span class="star-prototype">${review.review_star }</span><br>
  </c:forEach>
+ 
+ <script>
+//별점
+$.fn.generateStars = function() {
+ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+};
+
+//숫자 평점을 별로 변환하도록 호출하는 함수
+$('.star-prototype').generateStars();
+ 
+ </script>
  </div>
   상품평 페이징 처리
   
