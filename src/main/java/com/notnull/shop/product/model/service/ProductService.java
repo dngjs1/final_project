@@ -11,6 +11,7 @@ import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 public interface ProductService {
 
@@ -24,7 +25,9 @@ public interface ProductService {
 	
 	List<ProductOption> selectOption(String productCode);
 	
-	List<ProductReview> selectReview();
+	List<ProductReview> selectReview(String productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
+	
+	List<ProductReviewImgJoin> selectReviewImg(String productCode);
 }

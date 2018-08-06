@@ -200,8 +200,7 @@ span.star-prototype > * {
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <div>별점 이미지    ,참여인원<br>
- 
+ <div> 
  <c:set var="total" value="0"/>
  <c:forEach var="review" items="${reviewList}" varStatus="vs">
 	<%-- <tr>
@@ -215,15 +214,20 @@ span.star-prototype > * {
  참여인원:<c:out value="${count }"/>
  </div>
  <div>상품평 이미지</div>
-  
+   <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+	</c:forEach>
   
  <hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
 	 작성자:${review.member_id}<br>
-	 작성일:${review.review_date} <br> 
-	 내용 :${review.review_content} <br>	
 	별점:<span class="star-prototype">${review.review_star }</span><br>
+	 작성일:${review.review_date} <br> 
+	
+		<br>	 	 
+	 내용 :${review.review_content} <br>	
+	 <hr>
  </c:forEach>
  
  <script>

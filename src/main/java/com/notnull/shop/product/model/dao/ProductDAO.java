@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 
 public interface ProductDAO {
@@ -34,9 +35,11 @@ public interface ProductDAO {
 	
 	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,String productCode);
 	
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession);
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode);
 	
 	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
 	
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
+	
+	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,String productCode);
 }

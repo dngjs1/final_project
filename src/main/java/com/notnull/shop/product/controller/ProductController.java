@@ -10,10 +10,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.config.PropertySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +30,9 @@ import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+
+import oracle.jdbc.oracore.PickleOutputStream;
 
 @Controller
 public class ProductController {
@@ -176,13 +181,18 @@ public class ProductController {
 		String productCode=request.getParameter("productCode");
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
+		model.addAttribute("reviewImgList",reviewImgList);
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
-		productReviewList=service.selectReview();
+		
+		productReviewList=service.selectReview(productCode);
+		
 		request.setAttribute("reviewList", productReviewList);
-
+		
+		
 		return "/product/productView";
 	}
 
@@ -199,7 +209,7 @@ public class ProductController {
 		return "/product/buyForm";
 	}
 
-	@RequestMapping("/productReviewInsert.do")
+	@RequestMapping(value="/productReviewInsert.do", method=RequestMethod.POST)
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 		
 	    String saveDir="";

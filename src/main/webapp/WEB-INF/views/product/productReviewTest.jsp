@@ -21,7 +21,6 @@
 
 <c:set var='path' value="${pageContext.request.contextPath}" />
  <form name="productReview" action="${path }/productReviewInsert.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
- 	 
  	  <input name="product_code" type="hidden" value="${product_code}"/>
  	  <input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
  	  <h3>상품평 사진</h3>

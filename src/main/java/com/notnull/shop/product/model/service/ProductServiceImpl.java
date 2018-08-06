@@ -16,6 +16,7 @@ import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -92,8 +93,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReview> selectReview() {
-		return productDAO.selectReview(sqlSession);
+	public List<ProductReview> selectReview(String productCode) {
+		return productDAO.selectReview(sqlSession,productCode);
 	}
 
 	@Override
@@ -120,6 +121,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		
 		return result;
+	}
+
+	@Override
+	public List<ProductReviewImgJoin> selectReviewImg(String productCode) {
+		return productDAO.selectReviewImg(sqlSession,productCode);
 	}
 	
 	
