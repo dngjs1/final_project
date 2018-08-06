@@ -191,13 +191,13 @@ $(function(){
                 </td>
              </tr>
              <tr>
-                <th>패스워드</th>
+                <th>비밀번호</th>
                 <td>
                    <input type="password" class="form-control" name="member_pw" id="member_pw" required>
                 </td>
              </tr>
              <tr>
-                <th>패스워드확인</th>
+                <th>비밀번호 확인</th>
                 <td>   
                    <input type="password" class="form-control" id="member_pw2" required>
                 </td>
@@ -266,9 +266,9 @@ $(function(){
                 </td>
              </tr>
 			<tr>
-				<th>이메일 수신여부</th>
+				<th>이메일 수신</th>
 				<td>
-				<input type="checkbox" name="email_alarm" id="email_alram" value="Y" ><label for="email_alram" ></label>
+				<input type="checkbox" name="email_alarm" id="email_alram" value="Y"  ><label for="email_alram" ></label>
 				</td>
 			</tr> 
 
