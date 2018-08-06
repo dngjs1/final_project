@@ -220,7 +220,7 @@ $(document).ready(function(){
       <a class="nav-item nav-link active mr-3" href="#"><strong>사이트소개</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>상품명</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>이벤트</strong></a>
-      <a class="nav-item nav-link active mr-3" href="#"><strong>고객센터</strong></a>
+      <a class="nav-item nav-link active mr-3" href="${path}/infoMain.do"><strong>고객센터</strong></a>
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
