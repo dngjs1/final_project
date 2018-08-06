@@ -1,7 +1,6 @@
 Manifest-Version: 1.0
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 Built-By: pc
 =======
 Built-By: GhenHungJin
@@ -11,9 +10,5 @@ Build-Jdk: 1.8.0_161
 Built-By: hack5
 Build-Jdk: 1.8.0_171
 >>>>>>> branch_BJH
-=======
-Built-By: JC
-Build-Jdk: 9.0.4
->>>>>>> branch_JEC
 Created-By: Maven Integration for Eclipse
 

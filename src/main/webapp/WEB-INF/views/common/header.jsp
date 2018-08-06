@@ -126,7 +126,7 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#"><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.	</a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/myPage.do">마이페이지 </a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberView.do">마이페이지 </a>|</h5>
               </li>
                <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
