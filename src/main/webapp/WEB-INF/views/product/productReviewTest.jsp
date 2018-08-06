@@ -20,7 +20,7 @@
 </style>
 
 <c:set var='path' value="${pageContext.request.contextPath}" />
- <form name="productReview" action="${path }/productReviewInsert.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
+ <form name="productReview" action="${path}/productReviewInsert.do" method="post" enctype="multipart/form-data">
  	  <input name="product_code" type="hidden" value="${product_code}"/>
  	  <input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
  	  <h3>상품평 사진</h3>
@@ -53,9 +53,9 @@
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">별점</th>
 			<td>	
-		
+			
 			<div class="starRev">
-			  <span class="starR on">1</span>
+			  <span class="starR">1</span>
 			  <span class="starR">2</span>
 			  <span class="starR">3</span>
 			  <span class="starR">4</span>
@@ -71,6 +71,10 @@
         <input type="submit" value="등록" class="btn" />   
  </form>
  <script>
+ $(function(){
+	 $("#review_star").val("0");
+ });
+ 
  $('.starRev span').click(function(){
 	  $(this).parent().children('span').removeClass('on');
 	  $(this).addClass('on').prevAll('span').addClass('on');

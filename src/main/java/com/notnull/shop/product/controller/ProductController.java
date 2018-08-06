@@ -196,10 +196,7 @@ public class ProductController {
 		return "/product/productView";
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> branch_BJH
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model,HttpServletRequest request) {
 		//String productCode=request.getParameter("productCode");
@@ -211,17 +208,9 @@ public class ProductController {
 		//String productCode=request.getParameter("productCode");
 		return "/product/buyForm";
 	}
-<<<<<<< HEAD
-	@RequestMapping("/review_star.do")
-	public String reviewStar(Model model,HttpServletRequest request) {
-		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
-		productReviewList=service.selectReview();
-		System.out.println(productReviewList.get(0));
-=======
 
-	@RequestMapping(value="/productReviewInsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
-		
 	    String saveDir="";
         File dir=null;
 	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
@@ -283,7 +272,6 @@ public class ProductController {
 	public String productReviewTest(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		request.setAttribute("product_code", product_code);
->>>>>>> branch_BJH
 		
 		return "product/productReviewTest";
 	}
