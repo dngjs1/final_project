@@ -149,10 +149,40 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("memberView.do")
-	public String memberView() {
+	@RequestMapping("myPage.do")
+	public String myPage() {
 		
-		return "member/memberView";
+		return "member/myPage";
+	}
+	
+	@RequestMapping("memberUpdate.do")
+	public String memberUpdate() {
+				
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping("memberUpdateEnd.do")
+	public String memberUpdateEnd(Member m, Model model) {
+		
+		int result = service.updateMember(m);
+		
+		if(result>0) {
+			model.addAttribute("memberLoggedIn",m);
+		}
+		
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping("updatePassword.do")
+	public String updatePassword() {
+		
+		return "member/updatePassword";
+	}
+	
+	@RequestMapping("updatePasswordEnd.do")
+	public String updatePasswordEnd() {
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("emailAuth.do")
@@ -165,8 +195,11 @@ public class MemberController {
 	@RequestMapping("/emailConfirm.do")
 	public String emailConfirm(String email, Model model, HttpServletRequest request) {
 		
+		System.out.println("==============================================================sucess");
+		
 		String name = service.userAuth(email);
-	
+		
+		
 		
 		model.addAttribute("name",name);
 		

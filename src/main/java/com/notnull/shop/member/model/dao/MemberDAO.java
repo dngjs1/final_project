@@ -22,4 +22,6 @@ public interface MemberDAO {
 	
 	int idDuplicateCheck(SqlSessionTemplate sqlSession, String id);
 	
+	int updateMember(SqlSessionTemplate sqlSession, Member m);
+	
 }
