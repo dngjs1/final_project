@@ -226,4 +226,43 @@ public class MemberController {
 		return view;
 	}
 	
+	@RequestMapping("/myPage.do")
+	public String myPage() {
+		return "member/myPage";
+	}
+	
+	@RequestMapping("/memberUpdate.do")
+	public String memberUpdate() {
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping("/memberUpdateEnd.do")
+	public String memberUpdateEnd(Member m, Model model) {
+		
+		if(m.getEmail_alarm()==null) {
+			m.setEmail_alarm("N");
+		}
+		
+		String msg ="";
+		String loc ="myPage.do";
+		
+		int result = service.memberUpdate(m);
+		
+		if(result>0) {
+			msg="회원정보 수정을 완료했습니다.";
+			model.addAttribute("memberLoggedIn",m);
+			
+		}
+		else {
+			msg="회원정보 수정을 실패했습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "/common/msg";
+	}
+	
+	
+	
 }
