@@ -182,6 +182,8 @@ public class ProductController {
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
+
+		
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);

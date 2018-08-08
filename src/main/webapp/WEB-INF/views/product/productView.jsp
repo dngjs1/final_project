@@ -221,10 +221,16 @@ span.star-prototype > * {
  <hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
+ 	
 	 작성자:${review.member_id}<br>
 	별점:<span class="star-prototype">${review.review_star }</span><br>
 	 작성일:${review.review_date} <br> 
 	
+	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+		<c:if test="${review.review_code eq imgList.review_code }">
+			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+		</c:if>
+	</c:forEach>
 		<br>	 	 
 	 내용 :${review.review_content} <br>	
 	 <hr>
@@ -249,6 +255,13 @@ $('.star-prototype').generateStars();
   
   <hr>
   상품문의
+  <form name='productQuestion' action="${path }/question.do" method='post'
+			style='margin-left:25px; width:550px'>
+			<!-- 	<input type='hidden' name='boardCommentLevel' value='1'/>
+				<input type='hidden' name='boardCommentRef' value='0' /> -->
+				<textarea name='boardCommentContent' style='width:450px; height:50px;'></textarea>
+				<button class='btn btn-warning btn-sm' onclick='return validate()' type='submit'>등록</button>
+			</form>
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>
 </div>
