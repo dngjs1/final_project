@@ -38,5 +38,9 @@
   	<select id="duplicateIdCheck" parameterType="string" resultType="_int">
  		select count(*) from member where member_id=#{id}
 	</select>
+	
+	<update id="memberUpdate" parameterType="member">
+		update member set member_name=#{member_name}, birthday=#{birthday}, email=#{email}, phone=#{phone}, post_no=#{post_no}, address=#{address}, detail_address=#{detail_address}, gender=#{gender}, email_alarm=#{email_alarm} where member_id=#{member_id}
+	</update>
  
 </mapper>

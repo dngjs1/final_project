@@ -78,7 +78,7 @@
 </script>
 
 
-<script>
+<%-- <script>
 	function eamilAuth() {
 
 		 var emailch=$("#email").val();
@@ -87,7 +87,7 @@
 		 var status="left=500px,top=100px,width=600px,height=200px";
 		 var popup=window.open(url,title,status);
 	}
-</script>
+</script> --%>
 
 
 <script>
@@ -128,6 +128,8 @@ $(function(){
  });
 
 </script>
+
+
 
 <!-- <script>
 
@@ -186,7 +188,7 @@ $(function(){
                    <input type="text" class="form-control" placeholder="4글자이상" name="member_id" id="member_id" style="width:500px;" required>
                    <span class="guide ok">이 아이디는 사용 가능 합니다.</span>
                    <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-                   <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0/>
+                   <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0 />
                    </div>
                 </td>
              </tr>
@@ -280,6 +282,47 @@ $(function(){
 	    </div>
 
 </div>
+
+<script>
+$(function(){
+	
+	$("#member_pw2").blur(function(){
+		var p1=$("#member_pw").val(), p2=$("#member_pw2").val();
+		if(p1!=p2){
+			alert("패스워드가 일치하지 않습니다.");
+			$("#member_pw").focus();
+		}
+	});
+	
+});
+
+$(function(){
+	
+	$("#member_id").blur(function(){
+		var id=$("#member_id").val();
+		if(id.trim().length<4){
+			alert("아이디는 최소 4자리이상이어야 합니다.");
+			id.focus();
+			return false;
+			
+		}
+		return true;
+	});
+	
+});
+
+/* function validate(){
+	var userId = $("#member_id");
+	if(userId.val().trim().length<4){
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		userId.focus();
+		return false;
+	}
+	
+	return true;
+} */
+
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
