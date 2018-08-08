@@ -11,6 +11,20 @@
 </jsp:include>
 
 
+<style>
+/* 별점 */
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url('http://i.imgur.com/YsyS5y8.png') 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+</style>
 
 
 <!-- 판메화면 전체 부분을 감싸는 container 부분 시작 -->
@@ -79,10 +93,10 @@
 		
 		<div class = "view_type opacity" style="display:inline-block;">
 			<a href ="#">인기상품순</a>
-			<a href ="#">신상품순</a>
-			<a href ="#">낮은가격순</a>
-			<a href ="#">높은가격순</a>
-			<a href ="#">상품평점순</a>
+			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
+			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
+			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>
+			<a href ="${pageContext.request.contextPath}/reviewStarOrder.do">상품평점순</a>
 		</div>
 		<div class="add">
 			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
@@ -145,11 +159,11 @@ $(document).ready(function(){
 		
 						<div class="row mt-2 mb-2">
 							<div class="product-rating col-6 ml-2 mt-1 ">
-								<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-									class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-									class="fas fa-star"></i>
+							
+								<span class="star-prototype">${image.review_star}</span>			
+							
 							</div>
-		
+
 							<div class="col-5 item_icon text-right ">
 								<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
 									title="장바구니에 담기"></i></span> <span class="item_icon"></i> <i
@@ -169,7 +183,16 @@ $(document).ready(function(){
 	<!-- 전체화면 오른쪽 영역 부분 1로 비율 설정 -->
 
 </div><!-- 전체 div 를 감싸는 container  끝 -->
+<script>
+//별점
+$.fn.generateStars = function() {
+ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+};
 
+//숫자 평점을 별로 변환하도록 호출하는 함수
+$('.star-prototype').generateStars();
+ 
+ </script>
 <a href="#" id="toTop" style="display: block;"><span id="toTopHover"
 	style="opacity: 1;"></span></a>
 

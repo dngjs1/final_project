@@ -5,17 +5,58 @@
 	
 	<!-- devLang = 객체: 배열 / DB: 문자열 => 따로 선언을 해주면 됨 -->
 	<resultMap type="productListJoin" id="productListJoinMap">			
+<!-- 		<result column="write_date" property="write_date" />
+ -->
 	</resultMap>
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
 	<select id="selectProductList" resultMap="productListJoinMap">
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price 
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by product_code desc
+		order by product_code desc  
 	</select>
+ 
+ 
+ 	<select id="reviewStarOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by review_star desc  
+ 	</select>
+ 
+ 	<select id="highPriceOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by price desc  
+ 	</select>
+ 	
+ 	<select id="lowPriceOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by price asc  
+ 	</select>
+ 
+
+ 	<select id=" writeDateOrder" resultMap="productListJoinMap">
+ 	select x.product_code, x.write_date,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by write_date desc  
+ 	</select>
+ 
  
  	<select id="selectCategoryList" resultType="productCategory">
  		select * from product_category

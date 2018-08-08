@@ -201,17 +201,17 @@ span.star-prototype > * {
 	}
 </script>
  <div> 
- <c:set var="total" value="0"/>
- <c:forEach var="review" items="${reviewList}" varStatus="vs">
-	<%-- <tr>
-		<td>${review.review_star }</td><br>
-	</tr> --%>
-	<c:set var="total" value="${(total+review.review_star)}"/>
-	<c:set var="count" value="${vs.count }"/>
- </c:forEach>
- <c:out value="${total/count}"/>
- <span class="star-prototype">${total/count}</span>
- 참여인원:<c:out value="${count }"/>
+	 <c:set var="total" value="0"/>
+	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
+		<%-- <tr>
+			<td>${review.review_star }</td><br>
+		</tr> --%>
+		<c:set var="total" value="${(total+review.review_star)}"/>
+		<c:set var="count" value="${vs.count }"/>
+	 </c:forEach>
+	 <c:out value="${total/count}"/>
+	 <span class="star-prototype">${total/count}</span>
+	 참여인원:<c:out value="${count }"/>
  </div>
  <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
@@ -255,13 +255,118 @@ $('.star-prototype').generateStars();
   
   <hr>
   상품문의
-  <form name='productQuestion' action="${path }/question.do" method='post'
-			style='margin-left:25px; width:550px'>
-			<!-- 	<input type='hidden' name='boardCommentLevel' value='1'/>
-				<input type='hidden' name='boardCommentRef' value='0' /> -->
-				<textarea name='boardCommentContent' style='width:450px; height:50px;'></textarea>
-				<button class='btn btn-warning btn-sm' onclick='return validate()' type='submit'>등록</button>
-			</form>
+ <%--  <div class="container">
+ <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+        <div>
+            <div>
+                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+            </div>
+            <div>
+                <table class="table">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <br>
+                            <div>
+                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
+  </form>
+  
+  </div>
+  <div class="container">
+    <form id="commentListForm" name="commentListForm" method="post">
+        <div id="commentList">
+        </div>
+    </form>
+</div>
+<script>
+/*
+ * 댓글 등록하기(Ajax)
+ */
+function fn_comment(code){
+    
+    $.ajax({
+        type:'POST',
+        url : "<c:url value='addQuestion.do'/>",
+        data:$("#commentForm").serialize(),
+        success : function(data){
+            if(data=="success")
+            {
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+        
+    });
+}
+ 
+/**
+ * 초기 페이지 로딩시 댓글 불러오기
+ */
+$(function(){
+    
+    getCommentList();
+    
+});
+ 
+/**
+ * 댓글 불러오기(Ajax)
+ */
+function getCommentList(){
+    
+    $.ajax({
+        type:'GET',
+        url : "<c:url value='questionList.do'/>",
+        dataType : "json",
+        data:$("#commentForm").serialize(),
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        success : function(data){
+            
+            var html = "";
+            var cCnt = data.length;
+            
+            if(data.length > 0){
+                
+                for(i=0; i<data.length; i++){
+                    html += "<div>";
+                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
+                    html += data[i].comment + "<tr><td></td></tr>";
+                    html += "</table></div>";
+                    html += "</div>";
+                }
+                
+            } else {
+                
+                html += "<div>";
+                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                html += "</table></div>";
+                html += "</div>";
+                
+            }
+            
+            $("#cCnt").html(cCnt);
+            $("#commentList").html(html);
+            
+        },
+        error:function(request,status,error){
+            
+       }
+        
+    });
+}
+
+</script> --%>
+
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>
 </div>

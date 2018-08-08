@@ -77,6 +77,26 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, String productCode) {
 		return sqlSession.selectList("product.selectReviewImg",productCode);
 	}
+
+	@Override
+	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.reviewStarOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.highPriceOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.lowPriceOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.writeDateOrder");
+	}
 	
 	
 }

@@ -32,7 +32,6 @@ import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
-import oracle.jdbc.oracore.PickleOutputStream;
 
 @Controller
 public class ProductController {
@@ -45,7 +44,7 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		m.addAttribute("list",list);	
+		m.addAttribute("list",list);
 		return "/product/shop";
 	}
 	
@@ -274,8 +273,54 @@ public class ProductController {
 	public String productReviewTest(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		request.setAttribute("product_code", product_code);
-		
+	
 		return "product/productReviewTest";
 	}
 
+	
+	@RequestMapping("/question.do")
+	public String productQuestion(Model model,HttpServletRequest request) {
+		String p_question_content=request.getParameter("questionContent");
+		System.out.println(p_question_content);
+		
+		return "";
+		
+	}
+	
+	@RequestMapping("/reviewStarOrder.do")
+	public String reviewStarOrder(Model model) {
+		List<ProductListJoin> list = service.reviewStarOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/highPriceOrder.do")
+	public String highPriceOrder(Model model) {
+		List<ProductListJoin> list = service.highPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/lowPriceOrder.do")
+	public String lowPriceOrder(Model model) {
+		List<ProductListJoin> list = service.lowPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/writeDateOrder.do")
+	public String writeDateOrder(Model model) {
+		List<ProductListJoin> list = service.writeDateOrder();
+		for(int i=0;i<list.size();i++) {
+			System.out.println("!!!!!"+list.get(0).getWrite_date());
+		}
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	
 }

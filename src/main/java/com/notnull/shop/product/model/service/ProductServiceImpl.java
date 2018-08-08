@@ -127,6 +127,26 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductReviewImgJoin> selectReviewImg(String productCode) {
 		return productDAO.selectReviewImg(sqlSession,productCode);
 	}
+
+	@Override
+	public List<ProductListJoin> reviewStarOrder() {
+		return productDAO.reviewStarOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> highPriceOrder() {
+		return productDAO.highPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> lowPriceOrder() {
+		return productDAO.lowPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> writeDateOrder() {
+		return productDAO.writeDateOrder(sqlSession);
+	}
 	
 	
 }

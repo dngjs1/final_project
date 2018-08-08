@@ -17,6 +17,14 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
 	
+	List<ProductListJoin> reviewStarOrder();
+	
+	List<ProductListJoin> highPriceOrder();
+	
+	List<ProductListJoin> lowPriceOrder();
+	
+	List<ProductListJoin> writeDateOrder();
+	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	List<ProductCategory> selectCategoryList();
@@ -30,4 +38,6 @@ public interface ProductService {
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
 	
 	List<ProductReviewImgJoin> selectReviewImg(String productCode);
+	
+	
 }

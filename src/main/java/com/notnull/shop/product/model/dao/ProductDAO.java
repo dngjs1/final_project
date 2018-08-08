@@ -20,6 +20,14 @@ import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 public interface ProductDAO {
 	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
 	
+	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession);
+	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
 
