@@ -255,7 +255,7 @@ $('.star-prototype').generateStars();
   
   <hr>
   상품문의
- <%--  <div class="container">
+  <div class="container">
  <form id="commentForm" name="commentForm" method="post">
     <br><br>
         <div>
@@ -365,7 +365,7 @@ function getCommentList(){
     });
 }
 
-</script> --%>
+</script>
 
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>

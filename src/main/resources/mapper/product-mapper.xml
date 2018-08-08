@@ -5,8 +5,6 @@
 	
 	<!-- devLang = 객체: 배열 / DB: 문자열 => 따로 선언을 해주면 됨 -->
 	<resultMap type="productListJoin" id="productListJoinMap">			
-<!-- 		<result column="write_date" property="write_date" />
- -->
 	</resultMap>
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
@@ -48,7 +46,7 @@
  	</select>
  
 
- 	<select id=" writeDateOrder" resultMap="productListJoinMap">
+ 	<select id="writeDateOrder" resultMap="productListJoinMap">
  	select x.product_code, x.write_date,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y

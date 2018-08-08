@@ -314,9 +314,6 @@ public class ProductController {
 	@RequestMapping("/writeDateOrder.do")
 	public String writeDateOrder(Model model) {
 		List<ProductListJoin> list = service.writeDateOrder();
-		for(int i=0;i<list.size();i++) {
-			System.out.println("!!!!!"+list.get(0).getWrite_date());
-		}
 		model.addAttribute("list",list);		
 		return "/product/shop";
 		
