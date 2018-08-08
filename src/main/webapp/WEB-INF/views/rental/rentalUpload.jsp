@@ -8,97 +8,20 @@
    <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/plupload.full.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/jquery.ui.plupload.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/pluploadko.js" charset="UTF-8"></script>
+<link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.min.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="${path }/resources//css/jquery.ui.plupload.css" media="screen" />
+
+      
 <style>
 .tr1 th{text-align:center;background-color:#E1F6FA}
 .tr2 td{vertical-align:middle;text-align:center;}
 </style>
 
-<style>
-/* 첨부파일을 드래그할 영역의 스타일 */
-.fileDrop {
-    width: 600px;
-    height: 70px;
-    border: 2px dotted gray;
-    background-color: gray;
-}
-</style>
-<script>
-//이미지 파일 여부 판단
-function checkImageType(fileName){
-    var pattern = /jpg|gif|png|jpeg/i;
-    return fileName.match(pattern);
-}
 
-// 업로드 파일 정보
-function getFileInfo(fullName){
-    var fileName, imgsrc, getLink, fileLink;
-    // 이미지 파일일 경우
-    if(checkImageType(fullName)){
-        // 이미지 파열 경로(썸네일)
-        imgsrc = "/spring02/upload/displayFile?fileName="+fullName;
-        console.log(imgsrc);
-        // 업로드 파일명
-        fileLink = fullName.substr(14);
-        console.log(fileLink);
-        // 날짜별 디렉토리 추출
-        var front = fullName.substr(0, 12);
-        console.log(front);
-        // s_를 제거한 업로드이미지파일명
-        var end = fullName.substr(14);
-        console.log(end);
-        // 원본이미지 파일 디렉토리
-        getLink = "/spring02/upload/displayFile?fileName="+front+end;
-        console.log(getLink);
-    // 이미지 파일이 아닐경우
-    } else {
-        // UUID를 제외한 원본파일명
-        fileLink = fullName.substr(12);
-        console.log(fileLink);
-        // 일반파일디렉토리 
-        getLink = "/spring02/upload/displayFile?fileName="+fullName;
-        console.log(getLink);
-    }
-    // 목록에 출력할 원본파일명
-    fileName = fileLink.substr(fileLink.indexOf("_")+1);
-    console.log(fileName);
-    // { 변수:값 } json 객체 리턴
-    return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
-}
-$(document).ready(function(){
-    // 파일 업로드 영역에서 기본효과를 제한
-    $(".fileDrop").on("dragenter dragover", function(e){
-        e.preventDefault(); // 기본효과 제한
-    });
-    // 드래그해서 드롭한 파일들 ajax 업로드 요청
-    $(".fileDrop").on("drop", function(e){
-        e.preventDefault(); // 기본효과 제한
-        var files = e.originalEvent.dataTransfer.files; // 드래그한 파일들
-        var file = files[0]; // 첫번째 첨부파일
-        var formData = new FormData(); // 폼데이터 객체
-        formData.append("file", file); // 첨부파일 추가
-        $.ajax({
-            url: "${path}/upload/uploadAjax",
-            type: "post",
-            data: formData,
-            dataType: "text",
-            processData: false, // processType: false - header가 아닌 body로 전달
-            contentType: false,
-            // ajax 업로드 요청이 성공적으로 처리되면
-            success: function(data){
-                console.log(data);
-                // 첨부 파일의 정보
-                var fileInfo = getFileInfo(data);
-                // 하이퍼링크
-                var html = "<a href='"+fileInfo.getLink+"'>"+fileInfo.fileName+"</a><br>";
-                // hidden 태그 추가
-                html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>";
-                // div에 추가
-                $("#uploadedList").append(html);
-        }
-    });
-});
-
-</script>
 <div class='container' >
     <form name="fileForm" action="${path }/rentalUpload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
   
@@ -158,107 +81,71 @@ $(document).ready(function(){
 		
         </table>
         <br><br><br>
-
-		<div>
-		    첨부파일 등록
-		    <!-- 첨부파일 등록영역 -->
-		    <div class="fileDrop"></div>
-		    <!-- 첨부파일의 목록 출력영역 -->
-		    <div id="uploadedList"></div>
+        
+		<div id="uploader">
+			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
 		</div>
-        
-        <h3>상품 사진</h3>
-        <hr style="border:2px solid #787878"><br>
-    	<div id="fileDiv">
-	       	<input multiple="multiple" type="file" class="addfile0" name="file_0" />
-	        <a href="#this" name="delete" class="btn">삭제하기</a>
-        </div>
-        <a href="#this" id="add" class="btn">파일 추가하기</a>
-        <br><br><br>
-        
-        
-        <h3>상세 설명 사진</h3>
-        <hr style="border:2px solid #787878"><br>
-    	<div id="fileDiv1">
-	       	<input multiple="multiple" type="file" class="addfile1" name="file_1" />
-	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
-        </div>
-        <a href="#this" id="add1" class="btn1">파일 추가하기</a>
-        <br><br><br>
-        <script>
-               
-        function size_add(){
-        	var size_put="<span class='size_del'><br><br><b>치수: </b><input type='text'  name='size' id='size' required> <b>재고: </b><input type='number' name='left_amount' id='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br></span>";
-			$('#size_td').append(size_put);
-        	
-        }
-        function size_delete(e){
-        	e.parent().remove();
-        }
-        </script>
-        
-        
         <input type="submit" value="등록" class="btn" />     
     </form>
 </div>
-
+  
+  
 <script type="text/javascript">
-var g_count=1;
-$(document).ready(function(){
-	$("#add").on("click",function(e){
-		e.preventDefault();
-		fn_fileAdd();
+// Initialize the widget when the DOM is ready
+$(function() {
+	$("#uploader").plupload({
+		// General settings
+		runtimes : 'html5,flash,silverlight,html4',
+		url : 'upload',
+
+		// Maximum file size
+		max_file_size : '1000mb',
+
+		// User can upload no more then 20 files in one go (sets multiple_queues to false)
+		max_file_count: 20,
+		
+		chunk_size: '1mb',
+
+		// Resize images on clientside if we can
+		resize : {
+			width : 200, 
+			height : 200, 
+			quality : 90,
+			crop: true // crop to exact dimensions
+		},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,gif,png"},
+			{title : "Zip files", extensions : "zip,avi"}
+		],
+
+		// Rename files by clicking on their titles
+		rename: true,
+		
+		// Sort files
+		sortable: true,
+
+		// Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+		dragdrop: true,
+
+		// Views to activate
+		views: {
+			list: true,
+			thumbs: true, // Show thumbs
+			active: 'thumbs'
+		},
+
+		// Flash settings
+		flash_swf_url : '../../js/Moxie.swf',
+
+		// Silverlight settings
+		silverlight_xap_url : '../../js/Moxie.xap'
 	});
-	$("a[name='delete']").on("click",function(e){
-	       e.preventDefault();
-	       fn_fileDelete($(this));
-	   });
 });
-$(document).ready(function(){
-	$("#add1").on("click",function(e){
-		e.preventDefault();
-		fn_fileAdd1();
-	});
-	$("a[name='delete1']").on("click",function(e){
-		e.preventDefault();
-		fn_fileDelete($(this));
-	});
-});
-	 
- 
-function fn_fileDelete(obj){
-	obj.parent().remove();
-}
-function fn_fileAdd(){
-    var str = "<p><input type='file' class='addfile0' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
-    $("#fileDiv").append(str);
-     
-    $("a[name='delete']").on("click",function(e){
-        e.preventDefault();
-        fn_fileDelete($(this));         
-    });
-}
-function fn_fileAdd1(){
-    var str = "<p><input type='file' class='addfile1' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
-    $("#fileDiv1").append(str);
-     
-    $("a[name='delete1']").on("click",function(e){
-        e.preventDefault();
-        fn_fileDelete($(this));         
-    });
-}
- 
-function validate(){
-	if(!$('.addfile0').val().length){
-	 	alert("상품사진은 반드시 한개 이상 추가해야 합니다.");
-		return false;
-	}
-	if(!$('.addfile1').val().length){
-		alert("상세설명사진은 반드시 한개 이상 추가해야 합니다.");
-		return false;
-	}
-	return true;
-}
 </script>
 
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+

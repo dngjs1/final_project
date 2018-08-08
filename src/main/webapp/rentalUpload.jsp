@@ -8,136 +8,144 @@
    <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/plupload.full.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/jquery.ui.plupload.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${path }/resources/js/pluploadko.js" charset="UTF-8"></script>
+<link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.min.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="${path }/resources//css/jquery.ui.plupload.css" media="screen" />
 
-    <!-- jQuery
-    ====================================================================== -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      
+<style>
+.tr1 th{text-align:center;background-color:#E1F6FA}
+.tr2 td{vertical-align:middle;text-align:center;}
+</style>
 
-    <!-- Fine Uploader New/Modern CSS file
-    ====================================================================== -->
-    <link href="client/fine-uploader-new.css" rel="stylesheet">
 
-    <!-- Fine Uploader jQuery JS file
-    ====================================================================== -->
-    <script src="${path }/resources/js/fine-uploader.js"></script>
-    
-    <script src="${path }/resources/js/fileupload.js"></script>
-    
-    <!-- Fine Uploader Thumbnails template w/ customization
-    ====================================================================== -->
-    <script type="text/template" id="qq-template-manual-trigger">
-        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
-            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
-                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
-            </div>
-            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
-                <span class="qq-upload-drop-area-text-selector"></span>
-            </div>
-            <div class="buttons">
-                <div class="qq-upload-button-selector qq-upload-button">
-                    <div>Select files</div>
-                </div>
-                <button type="button" id="trigger-upload" class="btn btn-primary">
-                    <i class="icon-upload icon-white"></i> Upload
-                </button>
-            </div>
-            <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
-                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
-            </span>
-            <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
-                <li>
-                    <div class="qq-progress-bar-container-selector">
-                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
-                    </div>
-                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
-                    <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
-                    <span class="qq-upload-file-selector qq-upload-file"></span>
-                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
-                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
-                    <span class="qq-upload-size-selector qq-upload-size"></span>
-                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
-                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
-                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
-                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
-                </li>
-            </ul>
+<div class='container' >
+    <form name="fileForm" action="${path }/rentalUpload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
+  
+        <br>
+        <h3>상품등록</h3>
+        <hr style="border:2px solid #787878"><br>       
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
+        <tr class="tr1">
+			<th style="text-align: center;border-left:none;">카테고리</th>
+			<td>	
+			<select name="p_category_code" class="form-control" style="width:500px;">
+     			<c:forEach var='category' items='${categoryList}' varStatus="vs">
+                  <option value="${category.p_category_code}">${category.p_category_name }</option>
+				</c:forEach>	
+        	</select>
+			</td>
+		</tr>       
+        <tr class="tr1">
+			<th style="text-align: center;border-left:none;">상품명</th>
+			<td>	
+			<input type="text" class="form-control" name="product_name" id="product_name" required>
+			</td>
+		</tr>
+		<tr class="tr1">
+			<th style="text-align: center;border-left:none;">가격</th>
+			<td>	
+			<input type="number"  class="form-control" name="price" id="price" required>
+			</td>
+		</tr> 
+		<tr class="tr1">
+			<th style="text-align: center;border-left:none;">제조국</th>
+			<td>	
+			<input type="text" class="form-control" name="country" id="country" required>
+			</td>
+		</tr>
+		<tr class="tr1">
+			<th style="text-align: center;border-left:none;">크기</th>
+			<td>
+			 <input type="text"  class="form-control" name="real_size" id="real_size" value="상품 상세 정보 확인"> 
+			</td>
+		</tr>
+		<tr  class="tr1">
+			<th style="text-align: center;border-left:none;">사이즈 당 재고</th>
+			<td id="size_td">	
+				<b>치수: </b>
+				<input type="text"   name="size" id="size"> 
+				<b>재고: <b></b><input type="number" name="left_amount"	id="left_amount">
+				<input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>			
+			</td>
+		</tr>
+		<tr class="tr1">
+			<th style="text-align: center;border-left:none;">게시판글</th>
+			<td>
+			<input type="textarea" name="p_board_content" id="p_board_content" class="form-control">
+			</td>
+		</tr>
+		
+        </table>
+        <br><br><br>
+        
+		<div id="uploader">
+			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+		</div>
+        <input type="submit" value="등록" class="btn" />     
+    </form>
+</div>
+  
+  
+<script type="text/javascript">
+// Initialize the widget when the DOM is ready
+$(function() {
+	$("#uploader").plupload({
+		// General settings
+		runtimes : 'html5,flash,silverlight,html4',
+		url : '../upload.php',
 
-            <dialog class="qq-alert-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Close</button>
-                </div>
-            </dialog>
+		// Maximum file size
+		max_file_size : '1000mb',
 
-            <dialog class="qq-confirm-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
-                </div>
-            </dialog>
+		// User can upload no more then 20 files in one go (sets multiple_queues to false)
+		max_file_count: 20,
+		
+		chunk_size: '1mb',
 
-            <dialog class="qq-prompt-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <input type="text">
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
-                    <button type="button" class="qq-ok-button-selector">Ok</button>
-                </div>
-            </dialog>
-        </div>
-    </script>
+		// Resize images on clientside if we can
+		resize : {
+			width : 200, 
+			height : 200, 
+			quality : 90,
+			crop: true // crop to exact dimensions
+		},
 
-    <style>
-        #trigger-upload {
-            color: white;
-            background-color: #00ABC7;
-            font-size: 14px;
-            padding: 7px 20px;
-            background-image: none;
-        }
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,gif,png"},
+			{title : "Zip files", extensions : "zip,avi"}
+		],
 
-        #fine-uploader-manual-trigger .qq-upload-button {
-            margin-right: 15px;
-        }
+		// Rename files by clicking on their titles
+		rename: true,
+		
+		// Sort files
+		sortable: true,
 
-        #fine-uploader-manual-trigger .buttons {
-            width: 36%;
-        }
+		// Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+		dragdrop: true,
 
-        #fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
-            width: 60%;
-        }
-    </style>
+		// Views to activate
+		views: {
+			list: true,
+			thumbs: true, // Show thumbs
+			active: 'thumbs'
+		},
 
-    <title>Fine Uploader Manual Upload Trigger Demo</title>
-    <!-- Fine Uploader DOM Element
-    ====================================================================== -->
-    <div id="fine-uploader-manual-trigger"></div>
+		// Flash settings
+		flash_swf_url : '../../js/Moxie.swf',
 
-    <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
-    ====================================================================== -->
-    <script>
-        $('#fine-uploader-manual-trigger').fineUploader({
-            template: 'qq-template-manual-trigger',
-            request: {
-                endpoint: '/server/uploads'
-            },
-            thumbnails: {
-                placeholders: {
-                    waitingPath: '/source/placeholders/waiting-generic.png',
-                    notAvailablePath: '/source/placeholders/not_available-generic.png'
-                }
-            },
-            autoUpload: false
-        });
+		// Silverlight settings
+		silverlight_xap_url : '../../js/Moxie.xap'
+	});
+});
+</script>
 
-        $('#trigger-upload').click(function() {
-            $('#fine-uploader-manual-trigger').fineUploader('uploadStoredFiles');
-        });
-    </script>
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+

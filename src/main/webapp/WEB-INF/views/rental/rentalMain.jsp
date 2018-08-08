@@ -79,6 +79,7 @@
 	  font-size: 13px;
 	}
 </style>
+<a href="${path }/rentalUpload.do">등록</a>
 <div class="container-fluid">
 	<div class="map-container">
 		<div class="map-area">

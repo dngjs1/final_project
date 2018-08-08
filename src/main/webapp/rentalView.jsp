@@ -33,6 +33,16 @@
     	</div>
 	</div>
 </div>
+
+<script>
+	$(function(){
+		$('#datetime').daterangepicker({
+		 var years = endDate-startDate;
+		 alert(years);
+		});
+	});
+</script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 <script>
