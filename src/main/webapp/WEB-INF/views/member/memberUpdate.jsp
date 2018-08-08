@@ -57,6 +57,23 @@
     }
 </script>
 
+<script>
+	var oriPw = "${memberLoggedIn.member_pw}";
+	alert(oriPw);
+	
+	function validate() {
+		
+		//비밀번호 일치여부 확인
+		if($("#password").val() != ($("#password2"))) {
+			alert("비밀번호가 일치하지 않습니다.")
+			$("#password").val("");
+			$("#password2").val("");
+			$("#password").focus();
+			return false;
+		}
+	}
+	
+</script>
 
 
 
@@ -67,7 +84,7 @@
 
 
 <div style="width:50%; margin: 0 auto;">
-	<form name="memberEnrollFrm" action="memberUpdateEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
+	<form name="memberEnrollFrm" action="memberUpdateEnd.do" method="post" onsubmit="return validate();" >
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -78,13 +95,13 @@
 			<tr>
 				<th>현재 비밀번호</th>
 				<td>
-					<input type="password" class="form-control" name="password" id="password_" >
+					<input type="password" class="form-control" name="original_password" id="original_password" >
 				</td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>
 				<td>
-					<input type="password" class="form-control" name="password" id="password_" >
+					<input type="password" class="form-control" name="password" id="password" >
 				</td>
 			</tr>
 			<tr>

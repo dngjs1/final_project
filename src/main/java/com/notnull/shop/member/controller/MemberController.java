@@ -69,35 +69,37 @@ public class MemberController {
 		return "/common/msg";
 	}
 	
-	
-//	@RequestMapping("/checkIdDuplicate.do")
-//	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
-//
-//		System.out.println(member_Id);
-//		
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
-//		
-//		boolean check = service.idDuplicateCheck(member_Id)==0?true:false;
-//		
-//		
-//		mv.addObject(check);
-//		mv.setViewName("JsonView");
-//		
-//		return mv;
-//	}
-	
-	@RequestMapping("/checkIdDuplicate.do")
-    public void duplicateIdCheck(String member_id,HttpServletRequest req,HttpServletResponse res) throws IOException {
-	
-		System.out.println(member_id);
+	//ModelAndView 이용 ajax 왜안됨?	
+	@RequestMapping("/checkIdDuplicate.do" )
+	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
+
+		System.out.println(member_Id);
+		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
-       
-       boolean check=service.idDuplicateCheck(member_id)==0?true:false;
-       
-       System.out.println(check);
-       
-       res.getWriter().print(check);
-    }
+		
+		boolean check = service.idDuplicateCheck(member_Id)==0?true:false;
+		
+		
+		mv.addObject("check",check);
+		mv.setViewName("JsonView");
+		
+		return mv;
+	}
+	
+	
+	//Ajax 아이디 중복확인
+//	@RequestMapping("/checkIdDuplicate.do")
+//    public void duplicateIdCheck(String member_Id,HttpServletRequest req,HttpServletResponse res) throws IOException {
+//	
+//		System.out.println(member_Id);
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
+//       
+//       boolean check=service.idDuplicateCheck(member_Id)==0?true:false;
+//       
+//       System.out.println(check);
+//       
+//       res.getWriter().print(check);
+//    }
 	
 	
 	@RequestMapping("/memberLogin.do")
