@@ -87,7 +87,7 @@
         <h3>상품 사진</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv">
-	       	<input multiple="multiple" type="file" class="addfile0" name="file_0" />
+	       	<input multiple="multiple" type="file" class="addfile0" accept=".jpg, .png" name="file_0" />
 	        <a href="#this" name="delete" class="btn">삭제하기</a>
         </div>
         <a href="#this" id="add" class="btn">파일 추가하기</a>
@@ -97,7 +97,7 @@
         <h3>상세 설명 사진</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
-	       	<input multiple="multiple" type="file" class="addfile1" name="file_1" />
+	       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
 	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
         </div>
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
@@ -147,7 +147,7 @@ function fn_fileDelete(obj){
 	obj.parent().remove();
 }
 function fn_fileAdd(){
-    var str = "<p><input type='file' class='addfile0' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
+    var str = "<p><input type='file' class='addfile0' accept='.jpg, .png' name='file_0'/><a href='#this' name='delete' class='btn'>삭제하기</a></p> ";
     $("#fileDiv").append(str);
      
     $("a[name='delete']").on("click",function(e){
@@ -156,7 +156,7 @@ function fn_fileAdd(){
     });
 }
 function fn_fileAdd1(){
-    var str = "<p><input type='file' class='addfile1' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
+    var str = "<p><input type='file' class='addfile1' accept='.jpg, .png' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
     $("#fileDiv1").append(str);
      
     $("a[name='delete1']").on("click",function(e){
