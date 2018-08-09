@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
@@ -178,7 +182,7 @@ public class ProductController {
 	
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
-		String productCode=request.getParameter("productCode");
+		int productCode=Integer.parseInt(request.getParameter("productCode"));
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
@@ -198,11 +202,24 @@ public class ProductController {
 		return "/product/productView";
 	}
 
+	@RequestMapping("/cartInsert.do")
+	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//같은상품있나 확인하고 있으면 수량만 추가.
+		System.out.println(cart);
+		int productCode=cart.getProduct_code();
+		List<ProductOption> optionList =service.selectOption(productCode);
+		int result=service.insertCart(cart);
+		response.getWriter().print(result);
+	}
+	
 
 	@RequestMapping("/cartView.do")
-	public String cartView(Model model,HttpServletRequest request) {
-		//String productCode=request.getParameter("productCode");
+	public String cartView(String member_id,Model model) {
+		List<CartJoinList> cartList=service.selectCartList(member_id);
+		System.out.println(cartList);
+		model.addAttribute("cartList",cartList);
 		return "/product/cartView";
+		
 	}
 	
 	@RequestMapping("/buyForm.do")
@@ -320,9 +337,12 @@ public class ProductController {
 		
 	}
 	
+<<<<<<< HEAD
 	
 	
 	
 	
 	
+=======
+>>>>>>> SUPER_branch
 }

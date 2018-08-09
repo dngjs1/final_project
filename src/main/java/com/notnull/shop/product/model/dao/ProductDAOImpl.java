@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
@@ -49,17 +51,17 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession, String productCode) {
+	public ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectOne("product.selectProduct",productCode);
 	}
 
 	@Override
-	public List<ProductOption> selectOption(SqlSessionTemplate sqlSession, String productCode) {
+	public List<ProductOption> selectOption(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectOption",productCode);
 	}
 
 	@Override
-	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode) {
+	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode) {
 		return sqlSession.selectList("product.selectReview",productCode);
 	}
 
@@ -74,7 +76,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, String productCode) {
+	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectReviewImg",productCode);
 	}
 
@@ -96,6 +98,16 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.writeDateOrder");
+	}
+
+	@Override
+	public int insertCart(SqlSessionTemplate sqlSession, Cart cart) {
+		return sqlSession.insert("product.insertCart",cart);
+	}
+
+	@Override
+	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("product.selectCartList",member_id);
 	}
 	
 	
