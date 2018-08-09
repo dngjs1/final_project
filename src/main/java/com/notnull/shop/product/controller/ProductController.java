@@ -74,7 +74,6 @@ public class ProductController {
 		String[] sleft_amounts=request.getParameterValues("left_amount");
 		
 		List<ProductOption> productOptionList=new ArrayList<ProductOption>();
-		if(sizes[0].length()>0 && sleft_amounts[0].length()>0) {
 			int[] left_amounts = new int[sleft_amounts.length];
 			
 			for(int i=0;i<sleft_amounts.length;i++) {
@@ -88,7 +87,6 @@ public class ProductController {
 				productOption.setOption_size(sizes[i]);
 				productOptionList.add(productOption);
 			}
-		}
 		
  		/*상품사진 처리*/
         List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
@@ -186,7 +184,7 @@ public class ProductController {
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
 
-		
+		System.out.println("optionList:"+optionList);
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);
@@ -204,9 +202,9 @@ public class ProductController {
 	@RequestMapping("/cartInsert.do")
 	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.
-		System.out.println(cart);
 		int productCode=cart.getProduct_code();
-		List<ProductOption> optionList =service.selectOption(productCode);
+		List<CartJoinList> cartList=service.selectCartList(cart.getMember_id());
+		System.out.println(cartList);
 		int result=service.insertCart(cart);
 		response.getWriter().print(result);
 	}
@@ -215,7 +213,6 @@ public class ProductController {
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
-		System.out.println(cartList);
 		model.addAttribute("cartList",cartList);
 		return "/product/cartView";
 		
