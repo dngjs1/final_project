@@ -266,17 +266,17 @@ $('.star-prototype').generateStars();
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <textarea  style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                            	 <input type="button" onClick="fn_comment('${joinCategory.product_code }')" class="btn pull-right btn-success" value="등록" class="btn" />                   
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
+        <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
   </form>
   
   </div>
@@ -294,8 +294,8 @@ function fn_comment(code){
     
     $.ajax({
         type:'POST',
-        url : "<c:url value='addQuestion.do'/>",
-        data:$("#commentForm").serialize(),
+        url :"${path}/addQuestion.do",
+        data:{comment:$('#comment').val()}, 
         success : function(data){
             if(data=="success")
             {
