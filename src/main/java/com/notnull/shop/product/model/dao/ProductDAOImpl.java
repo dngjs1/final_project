@@ -61,7 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode) {
+	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode) {
 		return sqlSession.selectList("product.selectReview",productCode);
 	}
 
@@ -76,7 +76,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, String productCode) {
+	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectReviewImg",productCode);
 	}
 

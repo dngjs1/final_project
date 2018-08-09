@@ -45,19 +45,15 @@ public interface ProductDAO {
 	
 	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,int productCode);
 	
-<<<<<<< HEAD
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession);
-	
 	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
-=======
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode);
+
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
 	
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
 	
-	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,String productCode);
->>>>>>> SUPER_branch
+	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode);
 }

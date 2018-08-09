@@ -35,19 +35,15 @@ public interface ProductService {
 	
 	List<ProductOption> selectOption(int productCode);
 	
-<<<<<<< HEAD
-	List<ProductReview> selectReview();
-	
 	int insertCart(Cart cart);
 	
 	List<CartJoinList> selectCartList(String member_id);
-=======
-	List<ProductReview> selectReview(String productCode);
+
+	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
 	
-	List<ProductReviewImgJoin> selectReviewImg(String productCode);
+	List<ProductReviewImgJoin> selectReviewImg(int productCode);
 	
-	
->>>>>>> SUPER_branch
+
 }

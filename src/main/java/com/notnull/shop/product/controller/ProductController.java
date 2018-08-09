@@ -201,7 +201,6 @@ public class ProductController {
 		return "/product/productView";
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/cartInsert.do")
 	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.
@@ -212,9 +211,7 @@ public class ProductController {
 		response.getWriter().print(result);
 	}
 	
-=======
 
->>>>>>> SUPER_branch
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
@@ -229,8 +226,6 @@ public class ProductController {
 		//String productCode=request.getParameter("productCode");
 		return "/product/buyForm";
 	}
-<<<<<<< HEAD
-=======
 
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
@@ -341,6 +336,4 @@ public class ProductController {
 		
 	}
 	
-	
->>>>>>> SUPER_branch
 }

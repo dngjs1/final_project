@@ -95,7 +95,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReview> selectReview(String productCode) {
+	public List<ProductReview> selectReview(int productCode) {
 		return productDAO.selectReview(sqlSession,productCode);
 	}
 
@@ -126,7 +126,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(String productCode) {
+	public List<ProductReviewImgJoin> selectReviewImg(int productCode) {
 		return productDAO.selectReviewImg(sqlSession,productCode);
 	}
 
@@ -159,6 +159,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<CartJoinList> selectCartList(String member_id) {
 		return productDAO.selectCartList(sqlSession,member_id);
 	}
+
 	
 	
 }
