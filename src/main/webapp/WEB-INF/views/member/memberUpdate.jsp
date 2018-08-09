@@ -60,8 +60,6 @@
 </script>
 
 <script>
-	 
-	 var encodedPw = "${memberLoggedIn.member_pw}";
 	 var encodeCheck = "true";
 	 
 	$(function(){ 
@@ -71,7 +69,6 @@
 		        url:"${pageContext.request.contextPath}/checkUpdatePassword.do",
 		        type   : "post",
 		        data:{"original_password":$("#original_password").val() ,
-					  "encodedPw":encodedPw,
 					  "member_id":$("#member_id").val()
 		        },
 		        success:function(data){
