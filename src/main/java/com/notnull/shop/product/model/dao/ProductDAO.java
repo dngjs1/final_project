@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 
 import com.notnull.shop.product.model.vo.ProductCategory;
@@ -20,6 +22,14 @@ import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 public interface ProductDAO {
 	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
 	
+	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession);
+	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
 
@@ -31,15 +41,19 @@ public interface ProductDAO {
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
-	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
+	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,int productCode);
 	
-	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,String productCode);
+	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,int productCode);
 	
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode);
+	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
+
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
 	
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
 	
-	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,String productCode);
+	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode);
 }

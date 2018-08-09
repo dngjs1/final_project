@@ -81,7 +81,7 @@ public class MemberController {
 		return "/common/msg";
 	}
 	
-	//ModelAndView 이용 ajax 왜안됨?	
+	//ModelAndView 이용 
 	@RequestMapping("/checkIdDuplicate.do" )
 	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
 
@@ -257,6 +257,14 @@ public class MemberController {
 			m.setEmail_alarm("N");
 		}
 		
+		System.out.println("1 : " +m.getMember_pw());
+		
+		if(!(m.getMember_pw().equals(""))) {
+			m.setMember_pw(bcyptPasswordEncoder.encode(m.getMember_pw()));
+		}
+		
+		System.out.println("2 : " +m.getMember_pw());
+
 		String msg ="";
 		String loc ="myPage.do";
 		
@@ -275,6 +283,25 @@ public class MemberController {
 		model.addAttribute("loc",loc);
 		
 		return "/common/msg";
+	}
+	
+	//ModelAndView 이용 
+	@RequestMapping("/checkUpdatePassword.do")
+	public void checkUpdatePassword(HttpServletResponse response, String original_password, String encodedPw, String member_id) throws IOException{
+
+		
+		
+		String encode = service.selectEncode(member_id);
+		
+		
+		
+		String flag = bcyptPasswordEncoder.matches(original_password,encode)?"true":"false";
+		
+		System.out.println("비밀번호 결과값은 "+flag);
+		
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().write(flag);
+		
 	}
 	
 	

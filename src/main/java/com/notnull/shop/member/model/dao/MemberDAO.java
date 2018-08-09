@@ -24,4 +24,6 @@ public interface MemberDAO {
 	
 	int memberUpdate(SqlSessionTemplate sqlSession, Member m);
 	
+	String selectEncode(SqlSessionTemplate sqlSession, String id);
+	
 }

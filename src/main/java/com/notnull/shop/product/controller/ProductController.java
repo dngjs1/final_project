@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
@@ -32,7 +36,6 @@ import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
-import oracle.jdbc.oracore.PickleOutputStream;
 
 @Controller
 public class ProductController {
@@ -45,7 +48,7 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		m.addAttribute("list",list);	
+		m.addAttribute("list",list);
 		return "/product/shop";
 	}
 	
@@ -178,10 +181,12 @@ public class ProductController {
 	
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
-		String productCode=request.getParameter("productCode");
+		int productCode=Integer.parseInt(request.getParameter("productCode"));
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
+
+		
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);
@@ -196,11 +201,24 @@ public class ProductController {
 		return "/product/productView";
 	}
 
+	@RequestMapping("/cartInsert.do")
+	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//같은상품있나 확인하고 있으면 수량만 추가.
+		System.out.println(cart);
+		int productCode=cart.getProduct_code();
+		List<ProductOption> optionList =service.selectOption(productCode);
+		int result=service.insertCart(cart);
+		response.getWriter().print(result);
+	}
+	
 
 	@RequestMapping("/cartView.do")
-	public String cartView(Model model,HttpServletRequest request) {
-		//String productCode=request.getParameter("productCode");
+	public String cartView(String member_id,Model model) {
+		List<CartJoinList> cartList=service.selectCartList(member_id);
+		System.out.println(cartList);
+		model.addAttribute("cartList",cartList);
 		return "/product/cartView";
+		
 	}
 	
 	@RequestMapping("/buyForm.do")
@@ -272,8 +290,50 @@ public class ProductController {
 	public String productReviewTest(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		request.setAttribute("product_code", product_code);
-		
+	
 		return "product/productReviewTest";
 	}
 
+	
+	@RequestMapping("/question.do")
+	public String productQuestion(Model model,HttpServletRequest request) {
+		String p_question_content=request.getParameter("questionContent");
+		System.out.println(p_question_content);
+		
+		return "";
+		
+	}
+	
+	@RequestMapping("/reviewStarOrder.do")
+	public String reviewStarOrder(Model model) {
+		List<ProductListJoin> list = service.reviewStarOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/highPriceOrder.do")
+	public String highPriceOrder(Model model) {
+		List<ProductListJoin> list = service.highPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/lowPriceOrder.do")
+	public String lowPriceOrder(Model model) {
+		List<ProductListJoin> list = service.lowPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/writeDateOrder.do")
+	public String writeDateOrder(Model model) {
+		List<ProductListJoin> list = service.writeDateOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
 }

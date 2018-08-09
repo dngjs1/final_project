@@ -43,7 +43,6 @@ span.star-prototype > * {
    	});
 	function init () {
 		sell_price = parseInt($('#price').text());
-		amount = document.form.amount.value;
 		$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(sell_price>=20000){
 			$("#del_price").text("무료");
@@ -52,9 +51,9 @@ span.star-prototype > * {
 		}
 	}
 	function add () {
-		hm = document.form.amount;
-		hm.value ++ ;
-		var result = parseInt(hm.value) * sell_price;
+		amount = document.form.cart_quantity;
+		amount.value ++ ;
+		var result = parseInt(amount.value) * sell_price;
 		$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(result>=20000){
 			$("#del_price").text("무료");
@@ -63,10 +62,10 @@ span.star-prototype > * {
 		}
 	}
 	function del () {
-		hm = document.form.amount;
-		if (hm.value > 1) {
-			hm.value -- ;
-			var result = parseInt(hm.value) * sell_price;
+		amount = document.form.cart_quantity;
+		if (amount.value > 1) {
+			amount.value -- ;
+			var result = parseInt(amount.value) * sell_price;
 			$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(result>=20000){
 				$("#del_price").text("무료");
@@ -110,17 +109,25 @@ span.star-prototype > * {
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" id="frm" method="get">
-				<input type="hidden" value="${joinCategory.product_code}"/>
+				<input type="hidden" name="member_id" id="member_id" value="${memberLoggedIn.member_id}"/>
+				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<span>사이즈 </span>
 					<select name="size" style="font-size:15px;height:28px;" >
 						<c:forEach var="option" items="${optionList}">
-							<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							<c:choose>
+							<c:when test="${option.left_amount<=0}">
+								<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							</c:otherwise>
+							</c:choose>
 						</c:forEach>
 		            </select>
 		            &emsp;&emsp;&emsp;
 	            </c:if>
-				<span>수량 </span><input type="text" name="amount" value="1" size="2" style="height:25px;" readonly/>
+				<span>수량 </span><input type="text" name="cart_quantity" value="1" size="2" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
 				<div style="float:right;">
@@ -130,18 +137,56 @@ span.star-prototype > * {
 			</form>
 			<script>
 			$(function(){
-				$('#cart').click(function(){
-					var frm=$("#frm");
-					var url="${pageContext.request.contextPath }/cartView.do";
-					frm.attr("action",url);
-					frm.submit();
+				$('#cart').click(function(e){
+					var member_id=$('#member_id').val();
+					if(member_id==null||member_id.length<1){
+						alert("로그인 후 이용해주시기 바랍니다.");
+						e.preventDefault();
+					}else{
+						var productInfo={
+								member_id:member_id,
+								product_option_code:$("[name=size]").val(),
+								product_code:$("[name=product_code]").val(),
+								cart_quantity:$("[name=cart_quantity]").val()
+						};
+						$.ajax({
+							url:"${pageContext.request.contextPath}/cartInsert.do",
+							data:productInfo,
+							success:function(data){
+								if(data.trim()=='0'){
+									alert("장바구니 추가에 실패하였습니다.");
+									e.preventDefault();
+								}else{
+									if (confirm('장바구니로 이동하시겠습니까?')) {
+										location.href="${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}";
+						            } else {
+						                return;
+								    }
+								}
+							},
+							error:function(jpxhr,textStatus,errormsg){
+								console.log("ajax전송실패.");
+								console.log(jpxhr);
+								console.log(textStatus);
+								console.log(errormsg);
+							}
+						});
+					}
 				});
 				$('#buy').click(function(){
-					var frm=$("#frm");
-					var url="${pageContext.request.contextPath }/buyForm.do";
-					frm.attr("action",url);
-					frm.submit();
+					var member_id=$('#member_id').val();
+					if(member_id==null||member_id.length<1){
+						alert("로그인 후 이용해주시기 바랍니다.");
+						e.preventDefault();
+					}else{
+						var frm=$("#frm");
+						var url="${pageContext.request.contextPath }/buyForm.do";
+						frm.attr("action",url);
+						frm.submit();
+					}
 				});
+				
+				
 			});
 			</script>
     	</div>
@@ -201,17 +246,17 @@ span.star-prototype > * {
 	}
 </script>
  <div> 
- <c:set var="total" value="0"/>
- <c:forEach var="review" items="${reviewList}" varStatus="vs">
-	<%-- <tr>
-		<td>${review.review_star }</td><br>
-	</tr> --%>
-	<c:set var="total" value="${(total+review.review_star)}"/>
-	<c:set var="count" value="${vs.count }"/>
- </c:forEach>
- <c:out value="${total/count}"/>
- <span class="star-prototype">${total/count}</span>
- 참여인원:<c:out value="${count }"/>
+	 <c:set var="total" value="0"/>
+	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
+		<%-- <tr>
+			<td>${review.review_star }</td><br>
+		</tr> --%>
+		<c:set var="total" value="${(total+review.review_star)}"/>
+		<c:set var="count" value="${vs.count }"/>
+	 </c:forEach>
+	 <c:out value="${total/count}"/>
+	 <span class="star-prototype">${total/count}</span>
+	 참여인원:<c:out value="${count }"/>
  </div>
  <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
@@ -221,10 +266,16 @@ span.star-prototype > * {
  <hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
+ 	
 	 작성자:${review.member_id}<br>
 	별점:<span class="star-prototype">${review.review_star }</span><br>
 	 작성일:${review.review_date} <br> 
 	
+	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+		<c:if test="${review.review_code eq imgList.review_code }">
+			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+		</c:if>
+	</c:forEach>
 		<br>	 	 
 	 내용 :${review.review_content} <br>	
 	 <hr>
@@ -249,6 +300,118 @@ $('.star-prototype').generateStars();
   
   <hr>
   상품문의
+  <div class="container">
+ <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+        <div>
+            <div>
+                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+            </div>
+            <div>
+                <table class="table">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <br>
+                            <div>
+                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
+  </form>
+  
+  </div>
+  <div class="container">
+    <form id="commentListForm" name="commentListForm" method="post">
+        <div id="commentList">
+        </div>
+    </form>
+</div>
+<script>
+/*
+ * 댓글 등록하기(Ajax)
+ */
+function fn_comment(code){
+    
+    $.ajax({
+        type:'POST',
+        url : "<c:url value='addQuestion.do'/>",
+        data:$("#commentForm").serialize(),
+        success : function(data){
+            if(data=="success")
+            {
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+        
+    });
+}
+ 
+/**
+ * 초기 페이지 로딩시 댓글 불러오기
+ */
+$(function(){
+    
+    getCommentList();
+    
+});
+ 
+/**
+ * 댓글 불러오기(Ajax)
+ */
+function getCommentList(){
+    
+    $.ajax({
+        type:'GET',
+        url : "<c:url value='questionList.do'/>",
+        dataType : "json",
+        data:$("#commentForm").serialize(),
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        success : function(data){
+            
+            var html = "";
+            var cCnt = data.length;
+            
+            if(data.length > 0){
+                
+                for(i=0; i<data.length; i++){
+                    html += "<div>";
+                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
+                    html += data[i].comment + "<tr><td></td></tr>";
+                    html += "</table></div>";
+                    html += "</div>";
+                }
+                
+            } else {
+                
+                html += "<div>";
+                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                html += "</table></div>";
+                html += "</div>";
+                
+            }
+            
+            $("#cCnt").html(cCnt);
+            $("#commentList").html(html);
+            
+        },
+        error:function(request,status,error){
+            
+       }
+        
+    });
+}
+
+</script>
+
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>
 </div>

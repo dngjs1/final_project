@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.notnull.shop.product.model.dao.ProductDAO;
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
@@ -83,17 +85,17 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductJoinCategory selectProduct(String productCode) {
+	public ProductJoinCategory selectProduct(int productCode) {
 		return productDAO.selectProduct(sqlSession,productCode);
 	}
 
 	@Override
-	public List<ProductOption> selectOption(String productCode) {
+	public List<ProductOption> selectOption(int productCode) {
 		return productDAO.selectOption(sqlSession,productCode);
 	}
 
 	@Override
-	public List<ProductReview> selectReview(String productCode) {
+	public List<ProductReview> selectReview(int productCode) {
 		return productDAO.selectReview(sqlSession,productCode);
 	}
 
@@ -124,9 +126,40 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(String productCode) {
+	public List<ProductReviewImgJoin> selectReviewImg(int productCode) {
 		return productDAO.selectReviewImg(sqlSession,productCode);
 	}
+
+	@Override
+	public List<ProductListJoin> reviewStarOrder() {
+		return productDAO.reviewStarOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> highPriceOrder() {
+		return productDAO.highPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> lowPriceOrder() {
+		return productDAO.lowPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> writeDateOrder() {
+		return productDAO.writeDateOrder(sqlSession);
+	}
+
+	@Override
+	public int insertCart(Cart cart) {
+		return productDAO.insertCart(sqlSession,cart);
+	}
+
+	@Override
+	public List<CartJoinList> selectCartList(String member_id) {
+		return productDAO.selectCartList(sqlSession,member_id);
+	}
+
 	
 	
 }
