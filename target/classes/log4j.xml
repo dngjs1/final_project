@@ -9,7 +9,22 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+		<!-- log4jdbc-remix log출력 설정 -->
+	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p : %m%n"/>
+		</layout>
+	</appender>
 	
+	<logger name="jdbc.sqlonly" additivity="false">		
+		<level value="debug"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	
+	<logger name="jdbc.resulttable" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
 	<!-- Application Loggers -->
 	<logger name="com.notnull.shop">
 		<level value="info" />

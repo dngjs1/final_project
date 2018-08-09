@@ -9,19 +9,68 @@
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
 	<select id="selectProductList" resultMap="productListJoinMap">
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price 
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by product_code desc
+		order by product_code desc  
 	</select>
+ 
+ 
+ 	<select id="reviewStarOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by review_star desc  
+ 	</select>
+ 
+ 	<select id="highPriceOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by price desc  
+ 	</select>
+ 	
+ 	<select id="lowPriceOrder" resultMap="productListJoinMap">
+ 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by price asc  
+ 	</select>
+ 
+
+ 	<select id="writeDateOrder" resultMap="productListJoinMap">
+ 	select x.product_code, x.write_date,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code
+		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		order by write_date desc  
+ 	</select>
+ 
  
  	<select id="selectCategoryList" resultType="productCategory">
  		select * from product_category
  	</select>
  
  	
+ 	
+ 	<select id="selectReviewImg" resultType="ProductReviewImgJoin">
+ 		select x.product_code, y.review_code, y.new_review_img_path
+ 		from product_review x
+ 		inner join product_review_img y
+ 		on x.review_code=y.review_code	
+ 		WHERE product_code=#{product_code} 	
+ 	</select>	
+ 
+ 
  
 	<insert id="insertProduct" parameterType="product">
 	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date) 
@@ -52,9 +101,10 @@
   	</select>
   	
   	<select id="selectReview" resultType="productReview">
-  	 select * from product_review 
+  	 select * from product_review WHERE product_code=#{product_code} 
   	</select>
   	
+<<<<<<< HEAD
   	<insert id="insertCart" parameterType="cart">
   	insert into cart values(cart_seq.nextval,#{product_code},#{cart_quantity},#{member_id},sysdate,#{product_option_code})
   	</insert>
@@ -69,4 +119,15 @@
   	and member_id=#{member_id}
   	order by cart_date desc
   	</select>
+=======
+  	<insert id="reviewInsert" parameterType="productReview">
+  	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})
+ 	<selectKey keyProperty="review_code" resultType="_int" order="AFTER"> SELECT product_review_seq.CURRVAL FROM DUAL </selectKey>
+  	</insert>
+  	
+  	<insert id="insertReviewImg" parameterType="productReviewImg">
+  	INSERT INTO product_review_img 	VALUES(product_review_img_seq.nextval,#{review_img_path},#{new_review_img_path},#{review_code})	
+  	</insert>
+  	
+>>>>>>> SUPER_branch
 </mapper>

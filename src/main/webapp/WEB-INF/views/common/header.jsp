@@ -106,7 +106,7 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath }/findMember.do">ID/비밀번호 찾기<i class="fas fa-search"></i></a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberEnroll.do">회원가입<i class="far fa-handshake"></i></a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberAgree.do">회원가입<i class="far fa-handshake"></i></a>|</h5>
               </li>
               <!--  <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
@@ -126,7 +126,7 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#"><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.	</a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberView.do">마이페이지 </a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/myPage.do">마이페이지 </a>|</h5>
               </li>
                <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
@@ -220,7 +220,7 @@ $(document).ready(function(){
       <a class="nav-item nav-link active mr-3" href="#"><strong>사이트소개</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>상품명</strong></a>
       <a class="nav-item nav-link active mr-3" href="#"><strong>이벤트</strong></a>
-      <a class="nav-item nav-link active mr-3" href="#"><strong>고객센터</strong></a>
+      <a class="nav-item nav-link active mr-3" href="${path}/infoMain.do"><strong>고객센터</strong></a>
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

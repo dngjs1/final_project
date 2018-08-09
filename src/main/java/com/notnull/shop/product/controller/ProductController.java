@@ -12,10 +12,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.config.PropertySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +33,9 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+
 
 @Controller
 public class ProductController {
@@ -43,7 +48,7 @@ public class ProductController {
 	public String selectProductList(Model m) {
 		
 		List<ProductListJoin> list = service.selectProductList();
-		m.addAttribute("list",list);	
+		m.addAttribute("list",list);
 		return "/product/shop";
 	}
 	
@@ -179,11 +184,24 @@ public class ProductController {
 		int productCode=Integer.parseInt(request.getParameter("productCode"));
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
+
+		
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
+		model.addAttribute("reviewImgList",reviewImgList);
+		
+		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
+		
+		productReviewList=service.selectReview(productCode);
+		
+		request.setAttribute("reviewList", productReviewList);
+		
+		
 		return "/product/productView";
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/cartInsert.do")
 	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.
@@ -194,6 +212,9 @@ public class ProductController {
 		response.getWriter().print(result);
 	}
 	
+=======
+
+>>>>>>> SUPER_branch
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
@@ -208,4 +229,118 @@ public class ProductController {
 		//String productCode=request.getParameter("productCode");
 		return "/product/buyForm";
 	}
+<<<<<<< HEAD
+=======
+
+	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
+	    String saveDir="";
+        File dir=null;
+	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
+        List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+        
+        for (MultipartFile mf : fileList1) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductReviewImg productReviewImg = new ProductReviewImg();
+                      
+            productReviewImg.setReview_img_path(originFileName);
+            productReviewImg.setNew_review_img_path(renamedFileName);
+            
+            productReviewImgList.add(productReviewImg);
+        }
+        
+        System.out.println(productReview);
+		int result=service.reviewInsert(productReview,productReviewImgList);
+		
+		ModelAndView mv=new ModelAndView();
+        String msg="";
+		if(result>0)
+		{
+			msg="등록을 성공하였습니다.";
+		}
+		else
+		{
+			msg="등록을 실패하였습니다.";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "/product.do");
+		
+		mv.setViewName("common/msg");	
+        return mv;
+	}
+
+	
+	@RequestMapping("/productReviewTest.do")
+	public String productReviewTest(Model model,HttpServletRequest request) {
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		request.setAttribute("product_code", product_code);
+	
+		return "product/productReviewTest";
+	}
+
+	
+	@RequestMapping("/question.do")
+	public String productQuestion(Model model,HttpServletRequest request) {
+		String p_question_content=request.getParameter("questionContent");
+		System.out.println(p_question_content);
+		
+		return "";
+		
+	}
+	
+	@RequestMapping("/reviewStarOrder.do")
+	public String reviewStarOrder(Model model) {
+		List<ProductListJoin> list = service.reviewStarOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/highPriceOrder.do")
+	public String highPriceOrder(Model model) {
+		List<ProductListJoin> list = service.highPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/lowPriceOrder.do")
+	public String lowPriceOrder(Model model) {
+		List<ProductListJoin> list = service.lowPriceOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	@RequestMapping("/writeDateOrder.do")
+	public String writeDateOrder(Model model) {
+		List<ProductListJoin> list = service.writeDateOrder();
+		model.addAttribute("list",list);		
+		return "/product/shop";
+		
+	}
+	
+	
+>>>>>>> SUPER_branch
 }

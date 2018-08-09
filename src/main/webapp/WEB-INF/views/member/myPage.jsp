@@ -7,5 +7,14 @@
 	<jsp:param value=" " name="pageTitle"/>
 </jsp:include>
 
+<div style="width:50%; margin: 0 auto;">
+	<button type="button" onclick="memberUpdate()" >회원정보수정</button>
+</div>
+<script>
+	function memberUpdate() {
+		location.href ="${pageContext.request.contextPath}/memberUpdate.do"
+	}
+</script>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

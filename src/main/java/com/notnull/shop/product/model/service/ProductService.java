@@ -12,10 +12,20 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
+	
+	List<ProductListJoin> reviewStarOrder();
+	
+	List<ProductListJoin> highPriceOrder();
+	
+	List<ProductListJoin> lowPriceOrder();
+	
+	List<ProductListJoin> writeDateOrder();
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
@@ -25,9 +35,19 @@ public interface ProductService {
 	
 	List<ProductOption> selectOption(int productCode);
 	
+<<<<<<< HEAD
 	List<ProductReview> selectReview();
 	
 	int insertCart(Cart cart);
 	
 	List<CartJoinList> selectCartList(String member_id);
+=======
+	List<ProductReview> selectReview(String productCode);
+	
+	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
+	
+	List<ProductReviewImgJoin> selectReviewImg(String productCode);
+	
+	
+>>>>>>> SUPER_branch
 }

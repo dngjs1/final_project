@@ -10,8 +10,14 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductCategory" alias="productCategory"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductOption" alias="productOption"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinCategory" alias="productJoinCategory"/>
+<<<<<<< HEAD
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReview" alias="ProductReview"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.Cart" alias="cart"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.CartJoinList" alias="cartJoinList"/>
+=======
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductReview" alias="productReview"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImg" alias="productReviewImg"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImgJoin" alias="ProductReviewImgJoin"/>
+>>>>>>> SUPER_branch
 	</typeAliases>
 </configuration>

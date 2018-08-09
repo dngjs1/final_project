@@ -15,6 +15,8 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -59,8 +61,43 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.selectReview");
+	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode) {
+		return sqlSession.selectList("product.selectReview",productCode);
+	}
+
+	@Override
+	public int reviewInsert(SqlSessionTemplate sqlSession, ProductReview productReview) {
+		return sqlSession.insert("product.reviewInsert",productReview);
+	}
+
+	@Override
+	public int insertReviewImg(SqlSessionTemplate sqlSession, ProductReviewImg productReviewImg) {
+		return sqlSession.insert("product.insertReviewImg",productReviewImg);
+	}
+
+	@Override
+	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, String productCode) {
+		return sqlSession.selectList("product.selectReviewImg",productCode);
+	}
+
+	@Override
+	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.reviewStarOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.highPriceOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.lowPriceOrder");
+	}
+
+	@Override
+	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.writeDateOrder");
 	}
 
 	@Override

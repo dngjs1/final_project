@@ -17,6 +17,8 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -93,8 +95,59 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReview> selectReview() {
-		return productDAO.selectReview(sqlSession);
+	public List<ProductReview> selectReview(String productCode) {
+		return productDAO.selectReview(sqlSession,productCode);
+	}
+
+	@Override
+	public int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList) {
+		int result=0;
+		int review_code=0;
+		try {		
+			result=productDAO.reviewInsert(sqlSession, productReview);
+			review_code=productReview.getReview_code();
+			if(productReviewImgList.size()>0)
+			{
+				for(ProductReviewImg productReviewImg : productReviewImgList)
+				{
+					productReviewImg.setReview_code(review_code);
+					result=productDAO.insertReviewImg(sqlSession,productReviewImg);
+				}
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		
+		
+		return result;
+	}
+
+	@Override
+	public List<ProductReviewImgJoin> selectReviewImg(String productCode) {
+		return productDAO.selectReviewImg(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductListJoin> reviewStarOrder() {
+		return productDAO.reviewStarOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> highPriceOrder() {
+		return productDAO.highPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> lowPriceOrder() {
+		return productDAO.lowPriceOrder(sqlSession);
+	}
+
+	@Override
+	public List<ProductListJoin> writeDateOrder() {
+		return productDAO.writeDateOrder(sqlSession);
 	}
 
 	@Override

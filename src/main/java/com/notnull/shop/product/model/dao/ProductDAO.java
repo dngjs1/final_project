@@ -15,10 +15,20 @@ import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductReview;
+import com.notnull.shop.product.model.vo.ProductReviewImg;
+import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
 
 
 public interface ProductDAO {
 	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession);
+	
+	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession);
 	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
@@ -35,9 +45,19 @@ public interface ProductDAO {
 	
 	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,int productCode);
 	
+<<<<<<< HEAD
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession);
 	
 	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
+=======
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,String productCode);
+	
+	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
+	
+	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
+	
+	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,String productCode);
+>>>>>>> SUPER_branch
 }

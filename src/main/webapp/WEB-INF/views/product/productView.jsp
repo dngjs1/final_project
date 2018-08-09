@@ -6,6 +6,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<style>
+/* 별점 */
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url('http://i.imgur.com/YsyS5y8.png') 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+</style>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
@@ -67,6 +83,9 @@
 		else
 			$el.removeClass('shown');
 	});
+	
+	
+	
 </script>
 
 <div class="container">
@@ -220,54 +239,59 @@
 			
  
  <hr>
- <h4>상품평</h4> <input type="button" value="별점테스트" onclick="fn_star()"/>
+ <h4>상품평</h4> <input type="button" value="테스트" onclick="fn_productReview()"/>
  <script>
-	function fn_star(){
-		location.href="${pageContext.request.contextPath}/review_star.do";
+	function fn_productReview(){
+		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <div>별점 이미지    ,참여인원
- <c:choose>
-	<c:when test="${review.review_star eq '10' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '9' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '8' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '7' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '6' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '5' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '4' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '3' }" >
- 	<i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '2' }" >
- 	<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '1' }" >
- 	<i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
-	<c:when test="${review.review_star eq '0' }" >
- 	<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-	</c:when>
- </c:choose>
+ <div> 
+	 <c:set var="total" value="0"/>
+	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
+		<%-- <tr>
+			<td>${review.review_star }</td><br>
+		</tr> --%>
+		<c:set var="total" value="${(total+review.review_star)}"/>
+		<c:set var="count" value="${vs.count }"/>
+	 </c:forEach>
+	 <c:out value="${total/count}"/>
+	 <span class="star-prototype">${total/count}</span>
+	 참여인원:<c:out value="${count }"/>
  </div>
  <div>상품평 이미지</div>
-  
+   <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+	</c:forEach>
   
  <hr>
- <div> 작성자, 작성일, 내용</div>
+ <div> 
+ <c:forEach var="review" items="${reviewList}">
+ 	
+	 작성자:${review.member_id}<br>
+	별점:<span class="star-prototype">${review.review_star }</span><br>
+	 작성일:${review.review_date} <br> 
+	
+	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+		<c:if test="${review.review_code eq imgList.review_code }">
+			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+		</c:if>
+	</c:forEach>
+		<br>	 	 
+	 내용 :${review.review_content} <br>	
+	 <hr>
+ </c:forEach>
+ 
+ <script>
+//별점
+$.fn.generateStars = function() {
+ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+};
+
+//숫자 평점을 별로 변환하도록 호출하는 함수
+$('.star-prototype').generateStars();
+ 
+ </script>
+ </div>
   상품평 페이징 처리
   
    </div>
@@ -276,6 +300,118 @@
   
   <hr>
   상품문의
+  <div class="container">
+ <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+        <div>
+            <div>
+                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+            </div>
+            <div>
+                <table class="table">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <br>
+                            <div>
+                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
+  </form>
+  
+  </div>
+  <div class="container">
+    <form id="commentListForm" name="commentListForm" method="post">
+        <div id="commentList">
+        </div>
+    </form>
+</div>
+<script>
+/*
+ * 댓글 등록하기(Ajax)
+ */
+function fn_comment(code){
+    
+    $.ajax({
+        type:'POST',
+        url : "<c:url value='addQuestion.do'/>",
+        data:$("#commentForm").serialize(),
+        success : function(data){
+            if(data=="success")
+            {
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+        
+    });
+}
+ 
+/**
+ * 초기 페이지 로딩시 댓글 불러오기
+ */
+$(function(){
+    
+    getCommentList();
+    
+});
+ 
+/**
+ * 댓글 불러오기(Ajax)
+ */
+function getCommentList(){
+    
+    $.ajax({
+        type:'GET',
+        url : "<c:url value='questionList.do'/>",
+        dataType : "json",
+        data:$("#commentForm").serialize(),
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        success : function(data){
+            
+            var html = "";
+            var cCnt = data.length;
+            
+            if(data.length > 0){
+                
+                for(i=0; i<data.length; i++){
+                    html += "<div>";
+                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
+                    html += data[i].comment + "<tr><td></td></tr>";
+                    html += "</table></div>";
+                    html += "</div>";
+                }
+                
+            } else {
+                
+                html += "<div>";
+                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                html += "</table></div>";
+                html += "</div>";
+                
+            }
+            
+            $("#cCnt").html(cCnt);
+            $("#commentList").html(html);
+            
+        },
+        error:function(request,status,error){
+            
+       }
+        
+    });
+}
+
+</script>
+
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>
 </div>
