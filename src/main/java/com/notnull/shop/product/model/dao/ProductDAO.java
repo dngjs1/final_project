@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 
 import com.notnull.shop.product.model.vo.ProductCategory;
@@ -29,9 +31,13 @@ public interface ProductDAO {
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
-	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,String productCode);
+	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,int productCode);
 	
-	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,String productCode);
+	List<ProductOption> selectOption(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession);
+	
+	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
 }

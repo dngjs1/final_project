@@ -43,15 +43,30 @@
   	INSERT INTO product_option VALUES (product_option_seq.nextval,#{option_size},#{left_amount},#{product_code})
   	</insert>
   
-  	<select id="selectProduct" parameterType="string" resultType="productJoinCategory">
+  	<select id="selectProduct" parameterType="int" resultType="productJoinCategory">
   	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 
   	</select>
-  
-  	<select id="selectOption" parameterType="string" resultType="productOption">
+  	
+  	<select id="selectOption" parameterType="int" resultType="productOption">
   	SELECT * FROM product_option WHERE product_code=#{product_code} 
   	</select>
   	
   	<select id="selectReview" resultType="productReview">
   	 select * from product_review 
+  	</select>
+  	
+  	<insert id="insertCart" parameterType="cart">
+  	insert into cart values(cart_seq.nextval,#{product_code},#{cart_quantity},#{member_id},sysdate,#{product_option_code})
+  	</insert>
+  	
+  	<select id="selectCartList" parameterType="string" resultType="cartJoinList">
+  	select c.product_code, c.product_name, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	from cart a
+  	join product_option b on a.product_option_code=b.product_option_code
+  	join product c on b.product_code=c.product_code
+  	join product_img d on c.product_code=d.product_code
+  	where p_img_code in (select min(p_img_code) from product_img group by product_code)
+  	and member_id=#{member_id}
+  	order by cart_date desc
   	</select>
 </mapper>

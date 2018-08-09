@@ -27,7 +27,6 @@
    	});
 	function init () {
 		sell_price = parseInt($('#price').text());
-		amount = document.form.amount.value;
 		$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(sell_price>=20000){
 			$("#del_price").text("무료");
@@ -36,9 +35,9 @@
 		}
 	}
 	function add () {
-		hm = document.form.amount;
-		hm.value ++ ;
-		var result = parseInt(hm.value) * sell_price;
+		amount = document.form.cart_quantity;
+		amount.value ++ ;
+		var result = parseInt(amount.value) * sell_price;
 		$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(result>=20000){
 			$("#del_price").text("무료");
@@ -47,10 +46,10 @@
 		}
 	}
 	function del () {
-		hm = document.form.amount;
-		if (hm.value > 1) {
-			hm.value -- ;
-			var result = parseInt(hm.value) * sell_price;
+		amount = document.form.cart_quantity;
+		if (amount.value > 1) {
+			amount.value -- ;
+			var result = parseInt(amount.value) * sell_price;
 			$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(result>=20000){
 				$("#del_price").text("무료");
@@ -91,17 +90,25 @@
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" id="frm" method="get">
-				<input type="hidden" value="${joinCategory.product_code}"/>
+				<input type="hidden" name="member_id" id="member_id" value="${memberLoggedIn.member_id}"/>
+				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<span>사이즈 </span>
 					<select name="size" style="font-size:15px;height:28px;" >
 						<c:forEach var="option" items="${optionList}">
-							<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							<c:choose>
+							<c:when test="${option.left_amount<=0}">
+								<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+							</c:otherwise>
+							</c:choose>
 						</c:forEach>
 		            </select>
 		            &emsp;&emsp;&emsp;
 	            </c:if>
-				<span>수량 </span><input type="text" name="amount" value="1" size="2" style="height:25px;" readonly/>
+				<span>수량 </span><input type="text" name="cart_quantity" value="1" size="2" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
 				<hr>
 				<div style="float:right;">
@@ -111,18 +118,56 @@
 			</form>
 			<script>
 			$(function(){
-				$('#cart').click(function(){
-					var frm=$("#frm");
-					var url="${pageContext.request.contextPath }/cartView.do";
-					frm.attr("action",url);
-					frm.submit();
+				$('#cart').click(function(e){
+					var member_id=$('#member_id').val();
+					if(member_id==null||member_id.length<1){
+						alert("로그인 후 이용해주시기 바랍니다.");
+						e.preventDefault();
+					}else{
+						var productInfo={
+								member_id:member_id,
+								product_option_code:$("[name=size]").val(),
+								product_code:$("[name=product_code]").val(),
+								cart_quantity:$("[name=cart_quantity]").val()
+						};
+						$.ajax({
+							url:"${pageContext.request.contextPath}/cartInsert.do",
+							data:productInfo,
+							success:function(data){
+								if(data.trim()=='0'){
+									alert("장바구니 추가에 실패하였습니다.");
+									e.preventDefault();
+								}else{
+									if (confirm('장바구니로 이동하시겠습니까?')) {
+										location.href="${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}";
+						            } else {
+						                return;
+								    }
+								}
+							},
+							error:function(jpxhr,textStatus,errormsg){
+								console.log("ajax전송실패.");
+								console.log(jpxhr);
+								console.log(textStatus);
+								console.log(errormsg);
+							}
+						});
+					}
 				});
 				$('#buy').click(function(){
-					var frm=$("#frm");
-					var url="${pageContext.request.contextPath }/buyForm.do";
-					frm.attr("action",url);
-					frm.submit();
+					var member_id=$('#member_id').val();
+					if(member_id==null||member_id.length<1){
+						alert("로그인 후 이용해주시기 바랍니다.");
+						e.preventDefault();
+					}else{
+						var frm=$("#frm");
+						var url="${pageContext.request.contextPath }/buyForm.do";
+						frm.attr("action",url);
+						frm.submit();
+					}
 				});
+				
+				
 			});
 			</script>
     	</div>
