@@ -78,7 +78,7 @@
 </script>
 
 
-<script>
+<%-- <script>
 	function eamilAuth() {
 
 		 var emailch=$("#email").val();
@@ -87,7 +87,7 @@
 		 var status="left=500px,top=100px,width=600px,height=200px";
 		 var popup=window.open(url,title,status);
 	}
-</script>
+</script> --%>
 
 
 <script>
@@ -101,13 +101,16 @@ $(function(){
           $('#idDuplicateCheck').val(0);
           return;
        }
-       
+        
        $.ajax({
           url:"${pageContext.request.contextPath}/checkIdDuplicate.do",
-          data:{member_id:$(this).val()},
+          type   : "post",
+          dataType: "json",
+          data:{member_Id:$(this).val()},
           success:function(data){
           	
-          if(data.trim()=='true'){
+        	/* if(data.trim()=='true') */  
+          if(data.check==true){
                 $('.guide.error').hide();
                 $('.guide.ok').show();
                 $('#idDuplicateCheck').val(1);
@@ -128,6 +131,22 @@ $(function(){
  });
 
 </script>
+
+<script>
+	
+	function check() {
+		
+		alert("test");
+		
+		if($('#member_id').trim().val().length<4){
+			alert("아이디는 최소 4자리이상이어야 합니다.");
+			$('#member_id').focus();
+			return false;
+		}
+	}
+
+</script>
+
 
 <!-- <script>
 
@@ -177,7 +196,7 @@ $(function(){
  		<hr>
  		<h3>회원가입</h3>
  		<hr>
-       <form name="memberEnrollFrm" action="${pageContext.request.contextPath}/memberEnrollEnd.do" method="post"   >
+       <form name="memberEnrollFrm"  action="${pageContext.request.contextPath}/memberEnrollEnd.do" method="post" onsubmit='return validate();'   >
           <table>
              <tr>
                 <th>아이디</th>
@@ -186,18 +205,18 @@ $(function(){
                    <input type="text" class="form-control" placeholder="4글자이상" name="member_id" id="member_id" style="width:500px;" required>
                    <span class="guide ok">이 아이디는 사용 가능 합니다.</span>
                    <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-                   <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0/>
+                   <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0 />
                    </div>
                 </td>
              </tr>
              <tr>
-                <th>패스워드</th>
+                <th>비밀번호</th>
                 <td>
                    <input type="password" class="form-control" name="member_pw" id="member_pw" required>
                 </td>
              </tr>
              <tr>
-                <th>패스워드확인</th>
+                <th>비밀번호 확인</th>
                 <td>   
                    <input type="password" class="form-control" id="member_pw2" required>
                 </td>
@@ -266,7 +285,7 @@ $(function(){
                 </td>
              </tr>
 			<tr>
-				<th>이메일 수신여부</th>
+				<th>이메일 수신</th>
 				<td>
 				<input type="checkbox" name="email_alarm" id="email_alram" value="Y" ><label for="email_alram" ></label>
 				</td>
@@ -280,6 +299,47 @@ $(function(){
 	    </div>
 
 </div>
+
+<script>
+$(function(){
+	
+	$("#member_pw2").blur(function(){
+		var p1=$("#member_pw").val(), p2=$("#member_pw2").val();
+		if(p1!=p2){
+			alert("패스워드가 일치하지 않습니다.");
+			$("#member_pw").focus();
+		}
+	});
+	
+});
+
+/*  $(function() {
+	
+	$("#member_id").blur(function(){
+		var id=$("#member_id").val();
+		if(id.trim().length<4){
+			alert("아이디는 최소 4자리이상이어야 합니다.");
+			id.focus();
+			return false;
+			
+		}
+		
+	});
+	
+});  */
+
+ function validate(){
+	var userId = $("#member_id");
+	if(userId.val().trim().length<4){
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		userId.focus();
+		return false;
+	}
+	
+	return true;
+} 
+
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
