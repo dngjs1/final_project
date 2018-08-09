@@ -9,7 +9,12 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 <link rel="stylesheet" type="text/css" href="${path }/resources/css/daterangepicker.css" />
-
+<style>
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+input[name="datetimes"]{cursor: pointer;}
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+input[name="datetimes"]{cursor: pointer;}
+</style>
    
 <div class="container">
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">캠핑</span></p>
@@ -25,23 +30,51 @@
 				<p style="color: #00009e;">※ 기본 24시간 대여료입니다.</p>
 				<p style="color: #00009e;">※ 8시간 이하 추가 사용 시 24시간 대여료의 50%가 추가됩니다.</p>
 				<hr>
-				 대여기간 :  <input type="text" class="form-control" id="datetime" placeholder="Select value">
+				 대여기간 :  <input type="text" name="datetimes" placeholder="Select value" class="form-control" />
 				<hr>
-				<button class="btn btn-primary" onclick="buy()">구매</button>
-				<button class="btn btn-primary">장바구니</button>
+				<div>
+					<span id="del_price" style="color:#148CFF; font-size:25px; float: right;">--원</span>
+				</div>
+				<br><br><br>
+				<div style="float: right;">
+					<button class="btn btn-primary" onclick="buy()">구매</button>
+					<button class="btn btn-primary">장바구니</button>
+				</div>
+				<br>
+				<hr>
+				<br><br><br>
+				<div style="margin:0 0 10px;">
+                        <span style="color: tomato;"><span>✔</span>꼭 읽어주세요!</span>
+                        <div style="color: #a4a4a4;">
+                            <p>1. 반납일을 반드시 지켜주세요.</p>
+                            <p>2. 생활 기스 정도의 훼손은 책임을 묻지 않습니다.</p>
+                            <p>3. 상품 파손시 제품 수리비를 배상하셔야합니다.</p>
+                        </div>
+                            
+                    </div>
 	    	</div>
     	</div>
 	</div>
+	<hr style="boarder:0; height:3px; background: #ccc;">
 </div>
-
 <script>
-	$(function(){
-		$('#datetime').daterangepicker({
-		 var years = endDate-startDate;
-		 alert(years);
-		});
+	$(function() {
+	  $('input[name="datetimes"]').daterangepicker({
+	    timePicker: true,
+	    minDate: new Date
+	  }, function(start, end, label) {
+		  result = (end-start)/(1000*3600*24);
+		  result = Math.floor(result);
+		  result2 = ((end-start)%(1000*3600*24))/(1000*3600);
+		  if(result2>0 && result2<=8){
+			  $("#del_price").text(9000*result+9000*0.5+"원");
+		  } else{
+			  $("#del_price").text(9000*result+"원");
+		  }
+	  });
 	});
 </script>
+ 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
@@ -98,7 +131,5 @@ IMP.init('imp84398340');
 
 <script type="text/javascript" src="${path }/resources/js/moment.min.js"></script>
 <script type="text/javascript" src="${path }/resources/js/daterangepicker.js"></script>
-<script type="text/javascript" src="${path }/resources/js/demo.js"></script>
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
