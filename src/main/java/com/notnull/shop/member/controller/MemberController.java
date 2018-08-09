@@ -281,11 +281,17 @@ public class MemberController {
 	
 	//ModelAndView 이용 
 	@RequestMapping("/checkUpdatePassword.do")
-	public void checkUpdatePassword(HttpServletResponse response, String original_password, String encodedPw, ModelAndView mv) throws IOException{
+	public void checkUpdatePassword(HttpServletResponse response, String original_password, String encodedPw, String member_id) throws IOException{
 
-
-		String flag = bcyptPasswordEncoder.matches(original_password,encodedPw)?"true":"false";
-	
+		
+		
+		String encode = service.selectEncode(member_id);
+		
+		
+		
+		String flag = bcyptPasswordEncoder.matches(original_password,encode)?"true":"false";
+		
+		System.out.println("비밀번호 결과값은 "+flag);
 		
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().write(flag);

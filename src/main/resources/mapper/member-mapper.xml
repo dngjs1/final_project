@@ -39,6 +39,10 @@
  		select count(*) from member where member_id=#{id}
 	</select>
 	
+	<select id="selectEncode" parameterType="string" resultType="string">
+	 	select member_pw from member where member_id=#{id}
+	</select>
+	
 	<update id="memberUpdate" parameterType="member">
 		update member set member_name=#{member_name}, 
 			birthday=#{birthday}, 

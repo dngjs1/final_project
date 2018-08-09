@@ -68,6 +68,12 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.update("member.memberUpdate",m);
 	}
+
+	@Override
+	public String selectEncode(SqlSessionTemplate sqlSession, String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectEncode",id);
+	}
 	
 	
 

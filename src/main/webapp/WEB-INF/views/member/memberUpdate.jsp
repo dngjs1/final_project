@@ -71,7 +71,8 @@
 		        url:"${pageContext.request.contextPath}/checkUpdatePassword.do",
 		        type   : "post",
 		        data:{"original_password":$("#original_password").val() ,
-					  "encodedPw":encodedPw		
+					  "encodedPw":encodedPw,
+					  "member_id":$("#member_id").val()
 		        },
 		        success:function(data){
 					
@@ -92,7 +93,7 @@
 		      		  
 		      	  }
 		      	  
-		      	  console.log(encodeCheck);
+		      	  console.log("encodedCheck : "+encodeCheck);
 		        },
 		        error:function(jpxhr,textStatus,errormsg){
 		           console.log("ajax전송 실패")
