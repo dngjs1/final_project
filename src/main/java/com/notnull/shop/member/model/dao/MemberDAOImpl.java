@@ -63,4 +63,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.duplicateIdCheck",id);
 	}
 
+	@Override
+	public int memberUpdate(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("member.memberUpdate",m);
+	}
+
+	@Override
+	public String selectEncode(SqlSessionTemplate sqlSession, String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectEncode",id);
+	}
+	
+	
+
 }

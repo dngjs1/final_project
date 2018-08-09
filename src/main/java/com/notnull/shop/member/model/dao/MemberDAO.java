@@ -22,4 +22,8 @@ public interface MemberDAO {
 	
 	int idDuplicateCheck(SqlSessionTemplate sqlSession, String id);
 	
+	int memberUpdate(SqlSessionTemplate sqlSession, Member m);
+	
+	String selectEncode(SqlSessionTemplate sqlSession, String id);
+	
 }

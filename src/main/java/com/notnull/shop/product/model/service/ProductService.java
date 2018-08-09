@@ -2,6 +2,8 @@ package com.notnull.shop.product.model.service;
 
 import java.util.List;
 
+import com.notnull.shop.product.model.vo.Cart;
+import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
@@ -17,17 +19,31 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
 	
+	List<ProductListJoin> reviewStarOrder();
+	
+	List<ProductListJoin> highPriceOrder();
+	
+	List<ProductListJoin> lowPriceOrder();
+	
+	List<ProductListJoin> writeDateOrder();
+	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	List<ProductCategory> selectCategoryList();
 	
-	ProductJoinCategory selectProduct(String productCode);
+	ProductJoinCategory selectProduct(int productCode);
 	
-	List<ProductOption> selectOption(String productCode);
+	List<ProductOption> selectOption(int productCode);
 	
-	List<ProductReview> selectReview(String productCode);
+	int insertCart(Cart cart);
+	
+	List<CartJoinList> selectCartList(String member_id);
+
+	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
 	
-	List<ProductReviewImgJoin> selectReviewImg(String productCode);
+	List<ProductReviewImgJoin> selectReviewImg(int productCode);
+	
+
 }

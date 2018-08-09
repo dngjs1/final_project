@@ -28,11 +28,8 @@
 .font-price{font-weight:bold;font-size:20px;}
 </style>
 <script>
-	var sell_price;
-	var amount;
 	$(function(){
        	init();
-       	
        	$("#check_all").change(function(){
     		if($("#check_all").is(":checked")){
     			$("input[name=check]").prop("checked", true);
@@ -42,24 +39,48 @@
     	});
    	});
 	function init () {
-		sell_price = parseInt($('#price').text());
-		amount = document.form.amount.value;
-		var result = parseInt(amount) * sell_price;
-		$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		for(var i=1;i<=$('#cartLength').val();i++){
+			var sell_price = parseInt($('.price'+i).html());
+			var amount = $('[name=cart_quantity'+i+']').val();
+			var result = parseInt(amount) * sell_price;
+			$(".price"+i).text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		}
 	}
-	function add () {
-		hm = document.form.amount;
-		hm.value ++ ;
-		var result = parseInt(hm.value) * sell_price;
-		$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	}
-	function del () {
-		hm = document.form.amount;
-		if (hm.value > 1) {
-			hm.value -- ;
-			var result = parseInt(hm.value) * sell_price;
-			$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$(function(){
+		$('.add').on("click",function(){
+			var quantity=$(this).siblings('.quantity');
+			hm = parseInt(quantity.val());
+			hm = hm+1;
+			quantity.val(hm);
+			sell_price=$(this).parent().prev().find(".sell_price").html().replace(",", "");
+			var result = hm * parseInt(sell_price);
+			sum=$(this).parent().parent().find(".sum");
+			sum.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		});
+		$('.del').on("click",function(){
+			var quantity=$(this).siblings('.quantity');
+			hm = parseInt(quantity.val());
+			if (hm > 1) {
+				hm = hm-1;
+				quantity.val(hm);
+				sell_price=$(this).parent().prev().find(".sell_price").html().replace(",", "");
+				var result = hm * parseInt(sell_price);
+				sum=$(this).parent().parent().find(".sum");
+				sum.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+			}
+		});
+	});
+	
+	function del (e) {
+		for(var i=1;i<=$('#cartLength').val();i++){
+			hm = parseInt($('[name=cart_quantity'+i+']').val());
+			if (hm > 1) {
+				hm = hm-1;
+				$('[name=cart_quantity'+i+']').val(hm);
+				var result = hm * sell_price;
+				$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			}
 		}
 	}
 </script>
@@ -73,34 +94,33 @@
 			<th style="text-align: center">상품정보</th>
 			<th>상품금액</th>
 			<th>수량</th>
-			<th>총금액</th>
+			<th width="150px">총금액</th>
 		</tr>
-		<%-- <c:if test="${not empty list }">
-			<c:forEach var='board' items='${list }' varStatus="vs"> --%>
-		<tr class="tr2">
-			<td scope="col"><input type="checkbox" name="check" checked/></td>
-			<td scope="col">
-				<div style="float: left;width:80px"><img style="width:100%;" src="http://gdimg.gmarket.co.kr/971257748/still/600?ver=1526001424"> </div>
-				<div style="float: left;text-align:left;margin-left:15px;">
-					<span>상품명이 들어갈 부분</span><br>
-					<span>(사이즈가 들어갈 부분)</span><br>
-					<span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>					
-				</div>
-			</td>
-			<td scope="col"><span id="price" style="font-size:16px">9000</span><span> 원</span></td>
-			<td scope="col">
-				<form name="form">
-				<input type="button" value="-" style="width:25px;font-weight:bold" onclick="del();"/>
-				<input type="text" name="amount" value="1" size="1" style="height:25px;" readonly/>
-				<input type="button" value="+" style="width:25px;font-weight:bold" onclick="add();"/>
-				<input type="button" class="btn btn-default btn-sm" style="vertical-align:baseline" value="수정"/>
-				</form>
-			</td>
-			<td scope="col" style="width: 100px;font-size:16px;color:#B9062F;"><span id="sum_price"></span><span> 원</span></td>
-			
-		</tr>
-			<%-- </c:forEach>
-		</c:if> --%>
+		<c:if test="${not empty cartList}">
+		<c:forEach var='cart' items='${cartList}' varStatus="vs">
+			<tr class="tr2">
+				<td scope="col"><input type="checkbox" name="check" value="asd" checked/></td>
+				<td scope="col">
+					<div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.new_p_img_path }"></div>
+					<div style="float: left;text-align:left;margin-left:15px;">
+						<span style="font-weight:bold;font-size:15px;">${cart.product_name}</span><br>
+						<span>사이즈 : ${cart.option_size}</span><br>
+						<span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>					
+					</div>
+				</td>
+				<td scope="col"><span class="price${vs.count} sell_price" style="font-size:16px">${cart.price }</span><span> 원</span></td>
+				<td scope="col">
+				<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+					<input type="hidden" id="cartLength" value="${fn:length(cartList)}"/>
+					<input type="button" class="del" value="-" style="width:25px;font-weight:bold"/>
+					<input type="text" class="quantity" name="cart_quantity${vs.count}" value="${cart.cart_quantity}" size="2" style="height:25px;" readonly/>
+					<input type="button" class="add" value="+" style="width:25px;font-weight:bold"/>
+					<input type="button" class="btn btn-default btn-sm" style="vertical-align:baseline" value="수정"/>
+				</td>
+				<td scope="col" style="width: 100px;font-size:16px;color:#B9062F;"><span class="sum_price${vs.count} sum"></span><span> 원</span></td>
+			</tr>
+		</c:forEach>
+		</c:if>
 	</table>
 	<hr>
 	<div style="width:100%;border:2px solid #DDDDDD;padding:15px;text-align:center;font-size:15px;">
