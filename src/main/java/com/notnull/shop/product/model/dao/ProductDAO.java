@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -56,4 +57,6 @@ public interface ProductDAO {
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
 	
 	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode);
+	
+	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
 }

@@ -16,6 +16,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -158,6 +159,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<CartJoinList> selectCartList(String member_id) {
 		return productDAO.selectCartList(sqlSession,member_id);
+	}
+
+	@Override
+	public int addQuestion(ProductQuestion productQuestion) {
+		return productDAO.addQuestion(sqlSession,productQuestion);
 	}
 
 	

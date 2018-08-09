@@ -301,27 +301,30 @@ $('.star-prototype').generateStars();
   <hr>
   상품문의
   <div class="container">
- <form id="commentForm" name="commentForm" method="post">
+ <form id="commentForm" action="${path}/addQuestion.do" name="commentForm" method="post">
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+                <span><strong>Question</strong></span> 
             </div>
             <div>
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea  style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <textarea  style="width: 1100px" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
                             <br>
                             <div>
-                            	 <input type="button" onClick="fn_comment('${joinCategory.product_code }')" class="btn pull-right btn-success" value="등록" class="btn" />                   
+                            <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
+							<input type='hidden' name='member_id' value='${memberLoggedIn.member_id}'/>
+							<input type='hidden' name='question_level' value='1'/>
+							<input type='hidden' name='p_question_code_ref' value='0' />
+                            <input type="submit" class="btn pull-right btn-success" value="등록"  />                   
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
   </form>
   
   </div>
@@ -331,86 +334,7 @@ $('.star-prototype').generateStars();
         </div>
     </form>
 </div>
-<script>
-/*
- * 댓글 등록하기(Ajax)
- */
-function fn_comment(code){
-    
-    $.ajax({
-        type:'POST',
-        url :"${path}/addQuestion.do",
-        data:{comment:$('#comment').val()}, 
-        success : function(data){
-            if(data=="success")
-            {
-                getCommentList();
-                $("#comment").val("");
-            }
-        },
-        error:function(request,status,error){
-            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-       }
-        
-    });
-}
- 
-/**
- * 초기 페이지 로딩시 댓글 불러오기
- */
-$(function(){
-    
-    getCommentList();
-    
-});
- 
-/**
- * 댓글 불러오기(Ajax)
- */
-function getCommentList(){
-    
-    $.ajax({
-        type:'GET',
-        url : "<c:url value='questionList.do'/>",
-        dataType : "json",
-        data:$("#commentForm").serialize(),
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-        success : function(data){
-            
-            var html = "";
-            var cCnt = data.length;
-            
-            if(data.length > 0){
-                
-                for(i=0; i<data.length; i++){
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                    html += data[i].comment + "<tr><td></td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
-                }
-                
-            } else {
-                
-                html += "<div>";
-                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                html += "</table></div>";
-                html += "</div>";
-                
-            }
-            
-            $("#cCnt").html(cCnt);
-            $("#commentList").html(html);
-            
-        },
-        error:function(request,status,error){
-            
-       }
-        
-    });
-}
 
-</script>
 
   <div> 문의자  , 문의날짜, 문의내용</div>
 	</div>

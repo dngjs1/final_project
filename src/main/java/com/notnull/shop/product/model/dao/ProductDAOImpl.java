@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -108,6 +109,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("product.selectCartList",member_id);
+	}
+
+	@Override
+	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
+		return sqlSession.insert("product.addQuestion",productQuestion);
 	}
 	
 	

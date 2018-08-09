@@ -128,4 +128,8 @@
   	INSERT INTO product_review_img 	VALUES(product_review_img_seq.nextval,#{review_img_path},#{new_review_img_path},#{review_code})	
   	</insert>
   	
+  	<insert id="addQuestion"  parameterType="ProductQuestion">
+  	INSERT INTO product_question VALUES(product_question_seq.nextval,#{member_id},#{p_question_content},sysdate,#{product_code},'N',#{question_level},#{p_question_code_ref})	
+  	
+  	</insert>
 </mapper>

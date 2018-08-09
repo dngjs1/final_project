@@ -33,6 +33,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -295,15 +296,7 @@ public class ProductController {
 		return "product/productReviewTest";
 	}
 
-	
-	@RequestMapping("/question.do")
-	public String productQuestion(Model model,HttpServletRequest request) {
-		String p_question_content=request.getParameter("questionContent");
-		System.out.println(p_question_content);
-		
-		return "";
-		
-	}
+
 	
 	@RequestMapping("/reviewStarOrder.do")
 	public String reviewStarOrder(Model model) {
@@ -337,12 +330,15 @@ public class ProductController {
 		
 	}
 	
-<<<<<<< HEAD
 	
+	@RequestMapping("/addQuestion.do")
+	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
+		
+		int result=service.addQuestion(productQuestion);
+		
+		
+		return "/product/productView";
+	}
 	
-	
-	
-	
-=======
->>>>>>> SUPER_branch
+
 }
