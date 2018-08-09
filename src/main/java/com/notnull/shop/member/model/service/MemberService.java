@@ -21,4 +21,6 @@ public interface MemberService {
 	
 	int idDuplicateCheck(String id);
 	
+	int memberUpdate(Member m);
+	
 }
