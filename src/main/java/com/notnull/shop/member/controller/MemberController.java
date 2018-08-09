@@ -46,6 +46,12 @@ public class MemberController {
 		return "member/memberAgree";
 	}
 	
+	@RequestMapping("/memberEnrollEnd2.do")
+	public String memberEnrollEnd2() {
+		
+		return "member/memberEnrollEnd2";
+	}
+	
 	@RequestMapping(value="/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member m,Model model, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 		
