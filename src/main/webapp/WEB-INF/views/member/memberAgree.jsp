@@ -570,7 +570,7 @@
 						}
 					</style>
 					<div class = "regist-btn-box">
-						<a href = "#" class = "btn_black">
+						<a href = "${pageContext.request.contextPath}/memberEnroll.do" class = "btn_black">
 							다음
 						</a>
 					</div>

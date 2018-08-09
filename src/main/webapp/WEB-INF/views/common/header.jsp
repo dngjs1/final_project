@@ -106,7 +106,7 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath }/findMember.do">ID/비밀번호 찾기<i class="fas fa-search"></i></a>|</h5>
               </li>
               <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberEnroll.do">회원가입<i class="far fa-handshake"></i></a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberAgree.do">회원가입<i class="far fa-handshake"></i></a>|</h5>
               </li>
               <!--  <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
