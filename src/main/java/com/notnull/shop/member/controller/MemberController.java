@@ -41,7 +41,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberAgree.do")
-	public String memberagree() {
+	public String memberagree(HttpServletRequest request) {
+		
+		System.out.println(request.getHeader("Referer"));
 		
 		return "member/memberAgree";
 	}
@@ -152,8 +154,15 @@ public class MemberController {
 			msg ="WRONG ID";
 		}
 		
+		System.out.println(request.getHeader("Referer"));
+		String path =request.getHeader("Referer");
+		path=path.substring(27);
+		System.out.println(path);
+		
+		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
+		model.addAttribute("loc",path);
+		
 		
 		
 		System.out.println(request.getLocalAddr());

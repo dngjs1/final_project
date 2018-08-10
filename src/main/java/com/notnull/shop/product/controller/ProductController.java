@@ -45,7 +45,8 @@ public class ProductController {
 	
 	
 	@RequestMapping("/product.do")
-	public String selectProductList(Model m) {
+	public String selectProductList(Model m ,HttpServletRequest request) {
+
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
