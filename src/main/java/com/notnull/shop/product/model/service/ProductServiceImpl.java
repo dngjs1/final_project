@@ -162,7 +162,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int plusCart(Cart cart) {
 		return productDAO.plusCart(sqlSession,cart);
 	}
@@ -175,7 +174,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int deleteCart(int cart_code) {
 		return productDAO.deleteCart(sqlSession,cart_code);
-=======
+	}
+	
+	@Override
 	public int addQuestion(ProductQuestion productQuestion) {
 		return productDAO.addQuestion(sqlSession,productQuestion);
 	}
@@ -193,9 +194,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductImg> selectImgList(int productCode) {
 		return productDAO.selectImgList(sqlSession,productCode);
->>>>>>> SUPER_branch
 	}
 
-	
 	
 }

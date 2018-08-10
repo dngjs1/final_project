@@ -52,8 +52,6 @@ public interface ProductService {
 	
 	List<ProductReviewImgJoin> selectReviewImg(int productCode);
 	
-<<<<<<< HEAD
-=======
 	List<ProductDetailImg> selectDetailImg(int productCode);
 	
 	List<ProductImg> selectImgList(int productCode);
@@ -62,5 +60,4 @@ public interface ProductService {
 	
 	List<ProductQuestion> selectQuestion(int productCode);
 
->>>>>>> SUPER_branch
 }

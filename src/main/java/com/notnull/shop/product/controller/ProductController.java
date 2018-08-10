@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.config.PropertySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -246,8 +245,7 @@ public class ProductController {
 	
 	@RequestMapping("/deleteCart.do")
 	public String deleteCart(String cart_code,String member_id,RedirectAttributes re){
-		int cart_code1=Integer.parseInt(cart_code);
-		int result = service.deleteCart(cart_code1);
+		int result = service.deleteCart(Integer.parseInt(cart_code));
 		re.addAttribute("member_id", member_id);
 		return "redirect:/cartView.do";
 	}
