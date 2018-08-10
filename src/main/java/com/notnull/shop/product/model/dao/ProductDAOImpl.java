@@ -109,6 +109,21 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("product.selectCartList",member_id);
 	}
+
+	@Override
+	public int plusCart(SqlSessionTemplate sqlSession, Cart cart) {
+		return sqlSession.update("product.plusCart",cart);
+	}
+
+	@Override
+	public int changeCart(SqlSessionTemplate sqlSession, Cart cart) {
+		return sqlSession.update("product.changeCart",cart);
+	}
+
+	@Override
+	public int deleteCart(SqlSessionTemplate sqlSession, int cart_code) {
+		return sqlSession.delete("product.deleteCart",cart_code);
+	}
 	
 	
 }

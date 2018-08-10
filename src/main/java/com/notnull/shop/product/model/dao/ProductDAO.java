@@ -48,6 +48,12 @@ public interface ProductDAO {
 	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
+	
+	int plusCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	int changeCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	int deleteCart(SqlSessionTemplate sqlSession,int cart_code);
 
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	

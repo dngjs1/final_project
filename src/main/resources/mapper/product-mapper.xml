@@ -109,7 +109,7 @@
   	</insert>
   	
   	<select id="selectCartList" parameterType="string" resultType="cartJoinList">
-  	select c.product_code, c.product_name, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
@@ -119,6 +119,18 @@
   	order by cart_date desc
   	</select>
 
+	<update id="plusCart" parameterType="cart">
+		update cart set cart_quantity=cart_quantity+#{cart_quantity} where cart_code=#{cart_code}
+	</update>
+	
+	<update id="changeCart" parameterType="cart">
+		update cart set cart_quantity=#{cart_quantity} where cart_code=#{cart_code}
+	</update>
+	
+	<delete id="deleteCart" parameterType="_int">
+		delete from cart where cart_code=#{cart_code}
+	</delete>
+	
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})
  	<selectKey keyProperty="review_code" resultType="_int" order="AFTER"> SELECT product_review_seq.CURRVAL FROM DUAL </selectKey>

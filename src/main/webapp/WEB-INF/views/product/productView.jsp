@@ -114,14 +114,28 @@ span.star-prototype > * {
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
 						<c:when test="${optionList.size()<2}">
-							<c:forEach var="option" items="${optionList}">
-								<span>재고 : ${option.left_amount}</span>
-								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
+							<c:forEach var="option" items="${optionList}" varStatus="vs">
+								<c:choose>
+									<c:when test="${option.option_size == null}">
+										<span>재고 : ${option.left_amount}</span>
+										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
+									</c:when>
+									<c:when test="${option.left_amount<=0}">
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:when>
+									<c:otherwise>
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<span>사이즈 </span>
-							<select name="productCode" style="font-size:15px;height:28px;" >
+							<select name="product_option_code" style="font-size:15px;height:28px;" >
 								<c:forEach var="option" items="${optionList}">
 									<c:choose>
 									<c:when test="${option.left_amount<=0}">
@@ -155,7 +169,7 @@ span.star-prototype > * {
 					}else{
 						var productInfo={
 								member_id:member_id,
-								product_option_code:$("[name=productCode]").val(),
+								product_option_code:$("[name=product_option_code]").val(),
 								product_code:$("[name=product_code]").val(),
 								cart_quantity:$("[name=cart_quantity]").val()
 						};
