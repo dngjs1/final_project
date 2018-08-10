@@ -16,6 +16,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -161,6 +162,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int plusCart(Cart cart) {
 		return productDAO.plusCart(sqlSession,cart);
 	}
@@ -173,6 +175,25 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int deleteCart(int cart_code) {
 		return productDAO.deleteCart(sqlSession,cart_code);
+=======
+	public int addQuestion(ProductQuestion productQuestion) {
+		return productDAO.addQuestion(sqlSession,productQuestion);
+	}
+
+	@Override
+	public List<ProductQuestion> selectQuestion(int productCode) {
+		return productDAO.selectQuestion(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductDetailImg> selectDetailImg(int productCode) {
+		return productDAO.selectDetailImg(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductImg> selectImgList(int productCode) {
+		return productDAO.selectImgList(sqlSession,productCode);
+>>>>>>> SUPER_branch
 	}
 
 	

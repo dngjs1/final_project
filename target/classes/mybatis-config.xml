@@ -15,5 +15,7 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReview" alias="productReview"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImg" alias="productReviewImg"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImgJoin" alias="ProductReviewImgJoin"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductQuestion" alias="ProductQuestion"/>
+		
 	</typeAliases>
 </configuration>

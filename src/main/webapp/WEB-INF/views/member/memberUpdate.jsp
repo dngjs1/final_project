@@ -2,7 +2,9 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value=" " name="pageTitle"/>
+</jsp:include>	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -58,19 +60,75 @@
 </script>
 
 <script>
-	var oriPw = "${memberLoggedIn.member_pw}";
-	alert(oriPw);
+	 
+	 var encodedPw = "${memberLoggedIn.member_pw}";
+	 var encodeCheck = "true";
+	 
+	$(function(){ 
+		$('#original_password').blur(function(){
+			//기존 비밀번호 확인	
+		    $.ajax({
+		        url:"${pageContext.request.contextPath}/checkUpdatePassword.do",
+		        type   : "post",
+		        data:{"original_password":$("#original_password").val() ,
+					  "encodedPw":encodedPw,
+					  "member_id":$("#member_id").val()
+		        },
+		        success:function(data){
+					
+		        	console.log(data);
+		        	
+		      	  if(data==false && $("#original_password").val()!=""){
+
+						 /*  alert("기존 비밀번호가 일치하지 않습니다.");
+						  $("#password").val("");
+						  $("#password2").val("");
+						  $("#original_password").val("");
+						  $('#original_password').focus();
+						  return false; */
+						  
+						  encodeCheck="false";
+						  
+		      	  } else if(data==true || $("#original_password").val()=="") {
+		      		  
+		      	  }
+		      	  
+		      	  console.log("encodedCheck : "+encodeCheck);
+		        },
+		        error:function(jpxhr,textStatus,errormsg){
+		           console.log("ajax전송 실패")
+		           console.log(jpxhr);
+		           console.log(textStatus);
+		           console.log(errormsg);
+		        }
+		     });
+			
+		});
+	}); 
 	
+	
+	
+
 	function validate() {
-		
-		//비밀번호 일치여부 확인
-		if($("#password").val() != ($("#password2"))) {
-			alert("비밀번호가 일치하지 않습니다.")
+		//변경할 비밀번호 일치여부 확인
+		if($("#password").val() != ($("#password2").val())) {
+			alert("변경할 비밀번호가 일치하지 않습니다.")
 			$("#password").val("");
 			$("#password2").val("");
 			$("#password").focus();
 			return false;
 		}
+		
+		if(encodeCheck=="false" && $("#original_password").val()!="") {
+			  alert("기존 비밀번호가 일치하지 않습니다.");
+			  $("#password").val("");
+			  $("#password2").val("");
+			  $("#original_password").val("");
+			  $('#original_password').focus();
+			  return false;
+		}
+		
+		
 	}
 	
 </script>
@@ -78,9 +136,7 @@
 
 
 
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value=" " name="pageTitle"/>
-</jsp:include>
+
 
 
 <div style="width:50%; margin: 0 auto;">
@@ -101,7 +157,7 @@
 			<tr>
 				<th>변경할 비밀번호</th>
 				<td>
-					<input type="password" class="form-control" name="password" id="password" >
+					<input type="password" class="form-control" name="member_pw" id="password" >
 				</td>
 			</tr>
 			<tr>

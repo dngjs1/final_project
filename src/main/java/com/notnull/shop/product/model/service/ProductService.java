@@ -11,6 +11,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -51,4 +52,15 @@ public interface ProductService {
 	
 	List<ProductReviewImgJoin> selectReviewImg(int productCode);
 	
+<<<<<<< HEAD
+=======
+	List<ProductDetailImg> selectDetailImg(int productCode);
+	
+	List<ProductImg> selectImgList(int productCode);
+	
+	int addQuestion(ProductQuestion productQuestion);
+	
+	List<ProductQuestion> selectQuestion(int productCode);
+
+>>>>>>> SUPER_branch
 }

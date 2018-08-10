@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -184,10 +186,16 @@ public class ProductController {
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
+		List<ProductDetailImg> detailImgList=service.selectDetailImg(productCode);
+		List<ProductImg> imgList=service.selectImgList(productCode);
+		
+
 
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);
+		model.addAttribute("detailImgList",detailImgList);
+		model.addAttribute("imgList",imgList);
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
@@ -195,7 +203,10 @@ public class ProductController {
 		
 		request.setAttribute("reviewList", productReviewList);
 		
+		//문의사항
+		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
+		request.setAttribute("questionList", questionList);
 		return "/product/productView";
 	}
 
@@ -314,15 +325,7 @@ public class ProductController {
 		return "product/productReviewTest";
 	}
 
-	
-	@RequestMapping("/question.do")
-	public String productQuestion(Model model,HttpServletRequest request) {
-		String p_question_content=request.getParameter("questionContent");
-		System.out.println(p_question_content);
-		
-		return "";
-		
-	}
+
 	
 	@RequestMapping("/reviewStarOrder.do")
 	public String reviewStarOrder(Model model) {
@@ -356,4 +359,21 @@ public class ProductController {
 		
 	}
 	
+	
+	@RequestMapping("/addQuestion.do")
+	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
+		int productCode=Integer.parseInt(request.getParameter("productCode"));
+		
+		System.out.println(productQuestion);
+		int result=service.addQuestion(productQuestion);
+		System.out.println(result);
+		request.setAttribute("productCode", productCode);
+		
+		String re = "redirect:/productView.do"+"?productCode="+productCode;
+
+		return re;
+		
+	}
+	
+
 }

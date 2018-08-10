@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -111,6 +112,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int plusCart(SqlSessionTemplate sqlSession, Cart cart) {
 		return sqlSession.update("product.plusCart",cart);
 	}
@@ -123,6 +125,25 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int deleteCart(SqlSessionTemplate sqlSession, int cart_code) {
 		return sqlSession.delete("product.deleteCart",cart_code);
+=======
+	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
+		return sqlSession.insert("product.addQuestion",productQuestion);
+	}
+
+	@Override
+	public List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectQuestion",productCode);
+	}
+
+	@Override
+	public List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectDetailImg",productCode);
+	}
+
+	@Override
+	public List<ProductImg> selectImgList(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectImgList",productCode);
+>>>>>>> SUPER_branch
 	}
 	
 	

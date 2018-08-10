@@ -124,4 +124,10 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.memberUpdate(sqlSession, m);
 	}
 
+	@Override
+	public String selectEncode(String id) {
+		
+		return memberDAO.selectEncode(sqlSession, id);
+	}
+
 }

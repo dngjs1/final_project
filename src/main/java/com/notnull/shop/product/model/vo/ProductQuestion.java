@@ -10,11 +10,13 @@ public class ProductQuestion {
 	private Date question_date;
 	private int product_code;
 	private String status;
+	private int question_level;
+	private int p_question_code_ref;
 	
 	public ProductQuestion() {}
 
 	public ProductQuestion(int p_question_code, String member_id, String p_question_content, Date question_date,
-			int product_code, String status) {
+			int product_code, String status, int question_level, int p_question_code_ref) {
 		super();
 		this.p_question_code = p_question_code;
 		this.member_id = member_id;
@@ -22,6 +24,8 @@ public class ProductQuestion {
 		this.question_date = question_date;
 		this.product_code = product_code;
 		this.status = status;
+		this.question_level = question_level;
+		this.p_question_code_ref = p_question_code_ref;
 	}
 
 	public int getP_question_code() {
@@ -72,12 +76,29 @@ public class ProductQuestion {
 		this.status = status;
 	}
 
+	public int getQuestion_level() {
+		return question_level;
+	}
+
+	public void setQuestion_level(int question_level) {
+		this.question_level = question_level;
+	}
+
+	public int getP_question_code_ref() {
+		return p_question_code_ref;
+	}
+
+	public void setP_question_code_ref(int p_question_code_ref) {
+		this.p_question_code_ref = p_question_code_ref;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductQuestion [p_question_code=" + p_question_code + ", member_id=" + member_id
 				+ ", p_question_content=" + p_question_content + ", question_date=" + question_date + ", product_code="
-				+ product_code + ", status=" + status + "]";
+				+ product_code + ", status=" + status + ", question_level=" + question_level + ", p_question_code_ref="
+				+ p_question_code_ref + "]";
 	}
-	
+
 	
 }
