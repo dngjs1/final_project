@@ -166,6 +166,21 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.addQuestion(sqlSession,productQuestion);
 	}
 
+	@Override
+	public List<ProductQuestion> selectQuestion(int productCode) {
+		return productDAO.selectQuestion(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductDetailImg> selectDetailImg(int productCode) {
+		return productDAO.selectDetailImg(sqlSession,productCode);
+	}
+
+	@Override
+	public List<ProductImg> selectImgList(int productCode) {
+		return productDAO.selectImgList(sqlSession,productCode);
+	}
+
 	
 	
 }

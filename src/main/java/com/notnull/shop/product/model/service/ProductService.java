@@ -46,6 +46,12 @@ public interface ProductService {
 	
 	List<ProductReviewImgJoin> selectReviewImg(int productCode);
 	
+	List<ProductDetailImg> selectDetailImg(int productCode);
+	
+	List<ProductImg> selectImgList(int productCode);
+	
 	int addQuestion(ProductQuestion productQuestion);
+	
+	List<ProductQuestion> selectQuestion(int productCode);
 
 }

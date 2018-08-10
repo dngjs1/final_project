@@ -52,6 +52,10 @@ public interface ProductDAO {
 
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
+	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);
+	
+	List<ProductImg> selectImgList(SqlSessionTemplate sqlSession,int productCode);
+	
 	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
 	
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
@@ -59,4 +63,6 @@ public interface ProductDAO {
 	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode);
 	
 	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
+	
+	List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession,int productCode);
 }

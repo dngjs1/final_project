@@ -115,6 +115,21 @@ public class ProductDAOImpl implements ProductDAO {
 	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
 		return sqlSession.insert("product.addQuestion",productQuestion);
 	}
+
+	@Override
+	public List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectQuestion",productCode);
+	}
+
+	@Override
+	public List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectDetailImg",productCode);
+	}
+
+	@Override
+	public List<ProductImg> selectImgList(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectImgList",productCode);
+	}
 	
 	
 }

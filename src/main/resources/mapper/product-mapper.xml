@@ -71,6 +71,17 @@
  	</select>	
  
  
+ 	<select id="selectDetailImg" parameterType="int" resultType="ProductDetailImg">
+ 		select *
+ 		from product_detail_img
+ 		WHERE product_code=#{product_code} 	
+ 	</select>	
+ 
+ 	<select id="selectImgList" parameterType="int" resultType="productImg">
+ 		select *
+ 		from product_img
+ 		WHERE product_code=#{product_code} 	
+ 	</select>	
  
 	<insert id="insertProduct" parameterType="product">
 	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date) 
@@ -129,7 +140,20 @@
   	</insert>
   	
   	<insert id="addQuestion"  parameterType="ProductQuestion">
-  	INSERT INTO product_question VALUES(product_question_seq.nextval,#{member_id},#{p_question_content},sysdate,#{product_code},'N',#{question_level},#{p_question_code_ref})	
-  	
+  	<choose>
+  		<when test="p_question_code_ref  == 0">
+  	 	 INSERT INTO product_question VALUES(product_question_seq.nextval,#{member_id},#{p_question_content},sysdate,#{product_code},'N',#{question_level},default)	
+  		</when>
+  		
+  		<otherwise>
+  		INSERT INTO product_question VALUES(product_question_seq.nextval,#{member_id},#{p_question_content},sysdate,#{product_code},'N',#{question_level},#{p_question_code_ref})	
+  		</otherwise>
+  	</choose> 	
   	</insert>
+  	
+  	<select id="selectQuestion" parameterType="int" resultType="ProductQuestion">
+  	select *
+	from product_question A
+	where product_code=#{product_code} start with question_level=1 connect by prior p_question_code=p_question_code_ref order siblings by question_date asc
+  	</select>
 </mapper>
