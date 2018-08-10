@@ -41,7 +41,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberAgree.do")
-	public String memberagree() {
+	public String memberagree(HttpServletRequest request) {
+		
+		System.out.println(request.getHeader("Referer"));
 		
 		return "member/memberAgree";
 	}
@@ -74,7 +76,7 @@ public class MemberController {
 		int result = service.insertMember(m, ip);
 		
 		String msg="";
-		String loc="/";
+		String loc="/memberAgree.do";
 		
 		if(result>0) {
 			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
@@ -152,8 +154,15 @@ public class MemberController {
 			msg ="WRONG ID";
 		}
 		
+		System.out.println(request.getHeader("Referer"));
+		String path =request.getHeader("Referer");
+		path=path.substring(27);
+		System.out.println(path);
+		
+		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
+		model.addAttribute("loc",path);
+		
 		
 		
 		System.out.println(request.getLocalAddr());
@@ -291,9 +300,9 @@ public class MemberController {
 		return "/common/msg";
 	}
 	
-	//ModelAndView 이용 
+	 
 	@RequestMapping("/checkUpdatePassword.do")
-	public void checkUpdatePassword(HttpServletResponse response, String original_password, String encodedPw, String member_id) throws IOException{
+	public void checkUpdatePassword(HttpServletResponse response, String original_password,  String member_id) throws IOException{
 
 		
 		
@@ -309,6 +318,24 @@ public class MemberController {
 		response.getWriter().write(flag);
 		
 	}
+	
+	
+//	//ModelAndView 이용 , 왜 안되는지 모름 
+//	@RequestMapping("/checkUpdatePassword.do")
+//	public ModelAndView checkUpdatePassword(HttpServletResponse response, String original_password,  String member_id, ModelAndView mv) {
+//
+//		String encode = service.selectEncode(member_id);
+//
+//		String flag = bcyptPasswordEncoder.matches(original_password,encode)?"true":"false";
+//		
+//		System.out.println("비밀번호 결과값은 "+flag);
+//		
+//		mv.addObject("flag",flag);
+//		mv.setViewName("JsonView");
+//		
+//		return mv;
+//		
+//	}
 	
 	
 	
