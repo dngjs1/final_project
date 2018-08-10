@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: dngjs
-=======
-Built-By: GhenHungJin
->>>>>>> origin/super_branch_1.01
 Build-Jdk: 1.8.0_161
 Created-By: Maven Integration for Eclipse
 
