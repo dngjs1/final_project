@@ -104,7 +104,10 @@
 					<div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.new_p_img_path }"></div>
 					<div style="float: left;text-align:left;margin-left:15px;">
 						<span style="font-weight:bold;font-size:15px;">${cart.product_name}</span><br>
-						<span>사이즈 : ${cart.option_size}</span><br>
+						<c:if test="${cart.option_size != null }">
+							<span>사이즈 : ${cart.option_size}</span>
+						</c:if>
+						<br>
 						<span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>					
 					</div>
 				</td>

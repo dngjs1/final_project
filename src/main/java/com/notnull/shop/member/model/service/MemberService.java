@@ -23,4 +23,5 @@ public interface MemberService {
 	
 	int memberUpdate(Member m);
 	
+	String selectEncode(String id);
 }
