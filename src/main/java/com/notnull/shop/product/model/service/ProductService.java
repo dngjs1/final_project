@@ -39,7 +39,13 @@ public interface ProductService {
 	int insertCart(Cart cart);
 	
 	List<CartJoinList> selectCartList(String member_id);
+	
+	int plusCart(Cart cart);
 
+	int changeCart(Cart cart);
+	
+	int deleteCart(int cart_code);
+	
 	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);

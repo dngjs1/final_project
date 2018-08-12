@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.config.PropertySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.Cart;
@@ -47,7 +47,8 @@ public class ProductController {
 	
 	
 	@RequestMapping("/product.do")
-	public String selectProductList(Model m) {
+	public String selectProductList(Model m ,HttpServletRequest request) {
+
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
@@ -190,7 +191,6 @@ public class ProductController {
 		
 
 
-		System.out.println("optionList:"+optionList);
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);
@@ -211,12 +211,22 @@ public class ProductController {
 	}
 
 	@RequestMapping("/cartInsert.do")
-	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void cartInsert(Cart cart,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.
 		int productCode=cart.getProduct_code();
 		List<CartJoinList> cartList=service.selectCartList(cart.getMember_id());
-		System.out.println(cartList);
-		int result=service.insertCart(cart);
+		int result=0;
+		boolean check=false;
+		for(CartJoinList cartJoin: cartList) {
+			if(cartJoin.getProduct_option_code()==cart.getProduct_option_code()) {
+				cart.setCart_code(cartJoin.getCart_code());
+				result=service.plusCart(cart);
+				check=true;
+			}
+		}
+		if(!check) {
+			result=service.insertCart(cart);
+		}
 		response.getWriter().print(result);
 	}
 	
@@ -226,7 +236,19 @@ public class ProductController {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
 		model.addAttribute("cartList",cartList);
 		return "/product/cartView";
-		
+	}
+	
+	@RequestMapping("/changeCart.do")
+	public void changeCart(Cart cart,HttpServletResponse response) throws IOException {
+		int result = service.changeCart(cart);
+		response.getWriter().print(result);
+	}
+	
+	@RequestMapping("/deleteCart.do")
+	public String deleteCart(String cart_code,String member_id,RedirectAttributes re){
+		int result = service.deleteCart(Integer.parseInt(cart_code));
+		re.addAttribute("member_id", member_id);
+		return "redirect:/cartView.do";
 	}
 	
 	@RequestMapping("/buyForm.do")

@@ -1,21 +1,25 @@
 package com.notnull.shop.product.model.vo;
 
 public class CartJoinList {
+	private int cart_code;
 	private int product_code;
 	private String product_name;
 	private int cart_quantity;
+	private int product_option_code;
 	private String option_size;
 	private String new_p_img_path;
 	private int price;
 	
 	public CartJoinList() {}
-	
-	public CartJoinList(int product_code, String product_name, int cart_quantity, String option_size,
-			String new_p_img_path, int price) {
+
+	public CartJoinList(int cart_code, int product_code, String product_name, int cart_quantity,
+			int product_option_code, String option_size, String new_p_img_path, int price) {
 		super();
+		this.cart_code = cart_code;
 		this.product_code = product_code;
 		this.product_name = product_name;
 		this.cart_quantity = cart_quantity;
+		this.product_option_code = product_option_code;
 		this.option_size = option_size;
 		this.new_p_img_path = new_p_img_path;
 		this.price = price;
@@ -23,9 +27,17 @@ public class CartJoinList {
 
 	@Override
 	public String toString() {
-		return "CartJoinList [product_code=" + product_code + ", product_name=" + product_name + ", cart_quantity="
-				+ cart_quantity + ", option_size=" + option_size + ", new_p_img_path=" + new_p_img_path + ", price="
-				+ price + "]";
+		return "CartJoinList [cart_code=" + cart_code + ", product_code=" + product_code + ", product_name="
+				+ product_name + ", cart_quantity=" + cart_quantity + ", product_option_code=" + product_option_code
+				+ ", option_size=" + option_size + ", new_p_img_path=" + new_p_img_path + ", price=" + price + "]";
+	}
+
+	public int getCart_code() {
+		return cart_code;
+	}
+
+	public void setCart_code(int cart_code) {
+		this.cart_code = cart_code;
 	}
 
 	public int getProduct_code() {
@@ -52,6 +64,14 @@ public class CartJoinList {
 		this.cart_quantity = cart_quantity;
 	}
 
+	public int getProduct_option_code() {
+		return product_option_code;
+	}
+
+	public void setProduct_option_code(int product_option_code) {
+		this.product_option_code = product_option_code;
+	}
+
 	public String getOption_size() {
 		return option_size;
 	}
@@ -75,6 +95,6 @@ public class CartJoinList {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+
 	
 }

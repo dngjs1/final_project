@@ -162,6 +162,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public int plusCart(Cart cart) {
+		return productDAO.plusCart(sqlSession,cart);
+	}
+
+	@Override
+	public int changeCart(Cart cart) {
+		return productDAO.changeCart(sqlSession,cart);
+	}
+
+	@Override
+	public int deleteCart(int cart_code) {
+		return productDAO.deleteCart(sqlSession,cart_code);
+	}
+	
+	@Override
 	public int addQuestion(ProductQuestion productQuestion) {
 		return productDAO.addQuestion(sqlSession,productQuestion);
 	}
@@ -181,6 +196,5 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectImgList(sqlSession,productCode);
 	}
 
-	
 	
 }

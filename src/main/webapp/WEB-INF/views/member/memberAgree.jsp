@@ -16,6 +16,8 @@
 <script>
 
 
+
+
 /* 기본체크 */
 	$(".ckbox").each(function(index){
 		if($(this).prop("checked"))
@@ -196,6 +198,8 @@
 	}
 	
 </style>
+
+
 <div class = "container" style = "">
 
 	<div class = "joinstep">
