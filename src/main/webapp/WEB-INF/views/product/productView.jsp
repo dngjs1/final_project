@@ -284,12 +284,13 @@ span.star-prototype > * {
 	 <span class="star-prototype">${total/count}</span>
 	 참여인원:<c:out value="${count }"/>
  </div>
+
  <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 	</c:forEach>
   
- <hr>
+ <hr><hr><hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
  	
