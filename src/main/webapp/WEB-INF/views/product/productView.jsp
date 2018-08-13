@@ -329,8 +329,7 @@ span.star-prototype > * {
 	 	
 	 
 		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
-			<c:choose>
-			<c:when test="${likeList.review_code eq review.review_code and likeList.member_id eq review.member_id}">
+			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq review.member_id}">
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
 					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>
@@ -341,13 +340,7 @@ span.star-prototype > * {
 					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
 				</c:when>
 				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-				<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
-		 
-			</c:otherwise>
-			</c:choose>
+			</c:if>
 		</c:forEach>			
 			<c:if test="${empty likeList}">
 					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
