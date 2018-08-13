@@ -141,7 +141,7 @@ public class MemberController {
 		
 		String msg="";
 		String loc="/";
-		String view = "/common/msg";
+		String view = "/common/LoginMsg";
 		String path="memberLogin2.do";
 		path_=path_.substring(27);
 		
@@ -169,7 +169,7 @@ public class MemberController {
 		else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-//			model.addAttribute("loc",path);
+			model.addAttribute("loc",path);
 			response.setContentType("text/html; charset=UTF-8");
 			 
 			PrintWriter out = response.getWriter();
@@ -177,9 +177,6 @@ public class MemberController {
 			out.println("<script>alert('계정이 등록 되었습니다'); </script>");
 			 
 			out.flush();
-			
-			return "redirect:/memberLogin2.do";
-		
 			
 		}
 		
