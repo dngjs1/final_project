@@ -252,8 +252,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/buyForm.do")
-	public String buyForm(Model model,HttpServletRequest request) {
+	public String buyForm(CartJoinList cartJoinList,Model model,HttpServletRequest request) {
 		//String productCode=request.getParameter("productCode");
+		System.out.println(cartJoinList);
 		return "/product/buyForm";
 	}
 
