@@ -6,7 +6,6 @@
 
 
 
-<c:set var='path' value="${pageContext.request.contextPath}"/>
 <html>
 <head>
 
@@ -73,9 +72,6 @@
        </div>
      </div>
    </div>
-
-
-
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style = "font-family: 'Nanum Gothic','Ubuntu',sans-serif;">
   <!--헤더부분 시작-->
@@ -204,6 +200,7 @@ $(document).ready(function(){
               <button type= "button" class = "btn btn-primary" data-toggle = "collapse" data-target = "#demo">
                 <i class="fas fa-bars"></i> 전체보기
               </button>     
+              <input type="text" value="${memberLoggedIn.member_id }" name="memberId"/>
  		</ul>
  		
  		

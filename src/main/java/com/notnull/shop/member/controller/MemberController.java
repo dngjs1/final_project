@@ -2,11 +2,13 @@ package com.notnull.shop.member.controller;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -129,7 +131,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogin.do")
-	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request) {
+	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		System.out.println(member_id);
 		System.out.println(member_pw);
@@ -140,7 +142,8 @@ public class MemberController {
 		String msg="";
 		String loc="/";
 		String view = "/common/msg";
-		
+		String path="memberLogin2.do";
+		path_=path_.substring(27);
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
@@ -148,31 +151,42 @@ public class MemberController {
 				model.addAttribute("memberLoggedIn",m);
 				
 				System.out.println("페이지경로는 : " +path_);
-				path_=path_.substring(27);
-				System.out.println(path_);
 				
+				System.out.println(path_);
+				model.addAttribute("loc",path_);
 				msg="로그인 성공!!";
 				
 			}else {
 				System.out.println("WRONG PASSWORD");
 				msg ="잘못된 비밀번호입니다.";
-				path_="memberLogin2.do";
+				model.addAttribute("loc",path);
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
-			path_="memberLogin2.do";
+			model.addAttribute("loc",path);
 		}
 		else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-			path_="memberLogin2.do";
+//			model.addAttribute("loc",path);
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script>alert('계정이 등록 되었습니다'); </script>");
+			 
+			out.flush();
+			
+			return "redirect:/memberLogin2.do";
+		
+			
 		}
 		
 		
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",path_);
+		model.addAttribute("oriPath",path_);
 		
 		
 		
@@ -267,7 +281,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myPage.do")
-	public String myPage() {
+	public String myPage(HttpServletRequest request) {
+		
+		HttpSession session=request.getSession();
+		System.out.println(request.getSession());
+		
+		Member m  = (Member)session.getAttribute("memberLoggedIn");
+		
+		if(m==null) {
+			return "member/memberLogin2";
+		}
+		
+		
 		return "member/myPage";
 	}
 	
