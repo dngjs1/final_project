@@ -65,10 +65,10 @@
 		        data:{"original_password":$("#original_password").val() ,
 					  "member_id":$("#member_id").val()
 		        },
+		   		
 		        success:function(data){
 					
 		        	console.log(data);
-		        	
 		      	  if(data==false && $("#original_password").val()!=""){
 
 						 /*  alert("기존 비밀번호가 일치하지 않습니다.");
@@ -81,7 +81,7 @@
 						  encodeCheck="false";
 						  
 		      	  } else if(data==true || $("#original_password").val()=="") {
-		      		  
+		      		encodeCheck="true";
 		      	  }
 		      	  
 		      	  console.log("encodedCheck : "+encodeCheck);
