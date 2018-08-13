@@ -261,7 +261,7 @@
 				<b>회원가입이 정상적으로 <br>
 				완료되었습니다.</b>
 			</p>
-			<a href ="#" class = "btn_home" style = "color:#fff;">메인으로</a>
+			<a href ="${pageContext.request.contextPath }/" class = "btn_home" style = "color:#fff;">메인으로</a>
 		
 		</div>
 	</div>

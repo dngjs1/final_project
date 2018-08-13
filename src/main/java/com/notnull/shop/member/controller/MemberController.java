@@ -76,7 +76,7 @@ public class MemberController {
 		int result = service.insertMember(m, ip);
 		
 		String msg="";
-		String loc="/memberAgree.do";
+		String loc="/memberEnrollEnd2.do";
 		
 		if(result>0) {
 			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
