@@ -33,6 +33,11 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcyptPasswordEncoder;
 	
+	@RequestMapping("/memberLogin2.do")
+	public String memberLogin2() {
+		
+		return "member/memberLogin2";
+	}
 	
 	@RequestMapping("/memberEnroll.do")
 	public String memberEnroll() {
