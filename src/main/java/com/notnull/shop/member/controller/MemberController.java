@@ -34,7 +34,10 @@ public class MemberController {
 	private BCryptPasswordEncoder bcyptPasswordEncoder;
 	
 	@RequestMapping("/memberLogin2.do")
-	public String memberLogin2() {
+	public String memberLogin2(HttpServletRequest request , Model model) {
+		
+		String path =request.getHeader("Referer");
+		model.addAttribute("path",path);
 		
 		return "member/memberLogin2";
 	}
@@ -47,8 +50,6 @@ public class MemberController {
 	
 	@RequestMapping("/memberAgree.do")
 	public String memberagree(HttpServletRequest request) {
-		
-		System.out.println(request.getHeader("Referer"));
 		
 		return "member/memberAgree";
 	}
@@ -128,10 +129,11 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogin.do")
-	public String memberLogin(String member_id, String member_pw, Model model, HttpServletRequest request) {
+	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request) {
 		
 		System.out.println(member_id);
 		System.out.println(member_pw);
+		System.out.println(path_);
 		
 		Member m = service.loginCheck(member_id);
 		
@@ -139,34 +141,38 @@ public class MemberController {
 		String loc="/";
 		String view = "/common/msg";
 		
+		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
 				
+				System.out.println("페이지경로는 : " +path_);
+				path_=path_.substring(27);
+				System.out.println(path_);
+				
 				msg="로그인 성공!!";
 				
 			}else {
 				System.out.println("WRONG PASSWORD");
-				msg ="비잘못된 비밀번호입니다.";
+				msg ="잘못된 비밀번호입니다.";
+				path_="memberLogin2.do";
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
+			path_="memberLogin2.do";
 		}
 		else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
+			path_="memberLogin2.do";
 		}
 		
-		System.out.println(request.getHeader("Referer"));
-		String path =request.getHeader("Referer");
-		path=path.substring(27);
-		System.out.println(path);
 		
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",path);
+		model.addAttribute("loc",path_);
 		
 		
 		
