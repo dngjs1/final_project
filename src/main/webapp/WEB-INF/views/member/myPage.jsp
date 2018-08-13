@@ -59,7 +59,7 @@
 					font-weight : bold;
 					color : #FFF;
 					word-spacing: -2pt;
-					letter-spacing: -2pt;
+					letter-spacing: 0;
 					margin : 10px 0 8px 0;
 				}
 				
@@ -78,280 +78,119 @@
 				<div class = "subTitle">MYPAGE</div>
 			</div>
 			
+			<div align = "left" style = "overflow: hidden; background-color: #D8E5C4;">
+			<c:if test="${memberLoggedIn!=null}">
+				<ul>
+				
+					<li style = "margin-top:15px; "><center><b><span ><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</span></b></center></li>
+					<li><hr></li>
+					<li style = "padding:0 22px; font-size: 14px;"><b>회원등급</b> : <span><c:out value = "${memberLoggedIn.member_level}"></c:out></span></li>
+					<li style = "padding:0 22px; font-size: 14px;"><b>적립금</b> : <span>5000원</span>
+				</ul>
+				</c:if>
+			</div>
+			
+			
+			
 			<style>
-			.lmenu_menu {
-				width : 100%;
-				margin-top: 0;
-				padding-top : 0px;
-				display: inline-block;
-			}
-			
-			.menu{
-				margin : 0;
-				padding : 0;
-				border : none;
-				overflow : hidden;
-			}
-			
-			.menu > ul {
-				list-style: none;
-			}
-			
-			.lmenu_menu .menu li:first-child {
-				font-size : 16px;			
-			}
-			
 			.lmenu_menu .menu li {
 				text-align: left;
-				background-color: #AFB3C6;
+				background-color: #f7f7f7;
 				border-bottom: 1px solid #eaeaea;
 			}
 			
-			.lmenu_menu .menu li a {
-				width : 100%;
-				text-decoration: none;
-				display : inline-block;
-				color : #2e2e2e;
+			.lmenu_menu .menu .txt {
+				font-size : 14px;
+				font-weight: bold;
+				color : #686868;
+				padding: 0 22px;
+				line-height: 52px;
+				display: block;
 			}
 			
-			.lmenu_menu .menu .txt{
-				font:inherit;
-				font-size : 14px;
-				font-weight : bold;
-				color : #FFFFFF;
-				padding : 0 22px;
-				line-height : 52px;
-				display: block;
+			.lmenu_menu .menu .submenu{
+				text-align: left;
+				background-color: #ffffff;
+				border : none;
+				padding: 0 22px;
+			}
+			
+			.lmenu_menu .menu li a {
+			 	text-decoration: none;
+			 	display : inline-block;
+			 	color : black;
 			}
 			
 			.lmenu_menu .menu .submenu .txt_margin_top {
 				margin-top : 15px;
-				background-color: #AFB3C6;
 			}
 			
 			.lmenu_menu .menu .submenu .txt{
 				font:inherit;
-				font-size : 20px;
-				font-weight : normal;
-				color : #FFFFFF;
-				padding : 5px 0px 5px 0;
-				background : no-repeat;
+				font-size: 13px;
+				font-weight: normal;
+				color: #686868;
+				padding: 5px 0px 5px 0;
 				display: block;
 				cursor: pointer;
 			}
 			
-			.lmenu_menu .menu .submenu {
-				text-align: left;
-				background-color: #333333;
-				
-				padding:0 22px;
+			.lmenu_menu .menu .btm{
+				border-bottom: 1px solid #eaeaea;
 			}
 			
-			.lmenu_menu .menu .submenu .txt{
-				font: inherit;
-				font-size : 14px;
-				font-weight : normal;
-				color : #FFFFFF;
-				padding : 5px 0px 5px 0;
-				display: block;
-				cursor:pointer;
-			}
-			
-			.lmenu_menu .menu .btm {
-				border-bottom : 1px solid #eaeaea;
-			}
-			
-			.lmenu_menu .menu .submenu .txt_margin_bottom {
-				margin-bottom : 15px;
+			.lmenu_menu .menu .submenu .txt_margin_bottom{
+				margin-bottom: 15px;
 			}
 			</style>
+			
+			<script>
+				function memberUpdate() {
+				location.href ="${pageContext.request.contextPath}/memberUpdate.do"
+			}
+			</script>
 			<!-- 왼쪽 메뉴 시작 -->
 			<div class = "lmenu_menu">
 				<ul class = "menu">
-					<li> 
-						<a>
-							<span class = "txt">바로 서비스</span>
-						</a>
-					</li>
-					
-					<li class = "submenu top">
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_top">주문내역/배송조회</span>
-						</a>
-					</li>
-					
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">포인트 조회</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">나의 질문과 답변</span>
-						</a>
-					</li>
-					
-					<li class = "submenu btm">
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">장바구니</span>
-						</a>
-					</li>
-					
 					<li>
 						<a>
-							<span class = "txt">회원센터</span>
+							<span class = "txt">개인정보</span>
 						</a>
 					</li>
 					
 					<li class = "submenu top">
-						<a href = "#" target ="_self">
-							<span class = "txt txt_margin_top">회원가입</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">아이디찾기</span>
-						</a>
-					</li>
-					
-					<li class = "submenu btm">
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">비밀번호찾기</span>
-						</a>
-					</li>
-					
-					<li>
-					<a>
-						<span class = "txt">자주묻는 질문</span>
-					</a>
-					</li>
-					
-					<li class = "submenu top">
-						<a href = "${pageContext.request.contextPath }/findMember.do" target = "_self">
-							<span class = "txt txt_margin_top">아이디/비밀번호 찾기</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
 						<a href = "#" target="_self">
-							<span class = "txt">회원정보</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">배송관련</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">상품문의</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">반품/교환/취소/환불</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">주문결제</span>
+							<span class = "txt txt_margin_top" onclick="memberUpdate()">회원정보 수정</span>
 						</a>
 					</li>
 					
 					<li class = "submenu btm">
 						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">포인트</span>
+							<span class = "txt txt_margin_bottom">회원탈퇴</span>
 						</a>
 					</li>
 					
-					
 					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">공지사항</span>
-					</a>
+						<a>
+							<span class = "txt">나의 쇼핑정보</span>
+						</a>
 					</li>
 					
-					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">커뮤니티게시판</span>
-					</a>
+					<li class = "submenu top">
+						<a href = "#" target="_self">
+							<span class = "txt txt_margin_top">주문/배송내역</span>
+						</a>
 					</li>
 					
-					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">1:1친절상담</span>
-					</a>
+					<li class = "submenu">
+						<a href = "#" target = "_self">
+							<span class = "txt">취소/반품/환불내역</span>
+						</a>
 					</li>
-		
+				
 				</ul>
+				</div>
 			
-			</div>
-			<!-- 왼쪽 메뉴  : 끝 -->
-			<style>
-				ul.lgt_menu_bn {
-					background-color: #AFB3C6;
-					margin-top : 1px;
-				}
-				
-				ul.lgt_menu_bn .cs_center_li{
-					background:url(./resources/images/ico_tit_tel.png) no-repeat 5px center;
-					border-bottom: 1px solid #fff!important;
-				
-					
-				}
-				
-				ul.lgt_menu_bn li{
-					line-height:25px;
-					padding:14px 6px 14px 70px;
-				}
-				
-				ul.lgt_menu_bn .cs_center_li span{
-					display:block;
-					font-size:13px;
-				}
-				ul.lgt_menu_bn .cs_center_li span.white_space {
-					display: inline-block;
-				}
-				ul.lgt_menu_bn .time_info_li{
-					background:url(./resources/images/ico_tit_date.png) no-repeat 5px center;
-				}
-				ul.lgt_menu_bn .time_info_li span{
-					display:block;
-					font-weight:bold;
-					letter-spacing: -0.1em;
-					font-size: 12px;
-				}
-				
-				
-			</style>
-			<div>
-				<ul class = "lgt_menu_bn">
-				
-					<li class = "cs_center_li">
-					<span>
-						Design by<br><strong>진근형</strong>
-						<span class = "white_space"></span>
-					</span>
-					<strong>02-222-2222</strong>
-					
-					<li class = "time_info_li">
-						<span>
-							평일 <strong>10:30 ~ 17:30</strong>
-							<br>
-							런치 <strong>11:30 ~ 13:00</strong>
-							<br>
-							토/일/공휴일은 휴무
-						</span>
-					</li>
-				</ul>
-			</div>
 			
 			
 		</div>
@@ -365,14 +204,8 @@
 			
 			<hr>
 			
-			<div style="width:50%; margin: 0 auto;">
-	<button type="button" onclick="memberUpdate()" >회원정보수정</button>
-</div>
-<script>
-	function memberUpdate() {
-		location.href ="${pageContext.request.contextPath}/memberUpdate.do"
-	}
-</script>
+			
+
 			
 			
 		</div>
