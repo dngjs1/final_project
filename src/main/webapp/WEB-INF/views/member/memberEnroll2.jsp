@@ -131,7 +131,7 @@
 	
 </style>
 
-<!-- /*중복아이디체크관련* -->/
+<!-- /*중복아이디체크관련* -->
  <style> 
    #ok{color:green;
    		display:none;
