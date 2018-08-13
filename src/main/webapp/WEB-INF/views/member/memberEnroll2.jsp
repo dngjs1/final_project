@@ -130,6 +130,154 @@
 	}
 	
 </style>
+
+<!-- /*중복아이디체크관련* -->/
+ <style> 
+   #ok{color:green;
+   		display:none;
+   		}
+   #error{color:red;
+   		display:none;
+   		}
+
+</style> 
+
+<!-- 주소입력 API  -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function DaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('post_no').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('roadAddress').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('detail_address').focus();
+            }
+        }).open();
+    }
+</script>
+
+
+<!-- ID 중복검사 Ajax -->
+<script>
+$(function(){
+    $('#member_id').on('keyup',function(){
+    	
+    	console.log($(this).val());
+    
+       if($(this).val().trim().length<4){
+          $('#ok').hide();
+          $('#error').hide();
+          $('#length').show();
+          $('#idDuplicateCheck').val(0);
+          return;
+       }
+        
+       $.ajax({
+          url:"${pageContext.request.contextPath}/checkIdDuplicate.do",
+          type   : "post",
+          dataType: "json",
+          data:{member_Id:$(this).val()},
+          success:function(data){
+          	
+        	/* if(data.trim()=='true') */  
+          if(data.check==true){
+                $('#error').hide();
+                $('#ok').show();
+                $('#length').hide();
+                $('#idDuplicateCheck').val(1);
+             }else{
+                $('#ok').hide();
+                $('#error').show();
+                $('#length').hide();
+                $('#idDuplicateCheck').val(0);
+             }
+        
+          },
+          error:function(jpxhr,textStatus,errormsg){
+             console.log("ajax전송 실패")
+             console.log(jpxhr);
+             console.log(textStatus);
+             console.log(errormsg);
+          }
+       });
+    });
+ });
+
+</script>
+
+
+
+
+<!-- 유효성검사  -->
+<script>
+$(function(){
+	
+	$("#member_pw2").blur(function(){
+		var p1=$("#member_pw").val(), p2=$("#member_pw2").val();
+		if(p1!=p2){
+			alert("패스워드가 일치하지 않습니다.");
+			$("#member_pw").val("");
+			$("#member_pw2").val("");
+			$("#member_pw").focus();
+		}
+	});
+	
+});
+
+ function validate(){
+	var userId = $("#member_id");
+	if(userId.val().trim().length<4){
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		userId.focus();
+		return false;
+	}
+	
+	var idCheck = $("#idDuplicateCheck");
+	if($("#idDuplicateCheck").val()==0) {
+		alert("잘못된 아이디입니다 다시 입력하세요.")
+		$("#idDuplicateCheck").focus();
+		return false;
+	}
+	
+	return true;
+} 
+
+</script>
+
+
+
 		<div class = "joinstep">
 	<ul style = "border:none;">
 		<li>
@@ -289,32 +437,35 @@
 			&nbsp;회원가입
 		</h1>
 		<p class = "warnt"><b>*필수입력</b></p>
-		<form name = "frm" method="post" enctype = "multipart/form-data">
+		<form name = "frm" method="post" enctype = "multipart/form-data" onsubmit='return validate();' action="${pageContext.request.contextPath}/memberEnrollEnd.do" >
 			<ul class = "join_list">
 			<!-- 4글자 이상 입력 -->
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*아이디 입력" style = "ime-mode:disabled; width:100%;" tabindex = "1">
-				<p class = "example" id = "#">4글자 이상을 입력하세요</p>
+				<input type = "text" id = "member_id" name = "member_id" class = "text" placeholder="*아이디 입력" style = "ime-mode:disabled; width:100%;" tabindex = "1" required>
+				<p class="example" id="ok">이 아이디는 사용 가능 합니다.</p>
+                <p class="example" id="error">이 아이디는 사용할 수 없습니다.</p>
+                <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0 />
+				<p class = "example" id = "length">4글자 이상을 입력하세요</p>
 			</li>
 			<!-- 이름 입력 -->
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*이름 입력" style = " width:100%;" tabindex = "2">
+				<input type = "text" id = "member_name" name ="member_name" class = "text" placeholder="*이름 입력" style = " width:100%;" tabindex = "2" required>
 				<p class = "example" id = "#">한글로만 작성해주세요</p>
 			</li>
 			<!-- 비밀번호 입력 -->
 			<li>
-				<input type = "password" id = "pass" name = "pass" class = "text" placeholder="*비밀번호 입력" style = " width:100%;" tabindex = "3">
+				<input type = "password" id = "member_pw" name = "member_pw" class = "text" placeholder="*비밀번호 입력" style = " width:100%;" tabindex = "3" required>
 				<p class = "example" id = "rePassResult2">8 ~ 12 영문과 숫자(또는 한글 숫자)조합</p>
 			</li>
 			<!-- 비밀번호 확인 -->
 			<li>
-				<input type="password" id="repass" name="repass"  class = "text" placeholder="*비밀번호 확인 " tabindex="4" style="width:100%;" onkeyup="passwordCheck(this)">
+				<input type="password" id="member_pw2"  class = "text" placeholder="*비밀번호 확인 " tabindex="4" style="width:100%;" onkeyup="passwordCheck(this)" required>
 				<p class = "example" id = "rePassResult">
 				</p>
 			</li>
 			<!-- 생년월일 선택 -->
 			<li>
-				<input type = "date" id = "#" name = "#" class = "text" placeholder="*생년월일 입력" style = " width:100%;" tabindex = "5">
+				<input type = "date" id = "birthday" name = "birthday" class = "text" placeholder="*생년월일 입력" style = " width:100%;" tabindex = "5" required>
 				<p class = "example" id = "#">정확한 생년월일을 입력해주세요</p>
 			</li>
 			
@@ -337,7 +488,7 @@
 			
 			<!-- 휴대전화 입력 -->
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*휴대폰번호입력" style = " width:100%;" tabindex = "5">
+				<input type = "text" id = "phone" name = "phone" class = "text" placeholder="*휴대폰번호입력" style = " width:100%;" tabindex = "5" required>
 				<p class = "example" id = "#">(-없이)01012345678</p>
 			</li>
 			
@@ -359,23 +510,23 @@
 			}
 			</style>
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*주소" style = "width : 450px;">
-				<input type = "button" value = "주소찾기" class = "btn_check" style = "border:none;">
+				<input type = "text" id = "roadAddress" name = "address" class = "text" placeholder="*주소" style = "width : 450px;" required>
+				<input type = "button" value = "주소찾기" class = "btn_check" style = "border:none;" onclick="DaumPostcode()">
 				<p class = "example" id = "#">주소찾기버튼으로 쉽게 찾아보세요</p>
 			</li>
 			
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*상세주소입력" style = " width:100%;" tabindex = "5">
+				<input type = "text" id = "detail_address" name = "detail_address" class = "text" placeholder="*상세주소입력" style = " width:100%;" tabindex = "5" required>
 				<p class = "example" id = "#">주소찾기 버튼으로 주소를 찾은 후 나머지 주소를 입력해주세요</p>
 			</li>
 			
 			<li>
-				<input type = "text" id = "#" name = "#" class = "text" placeholder="*우편번호입력" style = " width:100%;" tabindex = "5">
+				<input type = "text" id = "post_no" name = "post_no" class = "text" placeholder="*우편번호입력" style = " width:100%;" tabindex = "5" required>
 				<p class = "example" id = "#">우편번호는 주소찾기 버튼을 활용할 시 자동으로 채워집니다.</p>
 			</li>
 			
 			<li>
-				<input type = "email" id = "#" name = "#" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px;">
+				<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px;" required>
 				<span style = "color : #777777;font-size:15px; margin-left:14px;"><strong>이메일 수신 :</strong></span><input type = "checkbox" name = "email_alarm" style = "margin-left: 5px;">
 				<p class = "example" id = "#">이메일 인증을 위해 이메일 형식에 맞게 입력해주세요.</p>
 				
