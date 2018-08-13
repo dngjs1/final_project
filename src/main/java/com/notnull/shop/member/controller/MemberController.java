@@ -139,11 +139,11 @@ public class MemberController {
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
 				
-				msg="SUCCESS LOGIN";
+				msg="로그인 성공!!";
 				
 			}else {
 				System.out.println("WRONG PASSWORD");
-				msg ="WRONG PASSWORD";
+				msg ="비잘못된 비밀번호입니다.";
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
@@ -151,7 +151,7 @@ public class MemberController {
 		}
 		else {
 			System.out.println("THERE'S NO ID");
-			msg ="WRONG ID";
+			msg ="없는 아이디입니다.";
 		}
 		
 		System.out.println(request.getHeader("Referer"));
@@ -262,7 +262,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberUpdate.do")
 	public String memberUpdate() {
-		return "member/memberUpdate";
+		return "member/memberUpdate2";
 	}
 	
 	@RequestMapping("/memberUpdateEnd.do")
