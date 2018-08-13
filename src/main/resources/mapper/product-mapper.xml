@@ -168,4 +168,33 @@
 	from product_question A
 	where product_code=#{product_code} start with question_level=1 connect by prior p_question_code=p_question_code_ref order siblings by question_date asc
   	</select>
+  	
+  	
+  	<insert id="addLike" parameterType="ProductReviewLike">
+  		insert into product_review_like values(#{review_code},#{member_id},#{like_status})
+  	</insert>
+  	
+  	<select id="selectLike" parameterType="_int" resultType="ProductReviewLike">
+  		select * from product_review_like where review_code=#{review_code}		
+  	</select>
+  	
+  	<delete id="deleteLike" parameterType="ProductReviewLike">
+  		delete from product_review_like where review_code=#{review_code} and member_id=#{member_id}	
+  	</delete>
+  	
+  	<update id="updateLike" parameterType="ProductReviewLike">
+  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
+  	</update>
+  	
+  	<select id="countLike" parameterType="ProductReviewLike" resultType="_int">
+  		select count(*) from product_review_like where like_status=#{like_status} and review_code=#{review_code}
+  	</select>
+  	
+ 	 <resultMap type="ProductReviewLike" id="ProductReviewLikeMap">			
+	</resultMap>
+  
+  	<select id="selectLikeList" resultMap="ProductReviewLikeMap">
+  		select * from product_review_like
+  	</select>
+
 </mapper>

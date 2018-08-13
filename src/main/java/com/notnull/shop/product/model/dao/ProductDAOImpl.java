@@ -18,6 +18,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -145,6 +146,36 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductImg> selectImgList(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectImgList",productCode);
 	}
-	
+
+	@Override
+	public int addLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.insert("product.addLike",productReviewLike);
+	}
+
+	@Override
+	public ProductReviewLike selectLike(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.selectOne("product.selectLike",review_code);
+	}
+
+	@Override
+	public int deleteLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.delete("product.deleteLike",productReviewLike);
+	}
+
+	@Override
+	public int updateLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.update("product.updateLike",productReviewLike);
+	}
+
+	@Override
+	public int countLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.selectOne("product.countLike",productReviewLike);
+	}
+
+	@Override
+	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.selectLikeList");
+	}
+
 	
 }

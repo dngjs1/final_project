@@ -18,6 +18,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 public interface ProductDAO {
@@ -71,4 +72,13 @@ public interface ProductDAO {
 	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
 	
 	List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession,int productCode);
+	
+	int addLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	ProductReviewLike selectLike(SqlSessionTemplate sqlSession,int review_code);
+	int deleteLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	int updateLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	int countLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	
+	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
+
 }
