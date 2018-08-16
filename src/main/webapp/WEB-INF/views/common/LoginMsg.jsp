@@ -15,7 +15,7 @@
 			alert("${msg}");
 			/* location.href='${pageContext.request.contextPath}/${loc}?path_="${oriPath}"';		 */
 			location.href='${pageContext.request.contextPath}/${loc}';		
-			alert('${pageContext.request.contextPath}/${loc}');
+			
 		</script>
 	</head>
 	<body>
