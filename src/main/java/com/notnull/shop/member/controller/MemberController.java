@@ -140,39 +140,34 @@ public class MemberController {
 		
 		String msg="";
 		String loc="/";
-//		String view = "/common/msg";
-		
 		String view = "/common/LoginMsg";
 		String path="memberLogin2.do";
 		path_=path_.substring(27);
-
+		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
 				
 				System.out.println("페이지경로는 : " +path_);
-				path_=path_.substring(27);
-				System.out.println(path_);
 				
+				System.out.println(path_);
+				model.addAttribute("loc",path_);
 				msg="로그인 성공!!";
 				
 			}else {
 				System.out.println("WRONG PASSWORD");
 				msg ="잘못된 비밀번호입니다.";
-				path_="memberLogin2.do";
+				model.addAttribute("loc",path);
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
-			path_="memberLogin2.do";
+			model.addAttribute("loc",path);
 		}
 		else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-
-			path_="memberLogin2.do";
-
 			model.addAttribute("loc",path);
 			response.setContentType("text/html; charset=UTF-8");
 			 
@@ -182,13 +177,12 @@ public class MemberController {
 			 
 			out.flush();
 			
-
 		}
 		
 		
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",path_);
+		model.addAttribute("oriPath",path_);
 		
 		
 		
