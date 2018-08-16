@@ -334,5 +334,14 @@
 			</ul>
 		
 		</form>
+			<button type = "button" onclick="withdraw()">회원탈퇴</button>
 	</div>
+	
+	
+	<script>
+		function withdraw() {
+			location.href="${pageContext.request.contextPath}/membershipWithdraw.do";
+		}
+	</script>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

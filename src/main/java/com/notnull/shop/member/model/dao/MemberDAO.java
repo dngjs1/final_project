@@ -26,4 +26,6 @@ public interface MemberDAO {
 	
 	String selectEncode(SqlSessionTemplate sqlSession, String id);
 	
+	int withdrawMember(SqlSessionTemplate sqlSession, String id);
+	
 }

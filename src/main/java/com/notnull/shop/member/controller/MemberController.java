@@ -163,19 +163,15 @@ public class MemberController {
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
-			model.addAttribute("loc",path);
+			model.addAttribute("loc","/");
 		}
-		else {
+		else if(m!=null && m.getEsc_status().equals("E")) {
+			msg="탈퇴한 회원입니다.";
+			model.addAttribute("loc","/");
+		}else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-			model.addAttribute("loc",path);
-			response.setContentType("text/html; charset=UTF-8");
-			 
-			PrintWriter out = response.getWriter();
-			 
-			out.println("<script>alert('계정이 등록 되었습니다'); </script>");
-			 
-			out.flush();
+			model.addAttribute("loc","/");
 			
 		}
 		
@@ -357,5 +353,35 @@ public class MemberController {
 //		return mv;
 //		
 //	}
+	
+	@RequestMapping("membershipWithdraw.do")
+	public String membershipWithdraw() {
 		
+		return"/member/membershipWithdraw";
+	}
+	
+	@RequestMapping("membershipWithdrawEnd.do")
+	public String membershipWithdrawEnd(String email, String pw,HttpServletRequest request, HttpServletResponse response, Model model,SessionStatus sessionStatus) {
+		
+		System.out.println(email);
+		System.out.println(pw);
+	
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+		boolean pwCheck = bcyptPasswordEncoder.matches(pw, m.getMember_pw());
+		
+		if(email.equals(m.getEmail()) && pwCheck==true) {
+			
+			int i = service.withdrawMember(m.getMember_id());
+			model.addAttribute("msg","탈퇴를 완료했습니다.");
+			model.addAttribute("loc","/");
+			sessionStatus.setComplete();
+		} else {
+			model.addAttribute("msg","회원정보가 올바르지 않습니다.");
+			model.addAttribute("loc","membershipWithdraw.do");
+		}
+		
+		
+		
+		return"/common/msg";
+	}
 }
