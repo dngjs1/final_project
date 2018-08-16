@@ -384,4 +384,27 @@ public class MemberController {
 		
 		return"/common/msg";
 	}
+	
+	@RequestMapping("memberManagement.do")
+	public String memberManagement(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+			
+		if(!(m.getMember_id().equals("admin"))) {
+			  response.setContentType("text/html; charset=UTF-8");
+
+	            PrintWriter out = response.getWriter();
+
+	            out.println("<script>alert('권한이 없습니다.'); </script>");
+
+	            out.flush(); 
+
+			return "redirect:/";
+		}
+		
+		
+		
+		
+		return "/member/memberManagement";
+	}
 }
