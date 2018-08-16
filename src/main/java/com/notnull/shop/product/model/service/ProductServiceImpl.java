@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -196,5 +198,39 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectImgList(sqlSession,productCode);
 	}
 
-	
+	@Override
+	public int addLike(ProductReviewLike productReviewLike) {
+		return productDAO.addLike(sqlSession,productReviewLike);
+	}
+
+	@Override
+	public ProductReviewLike selectLike(int review_code) {
+		return productDAO.selectLike(sqlSession,review_code);
+	}
+
+	@Override
+	public int deleteLike(ProductReviewLike productReviewLike) {
+		return productDAO.deleteLike(sqlSession,productReviewLike);
+	}
+
+	@Override
+	public int updateLike(ProductReviewLike productReviewLike) {
+		return productDAO.updateLike(sqlSession,productReviewLike);
+	}
+
+	@Override
+	public int countLike(ProductReviewLike productReviewLike) {
+		return productDAO.countLike(sqlSession,productReviewLike);
+	}
+
+	@Override
+	public List<ProductReviewLike> selectLikeList() {
+		return productDAO.selectLikeList(sqlSession);
+	}
+
+	@Override
+	public List<Map> selectlikeCountList(String status) {
+		return productDAO.selectlikeCountList(sqlSession,status);
+	}
+
 }

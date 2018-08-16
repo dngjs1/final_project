@@ -22,6 +22,24 @@ span.star-prototype > * {
     background-position: 0 0;
     max-width:80px; 
 }
+#like_btn{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 90px;
+  height: 40px;
+  background: #FFFFFF;
+  border: 0;
+  font-size: .9rem;
+  font-family: Futura;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
 </style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -52,6 +70,7 @@ span.star-prototype > * {
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
+		
 	}
 	function add () {
 		amount = document.form.cart_quantity;
@@ -131,28 +150,14 @@ span.star-prototype > * {
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
 						<c:when test="${optionList.size()<2}">
-							<c:forEach var="option" items="${optionList}" varStatus="vs">
-								<c:choose>
-									<c:when test="${option.option_size == null}">
-										<span>재고 : ${option.left_amount}</span>
-										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
-									</c:when>
-									<c:when test="${option.left_amount<=0}">
-										<select name="product_option_code" style="font-size:15px;height:28px;" >
-											<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
-										</select>
-									</c:when>
-									<c:otherwise>
-										<select name="product_option_code" style="font-size:15px;height:28px;" >
-											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
-										</select>
-									</c:otherwise>
-								</c:choose>
+							<c:forEach var="option" items="${optionList}">
+								<span>재고 : ${option.left_amount}</span>
+								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<span>사이즈 </span>
-							<select name="product_option_code" style="font-size:15px;height:28px;" >
+							<select name="productCode" style="font-size:15px;height:28px;" >
 								<c:forEach var="option" items="${optionList}">
 									<c:choose>
 									<c:when test="${option.left_amount<=0}">
@@ -186,7 +191,7 @@ span.star-prototype > * {
 					}else{
 						var productInfo={
 								member_id:member_id,
-								product_option_code:$("[name=product_option_code]").val(),
+								product_option_code:$("[name=productCode]").val(),
 								product_code:$("[name=product_code]").val(),
 								cart_quantity:$("[name=cart_quantity]").val()
 						};
@@ -298,14 +303,16 @@ span.star-prototype > * {
 	 <span class="star-prototype">${total/count}</span>
 	 참여인원:<c:out value="${count }"/>
  </div>
+
  <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 	</c:forEach>
   
- <hr>
+ <hr><hr><hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
+ <c:set var="flag" value="true"/>
  	
 	 작성자:${review.member_id}<br>
 	별점:<span class="star-prototype">${review.review_star }</span><br>
@@ -318,9 +325,175 @@ span.star-prototype > * {
 	</c:forEach>
 		<br>	 	 
 	 내용 :${review.review_content} <br>	
+
+	
+
+	 <div>
+	 	<input type="hidden" name="review_code" value="${review.review_code }"/> 
+	 	
+
+		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
+			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id}">
+			<c:set var="flag" value="false"/>
+				<c:choose>
+				<c:when test="${likeList.like_status eq 'Y' }">
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>
+					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='likeCount'>${likeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='likeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='disLikeCount'>0</span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				
+				</c:when>
+				<c:when test="${likeList.like_status eq 'N' }">
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='likeCount'>${likeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='likeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
+					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='disLikeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:when>
+				</c:choose>
+			</c:if>
+
+		</c:forEach>		
+	
+	
+		<c:if test="${flag =='true'}">
+			<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+			<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</c:if>
+		
+		
+		
+		
+	 </div>
+	 		
 	 <hr>
  </c:forEach>
- 
+<script>
+//좋아요
+$('.like').on('click',function(){
+	var thtag=$(this);
+	var member_id=$('#member_id').val();
+	if(member_id==null||member_id.length<1){
+		alert("로그인 후 이용해주시기 바랍니다.");
+		e.preventDefault();
+	}else{
+		var likeInfo={
+				member_id:member_id,
+				review_code:$(this).siblings("[name=review_code]").val(),
+				like_status:'Y'
+		};
+		$.ajax({
+			url:"${pageContext.request.contextPath}/like.do",
+			data:likeInfo,
+			success:function(data){
+				console.log(data);				
+				if(data.result==0){
+					alert("버튼에러");
+					e.preventDefault();
+				}else{
+					thtag.siblings(".likeCount").text(data.likeCount);
+					thtag.siblings(".disLikeCount").text(data.disLikeCount); 
+					if(data.likeOn==1){
+						thtag.css("color", "#1E96FF");
+					}else if(data.likeOn==2){
+						thtag.css("color", "#bebebe");	
+					}else{
+						thtag.css("color", "#1E96FF");	
+						thtag.siblings(".dislike").css("color", "#bebebe");
+					}
+			
+				}
+			},
+			error:function(jpxhr,textStatus,errormsg){
+				console.log("ajax전송실패.");
+				console.log(jpxhr);
+				console.log(textStatus);
+				console.log(errormsg);
+			}
+		});
+	}
+});
+
+
+$('.dislike').on('click',function(){
+	var thtag=$(this);
+	var member_id=$('#member_id').val();
+	if(member_id==null||member_id.length<1){
+		alert("로그인 후 이용해주시기 바랍니다.");
+		e.preventDefault();
+	}else{
+		var likeInfo={
+				member_id:member_id,
+				review_code:$(this).siblings("[name=review_code]").val(),
+				like_status:'N'
+		};
+		$.ajax({
+			url:"${pageContext.request.contextPath}/like.do",
+			data:likeInfo,
+			success:function(data){
+				if(data.result==0){
+					alert("버튼에러");
+					e.preventDefault();
+				}else{
+					thtag.siblings(".disLikeCount").text(data.disLikeCount);
+					thtag.siblings(".likeCount").text(data.likeCount);
+					if(data.likeOn==1){
+						thtag.css("color", "#FF3232");
+					}else if(data.likeOn==2){
+						thtag.css("color", "#bebebe");	
+					}else{
+						thtag.css("color", "#FF3232");	
+						thtag.siblings(".like").css("color", "#bebebe");
+					}
+					
+					
+				}
+			},
+			error:function(jpxhr,textStatus,errormsg){
+				console.log("ajax전송실패.");
+				console.log(jpxhr);
+				console.log(textStatus);
+				console.log(errormsg);
+			}
+		});
+	}
+});
+</script>
  <script>
 //별점
 $.fn.generateStars = function() {

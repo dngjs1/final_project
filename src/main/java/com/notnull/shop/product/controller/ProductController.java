@@ -37,6 +37,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 @Controller
@@ -207,6 +208,24 @@ public class ProductController {
 		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
 		request.setAttribute("questionList", questionList);
+		
+		
+		List<ProductReviewLike> likeList=service.selectLikeList();
+		
+		request.setAttribute("likeList", likeList);
+		
+		
+		ProductReviewLike productReviewLike = new ProductReviewLike();
+		String status="Y";		
+		List<Map> likeCountList=service.selectlikeCountList(status);
+		System.out.println("!!!!!!!!!"+likeCountList);
+		status="N";	
+		List<Map> nlikeCountList=service.selectlikeCountList(status);
+		System.out.println("@@@@@@@@"+nlikeCountList);
+		
+		request.setAttribute("likeCountList", likeCountList);
+		request.setAttribute("nlikeCountList", nlikeCountList);
+		
 		return "/product/productView";
 	}
 
@@ -372,6 +391,69 @@ public class ProductController {
 
 		return re;
 		
+	}
+	
+	@RequestMapping("/like.do")
+	public ModelAndView like(ModelAndView mv,HttpServletRequest request) {
+		int review_code=Integer.parseInt(request.getParameter("review_code"));
+		String member_id=request.getParameter("member_id");
+		String like_status=request.getParameter("like_status");
+		ProductReviewLike productReviewLike=new ProductReviewLike();
+		productReviewLike = service.selectLike(review_code);
+		int result=0;
+		int likeOn=0;
+		if(like_status.equals("Y")) {
+
+			if(productReviewLike==null) {
+				productReviewLike=new ProductReviewLike();
+				productReviewLike.setMember_id(member_id);
+				productReviewLike.setReview_code(review_code);
+				productReviewLike.setLike_status(like_status);
+			
+				result=service.addLike(productReviewLike);
+				likeOn=1;
+			}else if(productReviewLike.getLike_status().equals("Y")){
+				result=service.deleteLike(productReviewLike);
+				likeOn=2;
+			}else if(productReviewLike.getLike_status().equals("N")) {
+				productReviewLike.setLike_status("Y");
+				result=service.updateLike(productReviewLike);
+				likeOn=3;
+			}
+		}else if(like_status.equals("N")) {
+			if(productReviewLike==null) {
+				productReviewLike=new ProductReviewLike();
+				productReviewLike.setMember_id(member_id);
+				productReviewLike.setReview_code(review_code);
+				productReviewLike.setLike_status(like_status);
+			
+				result=service.addLike(productReviewLike);
+				likeOn=1;
+			}else if(productReviewLike.getLike_status().equals("N")){
+				result=service.deleteLike(productReviewLike);
+				likeOn=2;
+			}else if(productReviewLike.getLike_status().equals("Y")) {
+				productReviewLike.setLike_status("N");
+				result=service.updateLike(productReviewLike);
+				likeOn=3;
+			}
+		}
+		productReviewLike.setLike_status("Y");
+		int likeCount = service.countLike(productReviewLike);
+		productReviewLike.setLike_status("N");
+		int disLikeCount=service.countLike(productReviewLike);
+		
+		System.out.println("likeCOunt: "+ likeCount);
+		System.out.println("dislikeCOunt: "+ disLikeCount);
+
+		mv.addObject("likeCount", likeCount);
+		mv.addObject("disLikeCount", disLikeCount);
+			
+		mv.addObject("result", result);
+		mv.addObject("likeOn", likeOn);
+		
+		mv.setViewName("JsonView");
+		return mv;
 	}
 	
 
