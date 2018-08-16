@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
@@ -72,4 +73,6 @@ public interface ProductService {
 	int countLike(ProductReviewLike productReviewLike);
 
 	List<ProductReviewLike> selectLikeList();
+	
+	List<Map> selectlikeCountList(String status);
 }

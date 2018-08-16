@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,6 +226,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductReviewLike> selectLikeList() {
 		return productDAO.selectLikeList(sqlSession);
+	}
+
+	@Override
+	public List<Map> selectlikeCountList(String status) {
+		return productDAO.selectlikeCountList(sqlSession,status);
 	}
 
 }

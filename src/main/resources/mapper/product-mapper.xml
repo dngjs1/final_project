@@ -197,4 +197,13 @@
   		select * from product_review_like
   	</select>
 
+
+  	<resultMap type="map" id="countLikeMap"></resultMap>
+  	<select id="selectlikeCountList" resultMap="countLikeMap">
+  		select review_code,count(*) as cnt
+		from product_review_like
+		where like_status=#{status}
+		group by review_code
+  	</select>
+
 </mapper>

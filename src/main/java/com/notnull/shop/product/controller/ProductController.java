@@ -213,6 +213,19 @@ public class ProductController {
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
 		request.setAttribute("likeList", likeList);
+		
+		
+		ProductReviewLike productReviewLike = new ProductReviewLike();
+		String status="Y";		
+		List<Map> likeCountList=service.selectlikeCountList(status);
+		System.out.println("!!!!!!!!!"+likeCountList);
+		status="N";	
+		List<Map> nlikeCountList=service.selectlikeCountList(status);
+		System.out.println("@@@@@@@@"+nlikeCountList);
+		
+		request.setAttribute("likeCountList", likeCountList);
+		request.setAttribute("nlikeCountList", nlikeCountList);
+		
 		return "/product/productView";
 	}
 
@@ -430,8 +443,12 @@ public class ProductController {
 		productReviewLike.setLike_status("N");
 		int disLikeCount=service.countLike(productReviewLike);
 		
+		System.out.println("likeCOunt: "+ likeCount);
+		System.out.println("dislikeCOunt: "+ disLikeCount);
+
 		mv.addObject("likeCount", likeCount);
 		mv.addObject("disLikeCount", disLikeCount);
+			
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);
 		

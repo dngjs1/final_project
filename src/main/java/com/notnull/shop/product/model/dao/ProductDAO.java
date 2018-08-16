@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -80,5 +81,7 @@ public interface ProductDAO {
 	int countLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
 	
 	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
+	
+	List<Map> selectlikeCountList(SqlSessionTemplate sqlSession,String status);
 
 }

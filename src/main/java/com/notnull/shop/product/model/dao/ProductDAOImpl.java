@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -175,6 +176,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectLikeList");
+	}
+
+	@Override
+	public List<Map> selectlikeCountList(SqlSessionTemplate sqlSession,String status) {
+		return sqlSession.selectList("product.selectlikeCountList",status);
 	}
 
 	

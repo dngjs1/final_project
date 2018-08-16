@@ -70,6 +70,7 @@ span.star-prototype > * {
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
+		
 	}
 	function add () {
 		amount = document.form.cart_quantity;
@@ -311,6 +312,7 @@ span.star-prototype > * {
  <hr><hr><hr>
  <div> 
  <c:forEach var="review" items="${reviewList}">
+ <c:set var="flag" value="true"/>
  	
 	 작성자:${review.member_id}<br>
 	별점:<span class="star-prototype">${review.review_star }</span><br>
@@ -323,29 +325,80 @@ span.star-prototype > * {
 	</c:forEach>
 		<br>	 	 
 	 내용 :${review.review_content} <br>	
-	 
+
+	
+
 	 <div>
 	 	<input type="hidden" name="review_code" value="${review.review_code }"/> 
 	 	
-	 
+
 		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
-			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq review.member_id}">
+			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id}">
+			<c:set var="flag" value="false"/>
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
 					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>
+					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='likeCount'>${likeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='likeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
 					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='disLikeCount'>0</span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				
 				</c:when>
 				<c:when test="${likeList.like_status eq 'N' }">
 					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='likeCount'>${likeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='likeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
 					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
+					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
+						<c:choose>
+						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
+							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
+						</c:when>
+						<c:otherwise>
+							<span class='disLikeCount'>0 </span>
+						</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</c:when>
 				</c:choose>
 			</c:if>
-		</c:forEach>			
-			<c:if test="${empty likeList}">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-			</c:if>
+
+		</c:forEach>		
+	
+	
+		<c:if test="${flag =='true'}">
+			<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+			<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</c:if>
+		
+		
+		
+		
 	 </div>
 	 		
 	 <hr>
@@ -368,11 +421,13 @@ $('.like').on('click',function(){
 			url:"${pageContext.request.contextPath}/like.do",
 			data:likeInfo,
 			success:function(data){
-				console.log(data);
+				console.log(data);				
 				if(data.result==0){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
+					thtag.siblings(".likeCount").text(data.likeCount);
+					thtag.siblings(".disLikeCount").text(data.disLikeCount); 
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
 					}else if(data.likeOn==2){
@@ -381,7 +436,7 @@ $('.like').on('click',function(){
 						thtag.css("color", "#1E96FF");	
 						thtag.siblings(".dislike").css("color", "#bebebe");
 					}
-					
+			
 				}
 			},
 			error:function(jpxhr,textStatus,errormsg){
@@ -415,7 +470,8 @@ $('.dislike').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					
+					thtag.siblings(".disLikeCount").text(data.disLikeCount);
+					thtag.siblings(".likeCount").text(data.likeCount);
 					if(data.likeOn==1){
 						thtag.css("color", "#FF3232");
 					}else if(data.likeOn==2){
