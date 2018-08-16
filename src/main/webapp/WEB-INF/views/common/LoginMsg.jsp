@@ -13,7 +13,9 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 			alert("${msg}");
-			location.href="${pageContext.request.contextPath}/${loc}";		
+			/* location.href='${pageContext.request.contextPath}/${loc}?path_="${oriPath}"';		 */
+			location.href='${pageContext.request.contextPath}/${loc}';		
+			alert('${pageContext.request.contextPath}/${loc}');
 		</script>
 	</head>
 	<body>

@@ -48,7 +48,7 @@
 
 <div id="container">
 	<div class="empty-box" style="height: 40px;">
-		`
+		
 		<!-- 위 아래 여백을 위한 빈 박스 생성 -->
 		<!-- 추후 위 아래 여백 간격 조절할 때 활용하기 위해 생성함 -->
 	</div>
