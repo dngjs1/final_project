@@ -2,6 +2,7 @@ package com.notnull.shop.member.controller;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
@@ -129,7 +130,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogin.do")
-	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request) {
+	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		System.out.println(member_id);
 		System.out.println(member_pw);
@@ -139,15 +140,12 @@ public class MemberController {
 		
 		String msg="";
 		String loc="/";
-<<<<<<< HEAD
-		String view = "/common/msg";
+//		String view = "/common/msg";
 		
-=======
 		String view = "/common/LoginMsg";
 		String path="memberLogin2.do";
 		path_=path_.substring(27);
->>>>>>> branch_JEC
-		
+
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				System.out.println("success LOGIN");
@@ -172,9 +170,9 @@ public class MemberController {
 		else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-<<<<<<< HEAD
+
 			path_="memberLogin2.do";
-=======
+
 			model.addAttribute("loc",path);
 			response.setContentType("text/html; charset=UTF-8");
 			 
@@ -184,7 +182,7 @@ public class MemberController {
 			 
 			out.flush();
 			
->>>>>>> branch_JEC
+
 		}
 		
 		
