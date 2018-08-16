@@ -205,11 +205,11 @@
 			<ul class = "join_list">
 			<!-- 4글자 이상 입력 -->
 			<li>
-				<input type = "text" id = "member_id" name = "member_id" class = "text" placeholder="*아이디 입력" style = "ime-mode:disabled; width:100%;" tabindex = "1" value="${memberLoggedIn.member_id }"  readonly>
+				<input type = "text" id = "member_id" name = "member_id" class = "text" placeholder="*아이디 입력" style = "ime-mode:disabled; width:100%; border:solid gray;" tabindex = "1" value="${memberLoggedIn.member_id }"  readonly>
 			</li>
 			<!-- 이름 입력 -->
 			<li>
-				<input type = "text" id = "member_name" name ="member_name" class = "text" placeholder="*이름 입력" style = " width:100%;" tabindex = "2" value="${memberLoggedIn.member_name }" required>
+				<input type = "text" id = "member_name" name ="member_name" class = "text" placeholder="*이름 입력" style = " width:100%; border:solid gray;" tabindex = "2" value="${memberLoggedIn.member_name }" required>
 				<p class = "example" id = "#">한글로만 작성해주세요</p>
 			</li>
 			<!-- 기존 비밀번호 입력 -->
@@ -231,7 +231,7 @@
 			</li>
 			<!-- 생년월일 선택 -->
 			<li>
-				<input type = "date" id = "birthday" name = "birthday" class = "text" placeholder="*생년월일 입력" style = " width:100%;" tabindex = "5" value="${memberLoggedIn.birthday }" required>
+				<input type = "date" id = "birthday" name = "birthday" class = "text" placeholder="*생년월일 입력" style = " width:100%; border:solid gray;" tabindex = "5" value="${memberLoggedIn.birthday }" required>
 				<p class = "example" id = "#">정확한 생년월일을 입력해주세요</p>
 			</li>
 			
@@ -254,7 +254,7 @@
 			
 			<!-- 휴대전화 입력 -->
 			<li>
-				<input type = "text" id = "phone" name = "phone" class = "text" placeholder="*휴대폰번호입력" style = " width:100%;" tabindex = "5"  value="${memberLoggedIn.phone }" required>
+				<input type = "text" id = "phone" name = "phone" class = "text" placeholder="*휴대폰번호입력" style = " width:100%;  border:solid gray;" tabindex = "5"  value="${memberLoggedIn.phone }" required>
 				<p class = "example" id = "#">(-없이)01012345678</p>
 			</li>
 			
@@ -276,23 +276,23 @@
 			}
 			</style>
 			<li>
-				<input type = "text" id = "roadAddress" name = "address" class = "text" placeholder="*주소" style = "width : 450px;" value="${memberLoggedIn.address }" required>
+				<input type = "text" id = "roadAddress" name = "address" class = "text" placeholder="*주소" style = "width : 450px;  border:solid gray;" value="${memberLoggedIn.address }" required>
 				<input type = "button" value = "주소찾기" class = "btn_check" style = "border:none;" onclick="DaumPostcode()">
 				<p class = "example" id = "#">주소찾기버튼으로 쉽게 찾아보세요</p>
 			</li>
 			
 			<li>
-				<input type = "text" id = "detail_address" name = "detail_address" class = "text" placeholder="*상세주소입력" style = " width:100%;" tabindex = "5"  value="${memberLoggedIn.detail_address }"required>
+				<input type = "text" id = "detail_address" name = "detail_address" class = "text" placeholder="*상세주소입력" style = " width:100%;  border:solid gray;" tabindex = "5"  value="${memberLoggedIn.detail_address }"required>
 				<p class = "example" id = "#">주소찾기 버튼으로 주소를 찾은 후 나머지 주소를 입력해주세요</p>
 			</li>
 			
 			<li>
-				<input type = "text" id = "post_no" name = "post_no" class = "text" placeholder="*우편번호입력" style = " width:100%;" tabindex = "5"  value="${memberLoggedIn.post_no }" required>
+				<input type = "text" id = "post_no" name = "post_no" class = "text" placeholder="*우편번호입력" style = " width:100%;  border:solid gray;" tabindex = "5"  value="${memberLoggedIn.post_no }" required>
 				<p class = "example" id = "#">우편번호는 주소찾기 버튼을 활용할 시 자동으로 채워집니다.</p>
 			</li>
 			
 			<li>
-				<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px;"  value="${memberLoggedIn.email }" required>
+				<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px;  border:solid gray;"  value="${memberLoggedIn.email }" required>
 				<span style = "color : #777777;font-size:15px; margin-left:14px;"><strong>이메일 수신 :</strong></span><input type = "checkbox" name = "email_alarm" value="Y" style = "margin-left: 5px;" ${memberLoggedIn.email_alarm=='Y'?"checked":"" }>
 				<p class = "example" id = "#">이메일 인증을 위해 이메일 형식에 맞게 입력해주세요.</p>
 				
@@ -334,5 +334,14 @@
 			</ul>
 		
 		</form>
+			<button type = "button" onclick="withdraw()">회원탈퇴</button>
 	</div>
+	
+	
+	<script>
+		function withdraw() {
+			location.href="${pageContext.request.contextPath}/membershipWithdraw.do";
+		}
+	</script>
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

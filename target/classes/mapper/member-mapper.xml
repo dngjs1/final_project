@@ -57,6 +57,8 @@
 		where member_id=#{member_id}
 	</update>
 	
-	
+	<update id="withdrawMember" parameterType="string">
+		update member set esc_status='E' where member_id=#{member_id}
+	</update>
  
 </mapper>
