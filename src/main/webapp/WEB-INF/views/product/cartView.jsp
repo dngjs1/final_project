@@ -62,15 +62,17 @@
 		}
 		var total_sum=0;
 		if(sum>=20000){
-			$(".deli-price").parent().hide();
+			deli="무료";
 			total_sum=sum;
 		}else if(sum==0){
-			$(".deli-price").parent().hide();
+			deli="0원";
+			$(".deli-price").text("0원");
 			total_sum=0;
 		}else{
+			deli="2,500원";
 			total_sum=sum+2500;
 		}
-		
+		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	}
@@ -85,23 +87,24 @@
 				sum=sum+one_sum;
 			}
 		}
+		var deli="";
 		var total_sum=0;
 		if(sum>=20000){
-			$(".deli-price").parent().hide();
+			deli="무료";
 			total_sum=sum;
 		}else if(sum==0){
-			$(".deli-price").parent().hide();
+			deli="0원";
 			total_sum=0;
 		}else{
-			$(".deli-price").parent().show();
+			deli="2,500원";
 			total_sum=sum+2500;
 		}
-		
+		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(total_sum==0){
 			$(".total-price").siblings().hide();
-			$(".total-price").text("장바구니에 상품을 골라주세요.");
+			$(".total-price").text("0");
 		}
 	}
 	
@@ -467,7 +470,7 @@
 					<dl>
 					 <dt>선결제배송비</dt>
 					 <dd>
-					 	<span class = "deli-price" style = "padding-left : 10px;">2500</span>원
+					 	<span class = "deli-price" style = "padding-left : 10px;"></span>
 					 </dd>
 					</dl>
 				</div>
