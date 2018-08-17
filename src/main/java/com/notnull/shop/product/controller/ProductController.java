@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.sql.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -276,9 +280,22 @@ public class ProductController {
 	public String buyForm2(Model model,HttpServletRequest request) {
 		String[] cart_codes=request.getParameterValues("check");
 		List<CartJoinList> cartList=service.selectCartList(cart_codes);
-		System.out.println(cartList);
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
+	}
+	
+	@RequestMapping("/buyView.do")
+	public String buyView(BuyInfo buyInfo,Model model,HttpServletRequest request) {
+		System.out.println(buyInfo);
+		String[] product_option_codes = request.getParameterValues("product_option_code1");
+		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
+		List<BuyInfo> buyList=null;
+		for(int i=0;i<product_option_codes.length;i++) {
+			/*BuyInfo buy=
+			System.out.println(product_option_codes[i]);
+			System.out.println(buy_quantitys[i]);*/
+		}
+		return "/product/buyView";
 	}
 	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
