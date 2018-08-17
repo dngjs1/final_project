@@ -126,7 +126,7 @@ span.star-prototype > * {
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" id="frm" method="get">
-				<input type="hidden" name="member_id" id="member_id" value="${memberLoggedIn.member_id}"/>
+				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
@@ -179,7 +179,7 @@ span.star-prototype > * {
 			<script>
 			$(function(){
 				$('#cart').click(function(e){
-					var member_id=$('#member_id').val();
+					var member_id=$('.member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
 						e.preventDefault();

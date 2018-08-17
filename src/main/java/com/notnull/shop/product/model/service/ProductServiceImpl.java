@@ -14,6 +14,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -160,6 +161,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<CartJoinList> selectCartList(String member_id) {
 		return productDAO.selectCartList(sqlSession,member_id);
 	}
+	
+	@Override
+	public List<CartJoinList> selectCartList(String[] cart_codes) {
+		return productDAO.selectCartList(sqlSession,cart_codes);
+	}
 
 	@Override
 	public int plusCart(Cart cart) {
@@ -175,7 +181,17 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteCart(int cart_code) {
 		return productDAO.deleteCart(sqlSession,cart_code);
 	}
-	
+
+	@Override
+	public int deleteSelectCart(String[] cart_codes) {
+		return productDAO.deleteSelectCart(sqlSession,cart_codes);
+	}
+
+	@Override
+	public ProductJoinOption selectProductJoinOption(int product_option_code) {
+		return productDAO.selectProductJoinOption(sqlSession,product_option_code);
+	}
+
 	@Override
 	public int addQuestion(ProductQuestion productQuestion) {
 		return productDAO.addQuestion(sqlSession,productQuestion);
