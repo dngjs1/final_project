@@ -261,11 +261,6 @@ public class ProductController {
 	}
 		
 	@RequestMapping("/buyForm.do")
-<<<<<<< HEAD
-	public String buyForm(CartJoinList cartJoinList,Model model,HttpServletRequest request) {
-		//String productCode=request.getParameter("productCode");
-		System.out.println(cartJoinList);
-=======
 	public String buyForm(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		int cart_quantity=Integer.parseInt(request.getParameter("cart_quantity"));
@@ -274,7 +269,6 @@ public class ProductController {
 		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
 		model.addAttribute("productJoinOption",productJoinOption);
 		model.addAttribute("cart_quantity",cart_quantity);
->>>>>>> SUPER_branch
 		return "/product/buyForm";
 	}
 	
