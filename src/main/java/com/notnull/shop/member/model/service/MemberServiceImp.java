@@ -1,6 +1,7 @@
 package com.notnull.shop.member.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -134,6 +135,18 @@ public class MemberServiceImp implements MemberService {
 	public int withdrawMember(String id) {
 		
 		return memberDAO.withdrawMember(sqlSession, id);
+	}
+
+	@Override
+	public List<Member> memberList() {
+		
+		return memberDAO.memberList(sqlSession);
+	}
+
+	@Override
+	public Member selectMember(String id) {
+		
+		return memberDAO.selectMember(sqlSession, id);
 	}
 
 }
