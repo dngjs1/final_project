@@ -284,8 +284,8 @@ public class ProductController {
 		return "/product/buyForm";
 	}
 	
-	@RequestMapping("/buyView.do")
-	public String buyView(BuyInfo buyInfo,Model model,HttpServletRequest request) {
+	@RequestMapping("/buyEnd.do")
+	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		System.out.println(buyInfo);
 		String[] product_option_codes = request.getParameterValues("product_option_code1");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
@@ -295,7 +295,7 @@ public class ProductController {
 			System.out.println(product_option_codes[i]);
 			System.out.println(buy_quantitys[i]);*/
 		}
-		return "/product/buyView";
+		return "/product/buyEnd";
 	}
 	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
