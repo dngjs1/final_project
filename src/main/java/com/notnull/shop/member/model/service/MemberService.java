@@ -1,6 +1,7 @@
 package com.notnull.shop.member.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,4 +27,8 @@ public interface MemberService {
 	String selectEncode(String id);
 	
 	int withdrawMember(String id);
+	
+	List<Member> memberList();
+	
+	Member selectMember(String id);
 }
