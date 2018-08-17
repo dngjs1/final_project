@@ -4,6 +4,7 @@ package com.notnull.shop.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServlet;
@@ -421,7 +422,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberManagement.do")
-	public String memberManagement(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String memberManagement(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		
 		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
 			
@@ -437,9 +438,29 @@ public class MemberController {
 			return "redirect:/";
 		}
 		
-		
-		
+		List<Member> list = service.memberList();
+		System.out.println(list);
+		model.addAttribute("member",list);
 		
 		return "/member/memberManagement";
 	}
+	
+	@RequestMapping("management.do")
+	public String management(String member_id, Model model) {
+		
+		Member m = service.selectMember(member_id);
+		
+		System.out.println(m);
+		
+		model.addAttribute("member",m);
+		
+		return "/member/management";
+	}
+	
+	@RequestMapping("managementEnd.do")
+	public String managementEnd(String member_id) {
+		System.out.println(member_id);
+		return "";
+	}
+
 }

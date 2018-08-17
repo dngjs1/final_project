@@ -603,10 +603,12 @@
 		}
 		
 		.btn_submit01 {
+			margin-left : 5px;
 			display : inline-block;
 			width : 211px;
 			height : 60px;
 			background: #E2758C;
+			border : none;
 			color : #fff;
 			line-height: 58px;
 			font-weight: bold;
