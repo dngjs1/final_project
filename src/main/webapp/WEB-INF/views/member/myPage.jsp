@@ -176,7 +176,7 @@
 					</li>
 					
 					<li class = "submenu btm">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath }/memberManagement.do" target = "_self">
 							<span class = "txt txt_margin_bottom">회원관리</span>
 						</a>
 					</li>

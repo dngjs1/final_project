@@ -300,101 +300,114 @@
 			</style>
 			<div class = "mypage_wrap">
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 회원관리</h2>
-				<select id="sort">
-					<option value="member_level">회원등급</option>
-					<option value="member_level">상태</option>
-					<option value="member_level">회원등급</option>
-				</select>
+				<form action="${pageContext.request.contextPath }/managementEnd.do">
 				<table class = "order_board">
-						<col style = "width:5%;">
-					<%-- <colgroup>
+					 <colgroup>
+						<col style = "width:20%;">
+						<col style = "width:20%;">
+						<col style = "width:20%;">
+					</colgroup> 
+					<thead>
+					<tr>
+						<th scope="col" class = "#">ID</th>
+						<td>
+							<c:out value="${member.member_id }"></c:out>
+						</td>
+						<th scope="col" class = "#">우편번호</th>
+						<td><c:out value="${member.post_no }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">이름</th>
+						<td><c:out value="${member.member_name }"/></td>
+						<th scope="col" class = "#">주소</th>
+						<td><c:out value="${member.address }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">생년월일</th>
+						<td><c:out value="${member.birthday }"/></td>
+						<th scope="col" class = "#">상세주소</th>
+						<td><c:out value="${member.detail_address }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">성별</th>
+						<td>
+							${member.gender=='M'?"남자":"여자"}
+						</td>
+						<th scope="col" class = "#">전화번호</th>
+						<td><c:out value="${member.phone }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">가입일</th>
+						<td><c:out value="${member.join_date }"/></td>
+						<th scope="col" class = "#">이메일</th>
+						<td><c:out value="${member.email }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">회원등급</th>
+						<td>
+							<select name ="member_level" id="level">
+								<option value="admin" ${member.member_level=='admin'?"selected":"" }>admin</option>
+								<option value="user"  ${member.member_level=='user'?"selected":"" }>user</option>
+								<option value="user2" ${member.member_level=='user2'?"selected":"" }>user2</option>
+							</select>
+						</td>
+						<th scope="col" class = "#">이메일수신여부</th>
+						<td><c:out value="${member.email_alarm }"/></td>
+					</tr>
+					<tr>
+						<th scope="col" class = "#">상태</th>
+						<td>
+							<select name ="esc_status" id="esc_status">
+								<option value="Y" ${member.esc_status=='Y'?"selected":"" }>메일미인증</option>
+								<option value="N"  ${member.esc_status=='N'?"selected":"" }>일반회원</option>
+								<option value="E" ${member.esc_status=='E'?"selected":"" }>탈퇴회원</option>
+							</select>
+						</td>
+					</tr>
+					
+					
+					</thead>
+					<tbody>
+					
+					</tbody>
+				
+				</table>
+				<input type="submit" value="수정"/>
+				<input type="reset" value="취소"/>
+				</form>
+			</div>
+			<div class = "mypage_wrap2">
+				
+				<h2 class = "mypage_title02"><i class="shopping_Cart fas fa-shopping-cart"></i>구매목록</h2>
+				<table class = "order_board">
+					<colgroup>
+						<col style = "width:18%;">
 						<col style = "width:50%;">
 						<col style = "width:10%;">
 						<col style = "width:12%;">
 						<col style = "width:10%;">
-					</colgroup> --%>
+					</colgroup>
 					<thead>
 					<tr>
 						<th scope="col" class = "#">번호</th>
-						<th scope="col" class = "#">ID</th>
-						<th scope="col" class = "#">이름</th>
-						<th scope="col" class = "#">성별</th>
-						<th scope="col" class = "#">이메일</th>
-						<th scope="col" class = "#">회원등급</th>
-						<th scope="col" class = "#">가입일</th>
-						<th scope="col" class = "#">상태</th>
-						
-						<!-- <th scope="col" class = "#">ID</th>
-						<th scope="col" class = "#">이름</th>
-						<th scope="col" class = "#">생년월일</th>
-						<th scope="col" class = "#">성별</th>
-						<th scope="col" class = "#">전화번호</th>
-						<th scope="col" class = "#">우편번호</th>
-						<th scope="col" class = "#">주소</th>
-						<th scope="col" class = "#">상세주소</th>
-						<th scope="col" class = "#">이메일</th>
-						<th scope="col" class = "#">이메일수신여부</th>
-						<th scope="col" class = "#">회원등급</th>
-						<th scope="col" class = "#">가입일</th>
-						<th scope="col" class = "#">상태</th> -->
+						<th scope="col" class = "#">상품정보</th>
+						<th scope="col" class = "#">상품금액</th>
+						<th scope="col" class = "#">수량</th>
+						<th scope="col" class = "#">총금액</th>
 					</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${member }" var="m" varStatus="vs">
-							<tr>
-								<td><c:out value="${vs.count}"/></td>
-								<td><a href="${pageContext.request.contextPath }/management.do?member_id=${m.member_id}"><c:out value="${m.member_id }"/></a></td>
-								<td><c:out value="${m.member_name }"/></td>
-								<td>${m.gender=='M'?"남자":"여자"}</td>
-								<td><c:out value="${m.email }"/></td>
-								<td><option value=""><c:out value="${m.member_level }"/></td>
-								<td><c:out value="${m.join_date }"/></td>	
-								<td>
-									<c:if test="${m.esc_status eq 'Y' }">메일미인증</c:if>
-									<c:if test="${m.esc_status eq 'E' }">탈퇴</c:if>
-									<c:if test="${m.esc_status eq 'N' }">일반</c:if>
-								</td>
-							</tr>
-						</c:forEach>
-						
-							<%-- <c:forEach items="${member }" var="m" varStatus="vs">
-							<tr>
-								<td><a href="${pageContext.request.contextPath }/management.do?member_id=${m.member_id}"><c:out value="${m.member_id }"/></a></td>
-								<td><c:out value="${m.member_name }"/></td>
-								<td><c:out value="${m.birthday }"/></td>
-								<td>${m.gender=='M'?"남자":"여자"}</td>
-								<td><c:out value="${m.phone }"/></td>
-								<td><c:out value="${m.post_no }"/></td>
-								<td><c:out value="${m.address }"/></td>
-								<td><c:out value="${m.detail_address }"/></td>
-								<td><c:out value="${m.email }"/></td>
-								<td><c:out value="${m.email_alarm }"/></td>
-								<td><option value=""><c:out value="${m.member_level }"/></td>
-								<td><c:out value="${m.join_date }"/></td>	
-								<td>
-									<c:if test="${m.esc_status eq 'Y' }">메일미인증</c:if>
-									<c:if test="${m.esc_status eq 'E' }">탈퇴</c:if>
-									<c:if test="${m.esc_status eq 'N' }">일반</c:if>
-								</td>
-							</tr>
-						</c:forEach> --%>
-												
+						<tr>
+						<td colspan="5">장바구니가 비었습니다.</td>
+						</tr>
 					</tbody>
 				
 				</table>
-			</div>
-			
-			<div style = "height : 50px;">
 			
 			</div>
-
-
-			
-			
 		</div>
-	
-	
 	</div>
+
 
 
 </div>
