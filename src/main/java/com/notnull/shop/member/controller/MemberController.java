@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -399,6 +400,19 @@ public class MemberController {
 		}
 		
 		
+		
+		return"/common/msg";
+	}
+	
+	@RequestMapping("memberExitEnd.do")
+	public String memberExit(HttpServletRequest request, SessionStatus sessionStatus, Model model) {
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+		
+		int i = service.withdrawMember(m.getMember_id());
+		sessionStatus.setComplete();
+		
+		model.addAttribute("msg","회원탈퇴를 완료하였습니다.");
+		model.addAttribute("loc","/");
 		
 		return"/common/msg";
 	}
