@@ -141,8 +141,10 @@
 	}
 </style>
 
+
 <div class = "container">
-	<form name = "frm" id = "#" method="post" action = "#">
+	<form name = "frm" id = "#" method="post" action = "${pageContext.request.contextPath }/memberLogin.do">
+	<input type="hidden" name = "path_" id="path_" value="<c:out value="${path }"/>">
 	<div class = "member_wrap">
 		<h1 class = "title">
 		<i class="login_icon fas fa-sign-in-alt"></i>
@@ -153,13 +155,13 @@
 		<!-- 아이디 -->
 		
 			<li>
-				<input type = "text" class = "user_id" id = "id" name = "id" placeholder="아이디를 입력하세요">
+				<input type = "text" class = "user_id" id = "id" name = "member_id" placeholder="아이디를 입력하세요" required>
 				
 			</li>
 		
 		<!-- 패스워드 -->
 			<li>
-				<input type = "password" class = "user_pw" id = "password" name = "password" placeholder="비밀번호를 입력하세요">
+				<input type = "password" class = "user_pw" id = "password" name = "member_pw" placeholder="비밀번호를 입력하세요" required>
 			</li>
 	
 		<!-- 로그인 아이디 비번 맞는지 체크 -->
@@ -169,20 +171,21 @@
 		
 		</ul>
 		
-		<a href = "#" class = "login_button" style = "text-decoration: none;">
+		<button type="submit" class="login_button" style = "text-decoration: none;" >
 			<span>로그인</span>
-		</a>
+		</button>
+		
 	
 	
 	<div class = "member_link">
 	
-	<a href = "#">회원가입</a>
+	<a href = "${pageContext.request.contextPath }/memberEnroll2.do">회원가입</a>
 	 |
 		
-	<a href = "#">아이디찾기</a>
+	<a href = "${pageContext.request.contextPath }/findMember.do">아이디찾기</a>
 	 |
 		
-	<a href = "#">비밀번호 찾기</a>
+	<a href = "${pageContext.request.contextPath }/findMember.do">비밀번호 찾기</a>
 	</div>
 	<style>
 		.etc_div .kakao_login {
