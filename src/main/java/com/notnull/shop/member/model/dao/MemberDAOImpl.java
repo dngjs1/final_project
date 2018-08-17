@@ -74,6 +74,12 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectEncode",id);
 	}
+
+	@Override
+	public int withdrawMember(SqlSessionTemplate sqlSession, String id) {
+		
+		return sqlSession.update("member.withdrawMember",id);
+	}
 	
 	
 

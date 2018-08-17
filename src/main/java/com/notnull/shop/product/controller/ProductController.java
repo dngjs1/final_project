@@ -31,6 +31,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -247,17 +248,45 @@ public class ProductController {
 	@RequestMapping("/deleteCart.do")
 	public String deleteCart(String cart_code,String member_id,RedirectAttributes re){
 		int result = service.deleteCart(Integer.parseInt(cart_code));
-		re.addAttribute("member_id", member_id);
+		re.addAttribute("member_id",member_id);
 		return "redirect:/cartView.do";
 	}
-	
+		
+	@RequestMapping("/deleteSelectCart.do")
+	public String deleteSelectCart(String member_id,HttpServletRequest request,RedirectAttributes re){
+		String[] cart_codes=request.getParameterValues("check");
+		int result = service.deleteSelectCart(cart_codes);
+		re.addAttribute("member_id",member_id);
+		return "redirect:/cartView.do";
+	}
+		
 	@RequestMapping("/buyForm.do")
+<<<<<<< HEAD
 	public String buyForm(CartJoinList cartJoinList,Model model,HttpServletRequest request) {
 		//String productCode=request.getParameter("productCode");
 		System.out.println(cartJoinList);
+=======
+	public String buyForm(Model model,HttpServletRequest request) {
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		int cart_quantity=Integer.parseInt(request.getParameter("cart_quantity"));
+		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
+		
+		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
+		model.addAttribute("productJoinOption",productJoinOption);
+		model.addAttribute("cart_quantity",cart_quantity);
+>>>>>>> SUPER_branch
 		return "/product/buyForm";
 	}
-
+	
+	@RequestMapping("/buyForm2.do")
+	public String buyForm2(Model model,HttpServletRequest request) {
+		String[] cart_codes=request.getParameterValues("check");
+		List<CartJoinList> cartList=service.selectCartList(cart_codes);
+		System.out.println(cartList);
+		model.addAttribute("cartList",cartList);
+		return "/product/buyForm";
+	}
+	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 	    String saveDir="";

@@ -130,4 +130,10 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.selectEncode(sqlSession, id);
 	}
 
+	@Override
+	public int withdrawMember(String id) {
+		
+		return memberDAO.withdrawMember(sqlSession, id);
+	}
+
 }

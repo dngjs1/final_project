@@ -9,6 +9,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -40,11 +41,17 @@ public interface ProductService {
 	
 	List<CartJoinList> selectCartList(String member_id);
 	
+	List<CartJoinList> selectCartList(String[] cart_codes);
+	
 	int plusCart(Cart cart);
 
 	int changeCart(Cart cart);
 	
 	int deleteCart(int cart_code);
+	
+	int deleteSelectCart(String[] cart_codes);
+	
+	ProductJoinOption selectProductJoinOption(int product_option_code);
 	
 	List<ProductReview> selectReview(int productCode);
 	

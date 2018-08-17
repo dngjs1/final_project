@@ -2,9 +2,11 @@ package com.notnull.shop.member.controller;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,6 +35,14 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcyptPasswordEncoder;
 	
+	@RequestMapping("/memberLogin2.do")
+	public String memberLogin2(HttpServletRequest request , Model model) {
+		
+		String path =request.getHeader("Referer");
+		model.addAttribute("path",path);
+		
+		return "member/memberLogin2";
+	}
 	
 	@RequestMapping("/memberEnroll.do")
 	public String memberEnroll() {
@@ -42,8 +52,6 @@ public class MemberController {
 	
 	@RequestMapping("/memberAgree.do")
 	public String memberagree(HttpServletRequest request) {
-		
-		System.out.println(request.getHeader("Referer"));
 		
 		return "member/memberAgree";
 	}
@@ -58,6 +66,24 @@ public class MemberController {
 	public String memberEnrollEnd2() {
 		
 		return "member/memberEnrollEnd2";
+	}
+	
+	@RequestMapping("/memberPoint.do")
+	public String memberPoint() {
+		
+		return "member/memberPoint";
+	}
+	
+	@RequestMapping("/memberOrderTotal.do")
+	public String memberOrderTotal() {
+		
+		return "member/memberOrderTotal";
+	}
+	
+	@RequestMapping("/memberExit.do")
+	public String memberExit() {
+		
+		return "member/memberExit";
 	}
 	
 	@RequestMapping(value="/memberEnrollEnd.do")
@@ -76,7 +102,7 @@ public class MemberController {
 		int result = service.insertMember(m, ip);
 		
 		String msg="";
-		String loc="/memberAgree.do";
+		String loc="/memberEnrollEnd2.do";
 		
 		if(result>0) {
 			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
@@ -123,45 +149,55 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogin.do")
-	public String memberLogin(String member_id, String member_pw, Model model, HttpServletRequest request) {
+	public String memberLogin(String member_id, String member_pw, String path_, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		System.out.println(member_id);
 		System.out.println(member_pw);
+		System.out.println(path_);
 		
 		Member m = service.loginCheck(member_id);
 		
 		String msg="";
 		String loc="/";
-		String view = "/common/msg";
+		String view = "/common/LoginMsg";
+		String path="memberLogin2.do";
+		path_=path_.substring(27);
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
 				
-				msg="SUCCESS LOGIN";
+				System.out.println("페이지경로는 : " +path_);
+				
+				System.out.println(path_);
+				model.addAttribute("loc",path_);
+				msg="로그인 성공!!";
 				
 			}else {
 				System.out.println("WRONG PASSWORD");
-				msg ="WRONG PASSWORD";
+				msg ="잘못된 비밀번호입니다.";
+				model.addAttribute("loc",path);
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
+			model.addAttribute("loc","/");
 		}
-		else {
+		else if(m!=null && m.getEsc_status().equals("E")) {
+			msg="탈퇴한 회원입니다.";
+			model.addAttribute("loc","/");
+		}else {
 			System.out.println("THERE'S NO ID");
-			msg ="WRONG ID";
+			msg ="없는 아이디입니다.";
+			model.addAttribute("loc","/");
+			
 		}
 		
-		System.out.println(request.getHeader("Referer"));
-		String path =request.getHeader("Referer");
-		path=path.substring(27);
-		System.out.println(path);
 		
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc",path);
+		model.addAttribute("oriPath",path_);
 		
 		
 		
@@ -256,13 +292,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myPage.do")
-	public String myPage() {
+	public String myPage(String memberId) {
+		
+		System.out.println(memberId);
+		
 		return "member/myPage";
 	}
 	
 	@RequestMapping("/memberUpdate.do")
 	public String memberUpdate() {
-		return "member/memberUpdate";
+		return "member/memberUpdate2";
 	}
 	
 	@RequestMapping("/memberUpdateEnd.do")
@@ -337,6 +376,70 @@ public class MemberController {
 //		
 //	}
 	
+	@RequestMapping("membershipWithdraw.do")
+	public String membershipWithdraw() {
+		
+		return"/member/membershipWithdraw";
+	}
 	
+	@RequestMapping("membershipWithdrawEnd.do")
+	public String membershipWithdrawEnd(String email, String pw,HttpServletRequest request, HttpServletResponse response, Model model,SessionStatus sessionStatus) {
+		
+		System.out.println(email);
+		System.out.println(pw);
 	
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+		boolean pwCheck = bcyptPasswordEncoder.matches(pw, m.getMember_pw());
+		
+		if(email.equals(m.getEmail()) && pwCheck==true) {
+			
+			int i = service.withdrawMember(m.getMember_id());
+			model.addAttribute("msg","탈퇴를 완료했습니다.");
+			model.addAttribute("loc","/");
+			sessionStatus.setComplete();
+		} else {
+			model.addAttribute("msg","회원정보가 올바르지 않습니다.");
+			model.addAttribute("loc","membershipWithdraw.do");
+		}
+		
+		
+		
+		return"/common/msg";
+	}
+	
+	@RequestMapping("memberExitEnd.do")
+	public String memberExit(HttpServletRequest request, SessionStatus sessionStatus, Model model) {
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+		
+		int i = service.withdrawMember(m.getMember_id());
+		sessionStatus.setComplete();
+		
+		model.addAttribute("msg","회원탈퇴를 완료하였습니다.");
+		model.addAttribute("loc","/");
+		
+		return"/common/msg";
+	}
+	
+	@RequestMapping("memberManagement.do")
+	public String memberManagement(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
+			
+		if(!(m.getMember_id().equals("admin"))) {
+			  response.setContentType("text/html; charset=UTF-8");
+
+	            PrintWriter out = response.getWriter();
+
+	            out.println("<script>alert('권한이 없습니다.'); </script>");
+
+	            out.flush(); 
+
+			return "redirect:/";
+		}
+		
+		
+		
+		
+		return "/member/memberManagement";
+	}
 }
