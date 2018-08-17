@@ -9,6 +9,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 <link rel="stylesheet" type="text/css" href="${path }/resources/css/daterangepicker.css" />
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 input[name="datetimes"]{cursor: pointer;}
@@ -37,8 +38,7 @@ input[name="datetimes"]{cursor: pointer;}
 				</div>
 				<br><br><br>
 				<div style="float: right;">
-					<button class="btn btn-primary" onclick="buy()">구매</button>
-					<button class="btn btn-primary">장바구니</button>
+					<button class="btn btn-primary" onclick="buy()">대여</button>
 				</div>
 				<br>
 				<hr>
@@ -75,7 +75,7 @@ input[name="datetimes"]{cursor: pointer;}
 	});
 </script>
  
-
+<!-- 결제 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 <script>
