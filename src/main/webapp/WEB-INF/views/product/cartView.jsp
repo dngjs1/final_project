@@ -610,6 +610,7 @@
 			background: #E2758C;
 			border : none;
 			color : #fff;
+			font-size : 18px;
 			line-height: 58px;
 			font-weight: bold;
 			text-align: center;
