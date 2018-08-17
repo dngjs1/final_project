@@ -1,6 +1,7 @@
 package com.notnull.shop.member.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -53,7 +54,7 @@ public class MemberServiceImp implements MemberService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[SHOP 서비스 이메일 인증]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://"+ip+":9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://"+ip+":9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_self'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("euichan", "shop TEST");
 		sendMail.setTo(m.getEmail());
 		sendMail.send();
@@ -128,6 +129,24 @@ public class MemberServiceImp implements MemberService {
 	public String selectEncode(String id) {
 		
 		return memberDAO.selectEncode(sqlSession, id);
+	}
+
+	@Override
+	public int withdrawMember(String id) {
+		
+		return memberDAO.withdrawMember(sqlSession, id);
+	}
+
+	@Override
+	public List<Member> memberList() {
+		
+		return memberDAO.memberList(sqlSession);
+	}
+
+	@Override
+	public Member selectMember(String id) {
+		
+		return memberDAO.selectMember(sqlSession, id);
 	}
 
 }

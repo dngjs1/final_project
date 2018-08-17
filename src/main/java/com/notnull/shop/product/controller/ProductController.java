@@ -12,15 +12,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.config.PropertySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.Cart;
@@ -30,8 +31,10 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -45,7 +48,8 @@ public class ProductController {
 	
 	
 	@RequestMapping("/product.do")
-	public String selectProductList(Model m) {
+	public String selectProductList(Model m ,HttpServletRequest request) {
+
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
@@ -74,7 +78,6 @@ public class ProductController {
 		String[] sleft_amounts=request.getParameterValues("left_amount");
 		
 		List<ProductOption> productOptionList=new ArrayList<ProductOption>();
-		if(sizes[0].length()>0 && sleft_amounts[0].length()>0) {
 			int[] left_amounts = new int[sleft_amounts.length];
 			
 			for(int i=0;i<sleft_amounts.length;i++) {
@@ -88,7 +91,6 @@ public class ProductController {
 				productOption.setOption_size(sizes[i]);
 				productOptionList.add(productOption);
 			}
-		}
 		
  		/*상품사진 처리*/
         List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
@@ -185,11 +187,16 @@ public class ProductController {
 		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		List<ProductOption> optionList =service.selectOption(productCode);
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
-
+		List<ProductDetailImg> detailImgList=service.selectDetailImg(productCode);
+		List<ProductImg> imgList=service.selectImgList(productCode);
 		
+
+
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("reviewImgList",reviewImgList);
+		model.addAttribute("detailImgList",detailImgList);
+		model.addAttribute("imgList",imgList);
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
@@ -197,17 +204,30 @@ public class ProductController {
 		
 		request.setAttribute("reviewList", productReviewList);
 		
+		//문의사항
+		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
+		request.setAttribute("questionList", questionList);
 		return "/product/productView";
 	}
 
 	@RequestMapping("/cartInsert.do")
-	public void cartInsert(Cart cart,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void cartInsert(Cart cart,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.
-		System.out.println(cart);
 		int productCode=cart.getProduct_code();
-		List<ProductOption> optionList =service.selectOption(productCode);
-		int result=service.insertCart(cart);
+		List<CartJoinList> cartList=service.selectCartList(cart.getMember_id());
+		int result=0;
+		boolean check=false;
+		for(CartJoinList cartJoin: cartList) {
+			if(cartJoin.getProduct_option_code()==cart.getProduct_option_code()) {
+				cart.setCart_code(cartJoin.getCart_code());
+				result=service.plusCart(cart);
+				check=true;
+			}
+		}
+		if(!check) {
+			result=service.insertCart(cart);
+		}
 		response.getWriter().print(result);
 	}
 	
@@ -215,18 +235,52 @@ public class ProductController {
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
-		System.out.println(cartList);
 		model.addAttribute("cartList",cartList);
 		return "/product/cartView";
-		
 	}
 	
+	@RequestMapping("/changeCart.do")
+	public void changeCart(Cart cart,HttpServletResponse response) throws IOException {
+		int result = service.changeCart(cart);
+		response.getWriter().print(result);
+	}
+	
+	@RequestMapping("/deleteCart.do")
+	public String deleteCart(String cart_code,String member_id,RedirectAttributes re){
+		int result = service.deleteCart(Integer.parseInt(cart_code));
+		re.addAttribute("member_id",member_id);
+		return "redirect:/cartView.do";
+	}
+		
+	@RequestMapping("/deleteSelectCart.do")
+	public String deleteSelectCart(String member_id,HttpServletRequest request,RedirectAttributes re){
+		String[] cart_codes=request.getParameterValues("check");
+		int result = service.deleteSelectCart(cart_codes);
+		re.addAttribute("member_id",member_id);
+		return "redirect:/cartView.do";
+	}
+		
 	@RequestMapping("/buyForm.do")
 	public String buyForm(Model model,HttpServletRequest request) {
-		//String productCode=request.getParameter("productCode");
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		int cart_quantity=Integer.parseInt(request.getParameter("cart_quantity"));
+		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
+		
+		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
+		model.addAttribute("productJoinOption",productJoinOption);
+		model.addAttribute("cart_quantity",cart_quantity);
 		return "/product/buyForm";
 	}
-
+	
+	@RequestMapping("/buyForm2.do")
+	public String buyForm2(Model model,HttpServletRequest request) {
+		String[] cart_codes=request.getParameterValues("check");
+		List<CartJoinList> cartList=service.selectCartList(cart_codes);
+		System.out.println(cartList);
+		model.addAttribute("cartList",cartList);
+		return "/product/buyForm";
+	}
+	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 	    String saveDir="";
@@ -294,15 +348,7 @@ public class ProductController {
 		return "product/productReviewTest";
 	}
 
-	
-	@RequestMapping("/question.do")
-	public String productQuestion(Model model,HttpServletRequest request) {
-		String p_question_content=request.getParameter("questionContent");
-		System.out.println(p_question_content);
-		
-		return "";
-		
-	}
+
 	
 	@RequestMapping("/reviewStarOrder.do")
 	public String reviewStarOrder(Model model) {
@@ -336,4 +382,21 @@ public class ProductController {
 		
 	}
 	
+	
+	@RequestMapping("/addQuestion.do")
+	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
+		int productCode=Integer.parseInt(request.getParameter("productCode"));
+		
+		System.out.println(productQuestion);
+		int result=service.addQuestion(productQuestion);
+		System.out.println(result);
+		request.setAttribute("productCode", productCode);
+		
+		String re = "redirect:/productView.do"+"?productCode="+productCode;
+
+		return re;
+		
+	}
+	
+
 }

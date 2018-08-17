@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -30,6 +31,7 @@
 				src="https://t1.daumcdn.net/cfile/tistory/231235395466C11011 "
 				style="height: 350px;" alt="세번째 슬라이드 ">
 		</div>
+		
 	</div>
 	<a class="carousel-control-prev " href="#carouselExampleIndicators "
 		role="button " data-slide="prev "> <span
@@ -48,7 +50,7 @@
 
 <div id="container">
 	<div class="empty-box" style="height: 40px;">
-		`
+		
 		<!-- 위 아래 여백을 위한 빈 박스 생성 -->
 		<!-- 추후 위 아래 여백 간격 조절할 때 활용하기 위해 생성함 -->
 	</div>
@@ -178,6 +180,7 @@
 				<!-- 왼쪽 내비게이션을 위한 빈 div여백 -->
 			</div>
 			<div class="menu_section">
+
 
 
 
@@ -313,6 +316,7 @@
 								</div>
 
 							</div>
+							
 						</div>
 						
 						<!-- 사진은 위에서 아래의 순서대로 차례로 등록되어진다. -->
@@ -320,6 +324,7 @@
 						<div class="hover-box">
 							<img src="./resources/images/camp-3.jpg" alt="camp-3.jpg"
 								class="img-thumbnail" />
+								
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
 									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i

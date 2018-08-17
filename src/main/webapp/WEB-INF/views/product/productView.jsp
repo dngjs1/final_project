@@ -1,3 +1,5 @@
+<%@page import="com.notnull.shop.product.model.vo.ProductQuestion"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -32,6 +34,7 @@ span.star-prototype > * {
 	cal.add(Calendar.DATE, 3);
 	SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd E요일");
 	String strdate = simpleDate.format(cal.getTime());
+	List<ProductQuestion> questionList =(List)request.getAttribute("questionList");
 	
 %>
 
@@ -93,13 +96,27 @@ span.star-prototype > * {
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${joinCategory.p_category_name}</span></p>
 <div class="row">
 	<div class="col-6">
-		<img style="width:100%;" alt="상품사진" src="http://www.oasekorea.com/00_ADMIN/Code/goodsimg_PIC01/AAAA00120141218008MM-1.jpg">
+	
+	<c:forEach var='imgList' items='${imgList }' varStatus="vs">
+		<c:if test="${vs.index==0}">
+  		<img width="300px" height="300px" src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"/>
+  		</c:if>
+  		<c:if test="${vs.index>0}">
+  		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"/>
+  		</c:if>
+  	</c:forEach>
 	</div>
 	<div class="col-6">
 		<hr style="border: 1.5px solid black;margin-top: 0px;">
 		<div style="margin-left:10px">
 			<p style="font-size:25px;font-weight:bold">${joinCategory.product_name}</p>
-			<p>별점 들어갈부분</p>
+			 <c:set var="total" value="0"/>
+			 <c:forEach var="review" items="${reviewList}" varStatus="vs">
+				<c:set var="total" value="${(total+review.review_star)}"/>
+				<c:set var="count" value="${vs.count }"/>
+			 </c:forEach>
+			 <span class="star-prototype">${total/count}</span>
+			 <c:out value="${count}개 상품평"/>
 			<hr>
 			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">${joinCategory.price}</span><span> 원</span></div>
 			<hr>
@@ -109,23 +126,47 @@ span.star-prototype > * {
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" id="frm" method="get">
-				<input type="hidden" name="member_id" id="member_id" value="${memberLoggedIn.member_id}"/>
+				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
-					<span>사이즈 </span>
-					<select name="size" style="font-size:15px;height:28px;" >
-						<c:forEach var="option" items="${optionList}">
-							<c:choose>
-							<c:when test="${option.left_amount<=0}">
-								<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
-							</c:otherwise>
-							</c:choose>
-						</c:forEach>
-		            </select>
-		            &emsp;&emsp;&emsp;
+					<c:choose>
+						<c:when test="${optionList.size()<2}">
+							<c:forEach var="option" items="${optionList}" varStatus="vs">
+								<c:choose>
+									<c:when test="${option.option_size == null}">
+										<span>재고 : ${option.left_amount}</span>
+										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
+									</c:when>
+									<c:when test="${option.left_amount<=0}">
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:when>
+									<c:otherwise>
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<span>사이즈 </span>
+							<select name="product_option_code" style="font-size:15px;height:28px;" >
+								<c:forEach var="option" items="${optionList}">
+									<c:choose>
+									<c:when test="${option.left_amount<=0}">
+										<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+									</c:otherwise>
+									</c:choose>
+								</c:forEach>
+				            </select>
+						</c:otherwise>
+					</c:choose>
+					&emsp;&emsp;&emsp;
 	            </c:if>
 				<span>수량 </span><input type="text" name="cart_quantity" value="1" size="2" style="height:25px;" readonly/>
 				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
@@ -138,14 +179,14 @@ span.star-prototype > * {
 			<script>
 			$(function(){
 				$('#cart').click(function(e){
-					var member_id=$('#member_id').val();
+					var member_id=$('.member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
 						e.preventDefault();
 					}else{
 						var productInfo={
 								member_id:member_id,
-								product_option_code:$("[name=size]").val(),
+								product_option_code:$("[name=product_option_code]").val(),
 								product_code:$("[name=product_code]").val(),
 								cart_quantity:$("[name=cart_quantity]").val()
 						};
@@ -219,20 +260,22 @@ span.star-prototype > * {
   <table class="table table-bordered">
   	<tr>
   		<td width="15%" style="background-color:#D5D5D5">품명 및 모델명</td>
-  		<td width="35%">gg</td>
+  		<td width="35%">${joinCategory.p_category_name}</td>
   		<td width="15%" style="background-color:#D5D5D5">출시일</td>
-  		<td width="35%">gg</td>
+  		<td width="35%">${joinCategory.release_date}</td>
   	</tr>
   	<tr>
   		<td width="15%" style="background-color:#D5D5D5">제조국 (원산지)</td>
-  		<td width="35%">gg</td>
+  		<td width="35%">${joinCategory.country}</td>
   		<td width="15%" style="background-color:#D5D5D5">크기</td>
-  		<td width="35%">gg</td>
+  		<td width="35%">${joinCategory.real_size}</td>
   	</tr>
   </table>
   
   	<div>
-  	<img src="//thumbnail12.coupangcdn.com/thumbnails/remote/q89/image/vendor_inventory/images/2018/05/11/11/9/d758f18b-6718-4ad3-ab4d-97b7b5cc5495.jpg" onerror="this.src='//t1a.coupangcdn.com/thumbnails/remote/622x622/image/coupang/common/no_img_1000_1000.png'" width="100%" alt="">
+  			<c:forEach var='deImg' items='${detailImgList }' varStatus="vs">
+  				<img  src="${path }/resources/upload/productDetailImg/${deImg.new_p_detail_img_path }" alt="상세상품"/>
+  			</c:forEach>
  	</div>
   </div>
   <div id="section2" class="container tab-pane fade">
@@ -248,9 +291,6 @@ span.star-prototype > * {
  <div> 
 	 <c:set var="total" value="0"/>
 	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
-		<%-- <tr>
-			<td>${review.review_star }</td><br>
-		</tr> --%>
 		<c:set var="total" value="${(total+review.review_star)}"/>
 		<c:set var="count" value="${vs.count }"/>
 	 </c:forEach>
@@ -301,118 +341,110 @@ $('.star-prototype').generateStars();
   <hr>
   상품문의
   <div class="container">
- <form id="commentForm" name="commentForm" method="post">
+ <form id="commentForm" action="${path}/addQuestion.do?productCode=${joinCategory.product_code}" name="commentForm" method="post">
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+                <span><strong>Question</strong></span> 
             </div>
             <div>
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="문의사항을 입력하세요"></textarea>
+                            <textarea  style="width: 1100px" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>
+                            <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
+							<input type='hidden' id="member_id" name='member_id' value='${memberLoggedIn.member_id}'/>
+							<input type='hidden' name='question_level' value='1'/>
+							<input type='hidden' name='p_question_code_ref' value='0' />
+                            <input type="submit" class="btn pull-right btn-success" value="등록"  />                
                             </div>
                         </td>
                     </tr>
                 </table>
+                
             </div>
         </div>
-        <input type="hidden" id="b_code" name="b_code" value="${result.code }" />        
   </form>
   
   </div>
-  <div class="container">
-    <form id="commentListForm" name="commentListForm" method="post">
-        <div id="commentList">
-        </div>
-    </form>
-</div>
-<script>
-/*
- * 댓글 등록하기(Ajax)
- */
-function fn_comment(code){
-    
-    $.ajax({
-        type:'POST',
-        url : "<c:url value='addQuestion.do'/>",
-        data:$("#commentForm").serialize(),
-        success : function(data){
-            if(data=="success")
-            {
-                getCommentList();
-                $("#comment").val("");
-            }
-        },
-        error:function(request,status,error){
-            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-       }
-        
-    });
-}
- 
-/**
- * 초기 페이지 로딩시 댓글 불러오기
- */
-$(function(){
-    
-    getCommentList();
-    
-});
- 
-/**
- * 댓글 불러오기(Ajax)
- */
-function getCommentList(){
-    
-    $.ajax({
-        type:'GET',
-        url : "<c:url value='questionList.do'/>",
-        dataType : "json",
-        data:$("#commentForm").serialize(),
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-        success : function(data){
-            
-            var html = "";
-            var cCnt = data.length;
-            
-            if(data.length > 0){
-                
-                for(i=0; i<data.length; i++){
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                    html += data[i].comment + "<tr><td></td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
-                }
-                
-            } else {
-                
-                html += "<div>";
-                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                html += "</table></div>";
-                html += "</div>";
-                
-            }
-            
-            $("#cCnt").html(cCnt);
-            $("#commentList").html(html);
-            
-        },
-        error:function(request,status,error){
-            
-       }
-        
-    });
-}
 
-</script>
-
-  <div> 문의자  , 문의날짜, 문의내용</div>
+			<table id="tbl-comment">
+				    <%
+				    if(questionList != null){
+				        for(ProductQuestion productQuestion : questionList)
+				        {
+				       	 if(productQuestion.getQuestion_level()==1){%>
+					    <tr class='level1'>
+					        <td>
+					            <sub class=comment-writer><%=productQuestion.getMember_id() %></sub>
+					            <sub class=comment-date><%=productQuestion.getQuestion_date()%></sub>
+						    <br /> <br />
+					            <%=productQuestion.getP_question_content() %>
+						</td>
+					        <td>
+					            <button class="btn btn-outline-success btn-sm" value="<%=productQuestion.getP_question_code()%>">답글</button>
+					            <button class="btn btn-outline-dark btn-sm" value="<%=productQuestion.getP_question_code()%>">삭제</button>
+					        </td>
+					        
+					    </tr>
+				  		<%}
+				        else
+				        {%>
+				        	<tr class='level2'>
+				        		<td style="padding-left: 40px">
+				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        			<sub><%=productQuestion.getQuestion_date()%></sub>
+				        			<br>
+				        			<%=productQuestion.getP_question_content()%>
+				        		</td>
+				        		<td></td>
+				        	</tr>
+				        	
+				     	<% }
+				        
+				    	}   
+				   } %>
+				 	
+			        <script>
+			      		var logIn="<c:out value='${memberLoggedIn.member_id}'/>";
+			        	$(".btn-outline-success").on('click',function(e){
+			        		if(logIn!=null){
+			        		//화면에 출력될 답글 입력창 만들기
+			        		var tr=$("<tr></tr>");	//태그생성
+			        		var html="<td style='display:none;text-align:left;' colspan=2>";
+			        		html+='<form action="${path}/addQuestion.do?productCode=${joinCategory.product_code}" method="post">';
+			        		html+="<input type='hidden' name='product_code' value='${joinCategory.product_code }'/>";
+			        		html+="<input type='hidden' name='member_id' value='${memberLoggedIn.member_id}'/>";
+			        		html+="<input type='hidden' name='question_level' value='2'/>";
+			        		html+="<input type='hidden' name='p_question_code_ref' value='"+$(this).val()+"'/>";			        		
+			        		html+="<textarea name='p_question_content' cols='60' rows='1'></textarea>";
+			        		html+="<button type='submit' class='btn-insert2'>등록</button>";
+			        		html+="</form></td>";
+			        		//위에서 작성한 html구문을 tr 변수 text노드에 삽입
+			        		tr.html(html);
+			        		//작성된 tr 태그를 본 html 구문의 (tr class=level1) 뒤에 삽입
+			        		tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
+			        		//이벤트가 1회만 발생하게 제한
+			        		$(this).off('click');
+			        		//답글달고 버튼을 누르면 해당 서블릿에 데이터 전송
+			        		tr.find('form').submit(function(e){
+			        			if(logIn==null){
+			        				fn_loginAlert();
+			        				e.preventDefault();
+			        			}	
+			        			var len=$(this).children('textarea').val().trim().length;
+			        			if(len==0){
+			        				e.preventDefault();
+			        				tr.find('textarea').focus();
+			        			}
+			        		});
+			        		}
+			        	});
+			        
+			        </script>
+   				 </table>
 	</div>
 </div>
  

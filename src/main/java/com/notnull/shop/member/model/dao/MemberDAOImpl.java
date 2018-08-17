@@ -1,5 +1,7 @@
 package com.notnull.shop.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -73,6 +75,24 @@ public class MemberDAOImpl implements MemberDAO {
 	public String selectEncode(SqlSessionTemplate sqlSession, String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectEncode",id);
+	}
+
+	@Override
+	public int withdrawMember(SqlSessionTemplate sqlSession, String id) {
+		
+		return sqlSession.update("member.withdrawMember",id);
+	}
+
+	@Override
+	public List<Member> memberList(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectList("member.memberList");
+	}
+
+	@Override
+	public Member selectMember(SqlSessionTemplate sqlSession, String id) {
+		
+		return sqlSession.selectOne("member.selectMember", id);
 	}
 	
 	

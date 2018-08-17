@@ -12,8 +12,10 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -48,12 +50,32 @@ public interface ProductDAO {
 	int insertCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
+	
+	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String[] cart_codes);
+	
+	int plusCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	int changeCart(SqlSessionTemplate sqlSession,Cart cart);
+	
+	int deleteCart(SqlSessionTemplate sqlSession,int cart_code);
 
+	int deleteSelectCart(SqlSessionTemplate sqlSession,String[] cart_codes);
+	
+	ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession,int product_option_code);
+	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
+	
+	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);
+	
+	List<ProductImg> selectImgList(SqlSessionTemplate sqlSession,int productCode);
 	
 	int reviewInsert(SqlSessionTemplate sqlSession,ProductReview productReview);
 	
 	int insertReviewImg(SqlSessionTemplate sqlSession,ProductReviewImg productReviewImg);
 	
 	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode);
+	
+	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
+	
+	List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession,int productCode);
 }

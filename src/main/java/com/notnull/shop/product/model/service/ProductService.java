@@ -9,8 +9,10 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -38,12 +40,31 @@ public interface ProductService {
 	int insertCart(Cart cart);
 	
 	List<CartJoinList> selectCartList(String member_id);
+	
+	List<CartJoinList> selectCartList(String[] cart_codes);
+	
+	int plusCart(Cart cart);
 
+	int changeCart(Cart cart);
+	
+	int deleteCart(int cart_code);
+	
+	int deleteSelectCart(String[] cart_codes);
+	
+	ProductJoinOption selectProductJoinOption(int product_option_code);
+	
 	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
 	
 	List<ProductReviewImgJoin> selectReviewImg(int productCode);
 	
+	List<ProductDetailImg> selectDetailImg(int productCode);
+	
+	List<ProductImg> selectImgList(int productCode);
+	
+	int addQuestion(ProductQuestion productQuestion);
+	
+	List<ProductQuestion> selectQuestion(int productCode);
 
 }

@@ -1,5 +1,7 @@
 package com.notnull.shop.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
@@ -25,5 +27,11 @@ public interface MemberDAO {
 	int memberUpdate(SqlSessionTemplate sqlSession, Member m);
 	
 	String selectEncode(SqlSessionTemplate sqlSession, String id);
+	
+	int withdrawMember(SqlSessionTemplate sqlSession, String id);
+	
+	List<Member> memberList(SqlSessionTemplate sqlSession);
+	
+	Member selectMember(SqlSessionTemplate sqlSession, String id);
 	
 }

@@ -16,6 +16,8 @@
 <script>
 
 
+
+
 /* 기본체크 */
 	$(".ckbox").each(function(index){
 		if($(this).prop("checked"))
@@ -196,6 +198,8 @@
 	}
 	
 </style>
+
+
 <div class = "container" style = "">
 
 	<div class = "joinstep">
@@ -565,12 +569,12 @@
 							text-decoration: none;
 						}
 						
-						.btn_black > a {
+						.btn_black{
 							text-decoration: none;
 						}
 					</style>
 					<div class = "regist-btn-box">
-						<a href = "${pageContext.request.contextPath}/memberEnroll.do" class = "btn_black">
+						<a href = "${pageContext.request.contextPath}/memberEnroll2.do" class = "btn_black" style = "text-decoration: none;">
 							다음
 						</a>
 					</div>

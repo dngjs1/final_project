@@ -12,8 +12,10 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
+import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
@@ -108,6 +110,56 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("product.selectCartList",member_id);
+	}
+
+	@Override
+	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String[] cart_codes) {
+		return sqlSession.selectList("product.selectCartList2",cart_codes);
+	}
+
+	@Override
+	public int plusCart(SqlSessionTemplate sqlSession, Cart cart) {
+		return sqlSession.update("product.plusCart",cart);
+	}
+
+	@Override
+	public int changeCart(SqlSessionTemplate sqlSession, Cart cart) {
+		return sqlSession.update("product.changeCart",cart);
+	}
+
+	@Override
+	public int deleteCart(SqlSessionTemplate sqlSession, int cart_code) {
+		return sqlSession.delete("product.deleteCart",cart_code);
+	}
+	
+	@Override
+	public int deleteSelectCart(SqlSessionTemplate sqlSession, String[] cart_codes) {
+		return sqlSession.delete("product.deleteSelectCart",cart_codes);
+	}
+
+	@Override
+	public ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession, int product_option_code) {
+		return sqlSession.selectOne("product.selectProductJoinOption",product_option_code);
+	}
+
+	@Override
+	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
+		return sqlSession.insert("product.addQuestion",productQuestion);
+	}
+
+	@Override
+	public List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectQuestion",productCode);
+	}
+
+	@Override
+	public List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectDetailImg",productCode);
+	}
+
+	@Override
+	public List<ProductImg> selectImgList(SqlSessionTemplate sqlSession, int productCode) {
+		return sqlSession.selectList("product.selectImgList",productCode);
 	}
 	
 	
