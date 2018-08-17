@@ -129,6 +129,20 @@
   	and member_id=#{member_id}
   	order by cart_date desc
   	</select>
+  	
+  	<select id="selectCartList2" parameterType="hashmap" resultType="java.util.Map">
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	from cart a
+  	join product_option b on a.product_option_code=b.product_option_code
+  	join product c on b.product_code=c.product_code
+  	join product_img d on c.product_code=d.product_code
+  	where p_img_code in (select min(p_img_code) from product_img group by product_code)
+  	and cart_code in
+  	<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+    	${array[index]}
+    </foreach>
+  	order by cart_date desc
+  	</select>
 
 	<update id="plusCart" parameterType="cart">
 		update cart set cart_quantity=cart_quantity+#{cart_quantity} where cart_code=#{cart_code}
@@ -141,6 +155,22 @@
 	<delete id="deleteCart" parameterType="_int">
 		delete from cart where cart_code=#{cart_code}
 	</delete>
+	
+	<delete id="deleteSelectCart" parameterType="java.util.Map">
+		delete from cart where cart_code in
+		<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+    		${array[index]}
+    	</foreach>
+	</delete>
+	
+	<select id="selectProductJoinOption" parameterType="int" resultType="productJoinOption">
+		select a.product_code, product_option_code, option_size, 
+		price, product_name, new_p_img_path from product a 
+		join product_option b on(a.product_code=b.product_code) 
+		join product_img c on a.product_code=c.product_code
+		where product_option_code=#{product_option_code}
+		and p_img_code = (select min(p_img_code) from product_img where product_code=a.product_code)
+	</select>
 	
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})

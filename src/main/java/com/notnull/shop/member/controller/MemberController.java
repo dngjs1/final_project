@@ -261,7 +261,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myPage.do")
-	public String myPage() {
+	public String myPage(String memberId) {
+		
+		System.out.println(memberId);
+		
 		return "member/myPage";
 	}
 	
