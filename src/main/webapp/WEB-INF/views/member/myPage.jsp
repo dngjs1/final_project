@@ -169,17 +169,21 @@
 						</a>
 					</li>
 					
-					<li class = "submenu">
+					<c:if test="${memberLoggedIn.member_id eq 'admin' }">
+						<li class = "submenu ">
+							<a href = "${pageContext.request.contextPath }/memberManagement.do" target = "_self">
+								<span class = "txt">회원관리</span>
+							</a>
+						</li>
+					</c:if>
+					
+					<li class = "submenu btm ">
 						<a href = "${pageContext.request.contextPath}/memberExit.do" target = "_self">
-							<span class = "txt">회원탈퇴</span>
+							<span class = "txt txt_margin_bottom">회원탈퇴</span>
 						</a>
 					</li>
 					
-					<li class = "submenu btm">
-						<a href = "${pageContext.request.contextPath }/memberManagement.do" target = "_self">
-							<span class = "txt txt_margin_bottom">회원관리</span>
-						</a>
-					</li>
+				
 					
 					<li>
 						<a>
