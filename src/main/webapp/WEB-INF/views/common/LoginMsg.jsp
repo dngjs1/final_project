@@ -12,9 +12,14 @@
 		<title>알림창</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-			alert("${msg}");
+			
 			/* location.href='${pageContext.request.contextPath}/${loc}?path_="${oriPath}"';		 */
+<<<<<<< HEAD
 			location.href='${loc}';		
+=======
+			location.href='${loc}';
+		
+>>>>>>> SUPER_branch
 			
 		</script>
 	</head>
