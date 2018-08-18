@@ -63,15 +63,19 @@
 			if(sum>=20000){
 				$("#deli").text("무료");
 				$("#last_price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				$('[name=last_price]').val(sum);
 			}else{
 				var last_price=sum+2500;
 				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				$('[name=last_price]').val(last_price);
 			}
 		}
 	}
 	
 	function chk_validate(){
-		if( parseInt($('#use_point').val()) > parseInt($('#curr_point').text())){
+		var use_point=parseInt($('#use_point').val());
+		var curr_point=parseInt($('#curr_point').text());
+		if( use_point > curr_point ){
     		alert("포인트가 부족합니다.");
     		return false;
     	}
@@ -79,18 +83,25 @@
 			alert("포인트를 입력해주세요.");
 			return false;
 		}
+		if(use_point < 0){
+			alert("양의 정수를 입력해주세요.");
+			return false;
+		}
 		return true;
 	}
 	$(function(){
 		$("#point_chk").change(function(){
+			var use_point = parseInt($('#use_point').val());
 	        var last_price=parseInt($("#last_price").text().replace(",",""));
 	        if($("#point_chk").prop("checked")){
-		        	last_price=last_price-parseInt($('#use_point').val());
+		        	last_price=last_price-use_point;
 		        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		        	$('[name=last_price]').val(last_price);
 		        	$('#use_point').attr("readonly",true);
 	        }else{
-	        	last_price=last_price+parseInt($('#use_point').val());
+	        	last_price=last_price+use_point;
 	        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        	$('[name=last_price]').val(last_price);
 	        	$('#use_point').attr("readonly",false);
 	        }
 	    });
@@ -264,7 +275,7 @@
 		<tr>
 		<tr>
 			<td>총 결재금액</td>
-			<td><span id="last_price"></span><span> 원</span></td>
+			<td><span id="last_price"></span><span> 원</span><input type="hidden" name="last_price"/></td>
 		<tr>
 		<tr>
 			<td>결제방법</td>
