@@ -640,7 +640,7 @@
 		</div> -->
 	</form>
 <script>
-$('#select-delete').click(function(){
+$('#select-delete').click(function(e){
 	var member_id=$('.member_id').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");

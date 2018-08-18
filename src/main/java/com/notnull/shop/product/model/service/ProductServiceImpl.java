@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.notnull.shop.product.model.dao.ProductDAO;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -190,6 +191,25 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductJoinOption selectProductJoinOption(int product_option_code) {
 		return productDAO.selectProductJoinOption(sqlSession,product_option_code);
+	}
+	
+	@Override
+	public int insertBuyList(List<BuyInfo> buyList) {
+		int result=0;
+		try {		
+			if(buyList.size()>0)
+			{
+				for(BuyInfo buy : buyList)
+				{
+					result=productDAO.insertBuy(sqlSession,buy);
+				}
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		return result;
 	}
 
 	@Override

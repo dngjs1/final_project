@@ -2,6 +2,7 @@ package com.notnull.shop.product.model.service;
 
 import java.util.List;
 
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -52,6 +53,8 @@ public interface ProductService {
 	int deleteSelectCart(String[] cart_codes);
 	
 	ProductJoinOption selectProductJoinOption(int product_option_code);
+	
+	int insertBuyList(List<BuyInfo> buyList);
 	
 	List<ProductReview> selectReview(int productCode);
 	

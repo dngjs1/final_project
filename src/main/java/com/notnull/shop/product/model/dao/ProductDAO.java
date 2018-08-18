@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -62,6 +63,8 @@ public interface ProductDAO {
 	int deleteSelectCart(SqlSessionTemplate sqlSession,String[] cart_codes);
 	
 	ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession,int product_option_code);
+	
+	int insertBuy(SqlSessionTemplate sqlSession,BuyInfo buy);
 	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	

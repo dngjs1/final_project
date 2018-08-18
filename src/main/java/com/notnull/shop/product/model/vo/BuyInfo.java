@@ -8,6 +8,7 @@ public class BuyInfo {
 	private int buy_quantity;
 	private String member_id;
 	private String receiver_post_no;
+	private String receiver_address;
 	private String receiver_d_address;
 	private String receiver_name;
 	private String phone2;
@@ -19,13 +20,15 @@ public class BuyInfo {
 	}
 
 	public BuyInfo(int buy_code, int product_option_code, int buy_quantity, String member_id, String receiver_post_no,
-			String receiver_d_address, String receiver_name, String phone2, String request, Date buy_date) {
+			String receiver_address, String receiver_d_address, String receiver_name, String phone2, String request,
+			Date buy_date) {
 		super();
 		this.buy_code = buy_code;
 		this.product_option_code = product_option_code;
 		this.buy_quantity = buy_quantity;
 		this.member_id = member_id;
 		this.receiver_post_no = receiver_post_no;
+		this.receiver_address = receiver_address;
 		this.receiver_d_address = receiver_d_address;
 		this.receiver_name = receiver_name;
 		this.phone2 = phone2;
@@ -37,8 +40,9 @@ public class BuyInfo {
 	public String toString() {
 		return "BuyInfo [buy_code=" + buy_code + ", product_option_code=" + product_option_code + ", buy_quantity="
 				+ buy_quantity + ", member_id=" + member_id + ", receiver_post_no=" + receiver_post_no
-				+ ", receiver_d_address=" + receiver_d_address + ", receiver_name=" + receiver_name + ", phone2="
-				+ phone2 + ", request=" + request + ", buy_date=" + buy_date + "]";
+				+ ", receiver_address=" + receiver_address + ", receiver_d_address=" + receiver_d_address
+				+ ", receiver_name=" + receiver_name + ", phone2=" + phone2 + ", request=" + request + ", buy_date="
+				+ buy_date + "]";
 	}
 
 	public int getBuy_code() {
@@ -79,6 +83,14 @@ public class BuyInfo {
 
 	public void setReceiver_post_no(String receiver_post_no) {
 		this.receiver_post_no = receiver_post_no;
+	}
+
+	public String getReceiver_address() {
+		return receiver_address;
+	}
+
+	public void setReceiver_address(String receiver_address) {
+		this.receiver_address = receiver_address;
 	}
 
 	public String getReceiver_d_address() {
