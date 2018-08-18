@@ -163,10 +163,6 @@ public class MemberController {
 		String loc="/";
 		String view = "/common/LoginMsg";
 		String path="memberLogin2.do";
-<<<<<<< HEAD
-=======
-//		path_=path_.substring(27);
->>>>>>> SUPER_branch
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {

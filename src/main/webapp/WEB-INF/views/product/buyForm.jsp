@@ -960,7 +960,7 @@ $(function(){
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
 		    	var frm=$("#frm");
-				var url="${pageContext.request.contextPath }/buyView.do";
+				var url="${pageContext.request.contextPath }/buyEnd.do";
 				frm.attr('method', 'post');
 				frm.attr("action",url);
 				frm.submit();

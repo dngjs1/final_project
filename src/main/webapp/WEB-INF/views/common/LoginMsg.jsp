@@ -14,13 +14,8 @@
 		<script>
 			
 			/* location.href='${pageContext.request.contextPath}/${loc}?path_="${oriPath}"';		 */
-<<<<<<< HEAD
-			location.href='${loc}';		
-=======
 			location.href='${loc}';
-		
->>>>>>> SUPER_branch
-			
+
 		</script>
 	</head>
 	<body>
