@@ -258,8 +258,9 @@
 			</div>
 			
 			<p class = "result_txt">
-				<b>회원가입이 정상적으로 <br>
-				완료되었습니다.</b>
+				<b>회원가입이 완료되었습니다.<br><br>
+				이메일 인증을 완료해주세요.
+				</b>
 			</p>
 			<a href ="${pageContext.request.contextPath }/" class = "btn_home" style = "color:#fff;">메인으로</a>
 		
