@@ -173,6 +173,8 @@ input[name="datetimes"]{cursor: pointer;}
         placeholder: '사진 또는 게시글을 등록하여 주십시오',
         tabsize: 2,
         height: 400,
+        minHeight:400,
+        maxHeight:400,
         lang:'ko-KR',
         focus:false,
         callbacks:{
@@ -196,8 +198,10 @@ input[name="datetimes"]{cursor: pointer;}
             contentType : false,
             enctype:'multipart/form-data',
             processData : false,
-            success : function(url) {
-               $('#summernote').summernote('insertImage', url);
+            success : function(url) 
+				$(el).summernote('editor.insertImage', url);
+				$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+				$('#img').val(url);
             }
         });
     }

@@ -13,10 +13,4 @@ public class RentalServiceImpl implements RentalService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public String setImageUpload(MultipartFile uploadFile) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
