@@ -36,4 +36,6 @@ public interface MemberDAO {
 	
 	Member selectMember(SqlSessionTemplate sqlSession, String id);
 	
+	int updateManagement(SqlSessionTemplate sqlSession, Member m);
+	
 }

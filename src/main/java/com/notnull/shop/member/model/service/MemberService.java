@@ -34,4 +34,6 @@ public interface MemberService {
 	
 	Member selectMember(String id);
 	
+	int updateManagement(Member m);
+	
 }
