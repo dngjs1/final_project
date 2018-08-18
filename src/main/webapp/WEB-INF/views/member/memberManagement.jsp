@@ -385,6 +385,7 @@
 					</tbody>
 				
 				</table>
+				${pageBar }
 			</div>
 			
 			<div style = "height : 50px;">

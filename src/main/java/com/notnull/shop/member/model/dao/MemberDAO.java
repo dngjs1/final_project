@@ -30,7 +30,7 @@ public interface MemberDAO {
 	
 	int withdrawMember(SqlSessionTemplate sqlSession, String id);
 	
-	List<Member> memberList(SqlSessionTemplate sqlSession);
+	List<Member> memberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	
 	Member selectMember(SqlSessionTemplate sqlSession, String id);
 	

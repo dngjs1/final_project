@@ -2,6 +2,7 @@ package com.notnull.shop.member.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -84,9 +85,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Member> memberList(SqlSessionTemplate sqlSession) {
+	public List<Member> memberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
 		
-		return sqlSession.selectList("member.memberList");
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		
+		return sqlSession.selectList("member.memberList",null,rb);
 	}
 
 	@Override

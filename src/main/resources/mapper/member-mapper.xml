@@ -62,7 +62,7 @@
 	</update>
 	
 	<select id="memberList" resultType="member">
-		select * from member
+		select * from member order by join_date desc
 	</select>
 	
 	<select id="selectMember" resultType="member">
