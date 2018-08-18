@@ -149,4 +149,10 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.selectMember(sqlSession, id);
 	}
 
+	@Override
+	public int selectMemberCount() {
+		// TODO Auto-generated method stub
+		return memberDAO.selectMemberCount(sqlSession);
+	}
+
 }

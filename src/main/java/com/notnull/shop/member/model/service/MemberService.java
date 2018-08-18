@@ -30,5 +30,8 @@ public interface MemberService {
 	
 	List<Member> memberList(int cPage, int numPerPage);
 	
+	int selectMemberCount();
+	
 	Member selectMember(String id);
+	
 }

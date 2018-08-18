@@ -448,9 +448,11 @@ public class MemberController {
 		
 		System.out.println(list);
 		
-		int totalCount = list.size();
+		int totalCount = service.selectMemberCount();
 		
-		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"/member/memberManagement");
+		System.out.println(totalCount);
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"memberManagement.do");
 		
 		mv.addObject("pageBar", pageBar);
 		mv.addObject("member",list);

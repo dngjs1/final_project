@@ -282,6 +282,7 @@
 					word-wrap : break-word;
 				}
 				
+				
 				.order_board th {
 					padding: 21px 0;
 					background: #b5babd;
@@ -300,11 +301,6 @@
 			</style>
 			<div class = "mypage_wrap">
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 회원관리</h2>
-				<select id="sort">
-					<option value="member_level">회원등급</option>
-					<option value="member_level">상태</option>
-					<option value="member_level">회원등급</option>
-				</select>
 				<table class = "order_board">
 					<colgroup>
 						<col style = "width:5%;">
@@ -344,9 +340,9 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${member }" var="m" varStatus="vs">
-							<tr>
-								<td><c:out value="${vs.count}"/></td>
-								<td><a href="${pageContext.request.contextPath }/management.do?member_id=${m.member_id}"><c:out value="${m.member_id }"/></a></td>
+							<tr class ="memberManage" style="cursor:pointer;">
+								<td ><c:out value="${vs.count+10*(cPage-1)}"/></td>
+								<td class="clickedId" ><c:out value="${m.member_id }"/></td>
 								<td><c:out value="${m.member_name }"/></td>
 								<td>${m.gender=='M'?"남자":"여자"}</td>
 								<td><c:out value="${m.email }"/></td>
@@ -383,8 +379,9 @@
 						</c:forEach> --%>
 												
 					</tbody>
-				
+					
 				</table>
+				<br>
 				${pageBar }
 			</div>
 			
@@ -402,4 +399,22 @@
 
 
 </div>
+
+
+<script>
+	$(function(){
+		$('.memberManage').hover(function(){
+				$(this).children().attr("style","background-color:#c8c8c8;");
+			},function(){
+				$(this).children().attr("style","background-color:#fcfcfb;");
+			});
+		
+		
+		$('.memberManage').click(function(){
+			var id = $(this).children('.clickedId').html();
+			location.href="${pageContext.request.contextPath }/management.do?member_id="+id; 
+		});
+	});
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
