@@ -28,7 +28,10 @@ public interface MemberService {
 	
 	int withdrawMember(String id);
 	
-	List<Member> memberList();
+	List<Member> memberList(int cPage, int numPerPage);
+	
+	int selectMemberCount();
 	
 	Member selectMember(String id);
+	
 }

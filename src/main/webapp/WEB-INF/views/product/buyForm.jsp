@@ -44,7 +44,7 @@
 			
 			if(result>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(result);
+				$("#last_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}else{
 				var last_price=result+2500;
 				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -62,14 +62,40 @@
 			$('#sum_total_price').html(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(sum>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(sum);
+				$("#last_price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}else{
 				var last_price=sum+2500;
 				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}
 		}
 	}
-
+	
+	function chk_validate(){
+		if( parseInt($('#use_point').val()) > parseInt($('#curr_point').text())){
+    		alert("포인트가 부족합니다.");
+    		return false;
+    	}
+		if($('#use_point').val()==""){
+			alert("포인트를 입력해주세요.");
+			return false;
+		}
+		return true;
+	}
+	$(function(){
+		$("#point_chk").change(function(){
+	        var last_price=parseInt($("#last_price").text().replace(",",""));
+	        if($("#point_chk").prop("checked")){
+		        	last_price=last_price-parseInt($('#use_point').val());
+		        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		        	$('#use_point').attr("readonly",true);
+	        }else{
+	        	last_price=last_price+parseInt($('#use_point').val());
+	        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        	$('#use_point').attr("readonly",false);
+	        }
+	    });
+	});
+	
 </script>
 <!-- 주소입력 API  -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -120,10 +146,11 @@
 	<h3>주문/결제</h3>
 	<hr style="border:2px solid #787878"><br>
 	<h5>구매자 정보</h5>
+<form id="frm">
 	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
 		<tr>
 			<td>이름</td>
-			<td>${memberLoggedIn.member_name }</td>
+			<td>${memberLoggedIn.member_name }<input type="hidden" name="member_id" value="${memberLoggedIn.member_id }"/></td>
 		<tr>
 		<tr>
 			<td>이메일</td>
@@ -139,30 +166,30 @@
 	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
 		<tr>
 			<td>이름</td>
-			<td><input type="text" value="${memberLoggedIn.member_name }" /></td>
+			<td><input type="text" name="receiver_name" value="${memberLoggedIn.member_name }" /></td>
 		<tr>
 		<tr>
 			<td>배송주소</td>
 			<td>
 				<div>
-					<input type = "text" id = "roadAddress" name = "address" class = "text" value="${memberLoggedIn.address}" style = "width : 300px;" required>
-					<input type = "text" id = "post_no" name = "post_no" class = "text" value="${memberLoggedIn.post_no}" tabindex = "5" required>
+					<input type = "text" id = "roadAddress" name = "receiver_address" class = "text" value="${memberLoggedIn.address}" style = "width : 300px;" required>
+					<input type = "text" id = "post_no" name = "receiver_post_no" class = "text" value="${memberLoggedIn.post_no}" tabindex = "5" required>
 					<input type = "button" value = "주소찾기" class = "btn_check" style = "border:none;" onclick="DaumPostcode()">
 				</div>
 				<div>
 					<br>
 					<span>상세주소 : </span>
-					<input type = "text" id = "detail_address" name = "detail_address" class = "text"  value="${memberLoggedIn.detail_address}" style = " width:440px;" tabindex = "5" required>
+					<input type = "text" id = "detail_address" name = "receiver_d_address" class = "text"  value="${memberLoggedIn.detail_address}" style = " width:440px;" tabindex = "5" required>
 				</div>
 			</td>
 		<tr>
 		<tr>
 			<td>연락처</td>
-			<td><input type="text" value="${memberLoggedIn.phone }" /></td>
+			<td><input type="text" name="phone2" value="${memberLoggedIn.phone }" /></td>
 		<tr>
 		<tr>
 			<td>배송 요청사항</td>
-			<td><input type="text" value="부재시 경비실에 맡겨주세요" size="50"/></td>
+			<td><input type="text" name="request" value="부재시 경비실에 맡겨주세요" size="50"/></td>
 		<tr>
 	</table>
 	<h5>상품 정보</h5>
@@ -180,6 +207,8 @@
 					<td scope="col" style="border-left:none;">
 						<div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.NEW_P_IMG_PATH }"> </div>
 						<div style="float: left;text-align:left;margin-left:15px;">
+							<input type="hidden" name="product_option_code1" value="${cart.PRODUCT_OPTION_CODE}"/>
+							<input type="hidden" name="buy_quantity1" value="${cart.CART_QUANTITY}"/>
 							<span>${cart.PRODUCT_NAME}</span><br>
 							<c:if test="${cart.OPTION_SIZE!=null}">
 								<span>(${cart.OPTION_SIZE})</span><br>
@@ -205,6 +234,8 @@
 						<span>(${productJoinOption.option_size })</span><br>
 						<span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>
 					</div>
+					<input type="hidden" name="product_option_code1" value="${productJoinOption.product_option_code}"/>
+					<input type="hidden" name="buy_quantity1" value="${cart_quantity}"/>
 				</td>
 				<td scope="col"><span id="cart_quantity" style="font-size:15px;font-weight:bold">${cart_quantity }</span></td>
 				<td scope="col"><span id="price" style="font-size:16px">${productJoinOption.price}</span><span> 원</span></td>
@@ -222,9 +253,9 @@
 		<tr>
 			<td>포인트</td>
 			<td>
-				<input type="text" id="point" value="0" size="10"/><span> 점</span>&emsp;&emsp;
-				<span>적용가능 포인트 : 1000점</span>
-				
+				<label><input type="checkbox" id="point_chk" style="vertical-align:middle;" onclick="return chk_validate();"/> 사용</label>&emsp;
+				<input type="number" id="use_point" value="0" max="1000" style="width:80px"/><span> 점</span>&emsp;&emsp;
+				<span style="color:#3296FF">적용가능 포인트 : <span id="curr_point">1000</span>점</span>
 			</td>
 		<tr>
 		<tr>
@@ -233,7 +264,7 @@
 		<tr>
 		<tr>
 			<td>총 결재금액</td>
-			<td><span id="last_price"></span></td>
+			<td><span id="last_price"></span><span> 원</span></td>
 		<tr>
 		<tr>
 			<td>결제방법</td>
@@ -242,9 +273,10 @@
 	</table>
 	<br>
 	<div style="text-align:center;">
-	<button id="pay" class="btn btn-primary" style="width: 150px;height:50px;">결제하기</button>
+	<button id="pay" type="button" class="btn btn-primary" style="width: 150px;height:50px;">결제하기</button>
 	</div>
 	<hr style="border:2px solid #787878">
+</form>
 </div>
 <script>
 $(function(){
@@ -253,24 +285,29 @@ $(function(){
 		    pg : 'nice',
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:결제테스트',
-		    amount : 100,
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456',
-		    m_redirect_url : '${pageContext.request.contextPath }/product.do'
+		    name : '${memberLoggedIn.member_name }',
+		    amount : parseInt($('#last_price').html().replace(",","")),
+		    buyer_email : '${memberLoggedIn.email }',
+		    buyer_name : '${memberLoggedIn.member_name }',
+		    buyer_tel : '${memberLoggedIn.phone }',
+		    buyer_addr : '${memberLoggedIn.address}',
+		    buyer_postcode : '${memberLoggedIn.post_no }',
 		}, function(rsp) {
 		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    	var msg = '결제가 완료되었습니다.';
+		    	var frm=$("#frm");
+				var url="${pageContext.request.contextPath }/buyView.do";
+				frm.attr('method', 'post');
+				frm.attr("action",url);
+				frm.submit();
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
+		        var frm=$("#frm");
+				var url="${pageContext.request.contextPath }/buyEnd.do";
+				frm.attr('method', 'post');
+				frm.attr("action",url);
+				frm.submit();
 		    }
 		    alert(msg);
 		});

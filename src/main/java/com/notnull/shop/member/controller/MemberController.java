@@ -16,10 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.notnull.shop.common.PageCreate;
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
 
@@ -422,7 +424,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberManagement.do")
-	public String memberManagement(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+	public ModelAndView memberManagement(HttpServletRequest request, 
+									HttpServletResponse response, 
+									 @RequestParam(value="cPage",required=false,defaultValue="1") int cPage,
+									  ModelAndView mv) throws IOException {
 		
 		Member m = (Member) request.getSession().getAttribute("memberLoggedIn");
 			
@@ -434,15 +439,28 @@ public class MemberController {
 	            out.println("<script>alert('권한이 없습니다.'); </script>");
 
 	            out.flush(); 
-
-			return "redirect:/";
 		}
 		
-		List<Member> list = service.memberList();
-		System.out.println(list);
-		model.addAttribute("member",list);
+		//페이지당 글 
+		int numPerPage = 10; 
 		
-		return "/member/memberManagement";
+		List<Member> list = service.memberList(cPage,numPerPage);
+		
+		System.out.println(list);
+		
+		int totalCount = service.selectMemberCount();
+		
+		System.out.println(totalCount);
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"memberManagement.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("member",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/memberManagement");
+		
+		return mv;
 	}
 	
 	@RequestMapping("management.do")
@@ -462,5 +480,6 @@ public class MemberController {
 		System.out.println(member_id);
 		return "";
 	}
+	
 
 }

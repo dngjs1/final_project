@@ -128,6 +128,9 @@ span.star-prototype > * {
 			<form name="form" id="frm" method="get">
 				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
+				<input type="hidden" name="product_name" value="${joinCategory.product_name }"/>
+				<input type="hidden" name="option_size" value="${joinCategory.product_name }"/>
+				<input type="hidden" name="new_p_img_path" value="${joinCategory.product_name }"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
 						<c:when test="${optionList.size()<2}">

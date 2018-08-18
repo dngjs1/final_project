@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.sql.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -276,9 +280,32 @@ public class ProductController {
 	public String buyForm2(Model model,HttpServletRequest request) {
 		String[] cart_codes=request.getParameterValues("check");
 		List<CartJoinList> cartList=service.selectCartList(cart_codes);
-		System.out.println(cartList);
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
+	}
+	
+	@RequestMapping("/buyEnd.do")
+	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
+		String[] product_option_codes = request.getParameterValues("product_option_code1");
+		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
+		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
+		for(int i=0;i<product_option_codes.length;i++) {
+			BuyInfo buyInfo2=new BuyInfo();
+			buyInfo2.setProduct_option_code(Integer.parseInt(product_option_codes[i]));
+			buyInfo2.setBuy_quantity(Integer.parseInt(buy_quantitys[i]));
+			buyInfo2.setMember_id(buyInfo.getMember_id());
+			buyInfo2.setReceiver_post_no(buyInfo.getReceiver_post_no());
+			buyInfo2.setReceiver_address(buyInfo.getReceiver_address());
+			buyInfo2.setReceiver_d_address(buyInfo.getReceiver_d_address());
+			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
+			buyInfo2.setPhone2(buyInfo.getPhone2());
+			buyInfo2.setRequest(buyInfo.getRequest());
+			buyList.add(buyInfo2);
+		}
+		System.out.println(buyList);
+		int result=service.insertBuyList(buyList);
+		System.out.println(result);
+		return "/product/buyEnd";
 	}
 	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})

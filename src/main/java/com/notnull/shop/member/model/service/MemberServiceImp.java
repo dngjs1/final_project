@@ -138,15 +138,21 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public List<Member> memberList() {
+	public List<Member> memberList(int cPage, int numPerPage) {
 		
-		return memberDAO.memberList(sqlSession);
+		return memberDAO.memberList(sqlSession, cPage, numPerPage);
 	}
 
 	@Override
 	public Member selectMember(String id) {
 		
 		return memberDAO.selectMember(sqlSession, id);
+	}
+
+	@Override
+	public int selectMemberCount() {
+		// TODO Auto-generated method stub
+		return memberDAO.selectMemberCount(sqlSession);
 	}
 
 }
