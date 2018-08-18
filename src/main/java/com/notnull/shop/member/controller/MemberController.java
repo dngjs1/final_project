@@ -164,7 +164,7 @@ public class MemberController {
 		String loc="/";
 		String view = "/common/LoginMsg";
 		String path="memberLogin2.do";
-		path_=path_.substring(27);
+//		path_=path_.substring(27);
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
@@ -478,6 +478,9 @@ public class MemberController {
 	@RequestMapping("managementEnd.do")
 	public String managementEnd(String member_id) {
 		System.out.println(member_id);
+		
+		
+		
 		return "";
 	}
 	

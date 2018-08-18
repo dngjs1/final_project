@@ -363,6 +363,11 @@
 								<option value="E" ${member.esc_status=='E'?"selected":"" }>탈퇴회원</option>
 							</select>
 						</td>
+						<th scope="col" class="#">보유포인트</th>
+						<td>
+						
+						</td>
+						
 					</tr>
 					
 					
