@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -140,6 +141,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession, int product_option_code) {
 		return sqlSession.selectOne("product.selectProductJoinOption",product_option_code);
+	}
+	
+	@Override
+	public int insertBuy(SqlSessionTemplate sqlSession, BuyInfo buy) {
+		return sqlSession.insert("product.insertBuy",buy);
 	}
 
 	@Override

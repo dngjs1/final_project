@@ -171,7 +171,14 @@
 		where product_option_code=#{product_option_code}
 		and p_img_code = (select min(p_img_code) from product_img where product_code=a.product_code)
 	</select>
-	
+
+	<insert id="insertBuy" parameterType="buyInfo">
+        insert into buy_info values(buy_info_seq.nextval, #{product_option_code}, 
+        #{buy_quantity}, #{member_id}, #{receiver_post_no},
+        #{receiver_address}, #{receiver_d_address},#{receiver_name},
+        #{phone2},#{request}, SYSDATE)
+    </insert>
+    
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})
  	<selectKey keyProperty="review_code" resultType="_int" order="AFTER"> SELECT product_review_seq.CURRVAL FROM DUAL </selectKey>

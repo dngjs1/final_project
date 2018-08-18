@@ -44,7 +44,7 @@
 			
 			if(result>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(result);
+				$("#last_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}else{
 				var last_price=result+2500;
 				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -62,14 +62,40 @@
 			$('#sum_total_price').html(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(sum>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(sum);
+				$("#last_price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}else{
 				var last_price=sum+2500;
 				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			}
 		}
 	}
-
+	
+	function chk_validate(){
+		if( parseInt($('#use_point').val()) > parseInt($('#curr_point').text())){
+    		alert("포인트가 부족합니다.");
+    		return false;
+    	}
+		if($('#use_point').val()==""){
+			alert("포인트를 입력해주세요.");
+			return false;
+		}
+		return true;
+	}
+	$(function(){
+		$("#point_chk").change(function(){
+	        var last_price=parseInt($("#last_price").text().replace(",",""));
+	        if($("#point_chk").prop("checked")){
+		        	last_price=last_price-parseInt($('#use_point').val());
+		        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		        	$('#use_point').attr("readonly",true);
+	        }else{
+	        	last_price=last_price+parseInt($('#use_point').val());
+	        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        	$('#use_point').attr("readonly",false);
+	        }
+	    });
+	});
+	
 </script>
 <!-- 주소입력 API  -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -124,7 +150,7 @@
 	<table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">
 		<tr>
 			<td>이름</td>
-			<td>${memberLoggedIn.member_name }<input type="hidden" name="member_id" value="123"/></td>
+			<td>${memberLoggedIn.member_name }<input type="hidden" name="member_id" value="${memberLoggedIn.member_id }"/></td>
 		<tr>
 		<tr>
 			<td>이메일</td>
@@ -227,9 +253,9 @@
 		<tr>
 			<td>포인트</td>
 			<td>
-				<input type="text" id="point" value="0" size="10"/><span> 점</span>&emsp;&emsp;
-				<span>적용가능 포인트 : 1000점</span>
-				
+				<label><input type="checkbox" id="point_chk" style="vertical-align:middle;" onclick="return chk_validate();"/> 사용</label>&emsp;
+				<input type="number" id="use_point" value="0" max="1000" style="width:80px"/><span> 점</span>&emsp;&emsp;
+				<span style="color:#3296FF">적용가능 포인트 : <span id="curr_point">1000</span>점</span>
 			</td>
 		<tr>
 		<tr>
@@ -238,7 +264,7 @@
 		<tr>
 		<tr>
 			<td>총 결재금액</td>
-			<td><span id="last_price"></span></td>
+			<td><span id="last_price"></span><span> 원</span></td>
 		<tr>
 		<tr>
 			<td>결제방법</td>
@@ -260,7 +286,7 @@ $(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '${memberLoggedIn.member_name }',
-		    amount : 100,
+		    amount : parseInt($('#last_price').html().replace(",","")),
 		    buyer_email : '${memberLoggedIn.email }',
 		    buyer_name : '${memberLoggedIn.member_name }',
 		    buyer_tel : '${memberLoggedIn.phone }',
@@ -268,22 +294,12 @@ $(function(){
 		    buyer_postcode : '${memberLoggedIn.post_no }',
 		}, function(rsp) {
 		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
 		    	var frm=$("#frm");
 				var url="${pageContext.request.contextPath }/buyView.do";
 				frm.attr('method', 'post');
 				frm.attr("action",url);
 				frm.submit();
-		        /* var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        msg += '주문자명 : ' + rsp.buyer_name;
-		        msg += '이메일 : ' + rsp.buyer_email;
-		        msg += '연락처 : ' + rsp.buyer_tel;
-		        msg += '주소 : ' + rsp.buyer_addr;
-		        msg += '우편번호 : ' + rsp.buyer_postcode; */
-		        //location.href="${pageContext.request.contextPath }/buyView.do";
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
@@ -293,7 +309,7 @@ $(function(){
 				frm.attr("action",url);
 				frm.submit();
 		    }
-		    //alert(msg);
+		    alert(msg);
 		});
 	});
 });

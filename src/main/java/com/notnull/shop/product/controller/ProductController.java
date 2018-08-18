@@ -286,15 +286,25 @@ public class ProductController {
 	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
-		System.out.println(buyInfo);
 		String[] product_option_codes = request.getParameterValues("product_option_code1");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
-		List<BuyInfo> buyList=null;
+		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
-			/*BuyInfo buy=
-			System.out.println(product_option_codes[i]);
-			System.out.println(buy_quantitys[i]);*/
+			BuyInfo buyInfo2=new BuyInfo();
+			buyInfo2.setProduct_option_code(Integer.parseInt(product_option_codes[i]));
+			buyInfo2.setBuy_quantity(Integer.parseInt(buy_quantitys[i]));
+			buyInfo2.setMember_id(buyInfo.getMember_id());
+			buyInfo2.setReceiver_post_no(buyInfo.getReceiver_post_no());
+			buyInfo2.setReceiver_address(buyInfo.getReceiver_address());
+			buyInfo2.setReceiver_d_address(buyInfo.getReceiver_d_address());
+			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
+			buyInfo2.setPhone2(buyInfo.getPhone2());
+			buyInfo2.setRequest(buyInfo.getRequest());
+			buyList.add(buyInfo2);
 		}
+		System.out.println(buyList);
+		int result=service.insertBuyList(buyList);
+		System.out.println(result);
 		return "/product/buyEnd";
 	}
 	
