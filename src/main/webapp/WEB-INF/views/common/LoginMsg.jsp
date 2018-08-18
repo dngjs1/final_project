@@ -12,7 +12,7 @@
 		<title>알림창</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-			
+			alert("${msg}");
 			/* location.href='${pageContext.request.contextPath}/${loc}?path_="${oriPath}"';		 */
 			location.href='${loc}';
 		
