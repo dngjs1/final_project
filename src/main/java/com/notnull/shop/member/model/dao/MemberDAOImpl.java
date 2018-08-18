@@ -100,8 +100,14 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int selectMemberCount(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("member.selectMemberCount");
+	}
+
+	@Override
+	public int updateManagement(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("member.updateManagement",m);
 	}
 	
 	

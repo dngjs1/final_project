@@ -122,9 +122,7 @@ public class MemberController {
 	public ModelAndView checkIdDuplicate(String member_Id, ModelAndView mv) {
 
 		System.out.println(member_Id);
-		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!AJAX TEST!!!!!!!!!!!!!!!!!!!!!!");
-		
+
 		boolean check = service.idDuplicateCheck(member_Id)==0?true:false;
 		
 		
@@ -344,12 +342,8 @@ public class MemberController {
 	@RequestMapping("/checkUpdatePassword.do")
 	public void checkUpdatePassword(HttpServletResponse response, String original_password,  String member_id) throws IOException{
 
-		
-		
 		String encode = service.selectEncode(member_id);
-		
-		
-		
+
 		String flag = bcyptPasswordEncoder.matches(original_password,encode)?"true":"false";
 		
 		System.out.println("비밀번호 결과값은 "+flag);
@@ -474,12 +468,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping("managementEnd.do")
-	public String managementEnd(String member_id) {
+	public ModelAndView managementEnd(String member_id,Member m, ModelAndView mv) {
 		System.out.println(member_id);
+		System.out.println(m.getMember_id());
+		System.out.println(m.getEsc_status());
+		System.out.println(m.getMember_level());
+		int i = service.updateManagement(m);
 		
+		if(i>0) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
 		
+		mv.addObject("member.member_level", m.getMember_level());
+		mv.addObject("member.member_level", m.getEsc_status());
 		
-		return "";
+		return mv;
 	}
 	
 

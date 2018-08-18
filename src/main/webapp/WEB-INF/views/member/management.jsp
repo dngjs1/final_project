@@ -300,7 +300,7 @@
 			</style>
 			<div class = "mypage_wrap">
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 회원관리</h2>
-				<form action="${pageContext.request.contextPath }/managementEnd.do">
+				<%-- <form action="${pageContext.request.contextPath }/managementEnd.do" method="post"> --%>
 				<table class = "order_board">
 					 <colgroup>
 						<col style = "width:20%;">
@@ -311,6 +311,7 @@
 					<tr>
 						<th scope="col" class = "#">ID</th>
 						<td>
+							<input type="hidden" name="member_id" value="<c:out value="${member.member_id }"></c:out>"/>
 							<c:out value="${member.member_id }"></c:out>
 						</td>
 						<th scope="col" class = "#">우편번호</th>
@@ -377,9 +378,9 @@
 					</tbody>
 				
 				</table>
-				<input type="submit" value="수정"/>
-				<input type="reset" value="취소"/>
-				</form>
+				<button type="button" onclick="updateMember()">수정</button>
+				
+				<!-- </form> -->
 			</div>
 			<div class = "mypage_wrap2">
 				
@@ -401,6 +402,9 @@
 						<th scope="col" class = "#">총금액</th>
 					</tr>
 					</thead>
+					
+					
+					<!-- 구매목록 작성칸 -->
 					<tbody>
 						<tr>
 						<td colspan="5">장바구니가 비었습니다.</td>
@@ -413,6 +417,39 @@
 		</div>
 	</div>
 
+<script>
+function updateMember(){ 
+		
+		alert("접근성공");
+		
+		//vo 전송 가능한지 여쭤볼것!
+		
+	    $.ajax({
+	        url:"${pageContext.request.contextPath}/managementEnd.do",
+	        type   : "post",
+	        data:{"Member member_id" :  "${member_id}",
+	        		"Member member_level" : "${member_level}",
+	        		 "Member esc_status" : "${esc_status}"
+	       
+	        },
+	   		
+	        success:function(data){
+
+	        },
+	        error:function(jpxhr,textStatus,errormsg){
+	           console.log("ajax전송 실패")
+	           console.log(jpxhr);
+	           console.log(textStatus);
+	           console.log(errormsg);
+	        }
+	     });
+		
+};
+		
+		
+
+ 
+</script>
 
 
 </div>
