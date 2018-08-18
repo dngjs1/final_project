@@ -18,15 +18,7 @@
 	String strdate = simpleDate.format(cal.getTime());
 %>
 
-<style>
-.cart{
-	padding-left:50px;
-	padding-right:50px;
-}
-.tr1 th{text-align:center;}
-.tr2 td{vertical-align:middle;text-align:center;}
-.font-price{font-weight:bold;font-size:20px;}
-</style>
+
 <script>
 	$(function(){
        	init();
@@ -242,7 +234,7 @@
 <div class="container cart">
 	<div class = "cart_box_step">
 	<h1><i class="fas fa-cart-arrow-down"></i> 장바구니</h1>
-		<ul step_number>
+		<ul class = "step_number">
 			<li class = "top" style = "background: none; border-bottom:none;">
 			<span>01</span>
 				장바구니
