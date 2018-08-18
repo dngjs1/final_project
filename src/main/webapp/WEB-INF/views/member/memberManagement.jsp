@@ -306,13 +306,16 @@
 					<option value="member_level">회원등급</option>
 				</select>
 				<table class = "order_board">
+					<colgroup>
 						<col style = "width:5%;">
-					<%-- <colgroup>
-						<col style = "width:50%;">
 						<col style = "width:10%;">
-						<col style = "width:12%;">
 						<col style = "width:10%;">
-					</colgroup> --%>
+						<col style = "width:10%;">
+						<col style = "width:20%;">
+						<col style = "width:10%;">
+						<col style = "width:15%;">
+						<col style = "width:10%;">
+					</colgroup> 
 					<thead>
 					<tr>
 						<th scope="col" class = "#">번호</th>
