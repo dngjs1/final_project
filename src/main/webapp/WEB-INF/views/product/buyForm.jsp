@@ -28,21 +28,23 @@
        	init();
    	});
 	function init () {
-		if($("#cart_quantity").html()!=null){
+		var last_price=0;
+		if($("#quantity").html()!=null){
 			sell_price = parseInt($('#price').text());
-			cart_quantity = $("#cart_quantity").html();
-			var result = parseInt(cart_quantity) * sell_price;
+			quantity = $("#quantity").html();
+			var result = parseInt(quantity) * sell_price;
 			$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("#sum_total_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			var save_point=result*0.02;
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			$("[name=point]").val(save_point);
 			if(result>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				last_price=result;
+				
 			}else{
-				var last_price=result+2500;
-				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				last_price=result+2500;
 			}
 		}else{
 			var sum=0;
@@ -56,51 +58,55 @@
 			}
 			var save_point=sum*0.02;
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			$("[name=point]").val(save_point);
 			$('#sum_total_price').html(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(sum>=20000){
 				$("#deli").text("무료");
-				$("#last_price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-				$('[name=last_price]').val(sum);
+				last_price=sum;
 			}else{
-				var last_price=sum+2500;
-				$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-				$('[name=last_price]').val(last_price);
+				last_price=sum+2500;
 			}
 		}
+		$(".last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		$(".last_price").val(last_price);
 	}
 	
 	function chk_validate(){
 		var use_point=parseInt($('#use_point').val());
-		var curr_point=parseInt($('#curr_point').text().replace(",","").replace("p",""));
-		if( use_point > curr_point ){
-    		alert("포인트가 부족합니다.");
-    		return false;
-    	}
-		if($('#use_point').val()==""){
-			alert("포인트를 입력해주세요.");
-			return false;
-		}
-		if(use_point < 0){
-			alert("양의 정수를 입력해주세요.");
-			return false;
+		var curr_point=parseInt($('#curr_point').text().replace(",",""));
+		if($("#point_chk").prop("checked")){
+			if( use_point > curr_point ){
+	    		alert("포인트가 부족합니다.");
+	    		return false;
+	    	}
+			if($('#use_point').val()==""){
+				alert("포인트를 입력해주세요.");
+				return false;
+			}
+			if(use_point < 0){
+				alert("양의 정수를 입력해주세요.");
+				return false;
+			}
+			if( use_point > parseInt($(".last_price.total-price").text().replace(",","")) ){
+				alert("결제금액을 초과하였습니다.");
+				return false;
+			}
 		}
 		return true;
 	}
 	$(function(){
 		$("#point_chk").change(function(){
 			var use_point = parseInt($('#use_point').val());
-	        var last_price=parseInt($("#last_price").text().replace(",",""));
+	        var last_price=parseInt($(".last_price.total-price").text().replace(",",""));
 	        if($("#point_chk").prop("checked")){
 		        	last_price=last_price-use_point;
-		        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		        	$('[name=last_price]').val(last_price);
 		        	$('#use_point').attr("readonly",true);
 	        }else{
 	        	last_price=last_price+use_point;
-	        	$("#last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        	$('[name=last_price]').val(last_price);
 	        	$('#use_point').attr("readonly",false);
 	        }
+	        $(".last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        $(".last_price").val(last_price);
 	    });
 	});
 	
@@ -234,7 +240,6 @@
          font-weight : bold;
          text-align: left;
       }
-      
       .order_board {
          width : 100%;
          font-size : 15px;
@@ -242,7 +247,6 @@
          table-layout: fixed;
          word-wrap : break-word;
       }
-      
       .order_board th {
          padding : 21px 0;
          border-left : 1px solid #eaeaea;
@@ -251,6 +255,20 @@
          font-weight: bold;
          text-align: center;
       }
+      .order_board td.align_left {
+         padding : 23px 10px 23px 15px;
+      }
+      .align_left bdl_none {
+      	 width : 200px;
+         
+      }
+      .order_board td {
+         padding : 23px 0;
+         border-left : 1px solid #eaeaea;
+         border-botto : 1px solid #eaeaea;
+         background : #fcfcfb;
+         text-align : center;
+      }
    </style>
    <hr><!-- 임시 hr -->
    
@@ -258,7 +276,7 @@
       주문작성 / 결제
    </h2><!-- 임시 hr -->
    
-   
+  <form id="frm">
    <table class="order_board">
       <colgroup>
          <col style = "width:12%;">
@@ -279,11 +297,12 @@
          <c:forEach var='cart' items='${cartList }' varStatus="vs">
          <tbody>
             <tr class="tr2">
-               <td style = "width : 300px;">
+               <td class = "align_left bdl_none" style = "width : 300px;">
                   <div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.NEW_P_IMG_PATH }"> </div>
                   <div style="float: left;text-align:left;margin-left:15px;">
-                     <input type="hidden" name="product_option_code1" value="${cart.PRODUCT_OPTION_CODE}"/>
-                     <input type="hidden" name="buy_quantity1" value="${cart.CART_QUANTITY}"/>
+                     <input type="hidden" name="product_option_code" value="${cart.PRODUCT_OPTION_CODE}"/>
+                     <input type="hidden" name="buy_quantity" value="${cart.CART_QUANTITY}"/>
+                     <input type="hidden" class="name${vs.count }" value="${cart.PRODUCT_NAME} 등"/>
                      <span>${cart.PRODUCT_NAME}</span><br>
                      <c:if test="${cart.OPTION_SIZE!=null}">
                         <span>(${cart.OPTION_SIZE})</span><br>
@@ -300,30 +319,7 @@
             </tbody>
          </c:forEach>
       </c:if>
-      <style>
-      
-         .order_board td.align_left {
-            padding : 23px 10px 23px 15px;
-            
-         }
-         
-         .align_left bdl_none {
-            width : 200px;
-         
-         }
-      
-         .order_board td {
-            padding : 23px 0;
-            border-left : 1px solid #eaeaea;
-            border-botto : 1px solid #eaeaea;
-            background : #fcfcfb;
-            text-align : center;
-         }
-         
-         .something {
-            
-         }
-      </style>
+     
       <c:if test="${empty cartList }">
       <tbody>
          <tr class="tr2">
@@ -331,13 +327,16 @@
                <div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${productJoinOption.new_p_img_path }"> </div>
                <div style="float: left;text-align:left;margin-left:15px;">
                   <span>${productJoinOption.product_name}</span><br>
-                  <span>(${productJoinOption.option_size })</span><br>
-                  <span><span><%=strdate%></span> 도착 예정</span>
+                  	<c:if test="${productJoinOption.option_size != null}">
+                        <span>(${productJoinOption.option_size })</span><br>
+                     </c:if>
+                  <span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>
                </div>
-               <input type="hidden" name="product_option_code1" value="${productJoinOption.product_option_code}"/>
-               <input type="hidden" name="buy_quantity1" value="${cart_quantity}"/>
+               <input type="hidden" name="product_option_code" value="${productJoinOption.product_option_code}"/>
+               <input type="hidden" name="buy_quantity" value="${quantity}"/>
+               <input type="hidden" class="name1" value="${productJoinOption.product_name}"/>
             </td>
-            <td><span id="cart_quantity" >${cart_quantity }</span></td>
+            <td><span id="quantity" >${quantity }</span></td>
             <td><span id="price">${productJoinOption.price}</span><span> 원</span></td>
             <td><span id="sum_price"></span><span> 원</span></td>   
          </tr>
@@ -535,14 +534,6 @@
                         </dd>
                   </dl>
                   <dl>
-				                  <!-- <tr>
-				         <td>포인트</td>
-				         <td>
-				            <label><input type="checkbox" id="point_chk" style="vertical-align:middle;" onclick="return chk_validate();"/> 사용</label>&emsp;
-				            <input type="number" id="use_point" value="0" max="1000" style="width:80px"/><span> 점</span>&emsp;&emsp;
-				            <span style="color:#3296FF">적용가능 포인트 : <span id="curr_point">1000</span>점</span>
-				         </td>
-				      </tr> -->
                      <dt>포인트</dt>
                         <dd>
                            <div class = "dd_left">
@@ -551,7 +542,7 @@
                            
                            <div class = "dd_right">
                               <label for = "#">
-                                 <input type = "checkbox" id = "point_chk" class = "checkbox" onclick="return chk_validate();">사용(포인트 <em id="curr_point" style = "font-style: normal;font-weight: bold;">5,000P</em>)
+                                 <input type = "checkbox" id = "point_chk" class = "checkbox" onclick="return chk_validate();">적용 &nbsp;(적용 가능 포인트 <em id="curr_point" style = "font-style: normal;font-weight: bold;">5,000</em><em style = "font-style: normal;font-weight: bold;">P</em>)
                               </label>
                            </div>
                         </dd>
@@ -610,8 +601,8 @@
                <dl>
                   <dt style = "line-height:42px;">결제예정금액</dt>
                   <dd>
-                     <em class = "total-price" id="last_price"></em>
-                     원
+                     <em class = "total-price last_price"></em>
+                     	원
                   </dd>
                </dl>
             </div>
@@ -701,7 +692,6 @@
    </style>
 
    <h2 class = "order_people_title">구매자 정보</h2>
-   <form id="frm">
       <table class = "order_people">
          <colgroup>
             <col style = "width:172px">
@@ -827,7 +817,7 @@
          <th>배송 요청사항</th>
          <td>
          <div class = "limit_box">
-         <input type="text" class = "text04"  size="50" id = "orderMemo" name = "request"/>
+         <input type="text" class = "text04"  size="50" id = "orderMemo" name = "request" value="부재시 경비실에 맡겨주세요"/>
          <!-- 글자수 제한 -->
          
          <span>
@@ -846,7 +836,7 @@
          $("#orderMemo").on('keyup', function(){
             pubByteCheckTextarea("#orderMemo",".cs",40);   //글자수제한
          });
-      
+      });
       </script>
       
       <style>
@@ -887,8 +877,12 @@
    <tbody>
       <tr>
          <th scope = "row">총 결제금액</th>
-         <!-- <td><span id="last_price" class = "price"></span><span> 원</span></td> -->
-      </tr>  
+         <td>
+         	<span class = "price last_price"></span><span class = "price"> 원</span>
+         	<input type="hidden" name='last_price' class='last_price'/>
+         	<input type="hidden" name='point'/>
+         </td>
+      </tr>
       <tr>
          <th scope = "row">결제방법</th>
          <td>
@@ -940,52 +934,52 @@
    </table>
    <br>
    <div style="text-align:center;">
-   <button type = "button" class = "btn_cart">
-   <span class = "fas fa-cart-arrow-down" style = "font-size:20px;">&nbsp;장바구니</span>
-   
+   <button id="cart" type = "button" class = "btn_cart">
+   	<span class = "fas fa-cart-arrow-down" style = "font-size:20px;">&nbsp;장바구니</span>
    </button>
    <button id="pay" type="button" class="btn_ok">
-   <span class = "far fa-credit-card" style = "font-size:20px; font-weight:bold;">&nbsp;결제진행</span>
-   
+	<span class = "far fa-credit-card" style = "font-size:20px; font-weight:bold;">&nbsp;결제진행</span>
    </button>
    </div>
-   
 </form>
 </div>
 <script>
 $(function(){
-   $('#pay').click(function(){
-      IMP.request_pay({
-          pg : 'nice',
-          pay_method : 'card',
-          merchant_uid : 'merchant_' + new Date().getTime(),
-          name : '${memberLoggedIn.member_name }',
-          amount : parseInt($('#last_price').html().replace(",","")),
-          buyer_email : '${memberLoggedIn.email }',
-          buyer_name : '${memberLoggedIn.member_name }',
-          buyer_tel : '${memberLoggedIn.phone }',
-          buyer_addr : '${memberLoggedIn.address}',
-          buyer_postcode : '${memberLoggedIn.post_no }',
-      }, function(rsp) {
-          if ( rsp.success ) {
-             var msg = '결제가 완료되었습니다.';
-             var frm=$("#frm");
-            var url="${pageContext.request.contextPath }/buyView.do";
-            frm.attr('method', 'post');
-            frm.attr("action",url);
-            frm.submit();
-          } else {
-              var msg = '결제에 실패하였습니다.';
-              msg += '에러내용 : ' + rsp.error_msg;
-              var frm=$("#frm");
-            var url="${pageContext.request.contextPath }/buyEnd.do";
-            frm.attr('method', 'post');
-            frm.attr("action",url);
-            frm.submit();
-          }
-          alert(msg);
-      });
-   });
+	$('#cart').click(function(){
+		location.href="${pageContext.request.contextPath }/cartView.do?member_id=${memberLoggedIn.member_id}";
+	});
+	$('#pay').click(function(){
+		IMP.request_pay({
+		    pg : 'nice',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : $('.name1').val(),
+		    amount : parseInt($('.last_price').html().replace(",","")),
+		    buyer_email : '${memberLoggedIn.email }',
+		    buyer_name : '${memberLoggedIn.member_name }',
+		    buyer_tel : '${memberLoggedIn.phone }',
+		    buyer_addr : '${memberLoggedIn.address}',
+		    buyer_postcode : '${memberLoggedIn.post_no }',
+		},function(rsp) {
+			if ( rsp.success ) {
+				var msg = '결제가 완료되었습니다.';
+				var frm=$("#frm");
+				var url="${pageContext.request.contextPath }/buyEnd.do";
+				frm.attr('method', 'post');
+				frm.attr("action",url);
+				frm.submit();
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+				var frm=$("#frm");
+				var url="${pageContext.request.contextPath }/buyEnd.do";
+				frm.attr('method', 'post');
+				frm.attr("action",url);
+				frm.submit();
+			}
+			alert(msg);
+		});
+	});
 });
 </script>
 

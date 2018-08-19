@@ -268,12 +268,12 @@ public class ProductController {
 	@RequestMapping("/buyForm.do")
 	public String buyForm(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
-		int cart_quantity=Integer.parseInt(request.getParameter("cart_quantity"));
+		int quantity=Integer.parseInt(request.getParameter("cart_quantity"));
 		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
 		
 		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
 		model.addAttribute("productJoinOption",productJoinOption);
-		model.addAttribute("cart_quantity",cart_quantity);
+		model.addAttribute("quantity",quantity);
 		return "/product/buyForm";
 	}
 	
@@ -287,8 +287,8 @@ public class ProductController {
 	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
-		String[] product_option_codes = request.getParameterValues("product_option_code1");
-		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
+		String[] product_option_codes = request.getParameterValues("product_option_code");
+		String[] buy_quantitys = request.getParameterValues("buy_quantity");
 		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
 			BuyInfo buyInfo2=new BuyInfo();
@@ -306,9 +306,9 @@ public class ProductController {
 		//int result=service.insertBuyList(buyList);
 		
 		int last_price=Integer.parseInt(request.getParameter("last_price"));
-		int point=(int)(last_price*0.05);
+		int point=Integer.parseInt(request.getParameter("point"));
 		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),point,null);
-		int result2=service.insertPoint(pointLog);
+		//int result2=service.insertPoint(pointLog);
 		return "/product/buyEnd";
 	}
 	
