@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
@@ -302,9 +303,12 @@ public class ProductController {
 			buyInfo2.setRequest(buyInfo.getRequest());
 			buyList.add(buyInfo2);
 		}
-		System.out.println(buyList);
-		int result=service.insertBuyList(buyList);
-		System.out.println(result);
+		//int result=service.insertBuyList(buyList);
+		
+		int last_price=Integer.parseInt(request.getParameter("last_price"));
+		int point=(int)(last_price*0.05);
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),point,null);
+		int result2=service.insertPoint(pointLog);
 		return "/product/buyEnd";
 	}
 	

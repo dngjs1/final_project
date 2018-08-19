@@ -18,5 +18,6 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductQuestion" alias="ProductQuestion"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinOption" alias="productJoinOption"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.BuyInfo" alias="buyInfo"/>
+		<typeAlias type="com.notnull.shop.member.model.vo.PointLog" alias="pointLog"/>
 	</typeAliases>
 </configuration>

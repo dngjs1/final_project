@@ -46,11 +46,9 @@ public class MemberServiceImp implements MemberService {
 		System.out.println("IP ADRESS : " +ip);
 		
 		int check = memberDAO.insertMember(sqlSession, m); // 회원가입 DAO
-
 		String key = new TempKey().getKey(50, false); // 인증키 생성
-
+		
 		memberDAO.createAuthKey(sqlSession,m.getEmail(), key); // 인증키 DB저장
-
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[SHOP 서비스 이메일 인증]");
 		sendMail.setText(
@@ -58,7 +56,6 @@ public class MemberServiceImp implements MemberService {
 		sendMail.setFrom("euichan", "shop TEST");
 		sendMail.setTo(m.getEmail());
 		sendMail.send();
-		
 
 		return check;
 	}
