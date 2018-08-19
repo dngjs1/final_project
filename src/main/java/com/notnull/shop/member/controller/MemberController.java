@@ -532,10 +532,44 @@ public class MemberController {
 		}
 		System.out.println(i);
 		response.setContentType("application/json;charset=utf-8");
-		response.getWriter().print(i);
+		response.getWriter().print(i);	
+	}
+	
+	@RequestMapping("/searchMember.do")
+	public String searchMember(String info, 
+								Model model,
+								@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		
+		System.out.println(info);
+		
+		
+		int numPerPage = 10; 
+		
+		List<Member> list = service.memberList(cPage,numPerPage,info);
+		
+		System.out.println(list);
+		
+		int totalCount = service.selectMemberCount();
+		
+		System.out.println(totalCount);
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"memberManagement.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("member",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
+//		mv.addObject("pageBar", pageBar);
+//		mv.addObject("member",list);
+//		mv.addObject("cPage", cPage);
+//		mv.addObject("totalCount", totalCount);
+//		mv.setViewName("/member/memberManagement");
+		
+		return "/member/memberManagement";
 		
 	}
+	
 	
 
 }

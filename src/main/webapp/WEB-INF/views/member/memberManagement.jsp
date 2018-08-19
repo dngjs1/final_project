@@ -382,7 +382,10 @@
 					
 				</table>
 				<br>
-				${pageBar }
+				
+				<input type="text" name="searchInfo" id="searchInfo" /> <button type="button" onclick="searchMember()">검색</button>
+				
+			${pageBar }
 			</div>
 			
 			<div style = "height : 50px;">
@@ -415,6 +418,14 @@
 			location.href="${pageContext.request.contextPath }/management.do?member_id="+id; 
 		});
 	});
+	
+	
+	function searchMember() {
+		var info = $('#searchInfo').val();
+		alert(info);
+		location.href="${pageContext.request.contextPath}/searchMember.do?info="+info;
+	}
+	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
