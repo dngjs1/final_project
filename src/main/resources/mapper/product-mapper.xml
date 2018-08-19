@@ -184,7 +184,7 @@
     </insert>
     
     <select id="selectPoint" parameterType="string" resultType="_int">
-    	select sum(point_increase) from point_log where member_id=#{member_id}
+    	select nvl(sum(point_increase),0) from point_log where member_id=#{member_id}
     </select>
     
   	<insert id="reviewInsert" parameterType="productReview">
