@@ -334,7 +334,7 @@
 			</ul>
 		
 		</form>
-		<!-- 	<button type = "button" onclick="withdraw()">회원탈퇴</button> -->
+		
 	</div>
 	
 	
