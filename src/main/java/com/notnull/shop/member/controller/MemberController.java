@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.notnull.shop.common.PageCreate;
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
+import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.service.ProductService;
 
 
 @SessionAttributes(value= {"memberLoggedIn"})
@@ -34,6 +36,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private ProductService productService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcyptPasswordEncoder;
@@ -108,6 +112,8 @@ public class MemberController {
 		
 		if(result>0) {
 			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
+			PointLog pointLog = new PointLog(0,m.getMember_id(),3000,null);
+			int result2=productService.insertPoint(pointLog);
 		}else {
 			msg="회원가입 실패";
 		}
@@ -189,7 +195,7 @@ public class MemberController {
 		}else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-			model.addAttribute("loc","/");
+			model.addAttribute("loc",path);
 			
 		}
 		

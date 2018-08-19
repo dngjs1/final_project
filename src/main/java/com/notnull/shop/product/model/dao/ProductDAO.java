@@ -68,6 +68,8 @@ public interface ProductDAO {
 	
 	int insertPoint(SqlSessionTemplate sqlSession,PointLog pointLog);
 	
+	int selectPoint(SqlSessionTemplate sqlSession,String member_id);
+	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);

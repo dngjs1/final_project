@@ -38,7 +38,7 @@
 			$("#sum_total_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			var save_point=parseInt(result*0.02);
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			$("[name=point]").val(save_point);
+			$("[name=plus_point]").val(save_point);
 			if(result>=20000){
 				$("#deli").text("무료");
 				last_price=result;
@@ -69,6 +69,9 @@
 		}
 		$(".last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".last_price").val(last_price);
+		$("[name=minus_point]").val(0);
+		var curr_point=$("#curr_point").html();
+		$("#curr_point").html(curr_point.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	}
 	
 	function chk_validate(){
@@ -100,9 +103,11 @@
 	        var last_price=parseInt($(".last_price.total-price").text().replace(",",""));
 	        if($("#point_chk").prop("checked")){
 		        	last_price=last_price-use_point;
+		        	$("[name=minus_point]").val(use_point);
 		        	$('#use_point').attr("readonly",true);
 	        }else{
 	        	last_price=last_price+use_point;
+	        	$("[name=minus_point]").val(0);
 	        	$('#use_point').attr("readonly",false);
 	        }
 	        $(".last_price").text(last_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -542,7 +547,7 @@
                            
                            <div class = "dd_right">
                               <label for = "#">
-                                 <input type = "checkbox" id = "point_chk" class = "checkbox" onclick="return chk_validate();">적용 &nbsp;(적용 가능 포인트 <em id="curr_point" style = "font-style: normal;font-weight: bold;">5,000</em><em style = "font-style: normal;font-weight: bold;">P</em>)
+                                 <input type = "checkbox" id = "point_chk" class = "checkbox" onclick="return chk_validate();">적용 &nbsp;(적용 가능 포인트 <em id="curr_point" style = "font-style: normal;font-weight: bold;">${point }</em><em style = "font-style: normal;font-weight: bold;">P</em>)
                               </label>
                            </div>
                         </dd>
@@ -880,7 +885,8 @@
          <td>
          	<span class = "price last_price"></span><span class = "price"> 원</span>
          	<input type="hidden" name='last_price' class='last_price'/>
-         	<input type="hidden" name='point'/>
+         	<input type="hidden" name='plus_point'/>
+         	<input type="hidden" name='minus_point'/>
          </td>
       </tr>
       <tr>

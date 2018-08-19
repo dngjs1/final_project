@@ -153,6 +153,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public int insertPoint(SqlSessionTemplate sqlSession, PointLog pointLog) {
 		return sqlSession.insert("product.insertPoint",pointLog);
 	}
+	
+	@Override
+	public int selectPoint(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("product.selectPoint",member_id);
+	}
 
 	@Override
 	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {

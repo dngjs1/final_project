@@ -139,6 +139,7 @@ span.star-prototype > * {
 									<c:when test="${option.option_size == null}">
 										<span>재고 : ${option.left_amount}</span>
 										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
+										<input type="hidden" name="left_amount" value="${option.left_amount}"/>
 									</c:when>
 									<c:when test="${option.left_amount<=0}">
 										<select name="product_option_code" style="font-size:15px;height:28px;" >
@@ -149,6 +150,7 @@ span.star-prototype > * {
 										<select name="product_option_code" style="font-size:15px;height:28px;" >
 											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
 										</select>
+										<input type="hidden" name="left_amount" value="${option.left_amount}"/>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -221,7 +223,7 @@ span.star-prototype > * {
 					var member_id=$('#member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						location.href="${pageContext.request.contextPath}/memberLogin2.do"
+						location.href="${pageContext.request.contextPath}/memberLogin2.do";
 					}else{
 						var frm=$("#frm");
 						var url="${pageContext.request.contextPath }/buyForm.do";
