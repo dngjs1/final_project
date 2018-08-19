@@ -56,7 +56,7 @@
 				$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				sum=sum+result;
 			}
-			var save_point=sum*0.02;
+			var save_point=parseInt(sum*0.02);
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("[name=point]").val(save_point);
 			$('#sum_total_price').html(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
