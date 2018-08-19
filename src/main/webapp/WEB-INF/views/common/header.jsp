@@ -79,19 +79,304 @@
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style = "font-family: 'Nanum Gothic','Ubuntu',sans-serif;">
   <!--헤더부분 시작-->
+  
+  <!-- 헤더 수정css 추가하는 부분 -->
+  <style>
+  .container_01 {
+  	height : 140px;
+  	padding-top : 50px;
+  }
+  .member_info {
+  	width : 424px;
+  	height : 30px;
+  	margin-top : 14px;
+  	float : left;
+  }
+  
+  .member_info ul {
+  	float : left;
+  	height : 26px;
+  	line-height : 26px;
+  }
+  
+  .member_info ul li {
+  	float : left;
+  	min-height : 15px;
+  	padding : 0 12px 0 0;
+  	font-size : 11px;
+  	
+  }
+  
+  .member_info ul li a {
+  	color : #202020;
+  	font-size : 14px;
+  	font-weight : 600;
+  	text-decoration: none;
+  	
+  }
+  
+  .main_search {
+  	margin :0;
+  	float : left;
+  	width : 500px;
+  	text-align: center;
+  }
+  
+  .input-group {
+  	margin-left : 110px;
+  	margin-top : 10px;
+  	
+  }
+  
+  .main_logo {
+  	margin :0;
+  	float : left;
+  	width : 300px;
+  	text-align: center;
+  }
+  
+  .main_logo a {
+  	font-size : 30px;
+  	font-weight : bold;
+  	text-decoration: none;
+  	font-style : normal;
+  	color : #717171;
+  }
+  
+  .main_logo img {
+  	max-width: 300px;
+  	vertical-align: middle;
+  }
+  
+  .main_info_right {
+  	margin-top : 14px;
+  	float : right;
+  }
+  
+  .top_board {
+  	float : left;
+  }
+  
+  .top_board>ul>li {
+  	padding-left: 12px;
+  	line-height: 26px;
+  	float : left;
+  	font-size : 14px;
+  }
+  
+  .top_board>ul>li a {
+  	color : #202020;
+  	font-weight: 600;
+  	text-decoration: none;
+  }
+  
+  .headerSearch {
+  	position: relative;
+  	margin-left : 20px;
+  	float : left;
+  	z-index: 999;
+  }
+  
+  .top_menu {
+  	position: relative;
+  	width : 100%;
+  	height : 92px;
+  	border-top: 3px solid #202020;
+  	border-bottom : 1px solid #ddd;
+  	background-color: #fcfcfb;
+  	
+  }
+  
+  .categorys {
+  	width : 1240px;
+  	height : 55px;
+  	margin : 0 auto;
+  	z-index : 999;
+  }
+  </style>
   <header>
     <div class="header">
       <!--그냥 row로 감싸면 사이드에 여백이 생기기 때문에 container-fluid로 전체를 감싸줘야 한다.-->
       <!-- 첫 번째 내비코드 시작 -->
       <div class="container">
+      
+      
+      <div class = "head">
+      
+      <div class = "container container_01">
+      <!-- <div class = "member_info"> -->
+      <div class = "main_logo">
+      	<!-- 상단 우측 회원관련 정보 / 로그인 -->
+      		<!-- <ul>
+      			<li>
+      				<a href = "#"></a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#"></a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#"></a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#"></a>
+      			</li>
+      			
+      			<li>
+      			
+      			</li>
+      		
+      		
+      		
+      		</ul> -->
+      		
+      		<a href = "#">
+      	
+      		<img src = "./resources/images/cat_logo.png">
+      	
+      	
+      	</a>
+      
+      </div>
+      
+      
+      <div class = "main_search">
+      	<form class="form-inline">
+                <div class="input-group">
+                  <div class="input-group-btn">
+                   
+                    
+                  </div>
+                  <input class="form-control" style="width:350px;" type="search" placeholder="검색어를 입력하세요" aria-label="Search">
+                  <button class="btn btn-outline-success" type = "submit" style = "margin-left:3px;"><i class="fas fa-search "></i></button>
+                  </div>
+          </form>
+          
+      </div>
+      
+      <div class = "main_info_right">
+      	<div class = "top_board">
+      		<ul>
+      		
+      			<li>
+      				<a href = "#">로그인</a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#">ID/비밀번호 찾기</a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#">회원가입</a>
+      			</li>
+      			
+      			<li>
+      				<a href = "#">장바구니</a>
+      			</li>
+      			
+      		
+      		
+      		
+      		</ul>
+      	</div>
+      	
+      	<!-- 검색상단 -->
+      	<div class = "headerSearch">
+      		<div class = "search_pop">
+      		
+      		</div>
+      		
+      		<div class = "search_pop_wrap">
+      		
+      		</div>
+      	</div>
+      </div>
+      
+      </div>
+      
+      <style>
+      
+      .categorytype-layer {
+      	margin-left : 400px;
+      	
+      }
+      .categorytype-layer >li {
+      	position: relative;
+      	padding : 21px 0;
+      	z-index : 99;
+      	float : left;
+      }
+      
+       .categorytype-layer > li > a {
+       	display : block;
+       	padding : 0 19px;
+       	font-size : 18px;
+       	line-height : 13px;
+       	font-weight: 600;
+       	text-align: left;
+       	color : #202020;
+       	text-decoration: none;
+       	
+       }
+      </style>
+      <div class = "top_menu">
+      	<div id = "categorys">
+      	
+      		<div class = "all">
+      			<div class = "all_categories">
+      			
+      			</div>
+      			
+      			<div class = "wrap_default"></div>
+      			
+      			<!-- 카테고리 시작 -->
+      			
+      			<div class = "lnb">
+      				<ul class = "categorytype-layer">
+      					<li>
+      						<a href = "#">홈</a>
+      					</li>
+      					
+      					<li>
+      						<a href = "#">판매메뉴</a>
+      					</li>
+      					
+      					<li>
+      						<a href = "#">대여메뉴</a>
+      					</li>
+      					
+      					<li>
+      						<a href = "#">사이트소개</a>
+      					</li>
+      					
+      					<li>
+      						<a href = "#">고객센터</a>
+      					</li>
+      				</ul>
+      			</div>
+      		</div>
+      		
+      		<div class = "lnb">
+      		
+      		</div>
+      	</div>
+      </div>
+      
+      </div>
+      
+      
+      
+      
         <div class="row">
-          <div class="col-6">
+         <!--  <div class="col-6">
             <ul class="nav mt-1 ml-3">
               <li class="nav-item">
                 <h5><a class="badge badge-success" href="#" id="favorite" title="즐겨찾기 등록"><i class="far fa-bookmark"></i> 즐겨찾기</a></h5>
               </li>
             </ul>
-          </div>
+          </div> -->
           <div class="col-6">
           
           <c:if test="${memberLoggedIn==null }">
@@ -132,8 +417,7 @@
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/myPage.do">마이페이지 </a>|</h5>
               </li>
                <li class="nav-item">
-                <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
-                data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#" title="" data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>
               </li>
               <li class="nav-item">
                 <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogout.do">로그아웃 </a>|</h5>
@@ -173,7 +457,7 @@ $(document).ready(function(){
             </div>
 
             <div class="col-7">
-              <form class="form-inline">
+              <!-- <form class="form-inline">
                 <div class="input-group">
                   <div class="input-group-btn">
                     <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -187,7 +471,7 @@ $(document).ready(function(){
                   </div>
                   <input class="form-control col-9 mr-sm-2" style="width:350px;" type="search" placeholder="검색어를 입력하세요" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" "type="submit "><i class="fas fa-search "></i></button>
-          </form>
+          </form> -->
     </div>
   </div>
 
@@ -199,15 +483,7 @@ $(document).ready(function(){
       <!-- 세번 째 네비게이션  전체보기 사이트맵 버튼 들어가있는 가로라인 메뉴 시작-->
       <div class="container ">
         <div class="row">
-        <div class = "col-2">
-        <ul class="nav mt-2 ">
-              <button type= "button" class = "btn btn-primary" data-toggle = "collapse" data-target = "#demo">
-                <i class="fas fa-bars"></i> 전체보기
-              </button>     
- 		</ul>
- 		
- 		
- 		</div>
+        
  		
  		
  			<nav class="navbar navbar-expand-lg  navbar-light bg-default mb-1">
