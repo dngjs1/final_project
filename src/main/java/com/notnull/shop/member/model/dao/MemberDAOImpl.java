@@ -91,6 +91,15 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectList("member.memberList",null,rb);
 	}
+	
+	@Override
+	public List<Member> memberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage, String info) {
+		
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		
+		return sqlSession.selectList("member.memberSearch",info,rb);
+	}
+	
 
 	@Override
 	public Member selectMember(SqlSessionTemplate sqlSession, String id) {
@@ -109,6 +118,8 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.update("member.updateManagement",m);
 	}
+
+
 	
 	
 

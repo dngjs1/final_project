@@ -38,13 +38,13 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcyptPasswordEncoder;
 	
-	@RequestMapping("/memberLogin2.do")
+	@RequestMapping("/memberLoginBefore.do")
 	public String memberLogin2(HttpServletRequest request , Model model) {
 		
 		String path =request.getHeader("Referer");
 		model.addAttribute("path",path);
 		
-		return "member/memberLogin2";
+		return "member/memberLoginPage";
 	}
 	
 	@RequestMapping("/memberEnroll.do")
@@ -155,12 +155,18 @@ public class MemberController {
 		System.out.println(member_pw);
 		System.out.println(path_);
 		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		
+		PrintWriter writer =response.getWriter();
+		
 		Member m = service.loginCheck(member_id);
 		
 		String msg="";
 		String loc="/";
 		String view = "/common/LoginMsg";
-		String path="memberLogin2.do";
+		String path="memberLoginPage.do";
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
@@ -176,29 +182,57 @@ public class MemberController {
 			}else {
 				System.out.println("WRONG PASSWORD");
 				msg ="잘못된 비밀번호입니다.";
-				model.addAttribute("loc",path);
+				model.addAttribute("path",path_);
+				
+				 writer.println("<script>");
+			     writer.println("alert('"+msg+"');");
+			     writer.println("console.log('"+msg+"')");
+			     writer.println("</script>");
+			     writer.flush();
+				
+				
+				return "/member/memberLoginPage";
 			}
 		}else if(m!=null && m.getEsc_status().equals("Y")) {
 			System.out.println("이메일인증이 안된 아이디입니다.");
 			msg ="이메일 인증을 해주세요.";
-			model.addAttribute("loc","/");
+			model.addAttribute("path",path_);
+			
+			 writer.println("<script type='text/javascript'>");
+		     writer.println("alert('"+msg+"');");
+		     writer.println("history.back();");
+		     writer.println("</script>");
+		     writer.flush();
+			
+			return "/member/memberLoginPage";
 		}
 		else if(m!=null && m.getEsc_status().equals("E")) {
 			msg="탈퇴한 회원입니다.";
-			model.addAttribute("loc","/");
+			model.addAttribute("path",path_);
+			
+			 writer.println("<script type='text/javascript'>");
+		     writer.println("alert('"+msg+"');");
+		     writer.println("history.back();");
+		     writer.println("</script>");
+		     writer.flush();
+			
+			return "/member/memberLoginPage";
 		}else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-			model.addAttribute("loc","/");
+			model.addAttribute("path",path_);
+			
+			 writer.println("<script type='text/javascript'>");
+		     writer.println("alert('"+msg+"');");
+		     writer.println("history.back();");
+		     writer.println("</script>");
+		     writer.flush();
+			
+			return "/member/memberLoginPage";
 			
 		}
-		
-		
-		
+
 		model.addAttribute("msg",msg);
-		model.addAttribute("oriPath",path_);
-		
-		
 		
 		System.out.println(request.getLocalAddr());
 		
@@ -467,22 +501,75 @@ public class MemberController {
 		return "/member/management";
 	}
 	
-	@RequestMapping("managementEnd.do")
-	public ModelAndView managementEnd(String member_id,Member m, ModelAndView mv) {
 	
+//	ModelAndView 왜 또 안됨? 아나 ㅋㅋ 
+//	@RequestMapping("managementEnd.do")
+//	public ModelAndView managementEnd(Member m, ModelAndView mv) {
+//	
+//		int i = service.updateManagement(m);
+//		
+//		if(i>0) {
+//			System.out.println("성공");
+//		}else {
+//			System.out.println("실패");
+//		}
+//		
+//		mv.addObject("i", i);
+//		mv.setViewName("JsonView");
+//		
+//		return mv;
+//	}
+	
+	@RequestMapping("/managementEnd.do")
+	public void managementEnd(HttpServletResponse response, Member m) throws IOException{
+
 		int i = service.updateManagement(m);
-		
+
 		if(i>0) {
 			System.out.println("성공");
 		}else {
 			System.out.println("실패");
 		}
-		
-		mv.addObject("member.member_level", m.getMember_level());
-		mv.addObject("member.member_level", m.getEsc_status());
-		
-		return mv;
+		System.out.println(i);
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(i);	
 	}
+	
+	@RequestMapping("/searchMember.do")
+	public String searchMember(String info, 
+								Model model,
+								@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		System.out.println(info);
+		
+		
+		int numPerPage = 10; 
+		
+		List<Member> list = service.memberList(cPage,numPerPage,info);
+		
+		System.out.println(list);
+		
+		int totalCount = service.selectMemberCount();
+		
+		System.out.println(totalCount);
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"memberManagement.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("member",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
+//		mv.addObject("pageBar", pageBar);
+//		mv.addObject("member",list);
+//		mv.addObject("cPage", cPage);
+//		mv.addObject("totalCount", totalCount);
+//		mv.setViewName("/member/memberManagement");
+		
+		return "/member/memberManagement";
+		
+	}
+	
 	
 
 }
