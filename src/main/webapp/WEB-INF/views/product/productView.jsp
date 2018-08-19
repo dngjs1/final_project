@@ -185,7 +185,7 @@ span.star-prototype > * {
 					var member_id=$('.member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						e.preventDefault();
+						location.href="${pageContext.request.contextPath}/memberLogin2.do"
 					}else{
 						var productInfo={
 								member_id:member_id,
@@ -221,7 +221,7 @@ span.star-prototype > * {
 					var member_id=$('#member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						e.preventDefault();
+						location.href="${pageContext.request.contextPath}/memberLogin2.do"
 					}else{
 						var frm=$("#frm");
 						var url="${pageContext.request.contextPath }/buyForm.do";
