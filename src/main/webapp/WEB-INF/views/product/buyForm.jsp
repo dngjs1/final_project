@@ -36,7 +36,7 @@
 			$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("#sum_total_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			var save_point=result*0.02;
+			var save_point=parseInt(result*0.02);
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("[name=point]").val(save_point);
 			if(result>=20000){

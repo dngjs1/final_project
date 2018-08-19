@@ -67,6 +67,8 @@
 		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		var point=parseInt(sum*0.02);
+		$('#save_point').text(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 	}
 	
 	function change_price(){
@@ -98,6 +100,8 @@
 			$(".total-price").siblings().hide();
 			$(".total-price").text("0");
 		}
+		var point=parseInt(sum*0.02);
+		$('#save_point').text(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 	}
 	
 	$(function(){
@@ -562,7 +566,7 @@
 					<dl>
 						<dt>포인트적립</dt>
 						<dd>
-						0
+							<span id="save_point"></span>
 							<span class ="icon_point">P</span>
 						</dd>
 						
