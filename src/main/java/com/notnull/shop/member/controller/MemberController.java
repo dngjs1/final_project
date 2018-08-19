@@ -549,6 +549,7 @@ public class MemberController {
 		
 		System.out.println(list);
 		
+		//카운트도해줘야함 ㅋㅋ ㅅㅂ
 		int totalCount = service.selectMemberCount();
 		
 		System.out.println(totalCount);

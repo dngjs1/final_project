@@ -80,7 +80,7 @@
 	</update>
 	
 	<select id="memberSearch" resultType="member" parameterType="string">
-		select * from member where member_id like #{%+info+%}
+		select * from member where member_id like '%'||#{info}||'%'
 	</select>
  
 </mapper>
