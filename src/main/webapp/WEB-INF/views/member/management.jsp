@@ -422,19 +422,18 @@ function updateMember(){
 		
 		alert("접근성공");
 		
-		//vo 전송 가능한지 여쭤볼것!
 		
 	    $.ajax({
 	        url:"${pageContext.request.contextPath}/managementEnd.do",
 	        type   : "post",
-	        data:{"Member member_id" :  "${member_id}",
-	        		"Member member_level" : "${member_level}",
-	        		 "Member esc_status" : "${esc_status}"
+	        data:{"member_id" :  "${member.member_id}",
+	        		"member_level" : $("#level").val(),
+	        		 "esc_status" : $("#esc_status").val()
 	       
 	        },
 	   		
 	        success:function(data){
-
+				
 	        },
 	        error:function(jpxhr,textStatus,errormsg){
 	           console.log("ajax전송 실패")

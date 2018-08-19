@@ -469,10 +469,7 @@ public class MemberController {
 	
 	@RequestMapping("managementEnd.do")
 	public ModelAndView managementEnd(String member_id,Member m, ModelAndView mv) {
-		System.out.println(member_id);
-		System.out.println(m.getMember_id());
-		System.out.println(m.getEsc_status());
-		System.out.println(m.getMember_level());
+	
 		int i = service.updateManagement(m);
 		
 		if(i>0) {
