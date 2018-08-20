@@ -225,7 +225,7 @@
          <span>01</span>
             장바구니
             </li>
-         <li class = "top">
+         <li class = "top" style = "border-bottom:none;">
          <span>02</span>
             주문작성 / 결제
          </li>
@@ -262,9 +262,12 @@
       }
       .order_board td.align_left {
          padding : 23px 10px 23px 15px;
+         border-left: none;
+         
       }
       .align_left bdl_none {
       	 width : 200px;
+      	 border-left: none;
          
       }
       .order_board td {
@@ -273,13 +276,15 @@
          border-botto : 1px solid #eaeaea;
          background : #fcfcfb;
          text-align : center;
+         font-weight: bold;
+         font-size : 16px;
       }
    </style>
-   <hr><!-- 임시 hr -->
+   
    
    <h2  class = "order_title">
       주문작성 / 결제
-   </h2><!-- 임시 hr -->
+   
    
   <form id="frm">
    <table class="order_board">
@@ -306,7 +311,7 @@
                   <div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.NEW_P_IMG_PATH }"> </div>
                   <div style="float: left;text-align:left;margin-left:15px;">
                      <input type="hidden" name="product_option_code" value="${cart.PRODUCT_OPTION_CODE}"/>
-                     <input type="hidden" name="buy_quantity" value="${cart.CART_QUANTITY}"/>
+                     <input type="hidden" name="buy_quantity" value="<b>${cart.CART_QUANTITY}</b>"/>
                      <input type="hidden" class="name${vs.count }" value="${cart.PRODUCT_NAME} 등  ${fn:length(cartList)}개"/>
                      <span>${cart.PRODUCT_NAME}</span><br>
                      <c:if test="${cart.OPTION_SIZE!=null}">
@@ -349,7 +354,7 @@
       </c:if>
    </table>
    
-   <hr> <!-- 임시 선 나중에 지워야 함 -->
+  
    
 <style>
    
@@ -363,7 +368,7 @@
    
    .top {
       padding:0 36px;
-      
+      border-bottom: 1px solid #eaeaea;
       
    }
    
@@ -416,7 +421,7 @@
          <li>
             <div class = "top">
                <dl>
-                  <dt style = "line-height:42px;">주문금액</dt>
+                  <dt style = "line-height:84px;">주문금액</dt>
                   <dd>
                      <em id = "sum_total_price"></em>원
                   </dd>
@@ -604,7 +609,7 @@
          <li class = "sum">
             <div class = "top">
                <dl>
-                  <dt style = "line-height:42px;">결제예정금액</dt>
+                  <dt style = "line-height:84px;">결제예정금액</dt>
                   <dd>
                      <em class = "total-price last_price"></em>
                      	원
@@ -656,7 +661,7 @@
    
    
    
-   <hr> <!-- 임시 선 나중에 삭제해야 함 -->
+
    
    <style>
       .order_people_title {

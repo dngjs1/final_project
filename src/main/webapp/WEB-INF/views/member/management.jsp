@@ -9,6 +9,22 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <style>
+
+.update_btn {
+	width : 70px;
+	height : 40px;
+	border: none;
+	background: #2D2E33;
+	color : #fff;
+	font-size : 15px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	cursor:pointer;
+	float:right;
+}
+
+
 .location{
 	padding:15px 0;
 	color: #000;
@@ -378,7 +394,8 @@
 					</tbody>
 				
 				</table>
-				<button type="button" onclick="updateMember()">수정</button>
+				<br>
+				<button type="button" onclick="updateMember()" class="update_btn">수정</button>
 				
 				<!-- </form> -->
 			</div>
@@ -420,12 +437,10 @@
 <script>
 function updateMember(){ 
 		
-		alert("접근성공");
-		
-		
 	    $.ajax({
 	        url:"${pageContext.request.contextPath}/managementEnd.do",
 	        type   : "post",
+	     	
 	        data:{"member_id" :  "${member.member_id}",
 	        		"member_level" : $("#level").val(),
 	        		 "esc_status" : $("#esc_status").val()
@@ -433,6 +448,12 @@ function updateMember(){
 	        },
 	   		
 	        success:function(data){
+	        	if(data==1) {
+	        		alert("수정완료!");
+	        	}
+	        	else{
+	        		alert("수정실패");
+	        	}
 				
 	        },
 	        error:function(jpxhr,textStatus,errormsg){
