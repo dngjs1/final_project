@@ -297,7 +297,7 @@ public class MemberController {
 			
 		}
 		
-		model.addAttribute("id",id);
+		model.addAttribute("id","아이디는 "+id+" 입니다.");
 		
 		return "member/findMember";
 	}
