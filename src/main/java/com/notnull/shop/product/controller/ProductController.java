@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -291,7 +292,6 @@ public class ProductController {
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
 	}
-	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
@@ -311,15 +311,17 @@ public class ProductController {
 			buyList.add(buyInfo2);
 		}
 		//int result=service.insertBuyList(buyList);
-		
 		int last_price=Integer.parseInt(request.getParameter("last_price"));
 		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
 		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
-		
+		String product_all_name=request.getParameter("name1");
 		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
 		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
-		int result2=service.insertPoint(pointLog);
-		int result3=service.insertPoint(pointLog2);
+		//int result2=service.insertPoint(pointLog);
+		//int result3=service.insertPoint(pointLog2);
+		model.addAttribute("product_all_name",product_all_name);
+		model.addAttribute("buyInfo",buyList.get(0));
+		model.addAttribute("last_price",last_price);
 		return "/product/buyEnd";
 	}
 	
