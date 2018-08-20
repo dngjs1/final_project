@@ -222,6 +222,25 @@ public class ProductServiceImpl implements ProductService {
 	public int selectPoint(String member_id) {
 		return productDAO.selectPoint(sqlSession,member_id);
 	}
+	
+	@Override
+	public int updateLeftList(List<BuyInfo> buyList) {
+		int result=0;
+		try {		
+			if(buyList.size()>0)
+			{
+				for(BuyInfo buy : buyList)
+				{
+					result=productDAO.updateLeftList(sqlSession,buy);
+				}
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		return result;
+	}
 
 	@Override
 	public int addQuestion(ProductQuestion productQuestion) {

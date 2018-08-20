@@ -296,6 +296,14 @@ public class ProductController {
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		
+		int last_price=Integer.parseInt(request.getParameter("last_price"));
+		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
+		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
+		String product_all_name=request.getParameter("name1");
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
+		
 		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
 			BuyInfo buyInfo2=new BuyInfo();
@@ -310,15 +318,16 @@ public class ProductController {
 			buyInfo2.setRequest(buyInfo.getRequest());
 			buyList.add(buyInfo2);
 		}
-		//int result=service.insertBuyList(buyList);
-		int last_price=Integer.parseInt(request.getParameter("last_price"));
-		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
-		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
-		String product_all_name=request.getParameter("name1");
-		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
-		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
-		//int result2=service.insertPoint(pointLog);
-		//int result3=service.insertPoint(pointLog2);
+		int result=service.insertBuyList(buyList);
+		if(result>0) {
+			//포인트 적립
+			int result2=service.insertPoint(pointLog);
+			//포인트 차감
+			int result3=service.insertPoint(pointLog2);
+			//재고 차감
+			int result4=service.updateLeftList(buyList);
+		}
+		
 		model.addAttribute("product_all_name",product_all_name);
 		model.addAttribute("buyInfo",buyList.get(0));
 		model.addAttribute("last_price",last_price);

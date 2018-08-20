@@ -70,6 +70,8 @@ public interface ProductDAO {
 	
 	int selectPoint(SqlSessionTemplate sqlSession,String member_id);
 	
+	int updateLeftList(SqlSessionTemplate sqlSession,BuyInfo buy);
+	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);

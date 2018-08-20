@@ -134,9 +134,8 @@ span.star-prototype > * {
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
 								<c:choose>
 									<c:when test="${option.option_size == null}">
-										<span>재고 : ${option.left_amount}</span>
+										<span id="single_left">재고 : ${option.left_amount}</span>
 										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
-										<input type="hidden" name="left_amount" value="${option.left_amount}"/>
 									</c:when>
 									<c:when test="${option.left_amount<=0}">
 										<select name="product_option_code" style="font-size:15px;height:28px;" >
@@ -147,7 +146,6 @@ span.star-prototype > * {
 										<select name="product_option_code" style="font-size:15px;height:28px;" >
 											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
 										</select>
-										<input type="hidden" name="left_amount" value="${option.left_amount}"/>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -180,58 +178,81 @@ span.star-prototype > * {
 			</form>
 			<script>
 			$(function(){
-				$('#cart').click(function(e){
+				$('#cart').click(function(){
 					var member_id=$('.member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						location.href="${pageContext.request.contextPath}/memberLogin2.do"
+						location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 					}
-					
-					var left_amount=$('[name=product_option_code] option:selected');
-					alert(left_amount.text());
-
-					var productInfo={
-							member_id:member_id,
-							product_option_code:$("[name=product_option_code]").val(),
-							product_code:$("[name=product_code]").val(),
-							cart_quantity:$("[name=cart_quantity]").val()
-					};
-					$.ajax({
-						url:"${pageContext.request.contextPath}/cartInsert.do",
-						data:productInfo,
-						success:function(data){
-							if(data.trim()=='0'){
-								alert("장바구니 추가에 실패하였습니다.");
-								e.preventDefault();
-							}else{
-								if (confirm('장바구니로 이동하시겠습니까?')) {
-									location.href="${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}";
-					            } else {
-					                return;
-							    }
-							}
-						},
-						error:function(jpxhr,textStatus,errormsg){
-							console.log("ajax전송실패.");
-							console.log(jpxhr);
-							console.log(textStatus);
-							console.log(errormsg);
+					else{
+						var left_amount=0;
+						if($('#single_left').length){
+							var left_amount1=$('#single_left').text().split(':');
+							left_amount=parseInt(left_amount1[1]);
+						}else{
+							var left_amount2=$('[name=product_option_code] option:selected').text().split(':');
+							left_amount=parseInt(left_amount2[1]);
 						}
-					});
+						if(left_amount < parseInt($('[name=cart_quantity]').val()) ){
+							alert("재고가 부족합니다.");
+							return false;
+						}
+						
+						var productInfo={
+								member_id:member_id,
+								product_option_code:$("[name=product_option_code]").val(),
+								product_code:$("[name=product_code]").val(),
+								cart_quantity:$("[name=cart_quantity]").val()
+						};
+						$.ajax({
+							url:"${pageContext.request.contextPath}/cartInsert.do",
+							data:productInfo,
+							success:function(data){
+								if(data.trim()=='0'){
+									alert("장바구니 추가에 실패하였습니다.");
+									return false;
+								}else{
+									if (confirm('장바구니로 이동하시겠습니까?')) {
+										location.href="${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}";
+						            } else {
+						                return;
+								    }
+								}
+							},
+							error:function(jpxhr,textStatus,errormsg){
+								console.log("ajax전송실패.");
+								console.log(jpxhr);
+								console.log(textStatus);
+								console.log(errormsg);
+							}
+						});
+					}
 				});
 				$('#buy').click(function(){
 					var member_id=$('#member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						location.href="${pageContext.request.contextPath}/memberLogin2.do";
+						location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 					}else{
+						var left_amount=0;
+						if($('#single_left').length){
+							var left_amount1=$('#single_left').text().split(':');
+							left_amount=parseInt(left_amount1[1]);
+						}else{
+							var left_amount2=$('[name=product_option_code] option:selected').text().split(':');
+							left_amount=parseInt(left_amount2[1]);
+						}
+						if(left_amount < parseInt($('[name=cart_quantity]').val()) ){
+							alert("재고가 부족합니다.");
+							return false;
+						}
+					
 						var frm=$("#frm");
 						var url="${pageContext.request.contextPath }/buyForm.do";
 						frm.attr("action",url);
 						frm.submit();
 					}
 				});
-				
 			});
 			</script>
     	</div>

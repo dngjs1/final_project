@@ -158,6 +158,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public int selectPoint(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectOne("product.selectPoint",member_id);
 	}
+	
+	@Override
+	public int updateLeftList(SqlSessionTemplate sqlSession, BuyInfo buy) {
+		return sqlSession.update("product.updateLeftList",buy);
+	}
 
 	@Override
 	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {

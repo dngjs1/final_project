@@ -120,7 +120,7 @@
   	</insert>
   	
   	<select id="selectCartList" parameterType="string" resultType="cartJoinList">
-  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
@@ -131,7 +131,7 @@
   	</select>
   	
   	<select id="selectCartList2" parameterType="hashmap" resultType="java.util.Map">
-  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
@@ -186,6 +186,10 @@
     <select id="selectPoint" parameterType="string" resultType="_int">
     	select nvl(sum(point_increase),0) from point_log where member_id=#{member_id}
     </select>
+    
+    <update id="updateLeftList" parameterType="buyInfo">
+    	update product_option set left_amount=left_amount-#{buy_quantity} where product_option_code=#{product_option_code}
+    </update>
     
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})

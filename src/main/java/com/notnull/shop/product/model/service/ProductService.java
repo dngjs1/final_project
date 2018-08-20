@@ -61,6 +61,8 @@ public interface ProductService {
 	
 	int selectPoint(String member_id);
 	
+	int updateLeftList(List<BuyInfo> buyList);
+	
 	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
