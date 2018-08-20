@@ -72,5 +72,15 @@
 	<select id="selectMember" resultType="member">
 		select * from member where member_id=#{member_id}
 	</select>
+	
+	<update id="updateManagement" parameterType="member">
+		update member set esc_status=#{esc_status},
+							member_level=#{member_level}
+							 where member_id=#{member_id} 
+	</update>
+	
+	<select id="memberSearch" resultType="member" parameterType="string">
+		select * from member where member_id like '%'||#{info}||'%'
+	</select>
  
 </mapper>

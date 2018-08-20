@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.dao.ProductDAO;
 import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
@@ -210,6 +211,16 @@ public class ProductServiceImpl implements ProductService {
 			throw new RuntimeException();	
 		}
 		return result;
+	}
+
+	@Override
+	public int insertPoint(PointLog pointLog) {
+		return productDAO.insertPoint(sqlSession,pointLog);
+	}
+	
+	@Override
+	public int selectPoint(String member_id) {
+		return productDAO.selectPoint(sqlSession,member_id);
 	}
 
 	@Override

@@ -9,6 +9,22 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <style>
+
+.update_btn {
+	width : 70px;
+	height : 40px;
+	border: none;
+	background: #2D2E33;
+	color : #fff;
+	font-size : 15px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	cursor:pointer;
+	float:right;
+}
+
+
 .location{
 	padding:15px 0;
 	color: #000;
@@ -300,7 +316,7 @@
 			</style>
 			<div class = "mypage_wrap">
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 회원관리</h2>
-				<form action="${pageContext.request.contextPath }/managementEnd.do">
+				<%-- <form action="${pageContext.request.contextPath }/managementEnd.do" method="post"> --%>
 				<table class = "order_board">
 					 <colgroup>
 						<col style = "width:20%;">
@@ -311,6 +327,7 @@
 					<tr>
 						<th scope="col" class = "#">ID</th>
 						<td>
+							<input type="hidden" name="member_id" value="<c:out value="${member.member_id }"></c:out>"/>
 							<c:out value="${member.member_id }"></c:out>
 						</td>
 						<th scope="col" class = "#">우편번호</th>
@@ -363,6 +380,11 @@
 								<option value="E" ${member.esc_status=='E'?"selected":"" }>탈퇴회원</option>
 							</select>
 						</td>
+						<th scope="col" class="#">보유포인트</th>
+						<td>
+						
+						</td>
+						
 					</tr>
 					
 					
@@ -372,9 +394,10 @@
 					</tbody>
 				
 				</table>
-				<input type="submit" value="수정"/>
-				<input type="reset" value="취소"/>
-				</form>
+				<br>
+				<button type="button" onclick="updateMember()" class="update_btn">수정</button>
+				
+				<!-- </form> -->
 			</div>
 			<div class = "mypage_wrap2">
 				
@@ -396,6 +419,9 @@
 						<th scope="col" class = "#">총금액</th>
 					</tr>
 					</thead>
+					
+					
+					<!-- 구매목록 작성칸 -->
 					<tbody>
 						<tr>
 						<td colspan="5">장바구니가 비었습니다.</td>
@@ -408,6 +434,42 @@
 		</div>
 	</div>
 
+<script>
+function updateMember(){ 
+		
+	    $.ajax({
+	        url:"${pageContext.request.contextPath}/managementEnd.do",
+	        type   : "post",
+	     	
+	        data:{"member_id" :  "${member.member_id}",
+	        		"member_level" : $("#level").val(),
+	        		 "esc_status" : $("#esc_status").val()
+	       
+	        },
+	   		
+	        success:function(data){
+	        	if(data==1) {
+	        		alert("수정완료!");
+	        	}
+	        	else{
+	        		alert("수정실패");
+	        	}
+				
+	        },
+	        error:function(jpxhr,textStatus,errormsg){
+	           console.log("ajax전송 실패")
+	           console.log(jpxhr);
+	           console.log(textStatus);
+	           console.log(errormsg);
+	        }
+	     });
+		
+};
+		
+		
+
+ 
+</script>
 
 
 </div>

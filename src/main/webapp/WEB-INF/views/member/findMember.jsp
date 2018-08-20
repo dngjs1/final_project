@@ -8,26 +8,113 @@
 </jsp:include>
 
 
-<style>
-.findMember{
-
-	width: 500px;
-	
-	}
-
-
-
-	width: 500px;	
-}
-master
-
-
-
-span.viewID {
-		display: none;
-	}
-
-</style>
+	<!-- 회원가입 시작!! -->
+		<style>
+		.member_wrap {
+			width : 580px;
+			padding-top : 70px;
+			margin : 0 auto;
+			text-align : left;
+		}
+		
+		.member_wrap .title {
+			height: 103px;
+			padding-bottom: 23px;
+			border-bottom: 5px solid #2e2e2e;
+			font-size : 30px;
+			line-height: 81px;
+			font-weight: bold;
+		}
+		.title-icon {
+			display : inline-block;
+			width : 80px;
+			height : 80px;
+			margin-top : -2px;
+			border-radius: 100%;
+			background: #2D2E33;
+			color : #fff;
+			font-size : 30px;
+			line-height: 76px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		
+		.member_wrap .warnt {
+			height: 40px;
+			padding-bottom: 5px;
+			margin-top: -45px;
+			color : #000;
+			font-size : 15px;
+			line-height: 28px;
+			text-align: right;
+		}
+		
+		.member_wrap .join_list{
+			padding-top: 15px;
+			font-size : 0;
+			line-height: 0;
+		}
+		
+		.member_wrap .join_list > li {
+		margin-top: 5px;
+		}
+		
+		.member_wrap .join_list > li input.text{
+			height : 55px;
+			padding : 0 20px;
+			margin-left: 5px;
+			color : #92979b;
+			font-weight: bold;
+			line-height: 50px;
+			margin:0;
+			border : 1px solid #c4c4c4;
+			font-size : 15px;
+		}
+		
+		.member_wrap .join_list > li .example{
+			padding:0 20px 2px;
+			color : #888;
+			font-size : 13px;
+			line-height : 18px;
+		}
+		
+		.join_btn {
+				width : 450px;
+				height : 40px;
+				border: none;
+				background: #2D2E33;
+				color : #fff;
+				font-size : 18px;
+				font-weight: bold;
+				text-align: center;
+				vertical-align: middle;
+				cursor:pointer;
+			}
+			
+			.cancel_btn{
+				width : 175px;
+				height : 60px;
+				border : none;
+				background: #92979b;
+				color : #fff;
+				font-size : 18px;
+				font-weight: bold;
+				text-align: center;
+				vertical-align : middle;
+				margin-left : 14px;
+				cursor: pointer;
+			}
+			
+			.title_ {
+					margin-top: 0;
+					padding : 0 10px;
+					font-size: 20px;
+					line-height: 79px;
+					font-weight: bold;
+					text-align: left;
+				}
+			
+		</style>
 
 
 
@@ -38,29 +125,46 @@ span.viewID {
 	<tr>
 	<th>
 	<div class="findMember">
-	<h3>아이디찾기</h3> <hr>
+	<h2 class="title_">아이디찾기</h2>
 		<form name="findId" action="${pageContext.request.contextPath}/findMemberId.do" method="post">
-		이메일<input type="email" name="email" id="email" class="form-control" required="required"> <br>
-		<input type="submit" value="ID찾기"> <br><br>
-		<span class="viewID" id="viewID" > <c:out value="${id}"></c:out> </span>
+		
+			<li>
+				<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px; height:50px;  border:solid gray;"  value="${memberLoggedIn.email }" required>
+				<span style = "color : #777777;font-size:15px; margin-left:14px;">
+				
+				
+			</li>
+		
+		<input type="submit" value="아이디 찾기" class="join_btn"> <br><br>
+		<p class="viewID" id="viewID" style="text-align: center;" > <c:out value="${id}"></c:out> </p>
 		
 		<hr>
 		</form>
 	</div>
 	</th>
 	
+	<br>
+	
 	</tr>
 	<tr>
 	<th>
 	<div class="findMember">
-	<h3>비밀번호찾기</h3> <hr>
+	<h2 class="title_">비밀번호찾기</h2>
 		<form name="findPassword" action="${pageContext.request.contextPath }/findMemberPassword.do" method="post">
-		아이디<input type="text" name="id" id="id" class="form-control" required="required"> <br>
-		이메일<input type="email" name="email" id="email" class="form-control" required="required"><br>
-		<input type="submit" value="PW찾기"> <hr> 
+		<li>
+		<input type="text" name="id" id="id" class="text" placeholder="*아이디 입력" style = "width : 450px; height:50px;  border:solid gray;"required="required"> <br>
+		</li>
+		<p class="example"/>
+		<li>
+		<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px; height:50px;  border:solid gray;"  value="${memberLoggedIn.email }" required>
+		<span style = "color : #777777;font-size:15px; margin-left:14px;">
+		<p class = "example" style="font-size:13px; color: black;">이메일로 임시비밀번호를 발급해드립니다.</p>
+		</li>
+		<input type="submit" value="비밀번호 찾기" class="join_btn"> <hr> 
 		</form>
+		
 	</div>
-	<th>
+	</th>
 	</tr>
 	
 	</table>

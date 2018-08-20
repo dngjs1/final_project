@@ -18,15 +18,7 @@
 	String strdate = simpleDate.format(cal.getTime());
 %>
 
-<style>
-.cart{
-	padding-left:50px;
-	padding-right:50px;
-}
-.tr1 th{text-align:center;}
-.tr2 td{vertical-align:middle;text-align:center;}
-.font-price{font-weight:bold;font-size:20px;}
-</style>
+
 <script>
 	$(function(){
        	init();
@@ -75,6 +67,8 @@
 		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		var point=parseInt(sum*0.02);
+		$('#save_point').text(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 	}
 	
 	function change_price(){
@@ -106,6 +100,8 @@
 			$(".total-price").siblings().hide();
 			$(".total-price").text("0");
 		}
+		var point=parseInt(sum*0.02);
+		$('#save_point').text(point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 	}
 	
 	$(function(){
@@ -242,7 +238,7 @@
 <div class="container cart">
 	<div class = "cart_box_step">
 	<h1><i class="fas fa-cart-arrow-down"></i> 장바구니</h1>
-		<ul step_number>
+		<ul class = "step_number">
 			<li class = "top" style = "background: none; border-bottom:none;">
 			<span>01</span>
 				장바구니
@@ -328,6 +324,7 @@
 						<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 							<input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
+							<input type="hidden" name="member_id" value="${memberLoggedIn.member_id}"/>
 							<input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/>
 							<input type="text" class="quantity" name="cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
 							<input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/>
@@ -570,7 +567,7 @@
 					<dl>
 						<dt>포인트적립</dt>
 						<dd>
-						0
+							<span id="save_point"></span>
 							<span class ="icon_point">P</span>
 						</dd>
 						

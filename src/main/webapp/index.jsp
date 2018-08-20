@@ -313,6 +313,7 @@
 											class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
 											title="상세보기"></i></span>
 									</div>
+									
 								</div>
 
 							</div>

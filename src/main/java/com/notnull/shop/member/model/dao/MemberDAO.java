@@ -32,8 +32,12 @@ public interface MemberDAO {
 	
 	List<Member> memberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	
+	List<Member> memberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage, String info);
+	
 	int selectMemberCount(SqlSessionTemplate sqlSession);
 	
 	Member selectMember(SqlSessionTemplate sqlSession, String id);
+	
+	int updateManagement(SqlSessionTemplate sqlSession, Member m);
 	
 }

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
@@ -267,27 +268,34 @@ public class ProductController {
 	@RequestMapping("/buyForm.do")
 	public String buyForm(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
-		int cart_quantity=Integer.parseInt(request.getParameter("cart_quantity"));
+		int quantity=Integer.parseInt(request.getParameter("cart_quantity"));
 		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
-		
+		String member_id=request.getParameter("member_id");
 		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
 		model.addAttribute("productJoinOption",productJoinOption);
-		model.addAttribute("cart_quantity",cart_quantity);
+		model.addAttribute("quantity",quantity);
 		return "/product/buyForm";
 	}
 	
 	@RequestMapping("/buyForm2.do")
 	public String buyForm2(Model model,HttpServletRequest request) {
 		String[] cart_codes=request.getParameterValues("check");
+		String member_id=request.getParameter("member_id");
 		List<CartJoinList> cartList=service.selectCartList(cart_codes);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
 	}
 	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
-		String[] product_option_codes = request.getParameterValues("product_option_code1");
-		String[] buy_quantitys = request.getParameterValues("buy_quantity1");
+		String[] product_option_codes = request.getParameterValues("product_option_code");
+		String[] buy_quantitys = request.getParameterValues("buy_quantity");
 		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
 			BuyInfo buyInfo2=new BuyInfo();
@@ -302,9 +310,16 @@ public class ProductController {
 			buyInfo2.setRequest(buyInfo.getRequest());
 			buyList.add(buyInfo2);
 		}
-		System.out.println(buyList);
-		int result=service.insertBuyList(buyList);
-		System.out.println(result);
+		//int result=service.insertBuyList(buyList);
+		
+		int last_price=Integer.parseInt(request.getParameter("last_price"));
+		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
+		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
+		
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
+		int result2=service.insertPoint(pointLog);
+		int result3=service.insertPoint(pointLog2);
 		return "/product/buyEnd";
 	}
 	
@@ -352,7 +367,9 @@ public class ProductController {
         String msg="";
 		if(result>0)
 		{
-			msg="등록을 성공하였습니다.";
+			msg="등록을 성공하였습니다. 100p가 지급됩니다.";
+			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,null);
+			int result2=service.insertPoint(pointLog);
 		}
 		else
 		{
