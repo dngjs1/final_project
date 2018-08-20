@@ -6,6 +6,6 @@ import com.notnull.shop.rental.model.vo.Rental;
 
 public interface RentalService {
 	
-	public List<Rental> getRenList(int pageNum);
+	public boolean insertRental(Rental rental);
 	
 }

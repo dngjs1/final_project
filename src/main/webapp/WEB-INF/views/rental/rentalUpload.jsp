@@ -8,12 +8,9 @@
    <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${path }/resources/js/plupload.full.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${path }/resources/js/jquery.ui.plupload.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${path }/resources/js/pluploadko.js" charset="UTF-8"></script>
-<link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.min.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="${path }/resources//css/jquery.ui.plupload.css" media="screen" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<script src="${path }/resources/js/summernote-ko-KR.js"></script>
 
 <!-- 달력 -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
@@ -33,8 +30,10 @@ input[name="datetimes"]{cursor: pointer;}
 
 
 <div class='container' >
-    <form name="fileForm" action="${path }/rentalUpload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
+    <form id="form" action="${path }/rentalUpload.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
   
+		<input type="hidden" name="rental_obj_code" value="${param.rental_obj_code }" />
+		<input type="hidden" id="content" name="content" value="" />
         <br>
         <h3>상품등록</h3>
         <hr style="border:2px solid #787878"><br>       
@@ -48,42 +47,42 @@ input[name="datetimes"]{cursor: pointer;}
 					</c:forEach>	
 	        	</select>
 				</td>
-			</tr>       
+			</tr>      
+	        <tr class="tr1">
+				<th style="text-align: center;border-left:none;">회원아이디</th>
+				<td>	
+					<input type="text" class="form-control" name="member_id" value="${memberLoggedIn.member_id }" id="member_id" readonly="readonly">
+				</td>
+			</tr>        
+	        <tr class="tr1">
+				<th style="text-align: center;border-left:none;">연락처</th>
+				<td>	
+					<input type="text" class="form-control" name="phone" id="phone" required>
+				</td>
+			</tr>  
 	        <tr class="tr1">
 				<th style="text-align: center;border-left:none;">상품명</th>
 				<td>	
-					<input type="text" class="form-control" name="product_name" id="product_name" required>
+					<input type="text" class="form-control" name="rental_obj_name" id="rental_name" required>
 				</td>
 			</tr>
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none;">가격</th>
+				<th style="text-align: center;border-left:none;">24시간 대여가격</th>
 				<td>	
 					<input type="number"  class="form-control" name="price" id="price" required>
 				</td>
 			</tr> 
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none;">제조국</th>
-				<td>	
-					<input type="text" class="form-control" name="country" id="country" required>
-				</td>
-			</tr>
-			<tr class="tr1">
-				<th style="text-align: center;border-left:none;">크기</th>
-				<td>
-					<input type="text"  class="form-control" name="real_size" id="real_size" value="상품 상세 정보 확인"> 
-				</td>
-			</tr>
-			<tr class="tr1">
 				<th style="text-align: center;border-left:none;">주소</th>
 				<td>
-					<input class="form-control" style="width: 40%; display: inline-block;" type="text" id="sample6_postcode" placeholder="우편번호">
+					<input class="form-control" name="post_no" style="width: 40%; display: inline-block;" type="text" id="sample6_postcode" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input class="form-control" type="text" id="sample6_address" placeholder="주소">
-					<input class="form-control" type="text" id="sample6_address2" placeholder="상세주소">
+					<input class="form-control" name="address" type="text" id="sample6_address" placeholder="주소">
+					<input class="form-control" name="detail_address" type="text" id="sample6_address2" placeholder="상세주소">
 				</td>
 			</tr>
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none;">대여가능기간</th>
+				<th style="text-align: center;border-left:none;">대여기간</th>
 				<td>
 					<input type="text" name="datetimes" placeholder="Select value" class="form-control" />
 				</td>
@@ -91,16 +90,14 @@ input[name="datetimes"]{cursor: pointer;}
 			<tr class="tr1">
 				<th style="text-align: center;border-left:none;">게시판글</th>
 				<td>
-					<input type="textarea" name="p_board_content" id="p_board_content" class="form-control">
+					<textarea class="form-control" id="summernote" placeholder="글내용" name="content" maxlength="500" style="height: 350px;"></textarea>
 				</td>
 			</tr>
         </table>
-        <br><br><br>
-        
-		<div id="uploader">
-			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-		</div>
-        <input type="submit" value="등록" class="btn" />     
+        <br>
+		<br>
+        <input type="submit" value="등록" class="btn btn-default" value="저장" />    
+		<input type="button"  class="btn btn-default" onclick="location.href='${path}/rentalMain.do'" value="취소"> 
     </form>
 </div>
 
@@ -108,6 +105,8 @@ input[name="datetimes"]{cursor: pointer;}
 	$(function() {
 	  $('input[name="datetimes"]').daterangepicker({
 	    timePicker: true,
+	    startDate: moment().startOf('hour'),
+	    endDate: moment().startOf('hour').add(32, 'hour'),
 	    minDate: new Date
 	  });
 	});
@@ -159,62 +158,54 @@ input[name="datetimes"]{cursor: pointer;}
     }
 </script>
   
-<!-- 파일업로드 -->
-<script type="text/javascript">
-// Initialize the widget when the DOM is ready
-$(function() {
-	$("#uploader").plupload({
-		// General settings
-		runtimes : 'html5,flash,silverlight,html4',
-		url : 'upload',
 
-		// Maximum file size
-		max_file_size : '1000mb',
+    <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        placeholder: '사진 또는 게시글을 등록하여 주십시오',
+        tabsize: 2,
+        height: 400,
+        minHeight:400,
+        maxHeight:400,
+        lang:'ko-KR',
+        focus:false,
+        callbacks:{
+	          onImageUpload: function(files, editor, welEditable) {
+		            for (var i = files.length - 1; i >= 0; i--) {
+				        sendFile(files[i], this);
+		            }
+	          }
+        }
+      });
+    });
 
-		// User can upload no more then 20 files in one go (sets multiple_queues to false)
-		max_file_count: 20,
-		
-		chunk_size: '1mb',
+    function sendFile(file, editor, welEditable) {
+        data = new FormData();
+        data.append("uploadFile", file);
+        $.ajax({
+            data : data,
+            type : "POST",
+            url : "${path}/rentalImageUpload.do",
+            cache : false,
+            contentType : false,
+            enctype:'multipart/form-data',
+            processData : false,
+            success : function(url) {
+                $(el).summernote('editor.insertImage', url);
+                $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
 
-		// Resize images on clientside if we can
-		resize : {
-			width : 200, 
-			height : 200, 
-			quality : 90,
-			crop: true // crop to exact dimensions
-		},
 
-		// Specify what files to browse for
-		filters : [
-			{title : "Image files", extensions : "jpg,gif,png"},
-			{title : "Zip files", extensions : "zip,avi"}
-		],
+            }
+        });
+    }
+    </script>
 
-		// Rename files by clicking on their titles
-		rename: true,
-		
-		// Sort files
-		sortable: true,
-
-		// Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
-		dragdrop: true,
-
-		// Views to activate
-		views: {
-			list: true,
-			thumbs: true, // Show thumbs
-			active: 'thumbs'
-		},
-
-		// Flash settings
-		flash_swf_url : '../../js/Moxie.swf',
-
-		// Silverlight settings
-		silverlight_xap_url : '../../js/Moxie.xap'
-	});
-});
-</script>
-
+<style>
+ img{
+	 width:200px;
+	 height: 120px;
+ }
+</style>
 <script type="text/javascript" src="${path }/resources/js/moment.min.js"></script>
 <script type="text/javascript" src="${path }/resources/js/daterangepicker.js"></script>
 

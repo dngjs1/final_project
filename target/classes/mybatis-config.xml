@@ -18,5 +18,7 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductQuestion" alias="ProductQuestion"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinOption" alias="productJoinOption"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.BuyInfo" alias="buyInfo"/>
+		<typeAlias type="com.notnull.shop.rental.model.vo.File" alias="File"/>
+		<typeAlias type="com.notnull.shop.rental.model.vo.Rental" alias="rental"/>
 	</typeAliases>
 </configuration>

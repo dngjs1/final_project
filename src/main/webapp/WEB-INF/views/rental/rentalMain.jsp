@@ -97,10 +97,10 @@
 	                <label><input type="checkbox" name="room" class="item_room" value="05" checked /> 쓰리룸+</label>
 	            </div>
 	        	
+				<a href="${path }/shop/rentalWrite.do">등록</a>
 	        </div>
 		</div>
 	</div>
-	
     
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
 	<script>

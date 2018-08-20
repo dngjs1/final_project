@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Rental">
+	<insert id="insertRental" parameterType="rental" useGeneratedKeys="false">
+		insert into rental_obj values(rental_obj_seq.nextval, #{p_category_code}, #{title}, #{content}, #{member_id}, #{price}, #{post_no}, #{address}, #{detail_address}, #{phone}, #{start_date}, #{end_date})
+	</insert>
+</mapper>
