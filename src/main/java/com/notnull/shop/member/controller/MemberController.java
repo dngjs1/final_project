@@ -226,9 +226,7 @@ public class MemberController {
 		}else {
 			System.out.println("THERE'S NO ID");
 			msg ="없는 아이디입니다.";
-<<<<<<< HEAD
 			model.addAttribute("loc",path);
-=======
 			model.addAttribute("path",path_);
 			
 			 writer.println("<script type='text/javascript'>");
@@ -238,7 +236,6 @@ public class MemberController {
 		     writer.flush();
 			
 			return "/member/memberLoginPage";
->>>>>>> SUPER_branch
 			
 		}
 
