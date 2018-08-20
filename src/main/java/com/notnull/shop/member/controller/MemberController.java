@@ -304,7 +304,7 @@ public class MemberController {
 			
 		}
 		
-		model.addAttribute("id",id);
+		model.addAttribute("id","아이디는 "+id+" 입니다.");
 		
 		return "member/findMember";
 	}
@@ -556,6 +556,7 @@ public class MemberController {
 		
 		System.out.println(list);
 		
+		//카운트도해줘야함 ㅋㅋ ㅅㅂ
 		int totalCount = service.selectMemberCount();
 		
 		System.out.println(totalCount);
