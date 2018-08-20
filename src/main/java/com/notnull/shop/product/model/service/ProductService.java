@@ -59,6 +59,8 @@ public interface ProductService {
 	
 	int insertPoint(PointLog pointLog);
 	
+	int selectPoint(String member_id);
+	
 	List<ProductReview> selectReview(int productCode);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);

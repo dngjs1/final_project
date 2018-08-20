@@ -244,6 +244,7 @@
       <!--그냥 row로 감싸면 사이드에 여백이 생기기 때문에 container-fluid로 전체를 감싸줘야 한다.-->
       <!-- 첫 번째 내비코드 시작 -->
       <div class="container">
+<<<<<<< HEAD
       
       
       <div class = "head">
@@ -284,6 +285,71 @@
       	
       	</a>
       
+=======
+        <div class="row">
+          <div class="col-6">
+            <ul class="nav mt-1 ml-3">
+              <li class="nav-item">
+                <h5><a class="badge badge-success" href="#" id="favorite" title="즐겨찾기 등록"><i class="far fa-bookmark"></i> 즐겨찾기</a></h5>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+          
+          <c:if test="${memberLoggedIn==null }">
+            <ul class="nav justify-content-end mt-1">
+            
+  
+              <!-- <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" data-toggle="modal"  data-target="#loginModal">로그인<i class="fas fa-sign-in-alt"></i></a>|</h5>
+              </li>  --> 
+              
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath }/memberLoginBefore.do">로그인<i class="fas fa-sign-in-alt"></i></a>|</h5>
+              </li>  
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath }/findMember.do">ID/비밀번호 찾기<i class="fas fa-search"></i></a>|</h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberAgree.do">회원가입<i class="far fa-handshake"></i></a>|</h5>
+              </li>
+              <!--  <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
+                data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a></h5>
+              </li>  -->
+              
+             <!--  <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3 dropdown-toggle" ref="#" title="장바구니" 
+                data-toggle="dropdown">장바구니 <i class="fas fa-cart-plus"></i></a></h5>
+              </li> -->
+			</ul>
+			</c:if>
+			<c:if test="${memberLoggedIn!=null }">
+			<ul class="nav justify-content-end mt-1">
+            	
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="#"><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.	</a>|</h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/myPage.do">마이페이지 </a>|</h5>
+              </li>
+               <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" ref="#" title="" 
+                data-toggle="popover" data-placement="bottom" data-content="장바구니에 담겨있는 상품이 없습니다 " >장바구니 <i class="fas fa-cart-plus"></i> <span class="badge badge-success">0</span></a>|</h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3" href="${pageContext.request.contextPath}/memberLogout.do">로그아웃 </a>|</h5>
+              </li>
+              
+             <!--  <li class="nav-item">
+                <h5><a class="nav-link badge badge-light mr-3 ml-3 dropdown-toggle" ref="#" title="장바구니" 
+                data-toggle="dropdown">장바구니 <i class="fas fa-cart-plus"></i></a></h5>
+              </li> -->
+			</ul>
+			</c:if>
+          </div>
+        </div>
+>>>>>>> SUPER_branch
       </div>
       
       

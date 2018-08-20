@@ -217,6 +217,11 @@ public class ProductServiceImpl implements ProductService {
 	public int insertPoint(PointLog pointLog) {
 		return productDAO.insertPoint(sqlSession,pointLog);
 	}
+	
+	@Override
+	public int selectPoint(String member_id) {
+		return productDAO.selectPoint(sqlSession,member_id);
+	}
 
 	@Override
 	public int addQuestion(ProductQuestion productQuestion) {

@@ -78,5 +78,9 @@
 							member_level=#{member_level}
 							 where member_id=#{member_id} 
 	</update>
+	
+	<select id="memberSearch" resultType="member" parameterType="string">
+		select * from member where member_id like #{%+info+%}
+	</select>
  
 </mapper>

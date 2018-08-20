@@ -20,20 +20,20 @@
 </style>
 
 <c:set var='path' value="${pageContext.request.contextPath}" />
- <form name="productReview" action="${path}/productReviewInsert.do" method="post" enctype="multipart/form-data">
+ <form name="productReview" action="${path}/productReviewInsert.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
  	  <input name="product_code" type="hidden" value="${product_code}"/>
  	  <input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
  	  <h3>상품평 사진</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
-	       	<input multiple="multiple" type="file"  accept=".jpg, .png" class="addfile1" name="file_1" />
+	       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
 	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
         </div>
-        <a href="#this" id="add1" class="btn1">파일 추가하기</a>
+        <a href="#this" id="add1" class="btn1">사진 추가하기</a>
         <br><br><br>
        
  	
- 	 <h3>상품폄등록</h3>
+ 	 <h3>상품평 등록</h3>
         <hr style="border:2px solid #787878"><br>       
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
              
@@ -87,7 +87,13 @@ $('.starRev span').click(function(){
 	  else if($(this).html()==4) $("#review_star").val("4")
 	  else if($(this).html()==5) $("#review_star").val("5");	  
 }); 
- 
+function validate(){
+	if(!$('.addfile1').val().length){
+	 	alert("상품사진은 반드시 한개 이상 추가해야 합니다.");
+		return false;
+	}
+	return true;
+}
  </script>
   <script type="text/javascript">
 var g_count=1;

@@ -139,7 +139,14 @@ public class MemberServiceImp implements MemberService {
 		
 		return memberDAO.memberList(sqlSession, cPage, numPerPage);
 	}
-
+	
+	@Override
+	public List<Member> memberList(int cPage, int numPerPage, String info) {
+		
+		return memberDAO.memberList(sqlSession, cPage, numPerPage, info);
+	}
+	
+	
 	@Override
 	public Member selectMember(String id) {
 		
@@ -157,5 +164,7 @@ public class MemberServiceImp implements MemberService {
 		
 		return memberDAO.updateManagement(sqlSession, m);
 	}
+
+	
 
 }

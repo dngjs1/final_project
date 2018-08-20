@@ -270,8 +270,11 @@ public class ProductController {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		int quantity=Integer.parseInt(request.getParameter("cart_quantity"));
 		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
-		
+		String member_id=request.getParameter("member_id");
 		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
 		model.addAttribute("productJoinOption",productJoinOption);
 		model.addAttribute("quantity",quantity);
 		return "/product/buyForm";
@@ -280,7 +283,11 @@ public class ProductController {
 	@RequestMapping("/buyForm2.do")
 	public String buyForm2(Model model,HttpServletRequest request) {
 		String[] cart_codes=request.getParameterValues("check");
+		String member_id=request.getParameter("member_id");
 		List<CartJoinList> cartList=service.selectCartList(cart_codes);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
 	}
@@ -306,9 +313,13 @@ public class ProductController {
 		//int result=service.insertBuyList(buyList);
 		
 		int last_price=Integer.parseInt(request.getParameter("last_price"));
-		int point=Integer.parseInt(request.getParameter("point"));
-		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),point,null);
-		//int result2=service.insertPoint(pointLog);
+		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
+		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
+		
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
+		int result2=service.insertPoint(pointLog);
+		int result3=service.insertPoint(pointLog2);
 		return "/product/buyEnd";
 	}
 	
@@ -356,7 +367,9 @@ public class ProductController {
         String msg="";
 		if(result>0)
 		{
-			msg="등록을 성공하였습니다.";
+			msg="등록을 성공하였습니다. 100p가 지급됩니다.";
+			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,null);
+			int result2=service.insertPoint(pointLog);
 		}
 		else
 		{

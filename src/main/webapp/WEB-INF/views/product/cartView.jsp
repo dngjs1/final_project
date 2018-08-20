@@ -324,6 +324,7 @@
 						<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 							<input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
+							<input type="hidden" name="member_id" value="${memberLoggedIn.member_id}"/>
 							<input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/>
 							<input type="text" class="quantity" name="cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
 							<input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/>
