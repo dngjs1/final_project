@@ -36,9 +36,9 @@ span.star-prototype > * {
 	<div class = "ssSection" id = "subbrandList">
 	
 	<!-- 카테고리라는 이름 넣는  공간 -->
-	<div class = "ssTitle">
+	<!-- <div class = "ssTitle">
 		<span>검색영역</span>
-	</div><!-- 카테고리라는 이름 넣는 div 끝 -->
+	</div>카테고리라는 이름 넣는 div 끝 -->
 	
 	</div><!-- 품목 카테고리 나오는 부분 감싸는 div 끝 -->
 	
