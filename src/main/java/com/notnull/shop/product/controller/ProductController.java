@@ -44,7 +44,6 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
-import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 @Controller
@@ -56,7 +55,7 @@ public class ProductController {
 	
 	@RequestMapping("/product.do")
 	public String selectProductList(Model m ,HttpServletRequest request) {
-		
+
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
@@ -215,12 +214,6 @@ public class ProductController {
 		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
 		request.setAttribute("questionList", questionList);
-		
-		
-		List<ProductReviewLike> likeList=service.selectLikeList();
-		
-		request.setAttribute("likeList", likeList);
-				
 		return "/product/productView";
 	}
 
@@ -454,103 +447,18 @@ public class ProductController {
 	
 	
 	@RequestMapping("/addQuestion.do")
-	public String addQuestion(HttpServletRequest request,HttpServletResponse response, ProductQuestion productQuestion) throws IOException {
-		int productCode=productQuestion.getProduct_code();
+	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
+		int productCode=Integer.parseInt(request.getParameter("productCode"));
 		
+		System.out.println(productQuestion);
 		int result=service.addQuestion(productQuestion);
 		System.out.println(result);
-		List<ProductQuestion> questionList=service.selectQuestion(productCode);
-		ProductJoinCategory joinCategory=service.selectProduct(productCode);
+		request.setAttribute("productCode", productCode);
 		
-		request.setAttribute("joinCategory", joinCategory);
-		request.setAttribute("questionList", questionList);
-		
-		return "/product/questionAjax";
+		String re = "redirect:/productView.do"+"?productCode="+productCode;
 
-	}
-	
-	@RequestMapping("/deleteQuestion.do")
-	public String deleteQuestion(HttpServletRequest request,HttpServletResponse response, int p_question_code,int product_code) {
-		int result=service.deleteQuestion(p_question_code);
-		System.out.println(result);
+		return re;
 		
-		List<ProductQuestion> questionList=service.selectQuestion(product_code);
-		
-		request.setAttribute("questionList", questionList);
-		
-		return "/product/questionAjax";
-	}
-	
-	@RequestMapping("/like.do")
-	public ModelAndView like(ModelAndView mv,HttpServletRequest request) {
-		int review_code=Integer.parseInt(request.getParameter("review_code"));
-		String member_id=request.getParameter("member_id");
-		String like_status=request.getParameter("like_status");
-		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
-		int result=0;
-		int likeOn=0;
-		if(like_status.equals("Y")) {
-			if(likeList.isEmpty()) {
-				System.out.println("!!!");
-				likeList.get(0).setReview_code(review_code);
-				likeList.get(0).setMember_id(member_id);
-				likeList.get(0).setLike_status(like_status);
-				
-				result=service.addLike(likeList.get(0));
-			}else {				
-				for(int i=0;i<likeList.size();i++) {
-					if(likeList.isEmpty()) {
-						System.out.println("@@@");
-						likeList.get(i).setReview_code(review_code);
-						likeList.get(i).setMember_id(member_id);
-						likeList.get(i).setLike_status(like_status);
-						
-						result=service.addLike(likeList.get(i));
-						likeOn=1;
-					}else if(likeList.get(i).getLike_status().equals("Y")) {
-						result=service.deleteLike(likeList.get(i));
-						likeOn=2;
-					}else if(likeList.get(i).getLike_status().equals("N")) {
-						likeList.get(i).setLike_status("Y");
-						result=service.updateLike(likeList.get(i));
-						likeOn=3;
-					}
-				}
-			}  
-			if(like_status.equals("N")) {
-				if(likeList.isEmpty()) {
-					likeList.get(0).setReview_code(review_code);
-					likeList.get(0).setMember_id(member_id);
-					likeList.get(0).setLike_status(like_status);
-					
-					result=service.addLike(likeList.get(0));
-				}else {	
-					for(int i=0;i<likeList.size();i++) {
-						if(likeList.isEmpty()) {
-							likeList.get(i).setReview_code(review_code);
-							likeList.get(i).setMember_id(member_id);
-							likeList.get(i).setLike_status(like_status);
-							
-							result=service.addLike(likeList.get(i));
-							likeOn=1;
-						}else if(likeList.get(i).getLike_status().equals("N")) {
-							result=service.deleteLike(likeList.get(i));
-							likeOn=2;
-						}else if(likeList.get(i).getLike_status().equals("Y")) {
-							likeList.get(i).setLike_status("N");
-							result=service.updateLike(likeList.get(i));
-							likeOn=3;
-						}
-					}
-				}
-			}
-		}
-			
-		mv.addObject("result", result);
-		mv.addObject("likeOn", likeOn);
-		
-		mv.setViewName("JsonView");
-		return mv;
 	}
 	
 

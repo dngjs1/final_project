@@ -1,7 +1,6 @@
 package com.notnull.shop.product.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.vo.BuyInfo;
@@ -19,7 +18,6 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
-import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 public interface ProductService {
 
@@ -77,19 +75,6 @@ public interface ProductService {
 	
 	int addQuestion(ProductQuestion productQuestion);
 	
-	int deleteQuestion(int p_question_code);
-	
 	List<ProductQuestion> selectQuestion(int productCode);
-	
-	int addLike(ProductReviewLike productReviewLike);
-	
-	ProductReviewLike selectLike(int review_code);
-	
-	int deleteLike(ProductReviewLike productReviewLike);
-	
-	int updateLike(ProductReviewLike productReviewLike);
-	
-	List<ProductReviewLike> selectLikeList();
-		
-	List<ProductReviewLike> selectLikeList(int review_code);
+
 }

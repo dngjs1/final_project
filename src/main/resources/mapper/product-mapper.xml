@@ -8,8 +8,8 @@
 	</resultMap>
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
-	<select id="selectProductList" resultMap="productListJoinMap">    
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star
+	<select id="selectProductList" resultMap="productListJoinMap">
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
@@ -24,7 +24,7 @@
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by review_star desc nulls last
+		order by review_star desc  
  	</select>
  
  	<select id="highPriceOrder" resultMap="productListJoinMap">
@@ -212,53 +212,9 @@
   	</choose> 	
   	</insert>
   	
-  	<delete id="deleteQuestion" parameterType="_int">
-  		delete from product_question where p_question_code=#{p_question_code}
-  	</delete>
-  	
-  	
   	<select id="selectQuestion" parameterType="int" resultType="ProductQuestion">
   	select *
 	from product_question A
 	where product_code=#{product_code} start with question_level=1 connect by prior p_question_code=p_question_code_ref order siblings by question_date asc
   	</select>
-  	
-  	
-  	<insert id="addLike" parameterType="ProductReviewLike">
-  		insert into product_review_like values(#{review_code},#{member_id},#{like_status})
-  	</insert>
-  	
-  	<select id="selectLike" parameterType="_int" resultType="ProductReviewLike">
-  		select * from product_review_like where review_code=#{review_code}		
-  	</select>
-  	
-  	<delete id="deleteLike" parameterType="ProductReviewLike">
-  		delete from product_review_like where review_code=#{review_code} and member_id=#{member_id}	
-  	</delete>
-  	
-  	<update id="updateLike" parameterType="ProductReviewLike">
-  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
-  	</update>
-  	
-  
- 	 <resultMap type="ProductReviewLike" id="ProductReviewLikeMap">			
-	</resultMap>
-  
-  	<select id="selectLikeList" resultMap="ProductReviewLikeMap">
-  		select * from product_review_like
-  	</select>
-
-
- 
-  	<select id="selectLikeList1" resultMap="ProductReviewLikeMap">
-  		select * from product_review_like where review_code=#{review_code}
-  	</select>
-  	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
-  	<select id="selectlikeCountList" resultMap="countLikeMap">
-  		select review_code,count(*) as cnt
-		from product_review_like
-		where like_status=#{status}
-		group by review_code
-  	</select>
- -->
 </mapper>
