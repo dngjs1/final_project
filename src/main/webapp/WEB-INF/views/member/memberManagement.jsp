@@ -383,13 +383,34 @@
 				</table>
 				<br>
 				
+
 				<!-- <div style="position:relative; top:30px;"> -->
+<style>
+.search_btn {
+	width : 50px;
+	height : 30px;
+	border: none;
+	background: #007bff;
+	color : #fff;
+	font-size : 15px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	cursor:pointer;
+	float:right;
+}
+</style>
+				
+				
 				
 				<div class = "row">
 				
+				
+				
+				
 				<div class = "col-3" style = "margin-left : 20px;">
-					<input type="text" name="searchInfo" id="searchInfo" placeholder="ID 검색" /> 
-					<button type="button" onclick="searchMember()">검색</button>
+					<input type="text" name="searchInfo" id="searchInfo" style="border:solid #007bff; font-size:15px" placeholder="ID 검색" /> 
+					<button type="button" onclick="searchMember()" class="search_btn">검색</button>
 				</div>
 				
 				<div class = "col-6">

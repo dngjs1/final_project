@@ -139,7 +139,7 @@
   .main_logo a {
   	text-decoration: none;
   	font-style : normal;
-  	color : #black;
+  	color : black;
   	font-family: 'Fredericka the Great', cursive;
 	font-weight: bold;
 	font-size: 40px;
@@ -344,7 +344,7 @@
       			</c:if>
       			
       			<li>
-      				<a href = "#">장바구니</a>
+      				<a href = "${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id }">장바구니</a>
       			</li>
       			
       			<li>
