@@ -257,7 +257,6 @@
 							<td scope="col"><span class="price">${last_price }</span><span> 원</span></td>
 						</tr>
 					</tbody>
-				
 				</table>
 			</div>
 			
@@ -266,6 +265,10 @@
 					<i class="fas fa-shopping-basket"></i>&nbsp;&nbsp;쇼핑 계속하기 
 				</button>
 			</div>
-
+	<script>
+		$('.con_shop').click(function(){
+			location.href="${pageContext.request.contextPath}/product.do";
+		});
+	</script>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

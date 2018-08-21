@@ -10,8 +10,7 @@
 <html>
 <head>
 
-<meta content="UTF-8">
-<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu|Merienda|Fredericka+the+Great" rel="stylesheet">
 <!-- footer css외부참조파일 -->
 <link rel="stylesheet" href="resources/css/index.css" type="text/css">
 <link rel="stylesheet" href="resources/css/footer.css" type="text/css">
@@ -129,18 +128,25 @@
   }
   
   .main_logo {
+    padding-left : 121px; 
   	margin :0;
   	float : left;
   	width : 300px;
   	text-align: center;
+  	
   }
   
   .main_logo a {
-  	font-size : 30px;
-  	font-weight : bold;
   	text-decoration: none;
   	font-style : normal;
-  	color : #717171;
+  	color : #black;
+  	font-family: 'Fredericka the Great', cursive;
+	font-weight: bold;
+	font-size: 40px;
+  }
+  
+  .main_logo a:hover {
+  	color : #black;
   }
   
   .main_logo img {
@@ -212,6 +218,7 @@
   	z-index: 1000;
   	display : none;
   }
+  
   </style>
   
   <!-- 우측 하단 top버튼 스크립트 -->
@@ -278,15 +285,9 @@
       		
       		</ul> -->
       		
-      		<a href = "#">
-      	
-      		<img src = "./resources/images/cat_logo.png">
-      	
-      	
-      	</a>
-      
-
-        
+      		<a href = "${pageContext.request.contextPath}/">
+      			<span class="title-font">Try Trip</span>
+      		</a>
 
       </div>
       
@@ -767,7 +768,7 @@
       		<div class = "lnb">
       				<ul class = "categorytype-layer">
       					<li>
-      						<a href = "#"><i class="fas fa-home" style = "font-size: 24px; line-height : 14px;"></i></a>
+      						<a href = "${pageContext.request.contextPath}/"><i class="fas fa-home" style = "font-size: 24px; line-height : 14px;"></i></a>
       					</li>
       					
       					<li>

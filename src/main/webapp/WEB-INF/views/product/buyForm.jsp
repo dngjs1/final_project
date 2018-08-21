@@ -312,6 +312,7 @@
                   <div style="float: left;text-align:left;margin-left:15px;">
                      <input type="hidden" name="product_option_code" value="${cart.PRODUCT_OPTION_CODE}"/>
                      <input type="hidden" name="buy_quantity" value="${cart.CART_QUANTITY}"/>
+                     <input type="hidden" name="cart_code" value="${cart.CART_CODE}"/>
                      <input type="hidden" class="name${vs.count }" name="name${vs.count }" value="${cart.PRODUCT_NAME} 등  ${fn:length(cartList)}개"/>
                      <span>${cart.PRODUCT_NAME}</span><br>
                      <c:if test="${cart.OPTION_SIZE!=null}">

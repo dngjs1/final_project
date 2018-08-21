@@ -296,6 +296,10 @@ public class ProductController {
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		String[] cart_codes=null;
+		if( request.getParameterValues("cart_code") != null ) {
+			cart_codes = request.getParameterValues("cart_code");
+		}
 		
 		int last_price=Integer.parseInt(request.getParameter("last_price"));
 		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
@@ -326,6 +330,10 @@ public class ProductController {
 			int result3=service.insertPoint(pointLog2);
 			//재고 차감
 			int result4=service.updateLeftList(buyList);
+			//장바구니 삭제
+			if(cart_codes != null) {
+				int result5=service.deleteSelectCart(cart_codes);
+			}
 		}
 		
 		model.addAttribute("product_all_name",product_all_name);
