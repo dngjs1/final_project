@@ -305,8 +305,8 @@ public class ProductController {
 		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
 		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
 		String product_all_name=request.getParameter("name1");
-		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null,"상품 구매 적립");
-		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null,"상품 구매 사용");
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,"상품 구매 적립",null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,"상품 구매 사용",null);
 		
 		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
@@ -387,7 +387,7 @@ public class ProductController {
 		if(result>0)
 		{
 			msg="등록을 성공하였습니다. 100p가 지급됩니다.";
-			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,null,"상품평 등록 증정");
+			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,"상품평 등록 증정",null);
 			int result2=service.insertPoint(pointLog);
 		}
 		else

@@ -6,20 +6,20 @@ public class PointLog {
 	private int point_code;
 	private String member_id;
 	private int point_increase;
-	private Date point_date;
 	private String point_content;
+	private Date point_date;
 	
 	public PointLog() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointLog(int point_code, String member_id, int point_increase, Date point_date, String point_content) {
+	public PointLog(int point_code, String member_id, int point_increase,String point_content,Date point_date) {
 		super();
 		this.point_code = point_code;
 		this.member_id = member_id;
 		this.point_increase = point_increase;
-		this.point_date = point_date;
 		this.point_content = point_content;
+		this.point_date = point_date;
 	}
 
 	@Override
