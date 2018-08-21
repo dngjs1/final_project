@@ -244,7 +244,6 @@ public class ProductController {
 		response.getWriter().print(result);
 	}
 	
-
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
