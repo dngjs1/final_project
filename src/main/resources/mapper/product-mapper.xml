@@ -180,7 +180,7 @@
     </insert>
     
     <insert id="insertPoint" parameterType="pointLog">
-    	insert into point_log values(point_log_seq.nextval,#{member_id},#{point_increase},sysdate)
+    	insert into point_log values(point_log_seq.nextval,#{member_id},#{point_increase},sysdate,#{point_content})
     </insert>
     
     <select id="selectPoint" parameterType="string" resultType="_int">

@@ -112,7 +112,7 @@ public class MemberController {
 		
 		if(result>0) {
 			msg="회원가입 완료, 가입시 이용한 이메일로 인증해주세요";
-			PointLog pointLog = new PointLog(0,m.getMember_id(),3000,null);
+			PointLog pointLog = new PointLog(0,m.getMember_id(),3000,null,"회원가입 증정");
 			int result2=productService.insertPoint(pointLog);
 		}else {
 			msg="회원가입 실패";
