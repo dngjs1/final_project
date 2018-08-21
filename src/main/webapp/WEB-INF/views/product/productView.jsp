@@ -167,7 +167,7 @@ span.star-prototype > * {
 						<c:when test="${optionList.size()<2}">
 
 							<c:forEach var="option" items="${optionList}">
-								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
+								<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
 							</c:forEach>
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
 								<c:choose>
@@ -238,7 +238,7 @@ span.star-prototype > * {
 						
 						var productInfo={
 								member_id:member_id,
-								product_option_code:$("[name=productCode]").val(),
+								product_option_code:$("[name=product_option_code]").val(),
 								product_code:$("[name=product_code]").val(),
 								cart_quantity:$("[name=cart_quantity]").val()
 						};
