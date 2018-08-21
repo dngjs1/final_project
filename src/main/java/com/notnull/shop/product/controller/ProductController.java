@@ -327,7 +327,9 @@ public class ProductController {
 			//포인트 적립
 			int result2=service.insertPoint(pointLog);
 			//포인트 차감
-			int result3=service.insertPoint(pointLog2);
+			if(pointLog2.getPoint_increase()!=0) {
+				int result3=service.insertPoint(pointLog2);
+			}
 			//재고 차감
 			int result4=service.updateLeftList(buyList);
 			//장바구니 삭제
