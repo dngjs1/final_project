@@ -114,22 +114,76 @@ span.star-prototype > * {
 
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${joinCategory.p_category_name}</span></p>
 <div class="row">
-	<div class="col-6">
+	<div class="col-6 images_sum">
 	
+	<style>
+		.sub_images {
+			margin-left : 17px;
+		}
+		.sub_images:hover {
+		box-shadow: 10px 10px 20px #b4b2b2;
+		
+		
+		
+}
+		.main_image {
+		
+			max-width : 100%;
+			
+			cursor : pointer;
+			overflow: hidden;
+			}
+
+		#mainImg {
+			max-width:60%;
+
+			margin-left: auto; 
+			margin-right: auto; 
+			display: block;
+	
+		}
+	</style>
 	<c:forEach var='imgList' items='${imgList }' varStatus="vs">
+	
+		
 		<c:if test="${vs.index==0}">
-  		<img width="300px" height="300px" src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
+		<div class = "main_image">
+  		<img src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
+  		<hr>
+  		</div>
   		</c:if>
+  		
+  		
+  		
   		<c:if test="${vs.index>=0}">
-  		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
+  		
+  		<div class = "sub_images" style = "float:left; padding-right:10px;">
+  		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
   			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
+  		</div>
+  		
   		</c:if>
+  		
   	</c:forEach>
 	</div>
+	
+	<style>
+	
+	.infoBox {
+		padding : 0 40px;
+	}
+		.infoBox h1 {
+			margin:0;
+			color : #2e2e2e;
+			font-size : 30px;
+			line-height: 48px;
+			font-weight: bold;
+		}
+	</style>
 	<div class="col-6">
-		<hr style="border: 1.5px solid black;margin-top: 0px;">
-		<div style="margin-left:10px">
-			<p style="font-size:25px;font-weight:bold">${joinCategory.product_name}</p>
+		
+		<div class = "infoBox">
+			<h1 style = "box-sizing:border-box;padding-right:150px;position:relative;">${joinCategory.product_name}</h1>
 			 <c:set var="total" value="0"/>
 			 <c:forEach var="review" items="${reviewList}" varStatus="vs">
 				<c:set var="total" value="${(total+review.review_star)}"/>
@@ -151,14 +205,14 @@ span.star-prototype > * {
 				 	 <c:out value="0개 상품평"/>
 				 </c:otherwise>
 			</c:choose>
-			<hr>
+		
 			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">${joinCategory.price}</span><span> 원</span></div>
-			<hr>
+			
 			<p><span style="font-size:18px;color:#148CFF;"><%=strdate%></span> 도착 예정</p>
-			<hr>
+			
 			<span>배송방법 : 택배</span><br>
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
-			<hr>
+			
 			<form name="form" id="frm" method="get">
 				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
