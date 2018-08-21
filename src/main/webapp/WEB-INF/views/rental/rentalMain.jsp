@@ -84,52 +84,7 @@
 	<div class="map-container">
 		<div class="map-area">
 			<div id="map"></div>
-		</div>
-		<div class="map-content">
-	        <!-- search -->
-	        <div class="map-search">
-	            <div class="item-type">
-	                <h4>카테고리</h4>
-	                <label><input type="checkbox" name="room" class="item_room" value="01" checked /> 오픈형 원룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="02" checked /> 분리형 원룸 </label>
-	                <label><input type="checkbox" name="room" class="item_room" value="03" checked /> 복층형 원룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="04" checked /> 투룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="05" checked /> 쓰리룸+</label>
-	            </div>
-	        	
-				<a href="${path }/shop/rentalWrite.do">등록</a>
-	        </div>
-			<c:forEach items="${list }" var="rental" varStatus="stauts">
-			<c:if test="${status.index % 6 == 0 }">
-			<div class="row row-eq-height">
-			</c:if>
-				<div class="col-sm-2" style="text-align: -webkit-center;">
-			      	<a href="./detail.do?rental_obj_code=${rental.rental_obj_code }">
-				      <div class="thumbnail" style="overflow: hidden;">      	
-				      <c:if test="${rental.imgUrl == null }">
-				   		<img src="https://placehold.it/160x200?text=Not Image" class="media-object" alt="Good" style="float:left">
-				      </c:if>
-				      <c:if test="${rental.imgUrl != null }">
-				        <img src="${rental.imgUrl }" class="media-object" alt="Good">
-				      </c:if>	      
-				      </div>
-				      
-				      <div class="context">
-				      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"><strong>${rental.status }</strong></h4>
-				        <strong>[${rental.category }] ${rental.title }</strong>
-				        <p> ${rental.price } 원</p>
-				        <button class="btn">상품 보기</button>
-				       </div>
-			        </a>
-				</div>
-			<c:if test="${status.index % 6 == 5 }">
-			</div>
-			</c:if>
-			</c:forEach>
-		</div>
-	</div>
-    
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		    mapOption = { 
@@ -197,5 +152,56 @@
 		}
 		
 	</script>
+		</div>
+		<div class="map-content">
+	        <!-- search -->
+	        <div class="map-search">
+	            <div class="item-type">
+	                <h4>카테고리</h4>
+	                <label><input type="checkbox" name="room" class="item_room" value="01" checked /> 오픈형 원룸</label>
+	                <label><input type="checkbox" name="room" class="item_room" value="02" checked /> 분리형 원룸 </label>
+	                <label><input type="checkbox" name="room" class="item_room" value="03" checked /> 복층형 원룸</label>
+	                <label><input type="checkbox" name="room" class="item_room" value="04" checked /> 투룸</label>
+	                <label><input type="checkbox" name="room" class="item_room" value="05" checked /> 쓰리룸+</label>
+	            </div>
+	        	
+				<a href="${path }/shop/rentalWrite.do">등록</a>
+	        </div>
+	        <div class="map-list">
+			<<c:forEach items="${list }" var="rental" varStatus="status">
+			<c:if test="${status.index % 6 == 0 }">
+			<div class="list-item">
+			</c:if>
+				<div class="col-sm-2" style="text-align: -webkit-center;">
+			      	<a href="./detail.do?rental_obj_code=${rental.rental_obj_code }">
+				      <div class="thumbnail" style="overflow: hidden;">      	
+				      <c:if test="${rental.imgUrl == null }">
+				   		<img src="https://placehold.it/160x200?text=Not Image" class="media-object" alt="Rental" style="float:left">
+				      </c:if>     	
+				      <c:if test="${rental.imgUrl == '/p' }">
+				   		<img src="https://placehold.it/160x200?text=Not Image" class="media-object" alt="Rental" style="float:left">
+				      </c:if>
+				      <c:if test="${rental.imgUrl != null} && ${rental.imgUrl !='/p' }">
+				        <img src="${rental.imgUrl }" class="media-object" alt="Rental">
+				      </c:if>	      
+				      </div>
+				      
+				      <div class="context">
+				      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"><strong>${rental.status }</strong></h4>
+				        <strong>[${rental.category }] ${rental.title }</strong>
+				        <p> ${rental.price } 원</p>
+				        <button class="btn">상품 보기</button>
+				       </div>
+			        </a>
+				</div>
+			<c:if test="${status.index % 6 == 5 }">
+			</div>
+			</c:if>
+			</c:forEach>
+			</div>
+		</div>
+	</div>
+    
+
 </div>
 
