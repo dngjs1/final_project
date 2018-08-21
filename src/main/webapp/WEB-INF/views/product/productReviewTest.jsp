@@ -37,13 +37,6 @@
         <hr style="border:2px solid #787878"><br>       
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
              
-        
-		<tr class="tr1">
-			<th style="text-align: center;border-left:none;">작성일</th>
-			<td>	
-			<input type="date" class="form-control"  name="review_date" id="review_date" required>
-			</td>
-		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">내용</th>
 			<td>	
@@ -81,30 +74,27 @@
 	  return false;
 });
 $('.starRev span').click(function(){
-	  if($(this).html()==1) $("#review_star").val("1") 
-	  else if($(this).html()==2) $("#review_star").val("2")
-	  else if($(this).html()==3) $("#review_star").val("3")
-	  else if($(this).html()==4) $("#review_star").val("4")
+	  if($(this).html()==1) $("#review_star").val("1");
+	  else if($(this).html()==2) $("#review_star").val("2");
+	  else if($(this).html()==3) $("#review_star").val("3");
+	  else if($(this).html()==4) $("#review_star").val("4");
 	  else if($(this).html()==5) $("#review_star").val("5");	  
 }); 
-function validate(){
-	if(!$('.addfile1').val().length){
-	 	alert("상품사진은 반드시 한개 이상 추가해야 합니다.");
-		return false;
-	}
-	return true;
-}
+
  </script>
-  <script type="text/javascript">
-var g_count=1;
+<script type="text/javascript">
+var add_count=1;
 
 $(document).ready(function(){
 	$("#add1").on("click",function(e){
-		e.preventDefault();
+		add_count=add_count+1;
+		if(add_count>7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
 		fn_fileAdd1();
 	});
 	$("a[name='delete1']").on("click",function(e){
-		e.preventDefault();
 		fn_fileDelete($(this));
 	});
 });
@@ -123,6 +113,5 @@ function fn_fileAdd1(){
         fn_fileDelete($(this));         
     });
 }
- 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -342,10 +342,10 @@ span.star-prototype > * {
  	</div>
   </div>
   <div id="section2" class="container tab-pane fade">
-			
- 
+ <br>		
+ <input type="button" value="테스트" onclick="fn_productReview()"/>
  <hr>
- <h4>상품평</h4> <input type="button" value="테스트" onclick="fn_productReview()"/>
+ <h4>상품평</h4> 
  <script>
 	function fn_productReview(){
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
@@ -362,26 +362,28 @@ span.star-prototype > * {
 	 참여인원:<c:out value="${count }"/>
  </div> --%>
 
- <div>상품평 이미지</div>
+ <%-- <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
-	</c:forEach>
+	</c:forEach> --%>
 	<hr>
    <div> 
  <c:forEach var="review" items="${reviewList}">
  <c:set var="flag" value="true"/>
  	
-	 작성자:${review.member_id}<br>
-	별점:<span class="star-prototype">${review.review_star }</span><br>
-	 작성일:${review.review_date} <br> 
-	
+	<i class="far fa-user-circle"></i><span style="color:#1EA4FF;font-size:18px;"> ${review.member_id}</span>
+	&emsp;&emsp;<span class="star-prototype">${review.review_star }</span>
+	&emsp;&emsp;<span>${review.review_date}</span>
+
+	<br>
 	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<c:if test="${review.review_code eq imgList.review_code }">
 			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 		</c:if>
 	</c:forEach>
-		<br>	 	 
-	 내용 :${review.review_content} <br>	
+		<br>	
+		<span>${review.review_content}</span> 	 
+	  <br>	
 
 	
 
