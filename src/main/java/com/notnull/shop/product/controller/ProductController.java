@@ -549,6 +549,7 @@ public class ProductController {
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);
 		
+		
 		mv.setViewName("JsonView");
 		return mv;
 	}
