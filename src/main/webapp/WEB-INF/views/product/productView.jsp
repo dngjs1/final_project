@@ -190,7 +190,7 @@ span.star-prototype > * {
 						</c:when>
 						<c:otherwise>
 							<span>사이즈 </span>
-							<select name="productCode" style="font-size:15px;height:28px;" >
+							<select name="product_option_code" style="font-size:15px;height:28px;" >
 								<c:forEach var="option" items="${optionList}">
 									<c:choose>
 									<c:when test="${option.left_amount<=0}">
