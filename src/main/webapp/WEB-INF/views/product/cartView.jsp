@@ -43,7 +43,7 @@
 		var sum=0;
 		for(var i=1;i<=$('.cartLength').val();i++){
 			var sell_price = parseInt($('.price'+i).html());
-			var amount = $('[name=cart_quantity'+i+']').val();
+			var amount = $('.cart_quantity'+i).val();
 			var result = parseInt(amount) * sell_price;
 			$(".price"+i).text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -176,7 +176,15 @@
 			alert("상품을 한개이상 골라주세요");
 			return false;
 		}
-		
+		var left_amount=document.getElementsByName("left_amount");
+		var cart_quantity=document.getElementsByName("cart_quantity");
+		var product_name=document.getElementsByName("product_name");
+		for(var i=0;i<left_amount.length;i++){
+			if(parseInt(left_amount[i].value) < parseInt(cart_quantity[i].value)){
+				alert(product_name[i].value+"의 재고가 부족합니다. (남은수량 : "+left_amount[i].value+")");
+				return false;
+			}
+		}
 		return true;
 	}
 </script>
@@ -324,9 +332,10 @@
 						<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 							<input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
-							<input type="hidden" name="member_id" value="${memberLoggedIn.member_id}"/>
+							<input type="hidden" name="left_amount" value="${cart.left_amount}"/>
+							<input type="hidden" name="product_name" value="${cart.product_name}"/>
 							<input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/>
-							<input type="text" class="quantity" name="cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
+							<input type="text" name="cart_quantity" class="quantity cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
 							<input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/>
 						</td>
 						<td scope="col" style="width: 100px;font-size:16px;color:#B9062F;"><span class="sum_price${vs.count} sum"></span><span> 원</span></td>

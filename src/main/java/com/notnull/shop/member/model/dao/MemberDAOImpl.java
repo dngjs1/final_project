@@ -112,12 +112,18 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne("member.selectMemberCount");
 	}
-
+	@Override
+	public int selectMemberCount(SqlSessionTemplate sqlSession, String info) {
+		
+		return sqlSession.selectOne("member.selectMemberCountInfo",info);
+	}
+	
 	@Override
 	public int updateManagement(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.update("member.updateManagement",m);
 	}
+
 
 
 	

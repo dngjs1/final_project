@@ -6,7 +6,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
-
+<%@ page import="java.util.*, java.text.*"  %>
+<%
+ java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy년 MM월 dd일");
+ String today = formatter.format(new java.util.Date());
+%>
 <style>
    .cart_box_step {
       height: 80px;
@@ -225,28 +229,34 @@
 						<col style = "width:12%;">
 						<col style = "width:12%;">
 						<col style = "width:12%;">
-						<col style = "width:12%;">
 					</colgroup>
 					<thead>
+<script>
+	$(function(){
+		$(".price").text($(".price").text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	});
+</script>
 					<tr>
-						<th scope="col" class = "#">주문일자/번호</th>
-						<th scope="col" class = "#">상품명</th>
-						<th scope="col" class = "#">구매고객</th>
-						<th scope="col" class = "#">받는고객</th>
-						<th scope="col" class = "#">결제일</th>
-						<th scope="col" class = "#">결제금액</th>
-						<th scope="col" class = "#">결제수단</th>
+						<!-- <th scope="col" class = "#">주문일자/번호</th> -->
+						<th scope="col">결제일</th>
+						<th scope="col">상품명</th>
+						<th scope="col">구매고객</th>
+						<th scope="col">받는고객</th>
+						<th scope="col">결제수단</th>
+						<th scope="col">결제금액</th>
 					</tr>
 					</thead>
-					
 					<tbody>
-						<!-- 아무것도 안 담겨져 있을 때 나오는 곳 -->
 						<tr>
-						<td colspan="7"><b>결제한 상품이 없습니다.</b></td>
-						
+							<!-- <td scope="col">주문일자/번호</td> -->
+							<td scope="col"><%=today %></td>
+							<td scope="col">${product_all_name }</td>
+							<td scope="col">${memberLoggedIn.member_name }</td>
+							<td scope="col">${buyInfo.receiver_name }</td>
+							<td scope="col">신용카드</td>
+							<td scope="col"><span class="price">${last_price }</span><span> 원</span></td>
 						</tr>
 					</tbody>
-				
 				</table>
 			</div>
 			
@@ -255,6 +265,10 @@
 					<i class="fas fa-shopping-basket"></i>&nbsp;&nbsp;쇼핑 계속하기 
 				</button>
 			</div>
-
+	<script>
+		$('.con_shop').click(function(){
+			location.href="${pageContext.request.contextPath}/product.do";
+		});
+	</script>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

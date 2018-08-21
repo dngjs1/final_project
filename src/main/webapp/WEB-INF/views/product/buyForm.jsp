@@ -58,7 +58,7 @@
 			}
 			var save_point=parseInt(sum*0.02);
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			$("[name=point]").val(save_point);
+			$("[name=plus_point]").val(save_point);
 			$('#sum_total_price').html(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(sum>=20000){
 				$("#deli").text("무료");
@@ -311,8 +311,9 @@
                   <div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.NEW_P_IMG_PATH }"> </div>
                   <div style="float: left;text-align:left;margin-left:15px;">
                      <input type="hidden" name="product_option_code" value="${cart.PRODUCT_OPTION_CODE}"/>
-                     <input type="hidden" name="buy_quantity" value="<b>${cart.CART_QUANTITY}</b>"/>
-                     <input type="hidden" class="name${vs.count }" value="${cart.PRODUCT_NAME} 등  ${fn:length(cartList)}개"/>
+                     <input type="hidden" name="buy_quantity" value="${cart.CART_QUANTITY}"/>
+                     <input type="hidden" name="cart_code" value="${cart.CART_CODE}"/>
+                     <input type="hidden" class="name${vs.count }" name="name${vs.count }" value="${cart.PRODUCT_NAME} 등  ${fn:length(cartList)}개"/>
                      <span>${cart.PRODUCT_NAME}</span><br>
                      <c:if test="${cart.OPTION_SIZE!=null}">
                         <span>(${cart.OPTION_SIZE})</span><br>
@@ -344,7 +345,7 @@
                </div>
                <input type="hidden" name="product_option_code" value="${productJoinOption.product_option_code}"/>
                <input type="hidden" name="buy_quantity" value="${quantity}"/>
-               <input type="hidden" class="name1" value="${productJoinOption.product_name}"/>
+               <input type="hidden" class="name1" name="name1" value="${productJoinOption.product_name}"/>
             </td>
             <td><span id="quantity" >${quantity }</span></td>
             <td><span id="price">${productJoinOption.price}</span><span> 원</span></td>

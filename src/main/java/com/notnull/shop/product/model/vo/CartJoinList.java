@@ -7,13 +7,14 @@ public class CartJoinList {
 	private int cart_quantity;
 	private int product_option_code;
 	private String option_size;
+	private int left_amount;
 	private String new_p_img_path;
 	private int price;
 	
 	public CartJoinList() {}
 
 	public CartJoinList(int cart_code, int product_code, String product_name, int cart_quantity,
-			int product_option_code, String option_size, String new_p_img_path, int price) {
+			int product_option_code, String option_size, int left_amount, String new_p_img_path, int price) {
 		super();
 		this.cart_code = cart_code;
 		this.product_code = product_code;
@@ -21,6 +22,7 @@ public class CartJoinList {
 		this.cart_quantity = cart_quantity;
 		this.product_option_code = product_option_code;
 		this.option_size = option_size;
+		this.left_amount = left_amount;
 		this.new_p_img_path = new_p_img_path;
 		this.price = price;
 	}
@@ -29,7 +31,8 @@ public class CartJoinList {
 	public String toString() {
 		return "CartJoinList [cart_code=" + cart_code + ", product_code=" + product_code + ", product_name="
 				+ product_name + ", cart_quantity=" + cart_quantity + ", product_option_code=" + product_option_code
-				+ ", option_size=" + option_size + ", new_p_img_path=" + new_p_img_path + ", price=" + price + "]";
+				+ ", option_size=" + option_size + ", left_amount=" + left_amount + ", new_p_img_path=" + new_p_img_path
+				+ ", price=" + price + "]";
 	}
 
 	public int getCart_code() {
@@ -78,6 +81,14 @@ public class CartJoinList {
 
 	public void setOption_size(String option_size) {
 		this.option_size = option_size;
+	}
+
+	public int getLeft_amount() {
+		return left_amount;
+	}
+
+	public void setLeft_amount(int left_amount) {
+		this.left_amount = left_amount;
 	}
 
 	public String getNew_p_img_path() {

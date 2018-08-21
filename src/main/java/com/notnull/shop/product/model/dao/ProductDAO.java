@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -21,6 +22,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 public interface ProductDAO {
@@ -70,6 +72,8 @@ public interface ProductDAO {
 	
 	int selectPoint(SqlSessionTemplate sqlSession,String member_id);
 	
+	int updateLeftList(SqlSessionTemplate sqlSession,BuyInfo buy);
+	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);
@@ -84,5 +88,19 @@ public interface ProductDAO {
 	
 	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
 	
+	int deleteQuestion(SqlSessionTemplate sqlSession,int p_question_code);
+	
 	List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession,int productCode);
+	
+	int addLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	
+	ProductReviewLike selectLike(SqlSessionTemplate sqlSession,int review_code);
+	
+	int deleteLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	
+	int updateLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);	
+	
+	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
+	
+	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession,int review_code);
 }

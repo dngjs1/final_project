@@ -10,8 +10,7 @@
 <html>
 <head>
 
-<meta content="UTF-8">
-<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu|Merienda|Fredericka+the+Great" rel="stylesheet">
 <!-- footer css외부참조파일 -->
 <link rel="stylesheet" href="resources/css/index.css" type="text/css">
 <link rel="stylesheet" href="resources/css/footer.css" type="text/css">
@@ -129,18 +128,25 @@
   }
   
   .main_logo {
+    padding-left : 121px; 
   	margin :0;
   	float : left;
   	width : 300px;
   	text-align: center;
+  	
   }
   
   .main_logo a {
-  	font-size : 30px;
-  	font-weight : bold;
   	text-decoration: none;
   	font-style : normal;
-  	color : #717171;
+  	color : #black;
+  	font-family: 'Fredericka the Great', cursive;
+	font-weight: bold;
+	font-size: 40px;
+  }
+  
+  .main_logo a:hover {
+  	color : #black;
   }
   
   .main_logo img {
@@ -212,6 +218,7 @@
   	z-index: 1000;
   	display : none;
   }
+  
   </style>
   
   <!-- 우측 하단 top버튼 스크립트 -->
@@ -278,15 +285,9 @@
       		
       		</ul> -->
       		
-      		<a href = "#">
-      	
-      		<img src = "./resources/images/cat_logo.png">
-      	
-      	
-      	</a>
-      
-
-        
+      		<a href = "${pageContext.request.contextPath}/">
+      			<span class="title-font">Try Trip</span>
+      		</a>
 
       </div>
       
@@ -329,10 +330,18 @@
       			<li>
       				<a><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</a>
       			</li>
-      	
+      			
+      			<c:if test="${memberLoggedIn.member_level eq 'admin' }">
+      				<li>
+      					<a href = "${pageContext.request.contextPath}/adminPage.do">관리페이지</a>
+      				</li>
+      			</c:if>
+      			
+      			<c:if test="${memberLoggedIn.member_level ne 'admin' }">
       			<li>
       				<a href = "${pageContext.request.contextPath}/myPage.do">마이페이지</a>
       			</li>
+      			</c:if>
       			
       			<li>
       				<a href = "#">장바구니</a>
@@ -405,7 +414,7 @@
        	position: absolute;
        	top : 56px;
        	left : 0;
-       	padding : 50px 0;
+       	padding : 27px 0; /* 50px 0 */
        	width : 100%;
        	border-bottom : 1px solid #303030;
        	background-color: #fcfcfb;
@@ -420,11 +429,11 @@
        }
        
        .cateSection {
-       	width : 190px;
+       	width : 120px; /* 190px */
        	height : 350px;
-       	margin-right : 20px;
+       	margin-right : 48px; /* 20px */
        	text-align: left;
-       	float : let;
+       	float : left;
        	border-right: 1px solid #202020;
        	line-height: 1.2;
        }
@@ -482,9 +491,14 @@
       					color : #666;
       					display : inline-block;
       				}
+      				
+      				.gnb2 {
+      					margin-top : 50px;
+      				}
       			</style>
       			<div class = "wrap_default">
-      			
+      				
+      				<!-- 밑에 펼쳤을 때 나오는 메뉴목록 -->
       				<div class = "open_cate" style = "display:none;">
       					<div class = "openSection">
       					<!-- 메뉴1 -->
@@ -532,8 +546,228 @@
       							
       							</div>
       						</div>
+      						
+      						<!-- 메뉴2 -->
+							<div class = "cateSection">
+								<h3>테스트제목</h3>
+								
+								<ul>
+									<li>
+										<a href = "#">카테고리1</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리2</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리3</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리4</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리5</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리6</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리7</a>
+									</li>
+									
+									
+									<li>
+										<a href = "#">카테고리8</a>
+									</li>
+								
+								
+							    </ul>
+							
+							</div><!-- 메뉴 2 끝 -->
+							<style>
+								.cateSection2 {
+									width : 309px; /* 505px; */
+									height : 350px;
+									margin-right : 36px;
+									text-align: left;
+									float: left;
+									line-height: 1.2;
+									border-right: 1px solid #202020;
+								}
+								
+								.cateSection2 h3 {
+									display: inline-block;
+									margin-bottom: 20px;
+									font-size : 16px;
+									font-weight: bold;
+									color : #202020;
+									
+								}
+								
+								.cateSection2 ul li {
+									padding : 6px 0;
+								}
+								
+								.cateSection2 ul li span {
+									display: inline-block;
+								}
+								.cateSection2 ul li span:first-child {
+									width : 105px;
+									padding-right: 0;
+									color : #202020;
+									font-weight: 600;
+								}
+								
+								.cateSection2 ul li a {
+									display: inline-block;
+									text-decoration: none;
+									font-size : 12px;
+									color : #666;
+								}
+							</style>
+							
+							<!-- 메뉴3 -->
+							<div class = "cateSection2">
+								<h3>Product Category</h3>
+									<ul>
+										<li>
+											<span><a href = "#">Best</a></span>
+										</li>
+										
+										<li>
+											<span><a href = "#">NEW</a></span>
+										</li>
+										
+										
+										<li>
+											<span><a href = "#">TOP</a></span>
+											<span><a href = "#">캠핑</a></span>
+											<span><a href = "#">수영</a></span>
+											<span><a href = "#">기타</a></span>
+										</li>
+										
+										
+										<li>
+											<span><a href = "#">Title0</a></span>
+											<span><a href = "#">test1</a></span>
+											<span><a href = "#">test2</a></span>
+											<span><a href = "#">test3</a></span>
+										</li>
+										
+										
+										<li>
+											<span><a href = "#">Title1</a></span>
+											<span><a href = "#">test1</a></span>
+											<span><a href = "#">test2</a></span>
+											<span><a href = "#">test3</a></span>
+											<span><a href = "#">test4</a></span>
+											<span><a href = "#">test5</a></span>
+										</li>
+										
+										
+										<li>
+											<span><a href = "#">Title2</a></span>
+											<span><a href = "#">test1</a></span>
+											<span><a href = "#">test2</a></span>
+											<span><a href = "#">test3</a></span>
+											<span><a href = "#">test4</a></span>
+											<span><a href = "#">test5</a></span>
+										</li>
+										
+										
+										<li>
+											<span><a href = "#">Title3</a></span>
+											<span><a href = "#">test1</a></span>
+											<span><a href = "#">test2</a></span>
+											<span><a href = "#">test3</a></span>
+											<span><a href = "#">test4</a></span>
+											<span><a href = "#">test5</a></span>
+										</li>
+									
+									</ul>
+							</div>
+							<style>
+								.cateSection3 {
+									width : 319px;
+									margin-right: 0;
+									border : none;
+									height : 350px;
+									text-align: left;
+									float: left;
+									line-height : 1.2;
+								}
+								
+								.cateSection3 h3 {
+									display: inline-block;
+									margin-bottom: 20px;
+									font-size: 16px;
+									color : #202020;
+									font-weight: bold;
+								}
+								
+								.cateSection3 li > a> i {
+									font-size : 27px;
+								}
+								
+								.cateSection3 li {
+									padding : 6px 0 ;
+								}
+								
+								
+								
+								.open_cate_close {
+									position: absolute;
+									top : 0;
+									right : 0;
+									cursor : pointer;
+								}
+								
+								.gnb2 {
+									margin-top : 50px;
+								}
+							</style>
+							
+							<div class = "cateSection3">
+								<div>
+									<h3>SNS</h3>
+									<ul>
+										<li><a href = "#"><i class="fab fa-instagram"></i></a></li>
+										<li><a href = "#"><i class="fab fa-twitter"></i></a></li>
+										<li><a href = "#"><i class="fab fa-facebook"></i></a></li>
+									
+									
+									</ul>
+									</div>
+									<!-- 배너 넣는 곳 -->
+									
+									 <div class = "gnb2">
+										<a href = "#">
+											<img src = "./resources/images/cat.jpg" alt = "이벤트배너">
+										</a>
+									</div> 
+									
+									
+								
+							</div>
+							
+							<div class = "open_cate_close">
+										<img src = "./resources/images/menu_off.gif">
+									</div>
       					</div>
+      					
       				</div>
+      			
       			
       			</div>
       			<!-- 전체카테고리 end -->
@@ -542,7 +776,7 @@
       		<div class = "lnb">
       				<ul class = "categorytype-layer">
       					<li>
-      						<a href = "#">홈</a>
+      						<a href = "${pageContext.request.contextPath}/"><i class="fas fa-home" style = "font-size: 24px; line-height : 14px;"></i></a>
       					</li>
       					
       					<li>

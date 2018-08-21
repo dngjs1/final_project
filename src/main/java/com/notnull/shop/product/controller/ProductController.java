@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -43,6 +44,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 @Controller
@@ -54,7 +56,7 @@ public class ProductController {
 	
 	@RequestMapping("/product.do")
 	public String selectProductList(Model m ,HttpServletRequest request) {
-
+		
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
@@ -213,6 +215,12 @@ public class ProductController {
 		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
 		request.setAttribute("questionList", questionList);
+		
+		
+		List<ProductReviewLike> likeList=service.selectLikeList();
+		
+		request.setAttribute("likeList", likeList);
+				
 		return "/product/productView";
 	}
 
@@ -291,11 +299,22 @@ public class ProductController {
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
 	}
-	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		String[] cart_codes=null;
+		if( request.getParameterValues("cart_code") != null ) {
+			cart_codes = request.getParameterValues("cart_code");
+		}
+		
+		int last_price=Integer.parseInt(request.getParameter("last_price"));
+		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
+		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
+		String product_all_name=request.getParameter("name1");
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,"상품 구매 적립",null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,"상품 구매 사용",null);
+		
 		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
 		for(int i=0;i<product_option_codes.length;i++) {
 			BuyInfo buyInfo2=new BuyInfo();
@@ -310,16 +329,23 @@ public class ProductController {
 			buyInfo2.setRequest(buyInfo.getRequest());
 			buyList.add(buyInfo2);
 		}
-		//int result=service.insertBuyList(buyList);
+		int result=service.insertBuyList(buyList);
+		if(result>0) {
+			//포인트 적립
+			int result2=service.insertPoint(pointLog);
+			//포인트 차감
+			int result3=service.insertPoint(pointLog2);
+			//재고 차감
+			int result4=service.updateLeftList(buyList);
+			//장바구니 삭제
+			if(cart_codes != null) {
+				int result5=service.deleteSelectCart(cart_codes);
+			}
+		}
 		
-		int last_price=Integer.parseInt(request.getParameter("last_price"));
-		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
-		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
-		
-		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
-		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
-		int result2=service.insertPoint(pointLog);
-		int result3=service.insertPoint(pointLog2);
+		model.addAttribute("product_all_name",product_all_name);
+		model.addAttribute("buyInfo",buyList.get(0));
+		model.addAttribute("last_price",last_price);
 		return "/product/buyEnd";
 	}
 	
@@ -368,7 +394,7 @@ public class ProductController {
 		if(result>0)
 		{
 			msg="등록을 성공하였습니다. 100p가 지급됩니다.";
-			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,null);
+			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,"상품평 등록 증정",null);
 			int result2=service.insertPoint(pointLog);
 		}
 		else
@@ -428,18 +454,103 @@ public class ProductController {
 	
 	
 	@RequestMapping("/addQuestion.do")
-	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
-		int productCode=Integer.parseInt(request.getParameter("productCode"));
+	public String addQuestion(HttpServletRequest request,HttpServletResponse response, ProductQuestion productQuestion) throws IOException {
+		int productCode=productQuestion.getProduct_code();
 		
-		System.out.println(productQuestion);
 		int result=service.addQuestion(productQuestion);
 		System.out.println(result);
-		request.setAttribute("productCode", productCode);
+		List<ProductQuestion> questionList=service.selectQuestion(productCode);
+		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		
-		String re = "redirect:/productView.do"+"?productCode="+productCode;
+		request.setAttribute("joinCategory", joinCategory);
+		request.setAttribute("questionList", questionList);
+		
+		return "/product/questionAjax";
 
-		return re;
+	}
+	
+	@RequestMapping("/deleteQuestion.do")
+	public String deleteQuestion(HttpServletRequest request,HttpServletResponse response, int p_question_code,int product_code) {
+		int result=service.deleteQuestion(p_question_code);
+		System.out.println(result);
 		
+		List<ProductQuestion> questionList=service.selectQuestion(product_code);
+		
+		request.setAttribute("questionList", questionList);
+		
+		return "/product/questionAjax";
+	}
+	
+	@RequestMapping("/like.do")
+	public ModelAndView like(ModelAndView mv,HttpServletRequest request) {
+		int review_code=Integer.parseInt(request.getParameter("review_code"));
+		String member_id=request.getParameter("member_id");
+		String like_status=request.getParameter("like_status");
+		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
+		int result=0;
+		int likeOn=0;
+		if(like_status.equals("Y")) {
+			if(likeList.isEmpty()) {
+				System.out.println("!!!");
+				likeList.get(0).setReview_code(review_code);
+				likeList.get(0).setMember_id(member_id);
+				likeList.get(0).setLike_status(like_status);
+				
+				result=service.addLike(likeList.get(0));
+			}else {				
+				for(int i=0;i<likeList.size();i++) {
+					if(likeList.isEmpty()) {
+						System.out.println("@@@");
+						likeList.get(i).setReview_code(review_code);
+						likeList.get(i).setMember_id(member_id);
+						likeList.get(i).setLike_status(like_status);
+						
+						result=service.addLike(likeList.get(i));
+						likeOn=1;
+					}else if(likeList.get(i).getLike_status().equals("Y")) {
+						result=service.deleteLike(likeList.get(i));
+						likeOn=2;
+					}else if(likeList.get(i).getLike_status().equals("N")) {
+						likeList.get(i).setLike_status("Y");
+						result=service.updateLike(likeList.get(i));
+						likeOn=3;
+					}
+				}
+			}  
+			if(like_status.equals("N")) {
+				if(likeList.isEmpty()) {
+					likeList.get(0).setReview_code(review_code);
+					likeList.get(0).setMember_id(member_id);
+					likeList.get(0).setLike_status(like_status);
+					
+					result=service.addLike(likeList.get(0));
+				}else {	
+					for(int i=0;i<likeList.size();i++) {
+						if(likeList.isEmpty()) {
+							likeList.get(i).setReview_code(review_code);
+							likeList.get(i).setMember_id(member_id);
+							likeList.get(i).setLike_status(like_status);
+							
+							result=service.addLike(likeList.get(i));
+							likeOn=1;
+						}else if(likeList.get(i).getLike_status().equals("N")) {
+							result=service.deleteLike(likeList.get(i));
+							likeOn=2;
+						}else if(likeList.get(i).getLike_status().equals("Y")) {
+							likeList.get(i).setLike_status("N");
+							result=service.updateLike(likeList.get(i));
+							likeOn=3;
+						}
+					}
+				}
+			}
+		}
+			
+		mv.addObject("result", result);
+		mv.addObject("likeOn", likeOn);
+		
+		mv.setViewName("JsonView");
+		return mv;
 	}
 	
 

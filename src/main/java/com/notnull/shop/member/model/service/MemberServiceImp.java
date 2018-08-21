@@ -158,12 +158,19 @@ public class MemberServiceImp implements MemberService {
 		
 		return memberDAO.selectMemberCount(sqlSession);
 	}
+	
+	@Override
+	public int selectMemberCount(String info) {
+		
+		return memberDAO.selectMemberCount(sqlSession,info);
+	}
 
 	@Override
 	public int updateManagement(Member m) {
 		
 		return memberDAO.updateManagement(sqlSession, m);
 	}
+
 
 	
 

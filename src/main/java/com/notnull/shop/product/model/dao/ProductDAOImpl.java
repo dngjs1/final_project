@@ -1,6 +1,7 @@
 package com.notnull.shop.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,7 @@ import com.notnull.shop.product.model.vo.ProductQuestion;
 import com.notnull.shop.product.model.vo.ProductReview;
 import com.notnull.shop.product.model.vo.ProductReviewImg;
 import com.notnull.shop.product.model.vo.ProductReviewImgJoin;
+import com.notnull.shop.product.model.vo.ProductReviewLike;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -158,12 +160,23 @@ public class ProductDAOImpl implements ProductDAO {
 	public int selectPoint(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectOne("product.selectPoint",member_id);
 	}
+	
+	@Override
+	public int updateLeftList(SqlSessionTemplate sqlSession, BuyInfo buy) {
+		return sqlSession.update("product.updateLeftList",buy);
+	}
 
 	@Override
 	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
 		return sqlSession.insert("product.addQuestion",productQuestion);
 	}
 
+	@Override
+	public int deleteQuestion(SqlSessionTemplate sqlSession, int p_question_code) {
+		return sqlSession.delete("product.deleteQuestion",p_question_code);
+	}
+
+	
 	@Override
 	public List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectQuestion",productCode);
@@ -178,6 +191,37 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductImg> selectImgList(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectImgList",productCode);
 	}
-	
+
+	@Override
+	public int addLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.insert("product.addLike",productReviewLike);
+	}
+
+	@Override
+	public ProductReviewLike selectLike(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.selectOne("product.selectLike",review_code);
+	}
+
+	@Override
+	public int deleteLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.delete("product.deleteLike",productReviewLike);
+	}
+
+	@Override
+	public int updateLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
+		return sqlSession.update("product.updateLike",productReviewLike);
+	}
+
+	@Override
+	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.selectLikeList");
+	}
+
+	@Override
+	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.selectList("product.selectLikeList1",review_code);
+	}
+
+
 	
 }

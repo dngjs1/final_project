@@ -16,6 +16,7 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImg" alias="productReviewImg"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewImgJoin" alias="ProductReviewImgJoin"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductQuestion" alias="ProductQuestion"/>
+		<typeAlias type="com.notnull.shop.product.model.vo.ProductReviewLike" alias="ProductReviewLike"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.ProductJoinOption" alias="productJoinOption"/>
 		<typeAlias type="com.notnull.shop.product.model.vo.BuyInfo" alias="buyInfo"/>
 		<typeAlias type="com.notnull.shop.rental.model.vo.File" alias="File"/>

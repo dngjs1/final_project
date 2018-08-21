@@ -8,8 +8,8 @@
 	</resultMap>
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
-	<select id="selectProductList" resultMap="productListJoinMap">
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+	<select id="selectProductList" resultMap="productListJoinMap">    
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
@@ -24,7 +24,7 @@
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by review_star desc  
+		order by review_star desc nulls last
  	</select>
  
  	<select id="highPriceOrder" resultMap="productListJoinMap">
@@ -120,7 +120,7 @@
   	</insert>
   	
   	<select id="selectCartList" parameterType="string" resultType="cartJoinList">
-  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
@@ -131,7 +131,7 @@
   	</select>
   	
   	<select id="selectCartList2" parameterType="hashmap" resultType="java.util.Map">
-  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
@@ -180,12 +180,16 @@
     </insert>
     
     <insert id="insertPoint" parameterType="pointLog">
-    	insert into point_log values(point_log_seq.nextval,#{member_id},#{point_increase},sysdate)
+    	insert into point_log values(point_log_seq.nextval,#{member_id},#{point_increase},#{point_content},sysdate)
     </insert>
     
     <select id="selectPoint" parameterType="string" resultType="_int">
     	select nvl(sum(point_increase),0) from point_log where member_id=#{member_id}
     </select>
+    
+    <update id="updateLeftList" parameterType="buyInfo">
+    	update product_option set left_amount=left_amount-#{buy_quantity} where product_option_code=#{product_option_code}
+    </update>
     
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})
@@ -208,9 +212,53 @@
   	</choose> 	
   	</insert>
   	
+  	<delete id="deleteQuestion" parameterType="_int">
+  		delete from product_question where p_question_code=#{p_question_code}
+  	</delete>
+  	
+  	
   	<select id="selectQuestion" parameterType="int" resultType="ProductQuestion">
   	select *
 	from product_question A
 	where product_code=#{product_code} start with question_level=1 connect by prior p_question_code=p_question_code_ref order siblings by question_date asc
   	</select>
+  	
+  	
+  	<insert id="addLike" parameterType="ProductReviewLike">
+  		insert into product_review_like values(#{review_code},#{member_id},#{like_status})
+  	</insert>
+  	
+  	<select id="selectLike" parameterType="_int" resultType="ProductReviewLike">
+  		select * from product_review_like where review_code=#{review_code}		
+  	</select>
+  	
+  	<delete id="deleteLike" parameterType="ProductReviewLike">
+  		delete from product_review_like where review_code=#{review_code} and member_id=#{member_id}	
+  	</delete>
+  	
+  	<update id="updateLike" parameterType="ProductReviewLike">
+  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
+  	</update>
+  	
+  
+ 	 <resultMap type="ProductReviewLike" id="ProductReviewLikeMap">			
+	</resultMap>
+  
+  	<select id="selectLikeList" resultMap="ProductReviewLikeMap">
+  		select * from product_review_like
+  	</select>
+
+
+ 
+  	<select id="selectLikeList1" resultMap="ProductReviewLikeMap">
+  		select * from product_review_like where review_code=#{review_code}
+  	</select>
+  	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
+  	<select id="selectlikeCountList" resultMap="countLikeMap">
+  		select review_code,count(*) as cnt
+		from product_review_like
+		where like_status=#{status}
+		group by review_code
+  	</select>
+ -->
 </mapper>
