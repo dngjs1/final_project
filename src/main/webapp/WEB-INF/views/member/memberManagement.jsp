@@ -383,9 +383,11 @@
 				</table>
 				<br>
 				
+				<div style="height:30px;">
 				<input type="text" name="searchInfo" id="searchInfo" /> <button type="button" onclick="searchMember()">검색</button>
 				
 			${pageBar }
+			</div>
 			</div>
 			
 			<div style = "height : 50px;">
@@ -422,9 +424,15 @@
 	
 	function searchMember() {
 		var info = $('#searchInfo').val();
-		alert(info);
 		location.href="${pageContext.request.contextPath}/searchMember.do?info="+info;
 	}
+	
+	$("#searchInfo").keyup(function(e){
+		if(e.keyCode == 13) { 
+			searchMember(); 
+		}
+	});
+	
 	
 </script>
 

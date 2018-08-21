@@ -330,10 +330,18 @@
       			<li>
       				<a><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</a>
       			</li>
-      	
+      			
+      			<c:if test="${memberLoggedIn.member_level eq 'admin' }">
+      				<li>
+      					<a href = "${pageContext.request.contextPath}/adminPage.do">관리페이지</a>
+      				</li>
+      			</c:if>
+      			
+      			<c:if test="${memberLoggedIn.member_level ne 'admin' }">
       			<li>
       				<a href = "${pageContext.request.contextPath}/myPage.do">마이페이지</a>
       			</li>
+      			</c:if>
       			
       			<li>
       				<a href = "#">장바구니</a>

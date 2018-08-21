@@ -339,9 +339,17 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
+	@RequestMapping("/adminPage.do")
+	public String adminPage(String memberId) {
+		
+		System.out.println(memberId);
+		
+		return "member/adminPage";
+	}
+	
 	@RequestMapping("/memberUpdate.do")
 	public String memberUpdate() {
-		return "member/memberUpdate2";
+		return "member/memberUpdate";
 	}
 	
 	@RequestMapping("/memberUpdateEnd.do")
@@ -557,7 +565,7 @@ public class MemberController {
 		System.out.println(list);
 		
 		//카운트도해줘야함 ㅋㅋ ㅅㅂ
-		int totalCount = service.selectMemberCount();
+		int totalCount = service.selectMemberCount(info);
 		
 		System.out.println(totalCount);
 		
