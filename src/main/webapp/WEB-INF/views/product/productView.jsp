@@ -692,12 +692,14 @@ span.star-prototype > * {
 	&emsp;&emsp;<span>${review.review_date}</span>
 
 	<br>
+	<c:if test="${reviewImgList != null}">
 	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<c:if test="${review.review_code eq imgList.review_code }">
 			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 		</c:if>
 	</c:forEach>
 		<br>	
+	</c:if>
 		<span>${review.review_content}</span> 	 
 	  <br>	
 

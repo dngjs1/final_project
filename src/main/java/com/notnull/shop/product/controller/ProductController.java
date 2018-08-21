@@ -354,7 +354,7 @@ public class ProductController {
         File dir=null;
 	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
 	    List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
-	    if(fileList1 !=null && fileList1.get(0).getOriginalFilename().length()<1) {
+	    if(fileList1 !=null && fileList1.get(0).getOriginalFilename().length()>0) {
 	        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
 	        dir=new File(saveDir);
 	        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
@@ -386,7 +386,6 @@ public class ProductController {
 	            productReviewImgList.add(productReviewImg);
 	        }
 	    }
-	    System.out.println(productReview);
 		int result=service.reviewInsert(productReview,productReviewImgList);
 		
 		ModelAndView mv=new ModelAndView();
