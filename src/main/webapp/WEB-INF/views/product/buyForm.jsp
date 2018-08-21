@@ -76,7 +76,7 @@
 	
 	function chk_validate(){
 		var use_point=parseInt($('#use_point').val());
-		var curr_point=parseInt($('#curr_point').text().replace(",",""));
+		var curr_point=parseInt($('#curr_point').text().replace(/,/gi, ""));
 		if($("#point_chk").prop("checked")){
 			if( use_point > curr_point ){
 	    		alert("포인트가 부족합니다.");
@@ -90,7 +90,7 @@
 				alert("양의 정수를 입력해주세요.");
 				return false;
 			}
-			if( use_point > parseInt($(".last_price.total-price").text().replace(",","")) ){
+			if( use_point > parseInt($(".last_price.total-price").text().replace(/,/gi, "")) ){
 				alert("결제금액을 초과하였습니다.");
 				return false;
 			}
@@ -100,7 +100,7 @@
 	$(function(){
 		$("#point_chk").change(function(){
 			var use_point = parseInt($('#use_point').val());
-	        var last_price=parseInt($(".last_price.total-price").text().replace(",",""));
+	        var last_price=parseInt($(".last_price.total-price").text().replace(/,/gi, ""));
 	        if($("#point_chk").prop("checked")){
 		        	last_price=last_price-use_point;
 		        	$("[name=minus_point]").val(use_point);
@@ -966,7 +966,7 @@ $(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $('.name1').val(),
-		    amount : parseInt($('.last_price').html().replace(",","")),
+		    amount : parseInt($('.last_price').html().replace(/,/gi, "")),
 		    buyer_email : '${memberLoggedIn.email }',
 		    buyer_name : '${memberLoggedIn.member_name }',
 		    buyer_tel : '${memberLoggedIn.phone }',
