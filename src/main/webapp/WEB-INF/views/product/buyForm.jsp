@@ -102,10 +102,12 @@
 			var use_point = parseInt($('#use_point').val());
 	        var last_price=parseInt($(".last_price.total-price").text().replace(/,/gi, ""));
 	        if($("#point_chk").prop("checked")){
-		        	last_price=last_price-use_point;
-		        	$("[name=minus_point]").val(use_point);
-		        	$('#use_point').attr("readonly",true);
+        		$('.minus_price').text(use_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        	last_price=last_price-use_point;
+	        	$("[name=minus_point]").val(use_point);
+	        	$('#use_point').attr("readonly",true);
 	        }else{
+	        	$('.minus_price').text(0);
 	        	last_price=last_price+use_point;
 	        	$("[name=minus_point]").val(0);
 	        	$('#use_point').attr("readonly",false);
@@ -583,7 +585,7 @@
             <dl>
                <dt>할인금액</dt>
                <dd>
-               <em>0</em>원
+               <em class="minus_price">0</em>원
                </dd>
             </dl>
          </div>
