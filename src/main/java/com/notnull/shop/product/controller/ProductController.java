@@ -168,7 +168,9 @@ public class ProductController {
             
             productDetailImgList.add(productDetailImg);
         }
-        
+        if(product.getReal_size().isEmpty()) {
+        	product.setReal_size("상품 상세 정보 확인");
+        }
         int result= service.insertProduct(product,productImgList,productDetailImgList,productOptionList);
         ModelAndView mv=new ModelAndView();
         String msg="";
@@ -352,9 +354,11 @@ public class ProductController {
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 	    String saveDir="";
         File dir=null;
+        
 	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
 	    List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
-	    if(fileList1 !=null && fileList1.get(0).getOriginalFilename().length()>0) {
+	    
+	    if(!fileList1.isEmpty() && fileList1.get(0).getOriginalFilename().length()>0) {
 	        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
 	        dir=new File(saveDir);
 	        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
