@@ -70,7 +70,8 @@ span.star-prototype > * {
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
-		
+		var point= parseInt(sell_price*0.02);
+		$(".point").text(point);
 	}
 	function add () {
 		amount = document.form.cart_quantity;
@@ -82,6 +83,8 @@ span.star-prototype > * {
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
+		var point= parseInt(result*0.02);
+		$(".point").text(point);
 	}
 	function del () {
 		amount = document.form.cart_quantity;
@@ -94,6 +97,8 @@ span.star-prototype > * {
 			}else{
 				$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 			}
+			var point= parseInt(result*0.02);
+			$(".point").text(point);
 		}
 	}
 	
@@ -287,7 +292,7 @@ span.star-prototype > * {
 				<dd>
 				
 				<span class = "point_icon"><center>P</center></span>  
-				<strong>100</strong>
+				<strong class="point">100</strong><span> 적립</span>
 				</dd>
 				
 			<dt>제조국 :</dt>
