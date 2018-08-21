@@ -139,7 +139,7 @@
   .main_logo a {
   	text-decoration: none;
   	font-style : normal;
-  	color : #black;
+  	color : black;
   	font-family: 'Fredericka the Great', cursive;
 	font-weight: bold;
 	font-size: 40px;
