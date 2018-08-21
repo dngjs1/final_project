@@ -47,9 +47,11 @@
 			var result = parseInt(amount) * sell_price;
 			$(".price"+i).text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			
+			alert(result);
 			var check= document.getElementsByName("check");
+			alert(check)
 			one_sum=parseInt(check[i-1].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.innerHTML.replace(",", ""));
+			alert(one_sum);
 			sum=sum+one_sum;
 		}
 		var total_sum=0;
@@ -64,6 +66,7 @@
 			deli="2,500원";
 			total_sum=sum+2500;
 		}
+		alert(sum);
 		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
