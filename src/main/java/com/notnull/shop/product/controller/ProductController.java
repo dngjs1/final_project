@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.sql.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +20,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -31,6 +37,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -254,16 +261,86 @@ public class ProductController {
 	@RequestMapping("/deleteCart.do")
 	public String deleteCart(String cart_code,String member_id,RedirectAttributes re){
 		int result = service.deleteCart(Integer.parseInt(cart_code));
-		re.addAttribute("member_id", member_id);
+		re.addAttribute("member_id",member_id);
 		return "redirect:/cartView.do";
 	}
-	
+		
+	@RequestMapping("/deleteSelectCart.do")
+	public String deleteSelectCart(String member_id,HttpServletRequest request,RedirectAttributes re){
+		String[] cart_codes=request.getParameterValues("check");
+		int result = service.deleteSelectCart(cart_codes);
+		re.addAttribute("member_id",member_id);
+		return "redirect:/cartView.do";
+	}
+		
 	@RequestMapping("/buyForm.do")
 	public String buyForm(Model model,HttpServletRequest request) {
-		//String productCode=request.getParameter("productCode");
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		int quantity=Integer.parseInt(request.getParameter("cart_quantity"));
+		int product_option_code=Integer.parseInt(request.getParameter("product_option_code"));
+		String member_id=request.getParameter("member_id");
+		ProductJoinOption productJoinOption=service.selectProductJoinOption(product_option_code);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
+		model.addAttribute("productJoinOption",productJoinOption);
+		model.addAttribute("quantity",quantity);
 		return "/product/buyForm";
 	}
-
+	
+	@RequestMapping("/buyForm2.do")
+	public String buyForm2(Model model,HttpServletRequest request) {
+		String[] cart_codes=request.getParameterValues("check");
+		String member_id=request.getParameter("member_id");
+		List<CartJoinList> cartList=service.selectCartList(cart_codes);
+		
+		int point = service.selectPoint(member_id);
+		model.addAttribute("point",point);
+		model.addAttribute("cartList",cartList);
+		return "/product/buyForm";
+	}
+	@RequestMapping("/buyEnd.do")
+	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
+		String[] product_option_codes = request.getParameterValues("product_option_code");
+		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		
+		int last_price=Integer.parseInt(request.getParameter("last_price"));
+		int plus_point=Integer.parseInt(request.getParameter("plus_point"));
+		int minus_point=Integer.parseInt(request.getParameter("minus_point"));
+		String product_all_name=request.getParameter("name1");
+		PointLog pointLog = new PointLog(0,buyInfo.getMember_id(),plus_point,null);
+		PointLog pointLog2 = new PointLog(0,buyInfo.getMember_id(),-minus_point,null);
+		
+		List<BuyInfo> buyList=new ArrayList<BuyInfo>();
+		for(int i=0;i<product_option_codes.length;i++) {
+			BuyInfo buyInfo2=new BuyInfo();
+			buyInfo2.setProduct_option_code(Integer.parseInt(product_option_codes[i]));
+			buyInfo2.setBuy_quantity(Integer.parseInt(buy_quantitys[i]));
+			buyInfo2.setMember_id(buyInfo.getMember_id());
+			buyInfo2.setReceiver_post_no(buyInfo.getReceiver_post_no());
+			buyInfo2.setReceiver_address(buyInfo.getReceiver_address());
+			buyInfo2.setReceiver_d_address(buyInfo.getReceiver_d_address());
+			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
+			buyInfo2.setPhone2(buyInfo.getPhone2());
+			buyInfo2.setRequest(buyInfo.getRequest());
+			buyList.add(buyInfo2);
+		}
+		int result=service.insertBuyList(buyList);
+		if(result>0) {
+			//포인트 적립
+			int result2=service.insertPoint(pointLog);
+			//포인트 차감
+			int result3=service.insertPoint(pointLog2);
+			//재고 차감
+			int result4=service.updateLeftList(buyList);
+		}
+		
+		model.addAttribute("product_all_name",product_all_name);
+		model.addAttribute("buyInfo",buyList.get(0));
+		model.addAttribute("last_price",last_price);
+		return "/product/buyEnd";
+	}
+	
 	@RequestMapping(value="/productReviewInsert.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 	    String saveDir="";
@@ -308,7 +385,9 @@ public class ProductController {
         String msg="";
 		if(result>0)
 		{
-			msg="등록을 성공하였습니다.";
+			msg="등록을 성공하였습니다. 100p가 지급됩니다.";
+			PointLog pointLog = new PointLog(0,productReview.getMember_id(),100,null);
+			int result2=service.insertPoint(pointLog);
 		}
 		else
 		{

@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.dao.ProductDAO;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -15,6 +17,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -162,6 +165,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<CartJoinList> selectCartList(String member_id) {
 		return productDAO.selectCartList(sqlSession,member_id);
 	}
+	
+	@Override
+	public List<CartJoinList> selectCartList(String[] cart_codes) {
+		return productDAO.selectCartList(sqlSession,cart_codes);
+	}
 
 	@Override
 	public int plusCart(Cart cart) {
@@ -177,7 +185,65 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteCart(int cart_code) {
 		return productDAO.deleteCart(sqlSession,cart_code);
 	}
+
+	@Override
+	public int deleteSelectCart(String[] cart_codes) {
+		return productDAO.deleteSelectCart(sqlSession,cart_codes);
+	}
+
+	@Override
+	public ProductJoinOption selectProductJoinOption(int product_option_code) {
+		return productDAO.selectProductJoinOption(sqlSession,product_option_code);
+	}
 	
+	@Override
+	public int insertBuyList(List<BuyInfo> buyList) {
+		int result=0;
+		try {		
+			if(buyList.size()>0)
+			{
+				for(BuyInfo buy : buyList)
+				{
+					result=productDAO.insertBuy(sqlSession,buy);
+				}
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		return result;
+	}
+
+	@Override
+	public int insertPoint(PointLog pointLog) {
+		return productDAO.insertPoint(sqlSession,pointLog);
+	}
+	
+	@Override
+	public int selectPoint(String member_id) {
+		return productDAO.selectPoint(sqlSession,member_id);
+	}
+	
+	@Override
+	public int updateLeftList(List<BuyInfo> buyList) {
+		int result=0;
+		try {		
+			if(buyList.size()>0)
+			{
+				for(BuyInfo buy : buyList)
+				{
+					result=productDAO.updateLeftList(sqlSession,buy);
+				}
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		return result;
+	}
+
 	@Override
 	public int addQuestion(ProductQuestion productQuestion) {
 		return productDAO.addQuestion(sqlSession,productQuestion);

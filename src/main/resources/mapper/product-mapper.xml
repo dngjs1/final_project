@@ -120,13 +120,27 @@
   	</insert>
   	
   	<select id="selectCartList" parameterType="string" resultType="cartJoinList">
-  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, d.new_p_img_path, c.price
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
   	from cart a
   	join product_option b on a.product_option_code=b.product_option_code
   	join product c on b.product_code=c.product_code
   	join product_img d on c.product_code=d.product_code
   	where p_img_code in (select min(p_img_code) from product_img group by product_code)
   	and member_id=#{member_id}
+  	order by cart_date desc
+  	</select>
+  	
+  	<select id="selectCartList2" parameterType="hashmap" resultType="java.util.Map">
+  	select c.product_code, c.product_name, a.cart_code, a.PRODUCT_OPTION_CODE, a.CART_QUANTITY, b.OPTION_SIZE, b.left_amount, d.new_p_img_path, c.price
+  	from cart a
+  	join product_option b on a.product_option_code=b.product_option_code
+  	join product c on b.product_code=c.product_code
+  	join product_img d on c.product_code=d.product_code
+  	where p_img_code in (select min(p_img_code) from product_img group by product_code)
+  	and cart_code in
+  	<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+    	${array[index]}
+    </foreach>
   	order by cart_date desc
   	</select>
 
@@ -142,6 +156,41 @@
 		delete from cart where cart_code=#{cart_code}
 	</delete>
 	
+	<delete id="deleteSelectCart" parameterType="java.util.Map">
+		delete from cart where cart_code in
+		<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+    		${array[index]}
+    	</foreach>
+	</delete>
+	
+	<select id="selectProductJoinOption" parameterType="int" resultType="productJoinOption">
+		select a.product_code, product_option_code, option_size, 
+		price, product_name, new_p_img_path from product a 
+		join product_option b on(a.product_code=b.product_code) 
+		join product_img c on a.product_code=c.product_code
+		where product_option_code=#{product_option_code}
+		and p_img_code = (select min(p_img_code) from product_img where product_code=a.product_code)
+	</select>
+
+	<insert id="insertBuy" parameterType="buyInfo">
+        insert into buy_info values(buy_info_seq.nextval, #{product_option_code}, 
+        #{buy_quantity}, #{member_id}, #{receiver_post_no},
+        #{receiver_address}, #{receiver_d_address},#{receiver_name},
+        #{phone2},#{request}, SYSDATE)
+    </insert>
+    
+    <insert id="insertPoint" parameterType="pointLog">
+    	insert into point_log values(point_log_seq.nextval,#{member_id},#{point_increase},sysdate)
+    </insert>
+    
+    <select id="selectPoint" parameterType="string" resultType="_int">
+    	select nvl(sum(point_increase),0) from point_log where member_id=#{member_id}
+    </select>
+    
+    <update id="updateLeftList" parameterType="buyInfo">
+    	update product_option set left_amount=left_amount-#{buy_quantity} where product_option_code=#{product_option_code}
+    </update>
+    
   	<insert id="reviewInsert" parameterType="productReview">
   	INSERT INTO product_review VALUES (product_review_seq.nextval,#{member_id},#{review_star},#{review_content},#{review_date},#{product_code})
  	<selectKey keyProperty="review_code" resultType="_int" order="AFTER"> SELECT product_review_seq.CURRVAL FROM DUAL </selectKey>

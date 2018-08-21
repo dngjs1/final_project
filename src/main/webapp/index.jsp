@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -30,6 +31,7 @@
 				src="https://t1.daumcdn.net/cfile/tistory/231235395466C11011 "
 				style="height: 350px;" alt="세번째 슬라이드 ">
 		</div>
+		
 	</div>
 	<a class="carousel-control-prev " href="#carouselExampleIndicators "
 		role="button " data-slide="prev "> <span
@@ -311,6 +313,7 @@
 											class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
 											title="상세보기"></i></span>
 									</div>
+									
 								</div>
 
 							</div>
@@ -322,6 +325,7 @@
 						<div class="hover-box">
 							<img src="./resources/images/camp-3.jpg" alt="camp-3.jpg"
 								class="img-thumbnail" />
+								
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
 									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i

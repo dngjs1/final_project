@@ -6,6 +6,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -13,6 +15,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -114,6 +117,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	public List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession, String[] cart_codes) {
+		return sqlSession.selectList("product.selectCartList2",cart_codes);
+	}
+
+	@Override
 	public int plusCart(SqlSessionTemplate sqlSession, Cart cart) {
 		return sqlSession.update("product.plusCart",cart);
 	}
@@ -128,6 +136,36 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.delete("product.deleteCart",cart_code);
 	}
 	
+	@Override
+	public int deleteSelectCart(SqlSessionTemplate sqlSession, String[] cart_codes) {
+		return sqlSession.delete("product.deleteSelectCart",cart_codes);
+	}
+
+	@Override
+	public ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession, int product_option_code) {
+		return sqlSession.selectOne("product.selectProductJoinOption",product_option_code);
+	}
+	
+	@Override
+	public int insertBuy(SqlSessionTemplate sqlSession, BuyInfo buy) {
+		return sqlSession.insert("product.insertBuy",buy);
+	}
+
+	@Override
+	public int insertPoint(SqlSessionTemplate sqlSession, PointLog pointLog) {
+		return sqlSession.insert("product.insertPoint",pointLog);
+	}
+	
+	@Override
+	public int selectPoint(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("product.selectPoint",member_id);
+	}
+	
+	@Override
+	public int updateLeftList(SqlSessionTemplate sqlSession, BuyInfo buy) {
+		return sqlSession.update("product.updateLeftList",buy);
+	}
+
 	@Override
 	public int addQuestion(SqlSessionTemplate sqlSession, ProductQuestion productQuestion) {
 		return sqlSession.insert("product.addQuestion",productQuestion);

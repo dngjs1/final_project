@@ -65,6 +65,7 @@ li, ul, ol {
 .footer_menus .footer_menus_inner {
 	position: relative;
 	margin: auto;
+	text-decoration: none;
 }
 
 .footer_menus {
@@ -94,6 +95,6 @@ li, ul, ol {
 	position: absolute;
 	right: 30px;
 	top: 50%;
-	margin-top: -17px;
+	margin-top: -13px;
 	font-size: 18px;
 }

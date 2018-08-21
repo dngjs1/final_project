@@ -335,26 +335,24 @@
 					<div class = "exit_check_list">
 						<ul>
 							<li class = "top">
-								<input type = "checkbox" id = "#" name = "#" value = "다른 쇼핑몰에 비해 가격이 비쌈" title="다른 쇼핑몰에 비해 가격이 비쌈">
-								<label for = "#">다른 쇼핑몰에 비해 가격이 비쌈</label>
+								<input type = "checkbox" id = "check_1" name = "#" value = "다른 쇼핑몰에 비해 가격이 비쌈" title="다른 쇼핑몰에 비해 가격이 비쌈">
+								<label for = "check_1">다른 쇼핑몰에 비해 가격이 비쌈</label>
 							</li>
 							
 							<li class = "top">
-								<input type = "checkbox" id = "#" name = "#" value = "교환/환불/반품에 대한 불만" title="교환/환불/반품에 대한 불만">
-								<label for = "#">교환/환불/반품에 대한 불만</label>
+								<input type = "checkbox" id = "check_2" name = "#" value = "교환/환불/반품에 대한 불만" title="교환/환불/반품에 대한 불만">
+								<label for = "check_2">교환/환불/반품에 대한 불만</label>
 							</li>
 							
 							<li>
-								<input type = "checkbox" id = "#" name = "#" value = "상품품질이 안 좋음" title="상품품질이 안 좋음">
-								<label for = "#">상품품질이 안 좋음</label>
+								<input type = "checkbox" id = "check_3" name = "#" value = "상품품질이 안 좋음" title="상품품질이 안 좋음">
+								<label for = "check_3">상품품질이 안 좋음</label>
 							</li>
 							
 							<li>
-								<input type = "checkbox" id = "#" name = "#" value = "이벤트/회원서비스가 다양하지 않음" title="이벤트/회원서비스가 다양하지 않음">
-								<label for = "#">이벤트/회원서비스가 다양하지 않음</label>
+								<input type = "checkbox" id ="check_4" name = "#" value = "이벤트/회원서비스가 다양하지 않음" title="이벤트/회원서비스가 다양하지 않음">
+								<label for = "check_4">이벤트/회원서비스가 다양하지 않음</label>
 							</li>
-						
-						
 						
 						</ul>
 					
@@ -422,34 +420,38 @@
 							text-decoration: none;
 }
 					</style>
+					
+					
 					<div class = "user_agree_check">
-							<input type = "checkbox" id = "#" name = "#" value = "회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다." title="회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다.">
-							<label for = "#"><b>회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다.</b></label>
+							<input type = "checkbox" id = "agreeChecked" name = "#" value = "회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다." title="회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다.">
+							<label for = "agreeChecked"><b>회원 탈퇴 안내를 모두 확인 하였습니다. 탈퇴에 동의합니다.</b></label>
 					</div>
 					
 					<div class = "user_agree2_btn">
 					
-						<a href = "#" class = "btn_agree">
+						<button onclick="memberCheck()" class = "btn_agree">
 							확인
-						</a>
+						</button>
 						<span style = "display: inline-block; width:1px;"></span>
 						
-						<a href = "#" class = "btn_cancel">
+						<a href = "${pageContext.request.contextPath }/myPage.do" class = "btn_cancel">
 							취소
 						</a>
 					</div>
 			
-			</div>
-			
-			
-			
-			
-			
-			
+			</div>		
 		</div>
-	
-	
 	</div>
+
+<script>
+	function memberCheck() {
+		if($('#agreeChecked').prop('checked')) {
+			location.href="${pageContext.request.contextPath}/memberExitEnd.do";
+		}else {
+			alert("탈퇴동의 후 다시 눌러주세요.");
+		}
+	}
+</script>
 
 
 </div>

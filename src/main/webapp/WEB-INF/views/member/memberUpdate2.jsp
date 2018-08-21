@@ -329,16 +329,20 @@
 			</style>
 			<li>
 				<input type = "submit" value = "수정" class = "join_btn">
-				<input type = "reset" value = "취소" class = "cancel_btn">
+				<input type = "button" value = "취소" class = "cancel_btn" onclick="returnPage()">
 			</li>
 			</ul>
 		
 		</form>
-			<button type = "button" onclick="withdraw()">회원탈퇴</button>
+		
 	</div>
 	
 	
 	<script>
+		function returnPage() {
+			location.href="${pageContext.request.contextPath}/myPage.do"
+		}
+	
 		function withdraw() {
 			location.href="${pageContext.request.contextPath}/membershipWithdraw.do";
 		}

@@ -60,5 +60,27 @@
 	<update id="withdrawMember" parameterType="string">
 		update member set esc_status='E' where member_id=#{member_id}
 	</update>
+	
+	<select id="memberList" resultType="member">
+		select * from member order by join_date desc
+	</select>
+	
+	<select id="selectMemberCount" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<select id="selectMember" resultType="member">
+		select * from member where member_id=#{member_id}
+	</select>
+	
+	<update id="updateManagement" parameterType="member">
+		update member set esc_status=#{esc_status},
+							member_level=#{member_level}
+							 where member_id=#{member_id} 
+	</update>
+	
+	<select id="memberSearch" resultType="member" parameterType="string">
+		select * from member where member_id like '%'||#{info}||'%'
+	</select>
  
 </mapper>

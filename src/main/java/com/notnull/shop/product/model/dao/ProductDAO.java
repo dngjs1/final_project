@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 import com.notnull.shop.product.model.vo.Cart;
 import com.notnull.shop.product.model.vo.CartJoinList;
 import com.notnull.shop.product.model.vo.Product;
@@ -13,6 +15,7 @@ import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.product.model.vo.ProductDetailImg;
 import com.notnull.shop.product.model.vo.ProductImg;
 import com.notnull.shop.product.model.vo.ProductJoinCategory;
+import com.notnull.shop.product.model.vo.ProductJoinOption;
 import com.notnull.shop.product.model.vo.ProductListJoin;
 import com.notnull.shop.product.model.vo.ProductOption;
 import com.notnull.shop.product.model.vo.ProductQuestion;
@@ -35,7 +38,6 @@ public interface ProductDAO {
 	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
-
 	int insertImgList(SqlSessionTemplate sqlSession,ProductImg productImg);
 	
 	int insertDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
@@ -52,12 +54,26 @@ public interface ProductDAO {
 	
 	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String member_id);
 	
+	List<CartJoinList> selectCartList(SqlSessionTemplate sqlSession,String[] cart_codes);
+	
 	int plusCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	int changeCart(SqlSessionTemplate sqlSession,Cart cart);
 	
 	int deleteCart(SqlSessionTemplate sqlSession,int cart_code);
 
+	int deleteSelectCart(SqlSessionTemplate sqlSession,String[] cart_codes);
+	
+	ProductJoinOption selectProductJoinOption(SqlSessionTemplate sqlSession,int product_option_code);
+	
+	int insertBuy(SqlSessionTemplate sqlSession,BuyInfo buy);
+	
+	int insertPoint(SqlSessionTemplate sqlSession,PointLog pointLog);
+	
+	int selectPoint(SqlSessionTemplate sqlSession,String member_id);
+	
+	int updateLeftList(SqlSessionTemplate sqlSession,BuyInfo buy);
+	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);

@@ -160,14 +160,34 @@ span.star-prototype > * {
 			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
 			<hr>
 			<form name="form" id="frm" method="get">
-				<input type="hidden" name="member_id" id="member_id" value="${memberLoggedIn.member_id}"/>
+				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
 						<c:when test="${optionList.size()<2}">
+<<<<<<< HEAD
 							<c:forEach var="option" items="${optionList}">
 								<span>재고 : ${option.left_amount}</span>
 								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
+=======
+							<c:forEach var="option" items="${optionList}" varStatus="vs">
+								<c:choose>
+									<c:when test="${option.option_size == null}">
+										<span id="single_left">재고 : ${option.left_amount}</span>
+										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
+									</c:when>
+									<c:when test="${option.left_amount<=0}">
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:when>
+									<c:otherwise>
+										<select name="product_option_code" style="font-size:15px;height:28px;" >
+											<option value="${option.product_option_code}">${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
+										</select>
+									</c:otherwise>
+								</c:choose>
+>>>>>>> SUPER_branch
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
@@ -198,12 +218,26 @@ span.star-prototype > * {
 			</form>
 			<script>
 			$(function(){
-				$('#cart').click(function(e){
-					var member_id=$('#member_id').val();
+				$('#cart').click(function(){
+					var member_id=$('.member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						e.preventDefault();
-					}else{
+						location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
+					}
+					else{
+						var left_amount=0;
+						if($('#single_left').length){
+							var left_amount1=$('#single_left').text().split(':');
+							left_amount=parseInt(left_amount1[1]);
+						}else{
+							var left_amount2=$('[name=product_option_code] option:selected').text().split(':');
+							left_amount=parseInt(left_amount2[1]);
+						}
+						if(left_amount < parseInt($('[name=cart_quantity]').val()) ){
+							alert("재고가 부족합니다.");
+							return false;
+						}
+						
 						var productInfo={
 								member_id:member_id,
 								product_option_code:$("[name=productCode]").val(),
@@ -216,7 +250,7 @@ span.star-prototype > * {
 							success:function(data){
 								if(data.trim()=='0'){
 									alert("장바구니 추가에 실패하였습니다.");
-									e.preventDefault();
+									return false;
 								}else{
 									if (confirm('장바구니로 이동하시겠습니까?')) {
 										location.href="${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}";
@@ -238,16 +272,27 @@ span.star-prototype > * {
 					var member_id=$('#member_id').val();
 					if(member_id==null||member_id.length<1){
 						alert("로그인 후 이용해주시기 바랍니다.");
-						e.preventDefault();
+						location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 					}else{
+						var left_amount=0;
+						if($('#single_left').length){
+							var left_amount1=$('#single_left').text().split(':');
+							left_amount=parseInt(left_amount1[1]);
+						}else{
+							var left_amount2=$('[name=product_option_code] option:selected').text().split(':');
+							left_amount=parseInt(left_amount2[1]);
+						}
+						if(left_amount < parseInt($('[name=cart_quantity]').val()) ){
+							alert("재고가 부족합니다.");
+							return false;
+						}
+					
 						var frm=$("#frm");
 						var url="${pageContext.request.contextPath }/buyForm.do";
 						frm.attr("action",url);
 						frm.submit();
 					}
 				});
-				
-				
 			});
 			</script>
     	</div>
