@@ -25,6 +25,8 @@ public class FileUpload {
 		byte[] bytes;
 		String ext;
 		
+		System.out.println(uploadFile.getOriginalFilename()+"1");
+		
 		//file 저장
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			try {
@@ -38,7 +40,6 @@ public class FileUpload {
 					file = new File(path+storedFileName);
 
 					logger.info("저장된 파일 이름: {}",storedFileName);
-					
 				} while(isFile(file));
 	            
 				

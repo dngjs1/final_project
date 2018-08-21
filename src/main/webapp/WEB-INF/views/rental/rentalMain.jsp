@@ -99,6 +99,33 @@
 	        	
 				<a href="${path }/shop/rentalWrite.do">등록</a>
 	        </div>
+			<c:forEach items="${list }" var="rental" varStatus="stauts">
+			<c:if test="${status.index % 6 == 0 }">
+			<div class="row row-eq-height">
+			</c:if>
+				<div class="col-sm-2" style="text-align: -webkit-center;">
+			      	<a href="./detail.do?rental_obj_code=${rental.rental_obj_code }">
+				      <div class="thumbnail" style="overflow: hidden;">      	
+				      <c:if test="${rental.imgUrl == null }">
+				   		<img src="https://placehold.it/160x200?text=Not Image" class="media-object" alt="Good" style="float:left">
+				      </c:if>
+				      <c:if test="${rental.imgUrl != null }">
+				        <img src="${rental.imgUrl }" class="media-object" alt="Good">
+				      </c:if>	      
+				      </div>
+				      
+				      <div class="context">
+				      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"><strong>${rental.status }</strong></h4>
+				        <strong>[${rental.category }] ${rental.title }</strong>
+				        <p> ${rental.price } 원</p>
+				        <button class="btn">상품 보기</button>
+				       </div>
+			        </a>
+				</div>
+			<c:if test="${status.index % 6 == 5 }">
+			</div>
+			</c:if>
+			</c:forEach>
 		</div>
 	</div>
     

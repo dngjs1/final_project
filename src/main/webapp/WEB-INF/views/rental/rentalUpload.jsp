@@ -30,10 +30,12 @@ input[name="datetimes"]{cursor: pointer;}
 
 
 <div class='container' >
-    <form id="form" action="${path }/rentalUpload.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
+    <form id="form" action="${path }/rentalWrite2.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
   
-		<input type="hidden" name="rental_obj_code" value="${param.rental_obj_code }" />
+		<%-- <input type="hidden" name="rental_obj_code" value="${param.rental_obj_code }" /> --%>
 		<input type="hidden" id="content" name="content" value="" />
+		<input type="hidden" id="start_date" name="start_date" value="" />
+		<input type="hidden" id="end_date" name="end_date" value="" />
         <br>
         <h3>상품등록</h3>
         <hr style="border:2px solid #787878"><br>       
@@ -63,7 +65,7 @@ input[name="datetimes"]{cursor: pointer;}
 	        <tr class="tr1">
 				<th style="text-align: center;border-left:none;">상품명</th>
 				<td>	
-					<input type="text" class="form-control" name="rental_obj_name" id="rental_name" required>
+					<input type="text" class="form-control" name="title" id="title" required>
 				</td>
 			</tr>
 			<tr class="tr1">
@@ -96,7 +98,8 @@ input[name="datetimes"]{cursor: pointer;}
         </table>
         <br>
 		<br>
-        <input type="submit" value="등록" class="btn btn-default" value="저장" />    
+		<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">저장</button> 
+		<button id="hiddenBtn" type="submit" style="display: none;"></button>
 		<input type="button"  class="btn btn-default" onclick="location.href='${path}/rentalMain.do'" value="취소"> 
     </form>
 </div>
@@ -107,9 +110,17 @@ input[name="datetimes"]{cursor: pointer;}
 	    timePicker: true,
 	    startDate: moment().startOf('hour'),
 	    endDate: moment().startOf('hour').add(32, 'hour'),
-	    minDate: new Date
+	    minDate: new Date,
+	    locale: {
+	        format: 'YYYY-MM-DD HH:mm:ss'
+	      }
 	  });
 	});
+	  $('input[name="datetimes"]').change(function(){
+			var odate = $(this).val();
+			$("#start_date").val(odate.substring(0,19));
+			$("#end_date").val(odate.substring(22,42));
+	  });
 </script>
 
 <!-- 주소검색 -->  
@@ -179,9 +190,9 @@ input[name="datetimes"]{cursor: pointer;}
       });
     });
 
-    function sendFile(file, editor, welEditable) {
+    function sendFile(file, el) {
         data = new FormData();
-        data.append("uploadFile", file);
+        data.append("file", file);
         $.ajax({
             data : data,
             type : "POST",
@@ -192,20 +203,25 @@ input[name="datetimes"]{cursor: pointer;}
             processData : false,
             success : function(url) {
                 $(el).summernote('editor.insertImage', url);
-                $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+                $('#imageBoard > ul').append('<li><img src="'+url+'" width="150px" height="150px"/></li>');
 
 
             }
         });
     }
+    function bbsWrite() {
+    	var content = $('#summernote').summernote("code");
+
+    	alert($('#start_date').val());
+    	alert($('#end_date').val());
+    	$('#content').val(content);
+     
+    /* 	$('#bbsWrite').submit(); */
+    	document.getElementById('hiddenBtn').click();
+    	
+    }
     </script>
 
-<style>
- img{
-	 width:200px;
-	 height: 120px;
- }
-</style>
 <script type="text/javascript" src="${path }/resources/js/moment.min.js"></script>
 <script type="text/javascript" src="${path }/resources/js/daterangepicker.js"></script>
 

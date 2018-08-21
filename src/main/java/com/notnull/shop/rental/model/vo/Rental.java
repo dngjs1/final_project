@@ -3,7 +3,7 @@ package com.notnull.shop.rental.model.vo;
 
 public class Rental {
 	
-	private int seq;
+	private int rental_obj_code;
 	private String p_category_code;
 	private String title;
 	private String content;
@@ -18,12 +18,12 @@ public class Rental {
 	
 	private String imgUrl;
 
-	public int getSeq() {
-		return seq;
+	public int getRental_obj_code() {
+		return rental_obj_code;
 	}
 
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setRental_obj_code(int rental_obj_code) {
+		this.rental_obj_code = rental_obj_code;
 	}
 
 	public String getP_category_code() {
@@ -124,10 +124,10 @@ public class Rental {
 
 	@Override
 	public String toString() {
-		return "Rental [seq=" + seq + ", p_category_code=" + p_category_code + ", title=" + title + ", content="
-				+ content + ", member_id=" + member_id + ", price=" + price + ", post_no=" + post_no + ", address="
-				+ address + ", detail_address=" + detail_address + ", phone=" + phone + ", start_date=" + start_date
-				+ ", end_date=" + end_date + ", imgUrl=" + imgUrl + "]";
+		return "Rental [rental_obj_code=" + rental_obj_code + ", p_category_code=" + p_category_code + ", title="
+				+ title + ", content=" + content + ", member_id=" + member_id + ", price=" + price + ", post_no="
+				+ post_no + ", address=" + address + ", detail_address=" + detail_address + ", phone=" + phone
+				+ ", start_date=" + start_date + ", end_date=" + end_date + ", imgUrl=" + imgUrl + "]";
 	}
 
 	

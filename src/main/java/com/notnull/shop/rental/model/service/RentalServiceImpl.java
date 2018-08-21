@@ -19,4 +19,15 @@ public class RentalServiceImpl implements RentalService{
 	public boolean insertRental(Rental rental) {
 		return dao.insertRental(rental);
 	}
+
+	@Override
+	public int selectRentalCount() {
+		return dao.selectRentalCount();
+	}
+
+	@Override
+	public List<Rental> RentalList(int cPage, int numPerPage) {
+		return dao.RentalList(cPage, numPerPage);
+	}
+
 }

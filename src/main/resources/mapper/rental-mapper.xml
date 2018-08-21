@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Rental">
+
+	<resultMap type="rental" id="rentalMap"></resultMap>
+
 	<insert id="insertRental" parameterType="rental" useGeneratedKeys="false">
-		insert into rental_obj values(rental_obj_seq.nextval, #{p_category_code}, #{title}, #{content}, #{member_id}, #{price}, #{post_no}, #{address}, #{detail_address}, #{phone}, #{start_date}, #{end_date})
+		insert into rental_obj values(rental_obj_seq.nextval, #{p_category_code}, #{title}, #{content}, #{member_id}, #{price}, #{post_no}, #{address}, #{detail_address}, #{phone}, to_date(#{start_date}, 'YYYY-MM-DD HH24:mi:ss'), to_date(#{end_date}, 'YYYY-MM-DD HH24:mi:ss'))
 	</insert>
+	
+	<select id="selectRentalCount" resultType="_int">
+		select count(*) from rental_obj
+	</select>
+	
+	<select id="rentalList" resultType="rental">
+		select * from rental_obj order by rental_obj_code desc
+	</select>
 </mapper>

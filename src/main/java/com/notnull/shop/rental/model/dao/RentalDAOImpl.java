@@ -1,5 +1,8 @@
 package com.notnull.shop.rental.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +19,20 @@ public class RentalDAOImpl implements RentalDAO {
 
 	@Override
 	public boolean insertRental(Rental rental) {
-		return sqlSession.insert(ra+"insertRental"+rental) > 0 ? true : false;
+		return sqlSession.insert(ra+"insertRental", rental) > 0 ? true : false;
+	}
+
+	@Override
+	public int selectRentalCount() {
+		return sqlSession.selectOne(ra+"selectRentalCount");
+	}
+
+	@Override
+	public List<Rental> RentalList(int cPage, int numPerPage) {
+		
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		
+		return sqlSession.selectList(ra+"rentalList", null, rb);
 	}
 	
 	

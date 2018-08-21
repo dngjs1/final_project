@@ -27,8 +27,8 @@ public class FileController {
 		File fileVO = new File();
 		
 		//init
-		path = req.getSession().getServletContext().getRealPath("/")+"upload/image/";//파일 저장 경로
-		
+		path = req.getSession().getServletContext().getRealPath("/resources/upload/rentalImage/");//파일 저장 경로
+		System.out.println(path);
 		fileUpload = new FileUpload(file, path);
 		
 		//file
@@ -41,7 +41,7 @@ public class FileController {
 		service.insertFile(fileVO);
 		
 		//return
-		url = req.getContextPath()+"/upload/image"+fileUpload.getStoredFileName();
+		url = "./resources/upload/rentalImage/"+fileUpload.getStoredFileName();
 		
 		return url;
 	}
