@@ -134,6 +134,12 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	public int deleteQuestion(SqlSessionTemplate sqlSession, int p_question_code) {
+		return sqlSession.delete("product.deleteQuestion",p_question_code);
+	}
+
+	
+	@Override
 	public List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectList("product.selectQuestion",productCode);
 	}
@@ -169,19 +175,10 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public int countLike(SqlSessionTemplate sqlSession, ProductReviewLike productReviewLike) {
-		return sqlSession.selectOne("product.countLike",productReviewLike);
-	}
-
-	@Override
 	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectLikeList");
 	}
 
-	@Override
-	public List<Map> selectlikeCountList(SqlSessionTemplate sqlSession,String status) {
-		return sqlSession.selectList("product.selectlikeCountList",status);
-	}
 
 	
 }

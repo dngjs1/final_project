@@ -184,6 +184,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public int deleteQuestion(int p_question_code) {
+		return productDAO.deleteQuestion(sqlSession,p_question_code);
+	}
+	
+	@Override
 	public List<ProductQuestion> selectQuestion(int productCode) {
 		return productDAO.selectQuestion(sqlSession,productCode);
 	}
@@ -219,18 +224,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int countLike(ProductReviewLike productReviewLike) {
-		return productDAO.countLike(sqlSession,productReviewLike);
-	}
-
-	@Override
 	public List<ProductReviewLike> selectLikeList() {
 		return productDAO.selectLikeList(sqlSession);
-	}
-
-	@Override
-	public List<Map> selectlikeCountList(String status) {
-		return productDAO.selectlikeCountList(sqlSession,status);
 	}
 
 }

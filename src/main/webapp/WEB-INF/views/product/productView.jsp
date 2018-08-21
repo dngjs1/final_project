@@ -118,10 +118,11 @@ span.star-prototype > * {
 	
 	<c:forEach var='imgList' items='${imgList }' varStatus="vs">
 		<c:if test="${vs.index==0}">
-  		<img width="300px" height="300px" src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"/>
+  		<img width="300px" height="300px" src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
   		</c:if>
-  		<c:if test="${vs.index>0}">
-  		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"/>
+  		<c:if test="${vs.index>=0}">
+  		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
+  			 onclick="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</c:if>
   	</c:forEach>
 	</div>
@@ -134,8 +135,22 @@ span.star-prototype > * {
 				<c:set var="total" value="${(total+review.review_star)}"/>
 				<c:set var="count" value="${vs.count }"/>
 			 </c:forEach>
-			 <span class="star-prototype">${total/count}</span>
-			 <c:out value="${count}개 상품평"/>
+			 <c:choose>
+				 <c:when test="${total  == 0}">
+					 <span class="star-prototype">0</span>
+				 </c:when>
+				 <c:otherwise>
+				 	 <span class="star-prototype">${total/count}</span>
+				 </c:otherwise>
+			 </c:choose>
+			 <c:choose>
+				 <c:when test="${count > 0}">
+					 <c:out value="${count}개 상품평"/>
+				 </c:when>
+				 <c:otherwise>
+				 	 <c:out value="0개 상품평"/>
+				 </c:otherwise>
+			</c:choose>
 			<hr>
 			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">${joinCategory.price}</span><span> 원</span></div>
 			<hr>
@@ -265,7 +280,7 @@ span.star-prototype > * {
   <table class="table table-bordered">
   	<tr>
   		<td width="15%" style="background-color:#D5D5D5">품명 및 모델명</td>
-  		<td width="35%">${joinCategory.p_category_name}</td>
+  		<td width="35%">${joinCategory.product_name}</td>
   		<td width="15%" style="background-color:#D5D5D5">출시일</td>
   		<td width="35%">${joinCategory.release_date}</td>
   	</tr>
@@ -293,7 +308,7 @@ span.star-prototype > * {
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <div> 
+ <%-- <div> 
 	 <c:set var="total" value="0"/>
 	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
 		<c:set var="total" value="${(total+review.review_star)}"/>
@@ -302,15 +317,14 @@ span.star-prototype > * {
 	 <c:out value="${total/count}"/>
 	 <span class="star-prototype">${total/count}</span>
 	 참여인원:<c:out value="${count }"/>
- </div>
+ </div> --%>
 
  <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 	</c:forEach>
-  
- <hr><hr><hr>
- <div> 
+	<hr>
+   <div> 
  <c:forEach var="review" items="${reviewList}">
  <c:set var="flag" value="true"/>
  	
@@ -333,57 +347,17 @@ span.star-prototype > * {
 	 	
 
 		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
-			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id}">
+			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id }">
 			<c:set var="flag" value="false"/>
+	
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>
-					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
-						<c:choose>
-						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
-							<span class='likeCount'>${likeCountList.CNT} </span>
-						</c:when>
-						<c:otherwise>
-							<span class='likeCount'>0 </span>
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
-						<c:choose>
-						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
-							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
-						</c:when>
-						<c:otherwise>
-							<span class='disLikeCount'>0</span>
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>					
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>			
 				</c:when>
 				<c:when test="${likeList.like_status eq 'N' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-					<c:forEach var="likeCountList" items='${likeCountList }' varStatus="vs">
-						<c:choose>
-						<c:when test="${likeCountList.REVIEW_CODE eq likeList.review_code }">
-							<span class='likeCount'>${likeCountList.CNT} </span>
-						</c:when>
-						<c:otherwise>
-							<span class='likeCount'>0 </span>
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
-					<c:forEach var="nlikeCountList" items='${nlikeCountList }' varStatus="vs">
-						<c:choose>
-						<c:when test="${nlikeCountList.REVIEW_CODE eq likeList.review_code }">
-							<span class='disLikeCount'>${nlikeCountList.CNT} </span>
-						</c:when>
-						<c:otherwise>
-							<span class='disLikeCount'>0 </span>
-						</c:otherwise>
-						</c:choose>
-					</c:forEach>
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>				
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>					
 				</c:when>
 				</c:choose>
 			</c:if>
@@ -426,8 +400,7 @@ $('.like').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					thtag.siblings(".likeCount").text(data.likeCount);
-					thtag.siblings(".disLikeCount").text(data.disLikeCount); 
+					
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
 					}else if(data.likeOn==2){
@@ -470,8 +443,6 @@ $('.dislike').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					thtag.siblings(".disLikeCount").text(data.disLikeCount);
-					thtag.siblings(".likeCount").text(data.likeCount);
 					if(data.likeOn==1){
 						thtag.css("color", "#FF3232");
 					}else if(data.likeOn==2){
@@ -514,7 +485,7 @@ $('.star-prototype').generateStars();
   <hr>
   상품문의
   <div class="container">
- <form id="commentForm" action="${path}/addQuestion.do?productCode=${joinCategory.product_code}" name="commentForm" method="post">
+ <form id="commentForm" name="commentForm" method="post">
     <br><br>
         <div>
             <div>
@@ -529,9 +500,10 @@ $('.star-prototype').generateStars();
                             <div>
                             <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
 							<input type='hidden' id="member_id" name='member_id' value='${memberLoggedIn.member_id}'/>
+							<input type='hidden' id="member_level" name='member_level' value='${memberLoggedIn.member_level}'/>							
 							<input type='hidden' name='question_level' value='1'/>
 							<input type='hidden' name='p_question_code_ref' value='0' />
-                            <input type="submit" class="btn pull-right btn-success" value="등록"  />                
+                            <input type="button" class="btn pull-right btn-success input" value="등록"  />                
                             </div>
                         </td>
                     </tr>
@@ -542,7 +514,7 @@ $('.star-prototype').generateStars();
   </form>
   
   </div>
-
+		<div id="comment-container">
 			<table id="tbl-comment">
 				    <%
 				    if(questionList != null){
@@ -555,10 +527,10 @@ $('.star-prototype').generateStars();
 					            <sub class=comment-date><%=productQuestion.getQuestion_date()%></sub>
 						    <br /> <br />
 					            <%=productQuestion.getP_question_content() %>
-						</td>
+							</td>
 					        <td>
 					            <button class="btn btn-outline-success btn-sm" value="<%=productQuestion.getP_question_code()%>">답글</button>
-					            <button class="btn btn-outline-dark btn-sm" value="<%=productQuestion.getP_question_code()%>">삭제</button>
+					            <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
 					        </td>
 					        
 					    </tr>
@@ -587,13 +559,13 @@ $('.star-prototype').generateStars();
 			        		//화면에 출력될 답글 입력창 만들기
 			        		var tr=$("<tr></tr>");	//태그생성
 			        		var html="<td style='display:none;text-align:left;' colspan=2>";
-			        		html+='<form action="${path}/addQuestion.do?productCode=${joinCategory.product_code}" method="post">';
+			        		html+='<form id="answerForm" name="answerForm" method="post">';
 			        		html+="<input type='hidden' name='product_code' value='${joinCategory.product_code }'/>";
 			        		html+="<input type='hidden' name='member_id' value='${memberLoggedIn.member_id}'/>";
 			        		html+="<input type='hidden' name='question_level' value='2'/>";
 			        		html+="<input type='hidden' name='p_question_code_ref' value='"+$(this).val()+"'/>";			        		
 			        		html+="<textarea name='p_question_content' cols='60' rows='1'></textarea>";
-			        		html+="<button type='submit' class='btn-insert2'>등록</button>";
+			        		html+="<input type='button' class='btn-insert2 answer' value='등록'/>";
 			        		html+="</form></td>";
 			        		//위에서 작성한 html구문을 tr 변수 text노드에 삽입
 			        		tr.html(html);
@@ -618,8 +590,111 @@ $('.star-prototype').generateStars();
 			        
 			        </script>
    				 </table>
+   		</div> 
 	</div>
 </div>
+<script>
+//문의사항 등록
+$(document).on("click",".input",function(){
+	var formData = $("#commentForm").serialize();
+	var member_id=$('#member_id').val();
+	if(member_id==null||member_id.length<1){
+		alert("로그인 후 이용해주시기 바랍니다.");
+		e.preventDefault();
+	}else{
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/addQuestion.do",
+			data:formData,
+			success:function(data){
+				console.log(data);							
+				$("#p_question_content").val("");
+				$("#comment-container").html(data);
+					
+
+			},
+			error:function(jpxhr,textStatus,errormsg){
+				console.log("ajax전송실패.");
+				console.log(jpxhr);
+				console.log(textStatus);
+				console.log(errormsg);
+			}
+		});
+	}
+});
+//삭제
+$(document).on("click",".delete",function(e){
+	alert("!!!삭제버튼");
+	var p_question_code = $(this).val();
+	var product_code=$('#product_code').val();
+	var member_level=$('#member_level').val();
+	var member_id=$('#member_id').val();
+	var writer= $(this).parent().parent().find(".comment-writer").html();
+	
+	if(member_id==null||member_id.length<1){
+		alert("로그인 후 이용해주시기 바랍니다.");
+		e.preventDefault();
+	}else if(member_level=='admin' || member_id==writer){
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/deleteQuestion.do",
+			data:{ p_question_code:p_question_code,
+					product_code:product_code},
+			success:function(data){
+				console.log(data);							
+				$("#p_question_content").val("");
+				$("#comment-container").html(data);
+					
+
+			},
+			error:function(jpxhr,textStatus,errormsg){
+				console.log("ajax전송실패.");
+				console.log(jpxhr);
+				console.log(textStatus);
+				console.log(errormsg);
+			}
+		});
+	}else{
+		
+		alert("관리자나 자신의 글만 삭제가능")
+	}
+});
+//답글
+
+$(document).on("click",".answer",function(e){
+	var formData = $("#answerForm").serialize();
+	var member_id=$('#member_id').val();
+	var member_level=$('#member_level').val();
+	if(member_id==null||member_id.length<1){
+		alert("로그인 후 이용해주시기 바랍니다.");
+		e.preventDefault();
+	}else if(member_level=='admin'){
+		$.ajax({
+			
+			url:"${pageContext.request.contextPath}/addQuestion.do",
+			data:formData,
+			success:function(data){		
+					$("#p_question_content").val("");
+					$("#comment-container").html(data);
+			},
+			error:function(jpxhr,textStatus,errormsg){
+				console.log("ajax전송실패.");
+				console.log(jpxhr);
+				console.log(textStatus);
+				console.log(errormsg);
+			}
+		});
+	}else{
+		alert("관리자만 답변가능");
+	}
+});
+
+function changeImg(src) {
+	var img1 = document.getElementById("mainImg");
+	img1.src = src;
+	
+}
+</script>
  
   
 </div>

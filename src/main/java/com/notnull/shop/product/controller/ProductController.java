@@ -49,7 +49,7 @@ public class ProductController {
 	
 	@RequestMapping("/product.do")
 	public String selectProductList(Model m ,HttpServletRequest request) {
-
+		
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
@@ -213,19 +213,7 @@ public class ProductController {
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
 		request.setAttribute("likeList", likeList);
-		
-		
-		ProductReviewLike productReviewLike = new ProductReviewLike();
-		String status="Y";		
-		List<Map> likeCountList=service.selectlikeCountList(status);
-		System.out.println("!!!!!!!!!"+likeCountList);
-		status="N";	
-		List<Map> nlikeCountList=service.selectlikeCountList(status);
-		System.out.println("@@@@@@@@"+nlikeCountList);
-		
-		request.setAttribute("likeCountList", likeCountList);
-		request.setAttribute("nlikeCountList", nlikeCountList);
-		
+				
 		return "/product/productView";
 	}
 
@@ -379,18 +367,31 @@ public class ProductController {
 	
 	
 	@RequestMapping("/addQuestion.do")
-	public String addQuestion(Model model,HttpServletRequest request,ProductQuestion productQuestion) {
-		int productCode=Integer.parseInt(request.getParameter("productCode"));
+	public String addQuestion(HttpServletRequest request,HttpServletResponse response, ProductQuestion productQuestion) throws IOException {
+		int productCode=productQuestion.getProduct_code();
 		
-		System.out.println(productQuestion);
 		int result=service.addQuestion(productQuestion);
 		System.out.println(result);
-		request.setAttribute("productCode", productCode);
+		List<ProductQuestion> questionList=service.selectQuestion(productCode);
+		ProductJoinCategory joinCategory=service.selectProduct(productCode);
 		
-		String re = "redirect:/productView.do"+"?productCode="+productCode;
+		request.setAttribute("joinCategory", joinCategory);
+		request.setAttribute("questionList", questionList);
+		
+		return "/product/questionAjax";
 
-		return re;
+	}
+	
+	@RequestMapping("/deleteQuestion.do")
+	public String deleteQuestion(HttpServletRequest request,HttpServletResponse response, int p_question_code,int product_code) {
+		int result=service.deleteQuestion(p_question_code);
+		System.out.println(result);
 		
+		List<ProductQuestion> questionList=service.selectQuestion(product_code);
+		
+		request.setAttribute("questionList", questionList);
+		
+		return "/product/questionAjax";
 	}
 	
 	@RequestMapping("/like.do")
@@ -438,16 +439,7 @@ public class ProductController {
 				likeOn=3;
 			}
 		}
-		productReviewLike.setLike_status("Y");
-		int likeCount = service.countLike(productReviewLike);
-		productReviewLike.setLike_status("N");
-		int disLikeCount=service.countLike(productReviewLike);
 		
-		System.out.println("likeCOunt: "+ likeCount);
-		System.out.println("dislikeCOunt: "+ disLikeCount);
-
-		mv.addObject("likeCount", likeCount);
-		mv.addObject("disLikeCount", disLikeCount);
 			
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);

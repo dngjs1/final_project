@@ -8,8 +8,8 @@
 	</resultMap>
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
-	<select id="selectProductList" resultMap="productListJoinMap">
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+	<select id="selectProductList" resultMap="productListJoinMap">    
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
@@ -24,7 +24,7 @@
 		inner join product_img y
 		on x.product_code = y.product_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by review_star desc  
+		order by review_star desc nulls last
  	</select>
  
  	<select id="highPriceOrder" resultMap="productListJoinMap">
@@ -163,6 +163,11 @@
   	</choose> 	
   	</insert>
   	
+  	<delete id="deleteQuestion" parameterType="_int">
+  		delete from product_question where p_question_code=#{p_question_code}
+  	</delete>
+  	
+  	
   	<select id="selectQuestion" parameterType="int" resultType="ProductQuestion">
   	select *
 	from product_question A
@@ -186,10 +191,7 @@
   		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
   	</update>
   	
-  	<select id="countLike" parameterType="ProductReviewLike" resultType="_int">
-  		select count(*) from product_review_like where like_status=#{like_status} and review_code=#{review_code}
-  	</select>
-  	
+  
  	 <resultMap type="ProductReviewLike" id="ProductReviewLikeMap">			
 	</resultMap>
   
@@ -198,12 +200,12 @@
   	</select>
 
 
-  	<resultMap type="map" id="countLikeMap"></resultMap>
+  	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
   	<select id="selectlikeCountList" resultMap="countLikeMap">
   		select review_code,count(*) as cnt
 		from product_review_like
 		where like_status=#{status}
 		group by review_code
   	</select>
-
+ -->
 </mapper>

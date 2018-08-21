@@ -60,6 +60,8 @@ public interface ProductService {
 	
 	int addQuestion(ProductQuestion productQuestion);
 	
+	int deleteQuestion(int p_question_code);
+	
 	List<ProductQuestion> selectQuestion(int productCode);
 	
 	int addLike(ProductReviewLike productReviewLike);
@@ -70,9 +72,6 @@ public interface ProductService {
 	
 	int updateLike(ProductReviewLike productReviewLike);
 	
-	int countLike(ProductReviewLike productReviewLike);
-
 	List<ProductReviewLike> selectLikeList();
-	
-	List<Map> selectlikeCountList(String status);
+		
 }

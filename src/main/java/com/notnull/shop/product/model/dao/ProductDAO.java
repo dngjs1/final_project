@@ -72,16 +72,19 @@ public interface ProductDAO {
 	
 	int addQuestion(SqlSessionTemplate sqlSession,ProductQuestion productQuestion);
 	
+	int deleteQuestion(SqlSessionTemplate sqlSession,int p_question_code);
+	
 	List<ProductQuestion> selectQuestion(SqlSessionTemplate sqlSession,int productCode);
 	
 	int addLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	
 	ProductReviewLike selectLike(SqlSessionTemplate sqlSession,int review_code);
+	
 	int deleteLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
-	int updateLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
-	int countLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);
+	
+	int updateLike(SqlSessionTemplate sqlSession,ProductReviewLike productReviewLike);	
 	
 	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
 	
-	List<Map> selectlikeCountList(SqlSessionTemplate sqlSession,String status);
 
 }
