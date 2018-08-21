@@ -383,11 +383,22 @@
 				</table>
 				<br>
 				
-				<div style="height:30px;">
-				<input type="text" name="searchInfo" id="searchInfo" /> <button type="button" onclick="searchMember()">검색</button>
+				<!-- <div style="position:relative; top:30px;"> -->
 				
-			${pageBar }
-			</div>
+				<div class = "row">
+				
+				<div class = "col-3" style = "margin-left : 20px;">
+					<input type="text" name="searchInfo" id="searchInfo" placeholder="ID 검색" /> 
+					<button type="button" onclick="searchMember()">검색</button>
+				</div>
+				
+				<div class = "col-6">
+					
+				${pageBar }
+				</div>
+				</div>
+				
+			
 			</div>
 			
 			<div style = "height : 50px;">
