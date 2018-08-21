@@ -167,7 +167,6 @@ span.star-prototype > * {
 						<c:when test="${optionList.size()<2}">
 
 							<c:forEach var="option" items="${optionList}">
-								<span>재고 : ${option.left_amount}</span>
 								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
 							</c:forEach>
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
@@ -191,7 +190,7 @@ span.star-prototype > * {
 						</c:when>
 						<c:otherwise>
 							<span>사이즈 </span>
-							<select name="productCode" style="font-size:15px;height:28px;" >
+							<select name="product_option_code" style="font-size:15px;height:28px;" >
 								<c:forEach var="option" items="${optionList}">
 									<c:choose>
 									<c:when test="${option.left_amount<=0}">
