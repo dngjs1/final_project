@@ -92,7 +92,7 @@ input[name="datetimes"]{cursor: pointer;}
 			<tr class="tr1">
 				<th style="text-align: center;border-left:none;">게시판글</th>
 				<td>
-					<textarea class="form-control" id="summernote" placeholder="글내용" name="content" maxlength="500" style="height: 350px;"></textarea>
+					<textarea class="form-control" id="summernote" placeholder="글내용" maxlength="500" style="height: 350px;"></textarea>
 				</td>
 			</tr>
         </table>
@@ -211,12 +211,8 @@ input[name="datetimes"]{cursor: pointer;}
     }
     function bbsWrite() {
     	var content = $('#summernote').summernote("code");
-
-    	alert($('#start_date').val());
-    	alert($('#end_date').val());
     	$('#content').val(content);
      
-    /* 	$('#bbsWrite').submit(); */
     	document.getElementById('hiddenBtn').click();
     	
     }
