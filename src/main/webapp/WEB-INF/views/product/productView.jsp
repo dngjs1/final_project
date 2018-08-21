@@ -122,7 +122,7 @@ span.star-prototype > * {
   		</c:if>
   		<c:if test="${vs.index>=0}">
   		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
-  			 onclick="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
+  			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</c:if>
   	</c:forEach>
 	</div>
