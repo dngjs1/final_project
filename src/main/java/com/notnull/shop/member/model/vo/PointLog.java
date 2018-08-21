@@ -7,23 +7,25 @@ public class PointLog {
 	private String member_id;
 	private int point_increase;
 	private Date point_date;
+	private String point_content;
 	
 	public PointLog() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PointLog(int point_code, String member_id, int point_increase, Date point_date) {
+	public PointLog(int point_code, String member_id, int point_increase, Date point_date, String point_content) {
 		super();
 		this.point_code = point_code;
 		this.member_id = member_id;
 		this.point_increase = point_increase;
 		this.point_date = point_date;
+		this.point_content = point_content;
 	}
 
 	@Override
 	public String toString() {
 		return "PointLog [point_code=" + point_code + ", member_id=" + member_id + ", point_increase=" + point_increase
-				+ ", point_date=" + point_date + "]";
+				+ ", point_date=" + point_date + ", point_content=" + point_content + "]";
 	}
 
 	public int getPoint_code() {
@@ -58,4 +60,13 @@ public class PointLog {
 		this.point_date = point_date;
 	}
 
+	public String getPoint_content() {
+		return point_content;
+	}
+
+	public void setPoint_content(String point_content) {
+		this.point_content = point_content;
+	}
+
+	
 }
