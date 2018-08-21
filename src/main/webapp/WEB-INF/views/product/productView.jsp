@@ -167,7 +167,6 @@ span.star-prototype > * {
 						<c:when test="${optionList.size()<2}">
 
 							<c:forEach var="option" items="${optionList}">
-								<span>재고 : ${option.left_amount}</span>
 								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
 							</c:forEach>
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
