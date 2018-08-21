@@ -33,6 +33,8 @@ public interface MemberService {
 	List<Member> memberList(int cPage, int numPerPage,String info);
 	
 	int selectMemberCount();
+	int selectMemberCount(String info);
+	
 	
 	Member selectMember(String id);
 	
