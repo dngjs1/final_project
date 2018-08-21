@@ -116,7 +116,7 @@
             	<a href = "#">고객센터</a>
             	<span id = "SNS">FOLLOW US ON &nbsp;&nbsp;&nbsp;
             	<i class="fab fa-instagram"></i>&nbsp;&nbsp;&nbsp;
-            	<i class="fab fa-twitter"></i>&nbsp; &nbsp;&nbsp;
+            	<i class="fab fa-twitter"></i>&nbsp; &nbsp;
             	<i class="fab fa-facebook"></i>
             	</span>
             	</div>
