@@ -47,12 +47,7 @@
 			var result = parseInt(amount) * sell_price;
 			$(".price"+i).text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			alert(result);
-			var check= document.getElementsByName("check");
-			alert(check)
-			one_sum=parseInt(check[i-1].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.innerHTML.replace(",", ""));
-			alert(one_sum);
-			sum=sum+one_sum;
+			sum=sum+result;
 		}
 		var total_sum=0;
 		if(sum>=20000){
@@ -66,7 +61,6 @@
 			deli="2,500원";
 			total_sum=sum+2500;
 		}
-		alert(sum);
 		$(".deli-price").text(deli);
 		$(".total-product-price").text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		$(".total-price").text(total_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -80,8 +74,11 @@
 		var sum=0;
 		for(var i=1;i<=$('.cartLength').val();i++){
 			if( check[i-1].checked == true ){
-				one_sum=parseInt(check[i-1].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.innerHTML.replace(",", ""));
-				sum=sum+one_sum;
+				var sell_price = parseInt($('.price'+i).html().replace(/,/gi, ""));
+				var amount = $('.cart_quantity'+i).val();
+				var result = parseInt(amount) * sell_price;
+				$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				sum=sum+result;
 			}
 		}
 		var deli="";
@@ -116,7 +113,7 @@
 			var quantity=$(this).siblings('.quantity');
 			hm = parseInt(quantity.val());
 			hm = hm+1;
-			sell_price=$(this).parent().prev().find(".sell_price").html().replace(",", "");
+			sell_price=$(this).parent().prev().find(".sell_price").html().replace(/,/gi, "");
 			var result = hm * parseInt(sell_price);
 			sum=$(this).parent().parent().find(".sum");
 			sum.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -142,7 +139,7 @@
 			hm = parseInt(quantity.val());
 			if (hm > 1) {
 				hm = hm-1;
-				sell_price=$(this).parent().prev().find(".sell_price").html().replace(",", "");
+				sell_price=$(this).parent().prev().find(".sell_price").html().replace(/,/gi, "");
 				var result = hm * parseInt(sell_price);
 				sum=$(this).parent().parent().find(".sum");
 				sum.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
@@ -301,6 +298,7 @@
 			text-align: center;
 			font-weight: bold;
 		}
+		
 	</style>
 	<h2 class = "cart_title_01">내가 담은 상품리스트</h2>
 	
@@ -337,9 +335,9 @@
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
 							<input type="hidden" name="left_amount" value="${cart.left_amount}"/>
 							<input type="hidden" name="product_name" value="${cart.product_name}"/>
-							<input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/>
+							<i class="fas fa-minus-circle del" style="font-size:18px;cursor:pointer;color:#3CA0E1"> </i><!-- <input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/> -->
 							<input type="text" name="cart_quantity" class="quantity cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
-							<input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/>
+							<i class="fas fa-plus-circle add" style="font-size:18px;cursor:pointer;color:#3CA0E1;"></i><!-- <input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/> -->
 						</td>
 						<td scope="col" style="width: 100px;font-size:16px;color:#B9062F;"><span class="sum_price${vs.count} sum"></span><span> 원</span></td>
 						<td><img alt="삭제" class="cancel" style="cursor:pointer;"

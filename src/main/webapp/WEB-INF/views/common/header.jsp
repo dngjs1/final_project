@@ -344,7 +344,7 @@
       			</c:if>
       			
       			<li>
-      				<a href = "#">장바구니</a>
+      				<a href = "${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id }">장바구니</a>
       			</li>
       			
       			<li>
