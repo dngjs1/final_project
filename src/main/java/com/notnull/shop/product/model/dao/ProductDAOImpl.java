@@ -217,6 +217,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.selectLikeList");
 	}
 
+	@Override
+	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.selectList("product.selectLikeList1",review_code);
+	}
+
 
 	
 }

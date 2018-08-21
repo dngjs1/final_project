@@ -165,11 +165,11 @@ span.star-prototype > * {
 				<c:if test="${optionList!=null && optionList.size()>0}">
 					<c:choose>
 						<c:when test="${optionList.size()<2}">
-<<<<<<< HEAD
+
 							<c:forEach var="option" items="${optionList}">
 								<span>재고 : ${option.left_amount}</span>
 								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
-=======
+							</c:forEach>
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
 								<c:choose>
 									<c:when test="${option.option_size == null}">
@@ -187,7 +187,6 @@ span.star-prototype > * {
 										</select>
 									</c:otherwise>
 								</c:choose>
->>>>>>> SUPER_branch
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
@@ -393,8 +392,7 @@ span.star-prototype > * {
 
 		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
 			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id }">
-			<c:set var="flag" value="false"/>
-	
+			<c:set var="flag" value="false"/>	
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
 					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>					
@@ -412,7 +410,9 @@ span.star-prototype > * {
 	
 		<c:if test="${flag =='true'}">
 			<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+			
 			<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+			
 		</c:if>
 		
 		
@@ -426,7 +426,7 @@ span.star-prototype > * {
 //좋아요
 $('.like').on('click',function(){
 	var thtag=$(this);
-	var member_id=$('#member_id').val();
+	var member_id="${memberLoggedIn.member_id}";
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
 		e.preventDefault();
@@ -470,7 +470,7 @@ $('.like').on('click',function(){
 
 $('.dislike').on('click',function(){
 	var thtag=$(this);
-	var member_id=$('#member_id').val();
+	var member_id="${memberLoggedIn.member_id}";
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
 		e.preventDefault();

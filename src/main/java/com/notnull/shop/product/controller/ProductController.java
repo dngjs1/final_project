@@ -478,47 +478,65 @@ public class ProductController {
 		int review_code=Integer.parseInt(request.getParameter("review_code"));
 		String member_id=request.getParameter("member_id");
 		String like_status=request.getParameter("like_status");
-		ProductReviewLike productReviewLike=new ProductReviewLike();
-		productReviewLike = service.selectLike(review_code);
+		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
 		int result=0;
 		int likeOn=0;
 		if(like_status.equals("Y")) {
-
-			if(productReviewLike==null) {
-				productReviewLike=new ProductReviewLike();
-				productReviewLike.setMember_id(member_id);
-				productReviewLike.setReview_code(review_code);
-				productReviewLike.setLike_status(like_status);
-			
-				result=service.addLike(productReviewLike);
-				likeOn=1;
-			}else if(productReviewLike.getLike_status().equals("Y")){
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(productReviewLike.getLike_status().equals("N")) {
-				productReviewLike.setLike_status("Y");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
-			}
-		}else if(like_status.equals("N")) {
-			if(productReviewLike==null) {
-				productReviewLike=new ProductReviewLike();
-				productReviewLike.setMember_id(member_id);
-				productReviewLike.setReview_code(review_code);
-				productReviewLike.setLike_status(like_status);
-			
-				result=service.addLike(productReviewLike);
-				likeOn=1;
-			}else if(productReviewLike.getLike_status().equals("N")){
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(productReviewLike.getLike_status().equals("Y")) {
-				productReviewLike.setLike_status("N");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
+			if(likeList.isEmpty()) {
+				System.out.println("!!!");
+				likeList.get(0).setReview_code(review_code);
+				likeList.get(0).setMember_id(member_id);
+				likeList.get(0).setLike_status(like_status);
+				
+				result=service.addLike(likeList.get(0));
+			}else {				
+				for(int i=0;i<likeList.size();i++) {
+					if(likeList.isEmpty()) {
+						System.out.println("@@@");
+						likeList.get(i).setReview_code(review_code);
+						likeList.get(i).setMember_id(member_id);
+						likeList.get(i).setLike_status(like_status);
+						
+						result=service.addLike(likeList.get(i));
+						likeOn=1;
+					}else if(likeList.get(i).getLike_status().equals("Y")) {
+						result=service.deleteLike(likeList.get(i));
+						likeOn=2;
+					}else if(likeList.get(i).getLike_status().equals("N")) {
+						likeList.get(i).setLike_status("Y");
+						result=service.updateLike(likeList.get(i));
+						likeOn=3;
+					}
+				}
+			}  
+			if(like_status.equals("N")) {
+				if(likeList.isEmpty()) {
+					likeList.get(0).setReview_code(review_code);
+					likeList.get(0).setMember_id(member_id);
+					likeList.get(0).setLike_status(like_status);
+					
+					result=service.addLike(likeList.get(0));
+				}else {	
+					for(int i=0;i<likeList.size();i++) {
+						if(likeList.isEmpty()) {
+							likeList.get(i).setReview_code(review_code);
+							likeList.get(i).setMember_id(member_id);
+							likeList.get(i).setLike_status(like_status);
+							
+							result=service.addLike(likeList.get(i));
+							likeOn=1;
+						}else if(likeList.get(i).getLike_status().equals("N")) {
+							result=service.deleteLike(likeList.get(i));
+							likeOn=2;
+						}else if(likeList.get(i).getLike_status().equals("Y")) {
+							likeList.get(i).setLike_status("N");
+							result=service.updateLike(likeList.get(i));
+							likeOn=3;
+						}
+					}
+				}
 			}
 		}
-		
 			
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);

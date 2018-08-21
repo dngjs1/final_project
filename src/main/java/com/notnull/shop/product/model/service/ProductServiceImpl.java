@@ -294,4 +294,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectLikeList(sqlSession);
 	}
 
+	@Override
+	public List<ProductReviewLike> selectLikeList(int review_code) {
+		return productDAO.selectLikeList(sqlSession,review_code);
+	}
+
 }

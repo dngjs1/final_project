@@ -249,6 +249,10 @@
   	</select>
 
 
+ 
+  	<select id="selectLikeList1" resultMap="ProductReviewLikeMap">
+  		select * from product_review_like where review_code=#{review_code}
+  	</select>
   	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
   	<select id="selectlikeCountList" resultMap="countLikeMap">
   		select review_code,count(*) as cnt

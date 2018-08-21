@@ -102,5 +102,5 @@ public interface ProductDAO {
 	
 	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
 	
-
+	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession,int review_code);
 }
