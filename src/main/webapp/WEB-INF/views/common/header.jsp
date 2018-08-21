@@ -767,7 +767,7 @@
       		<div class = "lnb">
       				<ul class = "categorytype-layer">
       					<li>
-      						<a href = "#">홈</a>
+      						<a href = "#"><i class="fas fa-home" style = "font-size: 24px; line-height : 14px;"></i></a>
       					</li>
       					
       					<li>
