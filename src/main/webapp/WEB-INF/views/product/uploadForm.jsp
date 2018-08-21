@@ -91,7 +91,7 @@
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv">
 	       	<input multiple="multiple" type="file" class="addfile0" accept=".jpg, .png" name="file_0" />
-	        <a href="#this" name="delete" class="btn">삭제하기</a>
+	        <!-- <a href="#this" name="delete" class="btn">삭제하기</a> -->
         </div>
         <a href="#this" id="add" class="btn">파일 추가하기</a>
         <br><br><br>
@@ -101,7 +101,7 @@
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
 	       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
-	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
+	        <!-- <a href="#this" name="delete1" class="btn1">삭제하기</a> -->
         </div>
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
         <br><br><br>
@@ -123,24 +123,29 @@
 </div>
 
 <script type="text/javascript">
-var g_count=1;
+var add_count=1;
+var add_count1=1;
 $(document).ready(function(){
 	$("#add").on("click",function(e){
-		e.preventDefault();
+		add_count=add_count+1;
+		if(add_count>7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
 		fn_fileAdd();
 	});
 	$("a[name='delete']").on("click",function(e){
-	       e.preventDefault();
 	       fn_fileDelete($(this));
-	   });
-});
-$(document).ready(function(){
+	});
 	$("#add1").on("click",function(e){
-		e.preventDefault();
+		add_count1=add_count1+1;
+		if(add_count1>7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
 		fn_fileAdd1();
 	});
 	$("a[name='delete1']").on("click",function(e){
-		e.preventDefault();
 		fn_fileDelete($(this));
 	});
 });
@@ -154,7 +159,6 @@ function fn_fileAdd(){
     $("#fileDiv").append(str);
      
     $("a[name='delete']").on("click",function(e){
-        e.preventDefault();
         fn_fileDelete($(this));         
     });
 }
@@ -163,7 +167,6 @@ function fn_fileAdd1(){
     $("#fileDiv1").append(str);
      
     $("a[name='delete1']").on("click",function(e){
-        e.preventDefault();
         fn_fileDelete($(this));         
     });
 }

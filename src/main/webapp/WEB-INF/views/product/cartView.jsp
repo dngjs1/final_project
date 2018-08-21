@@ -298,6 +298,7 @@
 			text-align: center;
 			font-weight: bold;
 		}
+		
 	</style>
 	<h2 class = "cart_title_01">내가 담은 상품리스트</h2>
 	
@@ -334,9 +335,9 @@
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
 							<input type="hidden" name="left_amount" value="${cart.left_amount}"/>
 							<input type="hidden" name="product_name" value="${cart.product_name}"/>
-							<input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/>
+							<i class="fas fa-minus-circle del" style="font-size:18px;cursor:pointer;color:#3CA0E1"> </i><!-- <input type="button" class="del" value="-" style="width:25px;font-weight:bold;cursor:pointer;"/> -->
 							<input type="text" name="cart_quantity" class="quantity cart_quantity${vs.count}" value="${cart.cart_quantity}" size="3" style="height:25px;" readonly/>
-							<input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/>
+							<i class="fas fa-plus-circle add" style="font-size:18px;cursor:pointer;color:#3CA0E1;"></i><!-- <input type="button" class="add" value="+" style="width:25px;font-weight:bold;cursor:pointer;"/> -->
 						</td>
 						<td scope="col" style="width: 100px;font-size:16px;color:#B9062F;"><span class="sum_price${vs.count} sum"></span><span> 원</span></td>
 						<td><img alt="삭제" class="cancel" style="cursor:pointer;"
