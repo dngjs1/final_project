@@ -224,9 +224,7 @@ span.star-prototype > * {
 			<span class = "pdt_price_txt"> 원</span>
 			
 			</div>
-			<style>
-				.
-			</style>
+			
 			
 			<!-- <hr>줄 처럼 만든 div -->
 			<div class = "d_line">
@@ -1062,10 +1060,8 @@ $('.star-prototype').generateStars();
 				</td>
 			</tr>
 			
-			<tr>
+		
 			
-				<td style = "line-height: 13pt; margin:0px; padding:0px; height:30;">
-					<table class = "#" style = "margin:0px; border-spacing: 0px; border-collapse: collapse; color : #898989 !important; font-si"
 			</tbody>
 		
 		
