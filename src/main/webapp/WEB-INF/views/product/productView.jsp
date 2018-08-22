@@ -481,13 +481,14 @@ $('.dislike').on('click',function(){
 				like_status:'N'
 		};
 		$.ajax({
-			url:"${pageContext.request.contextPath}/like.do",
+			url:"${pageContext.request.contextPath}/dislike.do",
 			data:likeInfo,
 			success:function(data){
 				if(data.result==0){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
+					
 					if(data.likeOn==1){
 						thtag.css("color", "#FF3232");
 					}else if(data.likeOn==2){
