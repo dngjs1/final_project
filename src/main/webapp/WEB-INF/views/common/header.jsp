@@ -205,7 +205,7 @@
   
   .topbtn {
   	position: fixed;
-  	right : 12%;
+  	right : 2%;
   	bottom: 5%;
   	width : 36px;
   	padding : 12px 0 13px;
