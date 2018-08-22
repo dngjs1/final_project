@@ -200,7 +200,7 @@
 					      <c:when test="${rental.imgUrl == null }">
 					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
 					      </c:when>
-					      <c:when test="${rental.imgUrl == './p' }">
+					      <c:when test="${rental.imgUrl == './img' }">
 					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
 					      </c:when>
 				          <c:when test="${rental.imgUrl != null}">
