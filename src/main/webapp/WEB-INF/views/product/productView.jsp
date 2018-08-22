@@ -132,8 +132,9 @@ span.star-prototype > * {
 		
 }
 		.main_image {
+		
 			max-width : 100%;
-			height : 355px;
+			
 			cursor : pointer;
 			overflow: hidden;
 			}
@@ -224,9 +225,7 @@ span.star-prototype > * {
 			<span class = "pdt_price_txt"> 원</span>
 			
 			</div>
-			<style>
-				.
-			</style>
+			
 			
 			<!-- <hr>줄 처럼 만든 div -->
 			<div class = "d_line">
@@ -612,23 +611,99 @@ span.star-prototype > * {
 </div>
 <br><br>
 
+<style>
+
+	.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+		border-bottom : 4px solid #2D2E33;
+		background-color: #e7e7e7;
+	}
+	.nav-tabs .nav-link {
+		border:1px solid #e7e7e7 ;
+	}
+	.link01 {
+		display: table-cell;
+		padding : 10px 0;
+		border : 1px solid #e7e7e7;
+		border-left : 1px solid #e7e7e7;
+		background : #fcfcfb;
+		color : #2e2e2e;
+		font-size : 15px;
+		box-sizing: border-box;
+		text-align: center;
+		font-weight: bold;
+		border-bottom: 4px solid #fcfcfb;
+		width : 260px;
+	}
+	
+	.link01:hover {
+	border-bottom: 4px solid black;
+}
+
+	.link02 {
+		display: table-cell;
+		padding : 10px 0;
+		border : 1px solid #e7e7e7;
+		border-left : 1px solid #e7e7e7;
+		background : #fcfcfb;
+		color : #2e2e2e;
+		font-size : 15px;
+		box-sizing: border-box;
+		text-align: center;
+		font-weight: bold;
+		border-bottom: 4px solid #fcfcfb;
+		width : 260px;
+	}
+	
+	.link02:hover {
+	border-bottom: 4px solid red;
+}
+	
+	.link03 {
+		display: table-cell;
+		padding : 10px 0;
+		border : 1px solid #e7e7e7;
+		border-left : 1px solid #e7e7e7;
+		background : #fcfcfb;
+		color : #2e2e2e;
+		font-size : 15px;
+		box-sizing: border-box;
+		text-align: center;
+		font-weight: bold;
+		border-bottom: 4px solid #fcfcfb;
+		width : 260px;
+	}
+	
+	.link03:hover {
+	border-bottom: 4px solid black;
+}
+</style>
 
 
 <div class="container">
 
   <ul class="nav nav-tabs" role="tablist">
+  
      <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#section1">상품 상세</a>
+       <a class="nav-link active link01" data-toggle="tab" href="#section1">상품 상세</a>
     </li>
+    
     <li class="nav-item">
-       <a class="nav-link" data-toggle="tab" href="#section2">상품평</a>
+       <a class="nav-link link02" data-toggle="tab" href="#section2">상품평</a>
     </li>
+    
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#section3">상품문의</a>
+      <a class="nav-link link03" data-toggle="tab" href="#section3">상품문의</a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-link link03" data-toggle="tab" href="#section4">배송/교환/반품</a>
+    </li>
+    
   </ul>
 
  <div class="tab-content">
+ 
+ 
   <div id="section1" class="container tab-pane active">
 			
   
@@ -854,7 +929,7 @@ $('.star-prototype').generateStars();
    <div id="section3" class="container tab-pane fade">
 			
   
-  <hr>
+
   상품문의
   <div class="container">
  <form id="commentForm" name="commentForm" method="post">
@@ -963,6 +1038,37 @@ $('.star-prototype').generateStars();
 			        </script>
    				 </table>
    		</div> 
+	</div>
+	
+	<div id="section4" class="container tab-pane fade">
+	
+		<table style = "margin : 0px; border-spacing: 0px; border-collapse: collapse; border : 0; width : 100%; cellspacing = "0" cellpadding = "0">
+			
+			
+			<tbody>
+			
+			<tr>
+				<td style = "line-height: 13pt; marin:0px; padding:0px;">
+					
+				</td>
+				
+			</tr>
+			
+			
+			<tr>
+				<td style = "line-height: 13pt; margin:0px; padding:0px; height:30;">
+					<strong>배송정보</strong>
+				</td>
+			</tr>
+			
+		
+			
+			</tbody>
+		
+		
+		
+		
+		</table>
 	</div>
 </div>
 <script>
