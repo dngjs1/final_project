@@ -15,21 +15,21 @@
 		<li data-target="#carouselExampleIndicators " data-slide-to="1 "></li>
 		<li data-target="#carouselExampleIndicators " data-slide-to="2 "></li>
 	</ol>
-	<div class="carousel-inner ">
+	<div class="carousel-inner">
 		<div class="carousel-item active ">
 			<img class="d-block w-100 "
-				src="https://t1.daumcdn.net/cfile/tistory/231235395466C11011 "
-				style="height: 350px;" alt="첫번째 슬라이드 ">
+				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				style="width:1210px; height: 350px;" alt="첫번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="https://t1.daumcdn.net/cfile/tistory/231235395466C11011 "
-				style="height: 350px;" alt="두번째 슬라이드 ">
+				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				style="width:1210px; height: 350px;" alt="두번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="https://t1.daumcdn.net/cfile/tistory/231235395466C11011 "
-				style="height: 350px;" alt="세번째 슬라이드 ">
+				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				style="width:1210px; height: 350px;" alt="세번째 슬라이드 ">
 		</div>
 		
 	</div>
@@ -154,13 +154,17 @@
 			<nav class="col-1  show-on-scroll" id="myScrollspy">
 				<ul class="nav nav-pills flex-column "
 					style="border: 1px solid; background-color: #fafafa">
-					<li class="nav-item"><a class="nav-link active"
-						href="#section1" title="여행"><i class="fas fa-swimmer">
-								Swim_Item</i></a></li>
+					
 					<li class="nav-item"><a class="nav-link" href="#section2"><i
-							class="fab fa-free-code-camp"><b> 캠프</b></i></a></li>
-					<li class="nav-item"><a class="nav-link" href="#section3"><i
-							class="fas fa-fish"></i><b> 낚시</b></a></li>
+							class="fab fa-free-code-camp"><b> Camp_Item</b></i></a></li>
+							
+							<li class="nav-item"><a class="nav-link active"
+						href="#section1" title="수영"><i class="fas fa-swimmer">
+								Swim_Item</i></a></li>
+								
+								
+					<!-- <li class="nav-item"><a class="nav-link" href="#section3"><i
+							class="fas fa-fish"></i><b> 낚시</b></a></li> -->
 				</ul>
 			</nav>
 		</div>
