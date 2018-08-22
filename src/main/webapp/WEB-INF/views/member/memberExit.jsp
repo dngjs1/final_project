@@ -171,7 +171,7 @@
 					
 					<li class = "submenu btm">
 						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">회원관리</span>
+							<span class = "txt txt_margin_bottom">회원탈퇴</span>
 						</a>
 					</li>
 					
