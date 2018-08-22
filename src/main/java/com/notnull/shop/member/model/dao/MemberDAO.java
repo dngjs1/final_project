@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
+import com.notnull.shop.member.model.vo.PointLog;
 
 public interface MemberDAO {
 	
@@ -41,4 +42,5 @@ public interface MemberDAO {
 	
 	int updateManagement(SqlSessionTemplate sqlSession, Member m);
 	
+	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id);
 }
