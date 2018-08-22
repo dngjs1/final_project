@@ -968,7 +968,7 @@ $(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $('.name1').val(),
-		    amount : parseInt($('.last_price').html().replace(/,/gi, "")),
+		    amount : 100,/* parseInt($('.last_price').html().replace(/,/gi, "")), */
 		    buyer_email : '${memberLoggedIn.email }',
 		    buyer_name : '${memberLoggedIn.member_name }',
 		    buyer_tel : '${memberLoggedIn.phone }',
@@ -985,11 +985,11 @@ $(function(){
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
-				var frm=$("#frm");
+				/* var frm=$("#frm");
 				var url="${pageContext.request.contextPath }/buyEnd.do";
 				frm.attr('method', 'post');
 				frm.attr("action",url);
-				frm.submit();
+				frm.submit(); */
 			}
 			alert(msg);
 		});
