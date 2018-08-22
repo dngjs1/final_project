@@ -165,16 +165,10 @@
 							<span class = "txt txt_margin_top">회원정보 수정</span>
 						</a>
 					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">회원탈퇴</span>
-						</a>
-					</li>
-					
+										
 					<li class = "submenu btm">
 						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">회원관리</span>
+							<span class = "txt txt_margin_bottom">회원탈퇴</span>
 						</a>
 					</li>
 					
