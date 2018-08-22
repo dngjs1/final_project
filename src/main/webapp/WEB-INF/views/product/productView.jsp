@@ -132,9 +132,8 @@ span.star-prototype > * {
 		
 }
 		.main_image {
-		
 			max-width : 100%;
-			
+			height : 355px;
 			cursor : pointer;
 			overflow: hidden;
 			}
@@ -154,7 +153,6 @@ span.star-prototype > * {
 		<c:if test="${vs.index==0}">
 		<div class = "main_image">
   		<img src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
-  		<hr>
   		</div>
   		</c:if>
   		
@@ -651,9 +649,18 @@ span.star-prototype > * {
   	</tr>
   </table>
   
-  	<div>
+  <style>
+  	.detail_img_container{
+  		text-align: center;
+  	}
+  	.detail_img_container .detail_img{
+  		max-width: 835px;
+  	}
+  </style>
+  
+  	<div class="detail_img_container">
   			<c:forEach var='deImg' items='${detailImgList }' varStatus="vs">
-  				<img  src="${path }/resources/upload/productDetailImg/${deImg.new_p_detail_img_path }" alt="상세상품"/>
+  				<img class="detail_img" src="${path }/resources/upload/productDetailImg/${deImg.new_p_detail_img_path }" alt="상세상품"/><br>
   			</c:forEach>
  	</div>
   </div>
