@@ -95,4 +95,9 @@ public interface ProductService {
 	
 	
 	String checkLike(Map map);
+	
+	List ycountLike();
+	
+	List ncountLike();
+	
 }

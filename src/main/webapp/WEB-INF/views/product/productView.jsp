@@ -796,12 +796,32 @@ span.star-prototype > * {
 			<c:set var="flag" value="false"/>	
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>					
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>			
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>	
+						<c:forEach var="ycountLikeList" items="${ycountLikeList}">			 	
+							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ycountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>				
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+						<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ncountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>			
 				</c:when>
 				<c:when test="${likeList.like_status eq 'N' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>				
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>					
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+						<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
+							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ycountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>				
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
+						<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ncountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>					
 				</c:when>
 				</c:choose>
 			</c:if>
@@ -811,9 +831,17 @@ span.star-prototype > * {
 	
 		<c:if test="${flag =='true'}">
 			<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-			
+				<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
+					<c:if test="${ycountLikeList.REVIEW_CODE eq review.review_code }">								
+						<c:out value="${ycountLikeList.CNT}"></c:out>
+					</c:if>
+				</c:forEach>			
 			<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-			
+				<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+					<c:if test="${ncountLikeList.REVIEW_CODE eq review.review_code }">
+						<c:out value="${ncountLikeList.CNT}"></c:out>
+					</c:if>
+				</c:forEach>	
 		</c:if>
 		
 		
