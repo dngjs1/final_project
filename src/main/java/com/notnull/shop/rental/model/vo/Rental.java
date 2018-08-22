@@ -16,9 +16,20 @@ public class Rental {
 	private String start_date;
 	private String end_date;
 	private String p_category_name;
+	private String member_level;
 	
 	
 	
+	
+	
+	public String getMember_level() {
+		return member_level;
+	}
+
+	public void setMember_level(String member_level) {
+		this.member_level = member_level;
+	}
+
 	public String getP_category_name() {
 		return p_category_name;
 	}

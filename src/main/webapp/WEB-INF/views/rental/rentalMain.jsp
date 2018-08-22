@@ -10,8 +10,8 @@
 <style>
 	.map-container {
 	  position: absolute;
-	  left: 0;
-	  right: 0;
+	  left: 0px;
+	  right: 0px;
 	  bottom: 0;
 	  top: 160px;
 	  width: 100%;
@@ -93,7 +93,6 @@
 	}
 	
 </style>
-<a href="${path }/rentalUpload.do">등록</a>
 <div class="container-fluid">
 	<div class="map-container">
 		<div class="map-area">
@@ -140,24 +139,28 @@
 					        var marker = new daum.maps.Marker({
 					            map: map,
 					            position: coords,
+					            clickable:true,
 					            title:'${rental.title}'
 					        });
 					
 					        // 인포윈도우로 장소에 대한 설명을 표시합니다
 					        var infowindow = new daum.maps.InfoWindow({
-					            content: '<div>${rental.imgUrl}</div> <div>${rental.title}</div>'
+					            content: '<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">'+
+					            		'<div id="iw-container">'+
+					            			'<div class="iw-title">${rental.p_category_name}</div>'+
+					            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
+					            				'<span>물품명 : </span> <span>"${rental.title}"</span><br><span>주소 :</span><span>"${rental.address}"</span></a>'
 					        });
 						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-						    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-						    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-						    
-						    return marker;
+						    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+						    //daum.maps.event.addListener(marker, 'click', makeOutListener(infowindow));
+
+					        clusterer.addMarker(marker);
 					    } 
 					}); 
 			 	</c:forEach>
-		        clusterer.addMarkers(markers);
 		
 				// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 				function makeOverListener(map, marker, infowindow) {
@@ -175,6 +178,32 @@
 				
 			</script>
 		</div>
+		<style>
+			#iw-container {
+				margin-bottom: 10px;
+				width:200px;
+			}
+			#iw-container .iw-title {
+				font-family: 'Open Sans Condensed', sans-serif;
+				font-size: 22px;
+				font-weight: 400;
+				padding: 10px;
+				background-color: #48b5e9;
+				color: white;
+				margin: 0;
+				border-radius: 2px 2px 0 0;
+			}
+			#iw-container .iw-content {
+				font-size: 13px;
+				line-height: 18px;
+				font-weight: 400;
+				margin-right: 1px;
+				padding: 15px 5px 20px 15px;
+				max-height: 140px;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+		</style>
 		<div class="map-content">
 	        <!-- search -->
 	        <div class="map-search">
@@ -188,8 +217,8 @@
 	            </div>
 	        	
 	        </div>
-	        <div class="map-list">
-			<<c:forEach items="${list }" var="rental" varStatus="status">
+	        <div  style="overflow: scroll;">
+			<c:forEach items="${list }" var="rental" varStatus="status">
 			<c:if test="${status.index % 6 == 0 }">
 			<div class="list-item">
 			</c:if>
@@ -200,7 +229,7 @@
 					      <c:when test="${rental.imgUrl == null }">
 					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
 					      </c:when>
-					      <c:when test="${rental.imgUrl == './p' }">
+					      <c:when test="${rental.imgUrl == './img' }">
 					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
 					      </c:when>
 				          <c:when test="${rental.imgUrl != null}">
@@ -216,6 +245,7 @@
 				      </div>
 			        </a>
 				</div>
+				<br>
 			<c:if test="${status.index % 6 == 5 }">
 			</div>
 			</c:if>
