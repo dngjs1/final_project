@@ -260,5 +260,11 @@
 		where like_status=#{status}
 		group by review_code
   	</select>
- -->
+ 	-->
+
+ 	
+ 	<select id="checkLike" resultType="string" parameterType="map">
+ 		select like_status from product_review_like where member_id=#{id} and review_code=#{code}
+ 	</select>
+ 
 </mapper>

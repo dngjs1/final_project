@@ -71,9 +71,9 @@
 			<div style="position:relative;">
 				<span id="left_amount">
 					<input type="hidden" name="size" value="">
-					<b>재고: <b></b><input type="number" name="left_amount">
+					<b>재고: <b></b><input type="number" name="left_amount" required>
 				</span>
-				<div style="position:absolute;left:470px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
+				<div style="position:absolute;left:480px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
 			</div>
 			</td>
 		</tr>
@@ -128,9 +128,16 @@ var add_count1=1;
 $(document).ready(function(){
 	$("#add").on("click",function(e){
 		add_count=add_count+1;
-		if(add_count>7){
+		if(add_count > 7){
 			alert("사진은 최대 7개까지 올릴 수 있습니다.");
 			return false;
+		}
+		var file_name=document.getElementsByName('file_0');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
 		}
 		fn_fileAdd();
 	});
@@ -139,9 +146,16 @@ $(document).ready(function(){
 	});
 	$("#add1").on("click",function(e){
 		add_count1=add_count1+1;
-		if(add_count1>7){
+		if(add_count1 > 7){
 			alert("사진은 최대 7개까지 올릴 수 있습니다.");
 			return false;
+		}
+		var file_name=document.getElementsByName('file_1');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
 		}
 		fn_fileAdd1();
 	});
@@ -179,6 +193,20 @@ function validate(){
 	if(!$('.addfile1').val().length){
 		alert("상세설명사진은 반드시 한개 이상 추가해야 합니다.");
 		return false;
+	}
+	var file_name0=document.getElementsByName('file_0');
+	for(var i=0;i<file_name0.length;i++){
+		if(file_name0[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
+	}
+	var file_name1=document.getElementsByName('file_1');
+	for(var i=0;i<file_name1.length;i++){
+		if(file_name1[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
 	}
 	return true;
 }

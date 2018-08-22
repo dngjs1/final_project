@@ -92,6 +92,13 @@ $(document).ready(function(){
 			alert("사진은 최대 7개까지 올릴 수 있습니다.");
 			return false;
 		}
+		var file_name=document.getElementsByName('file_1');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
+		}
 		fn_fileAdd1();
 	});
 	$("a[name='delete1']").on("click",function(e){
@@ -112,6 +119,20 @@ function fn_fileAdd1(){
         e.preventDefault();
         fn_fileDelete($(this));         
     });
+}
+
+function validate(){
+	var file_name=document.getElementsByName('file_1');
+	if(file_name.length<2){
+		return true;
+	}
+	for(var i=0;i<file_name.length;i++){
+		if(file_name[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
+	}
+	return true;
 }
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

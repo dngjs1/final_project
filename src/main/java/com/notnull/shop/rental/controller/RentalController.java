@@ -50,7 +50,7 @@ public class RentalController {
 		    Matcher m = p.matcher(rental.getContent());
 		    if (m.find())
 		    {
-		    	rental.setImgUrl(m.group(1));
+		    	rental.setImgUrl("."+m.group(1));
 		    }
 		    
 		}
@@ -81,6 +81,26 @@ public class RentalController {
 		service.insertRental(rental);
 		
 		return "redirect:/rentalMain.do";
+	}
+	
+	//상세보기
+	@RequestMapping(value="/rentalDetail.do", method=RequestMethod.GET)
+	public String detailGet(int rental_obj_code, HttpServletRequest req, Model model) {
+		Rental rental = new Rental();
+		
+		rental = service.getRental(rental_obj_code);
+		String re1=".*?";	// Non-greedy match on filler
+		String re2="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
+
+	    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    
+	    Matcher m = p.matcher(rental.getContent());
+	    if (m.find()) {
+		    rental.setImgUrl("."+m.group(1));
+		}
+		model.addAttribute("rental", rental);
+		
+		return "rental/rentalView";
 	}
 	
 }

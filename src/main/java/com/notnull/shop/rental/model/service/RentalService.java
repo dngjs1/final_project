@@ -12,5 +12,7 @@ public interface RentalService {
 
 	public List<Rental> RentalList(int cPage, int numPerPage);
 
+	public Rental getRental(int rental_obj_code);
+
 	
 }

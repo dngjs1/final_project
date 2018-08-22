@@ -12,4 +12,6 @@ public interface RentalDAO {
 
 	List<Rental> RentalList(int cPage, int numPerPage);
 
+	Rental getRental(int rental_obj_code);
+
 }
