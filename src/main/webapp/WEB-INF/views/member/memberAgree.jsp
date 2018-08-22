@@ -86,8 +86,43 @@
 				$("input[name=agreePrivacy]").prop("checked",false);
 				$(".member_wrap .cklabel").removeClass("on");
 			}
-		})
-	})
+		});
+	});
+	
+	
+	$(function(){	
+	 $("#agreeLicensing").click(function(){
+		
+		if($("#agreeLicensing").prop("checked")){
+		
+			$("input[name=agreeLicensing]").prop("checked",true);
+			$("#Licensing").addClass("on");
+			
+			}
+		else{
+			$("input[name=agreeLicensing]").prop("checked",false);
+			$("#Licensing").removeClass("on");
+		}
+		}); 
+	});	
+	
+	$(function(){	
+		 $("#agreePrivacy").click(function(){
+			 
+			if($("#agreePrivacy").prop("checked")){
+			
+				$("input[name=agreePrivacy]").prop("checked",true);
+				$("#Privacy").addClass("on");
+				
+				}
+			else{
+				$("input[name=agreePrivacy]").prop("checked",false);
+				$("#Privacy").removeClass("on");
+			}
+			}); 
+		});
+		
+	
 </script>
 <style>
 
@@ -497,7 +532,7 @@
 					}
 				</style>
 				<div class = "con-right">
-					<label for = "agreeLicensing" class = "cklabel ck_mail">
+					<label for = "agreeLicensing" class = "cklabel ck_mail" id="Licensing" >
 					<div class = "far fa-check-circle" id = "iconfont"></div>
 						<input type = "checkbox" id = "agreeLicensing" name = "agreeLicensing" value = "T" class = "ckbox ck_mail">
 						구매 이용 약관에 동의합니다.
@@ -517,12 +552,9 @@
 						</div>
 						
 						<div class = "con-right">
-							<label for = agreePrivacy" class = "cklabel ck_mail">
-							
-							<div class = "far fa-check-circle" id = "iconfont">
-							
-							</div>
-								<input type = "checkbox" id = "agreePrivacy" name = "agreePrivacy" value = "T" class = "ckbox ck_mail">
+							<label for = "agreePrivacy" class = "cklabel ck_mail" id="Privacy">
+							<div class = "far fa-check-circle" id = "iconfont"></div>
+								<input type = "checkbox" id ="agreePrivacy" name = "agreePrivacy" value = "T" class = "ckbox ck_mail ">
 								개인정보 수집/이용약관에 동의합니다.
 							</label>
 						</div>
@@ -574,9 +606,10 @@
 						}
 					</style>
 					<div class = "regist-btn-box">
-						<a href = "${pageContext.request.contextPath}/memberEnroll2.do" class = "btn_black" style = "text-decoration: none;">
+						 <a href = "${pageContext.request.contextPath}/memberEnroll2.do" class = "btn_black" style = "text-decoration: none;">
 							다음
-						</a>
+						</a> 
+						<button  id="agreebtn" class="btn_black" style = "text-decoration: none;color:white">다음</button>
 					</div>
 					
 				</div>
@@ -590,6 +623,24 @@
 </form>
 
 </div>
+
+<script>
+
+	$(function(){	
+		$('#agreebtn').click(function(){
+			
+			 alert($("#agreePrivacy").prop("checked"));
+			if($("#agreePrivacy").prop("checked") && $("#agreeLicensing").prop("checked")){
+				alert("왜안가니?");
+					location.href="${pageContext.request.contextPath}/";
+				}
+			else{
+			 alert("약관에 동의해주세요.");
+			}
+		});
+			
+		});
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
