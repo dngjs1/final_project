@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.member.model.vo.PointLog;
@@ -26,6 +27,7 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
+	
 	@Override
 	public List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectProductList");
@@ -220,6 +222,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession, int review_code) {
 		return sqlSession.selectList("product.selectLikeList1",review_code);
+	}
+
+	@Override
+	public int checkLike(SqlSessionTemplate sqlSession, Map map) {
+		return sqlSession.selectOne("product.checkLike",map);
 	}
 
 

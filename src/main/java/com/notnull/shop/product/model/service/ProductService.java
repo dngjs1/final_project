@@ -92,4 +92,6 @@ public interface ProductService {
 	List<ProductReviewLike> selectLikeList();
 		
 	List<ProductReviewLike> selectLikeList(int review_code);
+	
+	int checkLike(Map map);
 }
