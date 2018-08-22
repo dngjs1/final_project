@@ -222,6 +222,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.selectLikeList1",review_code);
 	}
 
+	@Override
+	public String checkLike(SqlSessionTemplate sqlSession, Map map) {
+		return sqlSession.selectOne("product.checkLike",map);
+	}
+
 
 	
 }

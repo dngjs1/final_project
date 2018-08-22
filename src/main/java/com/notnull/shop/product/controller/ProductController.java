@@ -223,6 +223,7 @@ public class ProductController {
 		
 		request.setAttribute("likeList", likeList);
 				
+		
 		return "/product/productView";
 	}
 
@@ -490,65 +491,58 @@ public class ProductController {
 		String member_id=request.getParameter("member_id");
 		String like_status=request.getParameter("like_status");
 		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
+		ProductReviewLike productReviewLike=new ProductReviewLike();
 		int result=0;
 		int likeOn=0;
-		if(like_status.equals("Y")) {
-			if(likeList.isEmpty()) {
-				System.out.println("!!!");
-				likeList.get(0).setReview_code(review_code);
-				likeList.get(0).setMember_id(member_id);
-				likeList.get(0).setLike_status(like_status);
-				
-				result=service.addLike(likeList.get(0));
-			}else {				
-				for(int i=0;i<likeList.size();i++) {
-					if(likeList.isEmpty()) {
-						System.out.println("@@@");
-						likeList.get(i).setReview_code(review_code);
-						likeList.get(i).setMember_id(member_id);
-						likeList.get(i).setLike_status(like_status);
-						
-						result=service.addLike(likeList.get(i));
-						likeOn=1;
-					}else if(likeList.get(i).getLike_status().equals("Y")) {
-						result=service.deleteLike(likeList.get(i));
-						likeOn=2;
-					}else if(likeList.get(i).getLike_status().equals("N")) {
-						likeList.get(i).setLike_status("Y");
-						result=service.updateLike(likeList.get(i));
-						likeOn=3;
-					}
-				}
-			}  
-			if(like_status.equals("N")) {
-				if(likeList.isEmpty()) {
-					likeList.get(0).setReview_code(review_code);
-					likeList.get(0).setMember_id(member_id);
-					likeList.get(0).setLike_status(like_status);
-					
-					result=service.addLike(likeList.get(0));
-				}else {	
-					for(int i=0;i<likeList.size();i++) {
-						if(likeList.isEmpty()) {
-							likeList.get(i).setReview_code(review_code);
-							likeList.get(i).setMember_id(member_id);
-							likeList.get(i).setLike_status(like_status);
-							
-							result=service.addLike(likeList.get(i));
-							likeOn=1;
-						}else if(likeList.get(i).getLike_status().equals("N")) {
-							result=service.deleteLike(likeList.get(i));
-							likeOn=2;
-						}else if(likeList.get(i).getLike_status().equals("Y")) {
-							likeList.get(i).setLike_status("N");
-							result=service.updateLike(likeList.get(i));
-							likeOn=3;
-						}
-					}
-				}
-			}
-		}
+		
+		System.out.println(review_code);
+		System.out.println(member_id);
+		System.out.println(like_status);
+		
+		Map map = new HashMap();
+		map.put("id", member_id);
+		map.put("code", review_code);
+		
+		String check = service.checkLike(map);
+		
+		System.out.println(check);
+		productReviewLike.setReview_code(review_code);
+		productReviewLike.setMember_id(member_id);
+		productReviewLike.setLike_status(like_status);		
 			
+		if(check==null && like_status.equals("Y")) {
+			result=service.addLike(productReviewLike);
+			likeOn=1;
+		}else {
+			if(check.equals("Y") && like_status.equals("Y")) {
+				
+				result=service.deleteLike(productReviewLike);
+				likeOn=2;
+			}else if(check.equals("N") && like_status.equals("Y")) {
+				productReviewLike.setLike_status("Y");
+				result=service.updateLike(productReviewLike);
+				likeOn=3;
+			}
+			
+		}
+		/*
+		if(check==null && like_status.equals("N")) {
+			result=service.addLike(productReviewLike);
+			likeOn=1;
+		}else {
+			if(check.equals("N") && like_status.equals("N")) {
+				
+				result=service.deleteLike(productReviewLike);
+				likeOn=2;
+			}else if(check.equals("Y") && like_status.equals("N")) {
+				productReviewLike.setLike_status("N");
+				result=service.updateLike(productReviewLike);
+				likeOn=3;
+			}
+			
+		}
+		*/
+		
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);
 		
@@ -556,6 +550,57 @@ public class ProductController {
 		mv.setViewName("JsonView");
 		return mv;
 	}
-	
 
+	
+	@RequestMapping("/dislike.do")
+	public ModelAndView dislike(ModelAndView mv,HttpServletRequest request) {
+		int review_code=Integer.parseInt(request.getParameter("review_code"));
+		String member_id=request.getParameter("member_id");
+		String like_status=request.getParameter("like_status");
+		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
+		ProductReviewLike productReviewLike=new ProductReviewLike();
+		int result=0;
+		int likeOn=0;
+		
+		System.out.println(review_code);
+		System.out.println(member_id);
+		System.out.println(like_status);
+		
+		Map map = new HashMap();
+		map.put("id", member_id);
+		map.put("code", review_code);
+		
+		String check = service.checkLike(map);
+		
+		System.out.println(check);
+		productReviewLike.setReview_code(review_code);
+		productReviewLike.setMember_id(member_id);
+		productReviewLike.setLike_status(like_status);		
+			
+	
+		
+		if(check==null && like_status.equals("N")) {
+			result=service.addLike(productReviewLike);
+			likeOn=1;
+		}else {
+			if(check.equals("N") && like_status.equals("N")) {
+				
+				result=service.deleteLike(productReviewLike);
+				likeOn=2;
+			}else if(check.equals("Y") && like_status.equals("N")) {
+				productReviewLike.setLike_status("N");
+				result=service.updateLike(productReviewLike);
+				likeOn=3;
+			}
+			
+		}
+		
+		
+		mv.addObject("result", result);
+		mv.addObject("likeOn", likeOn);
+		
+		
+		mv.setViewName("JsonView");
+		return mv;
+	}
 }
