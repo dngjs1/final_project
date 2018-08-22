@@ -15,6 +15,10 @@
 input[name="datetimes"]{cursor: pointer;}
 /*datepicer input 롤오버 시 손가락 모양 표시*/
 input[name="datetimes"]{cursor: pointer;}
+
+#rental_content{
+	text-align: center;
+}
 </style>
    
 <div class="container">
@@ -58,15 +62,19 @@ input[name="datetimes"]{cursor: pointer;}
     	</div>
 	</div>
 	<hr style="boarder:0; height:3px; background: #ccc;">
-	<div class="container">
-	${rental.content }
+	<div class="container" id="rental_content">
+		${rental.content }
 	</div>
 </div>
 <script>
 	$(function() {
 	  $('input[name="datetimes"]').daterangepicker({
 	    timePicker: true,
-	    minDate: new Date
+	    minDate: "${rental.start_date}",
+	    maxDate: "${rental.end_date}",
+	    locale: {
+	        format: 'YYYY-MM-DD HH:mm:ss'
+	      }
 	  }, function(start, end, label) {
 		  result = (end-start)/(1000*3600*24);
 		  result = Math.floor(result);
@@ -86,6 +94,10 @@ input[name="datetimes"]{cursor: pointer;}
 <script>
 IMP.init('imp84398340');
 	function buy(){
+		if(${memberLoggedIn == null}) {
+			alert("로그인한 회원만 이용 가능합니다.");
+			return;
+		}
 		IMP.request_pay({
 		    pg : 'kakaopay',
 		    pay_method : 'card',
