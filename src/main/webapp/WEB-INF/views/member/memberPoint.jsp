@@ -87,7 +87,7 @@
 					<li style = "margin-top:15px; "><center><b><span><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</span></b></center></li>
 					<li><hr></li>
 					<li style = "padding:0 22px; font-size: 14px;"><b>회원등급</b> : <span><c:out value = "${memberLoggedIn.member_level }"></c:out></span></li>
-					<li style = "padding:0 22px; font-size: 14px;"><b>적립금</b> : <span>5000원</span>
+					<li style = "padding:0 22px; font-size: 14px;"><b>포인트</b> : <span>${sum_point }</span><span> 점</span>
 				</ul>
 				</c:if>
 			</div>
@@ -299,8 +299,7 @@
 						<col style = "width:10%;">
 						<col style = "width:30%;">
 						<col style = "width:40%;">
-						<col style = "width:20%;">
-						
+						<col style = "width:20%;">			
 					</colgroup> 
 					<thead>
 					<tr>
@@ -308,51 +307,17 @@
 						<th scope="col" class = "#">지급일</th>
 						<th scope="col" class = "#">증감내용</th>
 						<th scope="col" class = "#">증감내역</th>
-
-						
-
 					</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${member }" var="m" varStatus="vs">
-							<tr class ="memberManage" style="cursor:pointer;">
-								<td ><c:out value="${vs.count+10*(cPage-1)}"/></td>
-								<td class="clickedId" ><c:out value="${m.member_id }"/></td>
-								<td><c:out value="${m.member_name }"/></td>
-								<td>${m.gender=='M'?"남자":"여자"}</td>
-								<td><c:out value="${m.email }"/></td>
-								<td><option value=""><c:out value="${m.member_level }"/></td>
-								<td><c:out value="${m.join_date }"/></td>	
-								<td>
-									<c:if test="${m.esc_status eq 'Y' }">메일미인증</c:if>
-									<c:if test="${m.esc_status eq 'E' }">탈퇴</c:if>
-									<c:if test="${m.esc_status eq 'N' }">일반</c:if>
-								</td>
+						<c:forEach items="${pointList }" var="point" varStatus="vs">
+							<tr style="cursor:pointer;">
+								<td scope="col">${vs.count}</td>
+								<td scope="col">${point.point_date}</td>
+								<td scope="col">${point.point_content}</td>
+								<td scope="col">${point.point_increase}</td>
 							</tr>
-						</c:forEach>
-						
-							<%-- <c:forEach items="${member }" var="m" varStatus="vs">
-							<tr>
-								<td><a href="${pageContext.request.contextPath }/management.do?member_id=${m.member_id}"><c:out value="${m.member_id }"/></a></td>
-								<td><c:out value="${m.member_name }"/></td>
-								<td><c:out value="${m.birthday }"/></td>
-								<td>${m.gender=='M'?"남자":"여자"}</td>
-								<td><c:out value="${m.phone }"/></td>
-								<td><c:out value="${m.post_no }"/></td>
-								<td><c:out value="${m.address }"/></td>
-								<td><c:out value="${m.detail_address }"/></td>
-								<td><c:out value="${m.email }"/></td>
-								<td><c:out value="${m.email_alarm }"/></td>
-								<td><option value=""><c:out value="${m.member_level }"/></td>
-								<td><c:out value="${m.join_date }"/></td>	
-								<td>
-									<c:if test="${m.esc_status eq 'Y' }">메일미인증</c:if>
-									<c:if test="${m.esc_status eq 'E' }">탈퇴</c:if>
-									<c:if test="${m.esc_status eq 'N' }">일반</c:if>
-								</td>
-							</tr>
-						</c:forEach> --%>
-												
+						</c:forEach>	
 					</tbody>
 					
 				</table>

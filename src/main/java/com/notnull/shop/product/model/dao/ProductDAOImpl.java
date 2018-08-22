@@ -227,6 +227,17 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectOne("product.checkLike",map);
 	}
 
+	@Override
+	public List ycountLike(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.ycountLike");
+	}
+
+	
+	@Override
+	public List ncountLike(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.ncountLike");
+	}
+
 
 	
 }

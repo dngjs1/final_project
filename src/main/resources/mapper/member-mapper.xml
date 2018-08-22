@@ -87,4 +87,7 @@
 		select * from member where member_id like '%'||#{info}||'%'
 	</select>
  
+ 	<select id="selectPointList" resultType="pointLog" parameterType="string">
+ 		select * from point_log where member_id=#{member_id} order by point_date
+ 	</select>
 </mapper>

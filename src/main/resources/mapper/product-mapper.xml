@@ -267,4 +267,18 @@
  		select like_status from product_review_like where member_id=#{id} and review_code=#{code}
  	</select>
  
+ 	<resultMap type="map" id="likecount"></resultMap>
+ 
+ 	<select id="ycountLike" parameterType="_int" resultMap="likecount">
+ 		select review_code, count(*) as CNT from product_review_like
+ 		where like_status='Y' 
+ 		group by review_code
+ 	</select>
+ 
+ 
+	<select id="ncountLike" parameterType="_int" resultMap="likecount">
+ 		select review_code, count(*) as CNT from product_review_like
+ 		where like_status='N' 
+ 		group by review_code
+ 	</select>
 </mapper>

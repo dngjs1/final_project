@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -190,6 +191,7 @@ public class ProductController {
         return mv;
     }
 	
+	@Transactional
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
 		int productCode=Integer.parseInt(request.getParameter("productCode"));
@@ -217,16 +219,25 @@ public class ProductController {
 		List<ProductQuestion> questionList=service.selectQuestion(productCode);
 		
 		request.setAttribute("questionList", questionList);
-		
-		
+				
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
-		request.setAttribute("likeList", likeList);
-				
+		List ycountLikeList= service.ycountLike();
 		
-		return "/product/productView";
+		List ncountLikeList=service.ncountLike();
+		
+		
+		System.out.println(ycountLikeList);
+		System.out.println(ncountLikeList);
+		
+		request.setAttribute("likeList", likeList);
+		request.setAttribute("ycountLikeList", ycountLikeList);
+		request.setAttribute("ncountLikeList", ncountLikeList);
+		
+			return "/product/productView";
 	}
-
+	
+	
 	@RequestMapping("/cartInsert.do")
 	public void cartInsert(Cart cart,HttpServletResponse response) throws IOException {
 		//같은상품있나 확인하고 있으면 수량만 추가.

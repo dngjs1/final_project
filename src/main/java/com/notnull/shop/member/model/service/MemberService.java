@@ -7,6 +7,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.notnull.shop.member.model.vo.Member;
+import com.notnull.shop.member.model.vo.PointLog;
 
 public interface MemberService {
 
@@ -40,4 +41,5 @@ public interface MemberService {
 	
 	int updateManagement(Member m);
 	
+	List<PointLog> selectPointList(String member_id);
 }
