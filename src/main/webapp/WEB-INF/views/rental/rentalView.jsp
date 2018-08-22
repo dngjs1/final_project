@@ -86,6 +86,11 @@ input[name="datetimes"]{cursor: pointer;}
 		  }
 	  });
 	});
+	  $('input[name="datetimes"]').change(function(){
+			var odate = $(this).val();
+			$("#start_date").val(odate.substring(0,19));
+			$("#end_date").val(odate.substring(22,42));
+	  });
 </script>
  
 <!-- 결제 -->
@@ -112,6 +117,7 @@ IMP.init('imp84398340');
 		    kakaoOpenApp : true
 		}, function(rsp) {
 		    if ( rsp.success ) {
+		    	location.href="${path}/insertRentalPerson.do?rental_obj_code=${rental.rental_obj_code}&member_id=${memberLoggedIn}&start_date=${start_date}&end_date=${end_date}"
 		    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 		    	jQuery.ajax({
 		    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
