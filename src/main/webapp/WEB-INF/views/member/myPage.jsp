@@ -204,7 +204,7 @@
 					</li>
 					
 					<li class = "submenu">
-						<a href = "${pageContext.request.contextPath}/memberPoint.do" target = "_self">
+						<a href = "${pageContext.request.contextPath}/memberPoint.do?member_id=${memberLoggedIn.member_id}" target = "_self">
 							<span class = "txt">나의 포인트</span>
 						</a>
 					</li>

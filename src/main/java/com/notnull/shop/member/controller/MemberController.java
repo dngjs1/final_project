@@ -76,8 +76,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberPoint.do")
-	public String memberPoint() {
-		
+	public String memberPoint(String member_id,Model model) {
+		List<PointLog> pointList=service.selectPointList(member_id);
+		int sum=0;
+		for(PointLog point:pointList) {
+			sum+=point.getPoint_increase();
+		}
+		model.addAttribute("sum_point",sum);
+		model.addAttribute("pointList",pointList);
 		return "member/memberPoint";
 	}
 	
@@ -333,9 +339,6 @@ public class MemberController {
 	
 	@RequestMapping("/myPage.do")
 	public String myPage(String memberId) {
-		
-		System.out.println(memberId);
-		
 		return "member/myPage";
 	}
 	

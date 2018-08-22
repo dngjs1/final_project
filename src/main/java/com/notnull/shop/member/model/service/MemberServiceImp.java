@@ -18,6 +18,7 @@ import com.notnull.shop.common.MailHandler;
 import com.notnull.shop.common.TempKey;
 import com.notnull.shop.member.model.dao.MemberDAO;
 import com.notnull.shop.member.model.vo.Member;
+import com.notnull.shop.member.model.vo.PointLog;
 
 @Service
 public class MemberServiceImp implements MemberService {
@@ -169,6 +170,11 @@ public class MemberServiceImp implements MemberService {
 	public int updateManagement(Member m) {
 		
 		return memberDAO.updateManagement(sqlSession, m);
+	}
+
+	@Override
+	public List<PointLog> selectPointList(String member_id) {
+		return memberDAO.selectPointList(sqlSession,member_id);
 	}
 
 
