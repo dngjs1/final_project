@@ -168,7 +168,9 @@ public class ProductController {
             
             productDetailImgList.add(productDetailImg);
         }
-        
+        if(product.getReal_size().isEmpty()) {
+        	product.setReal_size("상품 상세 정보 확인");
+        }
         int result= service.insertProduct(product,productImgList,productDetailImgList,productOptionList);
         ModelAndView mv=new ModelAndView();
         String msg="";
@@ -245,7 +247,6 @@ public class ProductController {
 		response.getWriter().print(result);
 	}
 	
-
 	@RequestMapping("/cartView.do")
 	public String cartView(String member_id,Model model) {
 		List<CartJoinList> cartList=service.selectCartList(member_id);
@@ -354,40 +355,42 @@ public class ProductController {
 	public ModelAndView reviewInsert(Model model,MultipartHttpServletRequest mtfRequest,HttpServletRequest request,ProductReview productReview ) {
 	    String saveDir="";
         File dir=null;
+        
 	    List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
-        List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
-        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
-        dir=new File(saveDir);
-        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-        
-        for (MultipartFile mf : fileList1) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-			int rndNum=(int)(Math.random()*1000);
-			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-			renamedFileName+="_"+rndNum+"."+ext;
-
-            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
-            try {
-                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            
-            ProductReviewImg productReviewImg = new ProductReviewImg();
-                      
-            productReviewImg.setReview_img_path(originFileName);
-            productReviewImg.setNew_review_img_path(renamedFileName);
-            
-            productReviewImgList.add(productReviewImg);
-        }
-        
-        System.out.println(productReview);
+	    List<ProductReviewImg> productReviewImgList = new ArrayList<ProductReviewImg>();
+	    
+	    if(!fileList1.isEmpty() && fileList1.get(0).getOriginalFilename().length()>0) {
+	        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productReviewImg/");
+	        dir=new File(saveDir);
+	        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+	        
+	        for (MultipartFile mf : fileList1) {
+	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	            long fileSize = mf.getSize(); // 파일 사이즈
+	
+	            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum=(int)(Math.random()*1000);
+				String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName+="_"+rndNum+"."+ext;
+	
+	            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+	            try {
+	                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+	            } catch (IllegalStateException e) {
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            
+	            ProductReviewImg productReviewImg = new ProductReviewImg();
+	                      
+	            productReviewImg.setReview_img_path(originFileName);
+	            productReviewImg.setNew_review_img_path(renamedFileName);
+	            
+	            productReviewImgList.add(productReviewImg);
+	        }
+	    }
 		int result=service.reviewInsert(productReview,productReviewImgList);
 		
 		ModelAndView mv=new ModelAndView();

@@ -30,4 +30,9 @@ public class RentalServiceImpl implements RentalService{
 		return dao.RentalList(cPage, numPerPage);
 	}
 
+	@Override
+	public Rental getRental(int rental_obj_code) {
+		return dao.getRental(rental_obj_code);
+	}
+
 }

@@ -66,11 +66,12 @@ span.star-prototype > * {
 		sell_price = parseInt($('#price').text());
 		$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(sell_price>=20000){
-			$("#del_price").text("무료");
+			$("#del_price").text("무료배송");
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
-		
+		var point= parseInt(sell_price*0.02);
+		$(".point").text(point);
 	}
 	function add () {
 		amount = document.form.cart_quantity;
@@ -78,10 +79,12 @@ span.star-prototype > * {
 		var result = parseInt(amount.value) * sell_price;
 		$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		if(result>=20000){
-			$("#del_price").text("무료");
+			$("#del_price").text("무료배송");
 		}else{
 			$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 		}
+		var point= parseInt(result*0.02);
+		$(".point").text(point);
 	}
 	function del () {
 		amount = document.form.cart_quantity;
@@ -90,10 +93,12 @@ span.star-prototype > * {
 			var result = parseInt(amount.value) * sell_price;
 			$("#price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			if(result>=20000){
-				$("#del_price").text("무료");
+				$("#del_price").text("무료배송");
 			}else{
 				$("#del_price").text("2,500원 (20,000원이상 결제시 배송비 무료)");
 			}
+			var point= parseInt(result*0.02);
+			$(".point").text(point);
 		}
 	}
 	
@@ -114,51 +119,239 @@ span.star-prototype > * {
 
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${joinCategory.p_category_name}</span></p>
 <div class="row">
-	<div class="col-6">
+	<div class="col-6 images_sum">
 	
+	<style>
+		.sub_images {
+			margin-left : 17px;
+		}
+		.sub_images:hover {
+		box-shadow: 10px 10px 20px #b4b2b2;
+		
+		
+		
+}
+		.main_image {
+		
+			max-width : 100%;
+			
+			cursor : pointer;
+			overflow: hidden;
+			}
+
+		#mainImg {
+			max-width:100%;
+			max-height : 355px;
+			margin-left: auto; 
+			margin-right: auto; 
+			display: block;
+	
+		}
+	</style>
 	<c:forEach var='imgList' items='${imgList }' varStatus="vs">
+	
+		
 		<c:if test="${vs.index==0}">
-  		<img width="300px" height="300px" src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
+		<div class = "main_image">
+  		<img src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품" id="mainImg"/>
+  		<hr>
+  		</div>
   		</c:if>
+  		
+  		
+  		
   		<c:if test="${vs.index>=0}">
-  		<img width="50px" height="50px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
-  			 onclick="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
+  		
+  		<div class = "sub_images" style = "float:left; padding-right:10px;">
+  		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
+  			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
+  		</div>
+  		
   		</c:if>
+  		
   	</c:forEach>
 	</div>
+	
+	<style>
+	
+	.infoBox {
+		padding : 0 40px;
+		
+		}
+		
+		.infoBox h1 {
+			margin:0;
+			color : #2e2e2e;
+			font-size : 30px;
+			line-height: 48px;
+			font-weight: bold;
+		}
+		
+		.pdt_price {
+			color : #2e2e2e;
+			font-size : 42px;
+			line-height : 42px;
+			font-weight: bold;
+		}
+		
+		.pdt_price_txt {
+			color : #2e2e2e;
+			font-size : 20px;
+			line-height: 42px;
+			font-weight: bold;
+			
+		}
+		
+		.d_line {
+			width: 100%;
+			height : 20px;
+			background: url("./resources/images/border_line.gif") repeat-x 0 center;
+			overflow: hidden;
+		}
+	</style>
 	<div class="col-6">
-		<hr style="border: 1.5px solid black;margin-top: 0px;">
-		<div style="margin-left:10px">
-			<p style="font-size:25px;font-weight:bold">${joinCategory.product_name}</p>
+		
+		<!-- 사진 옆 상품에 대 한 상세정보 전체를 감싸는 div -->
+		<div class = "infoBox">
+		
+			<!-- 삼품명을 불러오는 코드부분 -->
+			<h1 style = "box-sizing:border-box;padding-right:150px;position:relative;">${joinCategory.product_name}</h1>
+			
+			
+		
+			<div class = pdt_price>
+			
+			<span id="price">${joinCategory.price}</span>
+			
+			<span class = "pdt_price_txt"> 원</span>
+			
+			</div>
+			<style>
+				.
+			</style>
+			
+			<!-- <hr>줄 처럼 만든 div -->
+			<div class = "d_line">
+			
+			</div>
+			
+			<style>
+			
+			.option_section {
+				margin : 0;
+				padding : 3px 0;
+				font-size : 15px;
+				line-height: 33px;
+				overflow: hidden;
+			}
+				.option_section dt {
+					float : left;
+					color : #000;
+					font-weight: bold;
+				}
+				
+				.option_section dd {
+					margin : 0;
+					padding-left : 68px;
+					color : #000;
+				}
+				
+				.point_icon {
+					display : inline-block;
+					width : 18px;
+					height : 18px;
+					margin-top : -2px;
+					border-radius: 100%;
+					background : #b0c976;
+					color : #fff;
+					font-weight : bold;
+					font-size : 12px;
+					line-height: 18px;
+					
+					overflow: hidden;
+					vertical-align: middle;
+				}
+			
+			</style>
+			
+			<!-- 상품 옵션에 대한 메뉴 카테고리 담은 div -->
+			<dl class = "option_section">
+			<dt>도착일 :</dt>
+			
+				<dd> <%=strdate%></dd>
+
+			
+			<dt>배송비 : </dt>
+			
+			<dd id="del_price"></dd>
+			
+		
+			
+			<dt>포인트 :</dt>
+			
+				<dd>
+				
+				<span class = "point_icon"><center>P</center></span>  
+				<strong class="point">100</strong><span> 적립</span>
+				</dd>
+				
+			<dt>제조국 :</dt>
+			
+				<dd>한국</dd>	
+			
+			</dl>
+			<!--
+				상품 평점 남기는 부분 코드 시작
+			 -->
+	
 			 <c:set var="total" value="0"/>
 			 <c:forEach var="review" items="${reviewList}" varStatus="vs">
 				<c:set var="total" value="${(total+review.review_star)}"/>
 				<c:set var="count" value="${vs.count }"/>
 			 </c:forEach>
+			 
+			 
 			 <c:choose>
 				 <c:when test="${total  == 0}">
-					 <span class="star-prototype">0</span>
+					 <b>평점 : </b><span class="star-prototype" style = "margin-left : 24px;">0</span>
 				 </c:when>
 				 <c:otherwise>
-				 	 <span class="star-prototype">${total/count}</span>
+				 	 <b>평점 : </b><span class="star-prototype" style = "margin-left : 24px;">${total/count}</span>
 				 </c:otherwise>
 			 </c:choose>
+			 
 			 <c:choose>
 				 <c:when test="${count > 0}">
-					 <c:out value="${count}개 상품평"/>
+					 <b><c:out value="${count}개 상품평"/></b>
 				 </c:when>
 				 <c:otherwise>
-				 	 <c:out value="0개 상품평"/>
+				 	 <b><c:out value="0개 상품평"/></b>
 				 </c:otherwise>
 			</c:choose>
-			<hr>
-			<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">${joinCategory.price}</span><span> 원</span></div>
-			<hr>
-			<p><span style="font-size:18px;color:#148CFF;"><%=strdate%></span> 도착 예정</p>
-			<hr>
-			<span>배송방법 : 택배</span><br>
-			<span>배송비 : </span><span id="del_price" style="color:#148CFF;"></span>
-			<hr>
+			
+			<!-- <hr>줄 처럼 만든 div -->
+			<div class = "d_line">
+			
+			</div>
+			
+			
+			<style>
+			
+				.selected_option {
+					position: relative;
+					margin-top : -1px;
+					padding : 15px 30px 20px 10px;
+					border : 1px solid #c4c4c4;
+					color : #000;
+					font-size : 14px;
+					line-height : 20px;
+					overflow: hidden;
+					box-shadow : 1px 1px 3px #c4c4c4;
+					height : 63px;
+				}
+			</style>
+			<div class = "selected_option">
+			
 			<form name="form" id="frm" method="get">
 				<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 				<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
@@ -167,15 +360,16 @@ span.star-prototype > * {
 						<c:when test="${optionList.size()<2}">
 
 							<c:forEach var="option" items="${optionList}">
-								<span>재고 : ${option.left_amount}</span>
-								<input type="hidden" name="productCode" value="${option.product_option_code}"/>
+								<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
 							</c:forEach>
+							
 							<c:forEach var="option" items="${optionList}" varStatus="vs">
 								<c:choose>
 									<c:when test="${option.option_size == null}">
 										<span id="single_left">재고 : ${option.left_amount}</span>
 										<input type="hidden" name="product_option_code" value="${option.product_option_code}"/>
 									</c:when>
+									
 									<c:when test="${option.left_amount<=0}">
 										<select name="product_option_code" style="font-size:15px;height:28px;" >
 											<option value="${option.product_option_code}" disabled>${option.option_size}&emsp;&emsp;&emsp;|&nbsp;재고:${option.left_amount}</option>
@@ -189,9 +383,10 @@ span.star-prototype > * {
 								</c:choose>
 							</c:forEach>
 						</c:when>
+						
 						<c:otherwise>
-							<span>사이즈 </span>
-							<select name="productCode" style="font-size:15px;height:28px;" >
+							
+							<select name="product_option_code" style="font-size:15px;height:28px;" >
 								<c:forEach var="option" items="${optionList}">
 									<c:choose>
 									<c:when test="${option.left_amount<=0}">
@@ -207,14 +402,132 @@ span.star-prototype > * {
 					</c:choose>
 					&emsp;&emsp;&emsp;
 	            </c:if>
-				<span>수량 </span><input type="text" name="cart_quantity" value="1" size="2" style="height:25px;" readonly/>
-				<input type="button" value="+" style="width:25px;" onclick="add();"/><input type="button" value="-" style="width:25px;" onclick="del();"/>
-				<hr>
-				<div style="float:right;">
-					<button class="btn btn-primary" type="button" id="buy">구매</button>
-					<button class="btn btn-primary" type="button" id="cart">장바구니</button>
+	            
+	            <style>
+	            	.selected_option .count_control {
+	            		position: absolute;
+	            		left: 205px;
+	            		top : 16px;
+	            	}
+	            	
+	            	.count_control {
+	            		display : inline-block;
+	            		border : 1px solid #c4c4c4;
+	            		font-size : 0;
+	            		line-height: 0;
+	            	}
+	            	.count_control input {
+	            		width : 40px;
+	            		height : 25px;
+	            		padding : 0 5px;
+	            		border : none;
+	            		border-right : 1px solid #c4c4c4;
+	            		border-left : 1px solid #c4c4c4;
+	            		font-size : 14px;
+	            		line-height: 21px;
+	            		text-align: center;
+	            		box-sizing: border-box;
+	            		vertical-align: top;
+	            	}
+	            	
+	            	.count_control img {
+	            		vertical-align: top;
+	            		cursor: pointer;
+	            	}
+	            
+	            </style>
+	            <!-- <div class = "count_control">
+	            <input type="button" value="-"  onclick="del();"/>
+				<input type="text" name="cart_quantity" value="1" size="2" style="height:25px; width:40px;"  readonly/>
+				<input type="button" value="+" onclick="add();"/>
+				</div> -->
+				
+				<div class = "count_control">
+				
+				<span class = "btn_minus">
+					<img src ="./resources/images/btn_count_minus.gif" alt ="Minus" onclick="del();">
+				</span>
+				
+					<input type="text" name="cart_quantity" value="1" size="2" readonly/>
+			
+				
+				<span class = "btn_plus">
+					<img src ="./resources/images/btn_count_plus.gif" alt ="Plus" onclick="add();">
+				</span>
 				</div>
+				
+				
+				
 			</form>
+			</div>
+			
+			<div class = "d_line">
+			
+			</div>
+			
+			<style>
+			
+			.btn_cart {
+				float:left;
+				width : 43%;
+				height : 70px;
+				background : #92979b;
+				color : #fff;
+				font-size : 18px;
+				line-height: 55px;
+				text-align: center;
+				font-weight : bold;
+				cursor: pointer;
+			}
+			
+			.cart_icon {
+				display: inline-block;
+				margin : -5px 5px 0 0;
+				font-size : 35px;
+				vertical-align: middle;
+			}
+			
+			.btn_buy {
+				float : left;
+				width : 56%;
+				height : 70px;
+				margin-left: 1%;
+				background : #2D2E33;
+				color : #fff;
+				font-size: 18px;
+				line-height: 55px;
+				text-align: center;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			
+			.buy_icon {
+				display: inline-block;
+				margin : -5px 5px 0 0;
+				font-size : 35px;
+				vertical-align: middle;
+			}
+			</style>
+			
+			<div class = "btn_area">
+			
+			
+					<button class="btn btn_cart" type="button" id="cart">
+						<span class ="cart_icon fas fa-shopping-cart"></span>
+					장바구니
+					
+					</button>
+					<button class="btn btn_buy" type="button" id="buy">
+						<span class = "buy_icon far fa-credit-card"></span>
+					구매하기
+					
+					</button>
+					
+			
+			</div>
+			
+		
+			
 			<script>
 			$(function(){
 				$('#cart').click(function(){
@@ -239,7 +552,7 @@ span.star-prototype > * {
 						
 						var productInfo={
 								member_id:member_id,
-								product_option_code:$("[name=productCode]").val(),
+								product_option_code:$("[name=product_option_code]").val(),
 								product_code:$("[name=product_code]").val(),
 								cart_quantity:$("[name=cart_quantity]").val()
 						};
@@ -297,8 +610,10 @@ span.star-prototype > * {
     	</div>
 	</div>
 </div>
+
 </div>
 <br><br>
+
 
 
 <div class="container">
@@ -343,10 +658,10 @@ span.star-prototype > * {
  	</div>
   </div>
   <div id="section2" class="container tab-pane fade">
-			
- 
+ <br>		
+ <input type="button" value="테스트" onclick="fn_productReview()"/>
  <hr>
- <h4>상품평</h4> <input type="button" value="테스트" onclick="fn_productReview()"/>
+ <h4>상품평</h4> 
  <script>
 	function fn_productReview(){
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
@@ -363,26 +678,30 @@ span.star-prototype > * {
 	 참여인원:<c:out value="${count }"/>
  </div> --%>
 
- <div>상품평 이미지</div>
+ <%-- <div>상품평 이미지</div>
    <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
-	</c:forEach>
+	</c:forEach> --%>
 	<hr>
    <div> 
  <c:forEach var="review" items="${reviewList}">
  <c:set var="flag" value="true"/>
  	
-	 작성자:${review.member_id}<br>
-	별점:<span class="star-prototype">${review.review_star }</span><br>
-	 작성일:${review.review_date} <br> 
-	
+	<i class="far fa-user-circle"></i><span style="color:#1EA4FF;font-size:18px;"> ${review.member_id}</span>
+	&emsp;&emsp;<span class="star-prototype">${review.review_star }</span>
+	&emsp;&emsp;<span>${review.review_date}</span>
+
+	<br>
+	<c:if test="${reviewImgList != null}">
 	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
 		<c:if test="${review.review_code eq imgList.review_code }">
 			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 		</c:if>
 	</c:forEach>
-		<br>	 	 
-	 내용 :${review.review_content} <br>	
+		<br>	
+	</c:if>
+		<span>${review.review_content}</span> 	 
+	  <br>	
 
 	
 

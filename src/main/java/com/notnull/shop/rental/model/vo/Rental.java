@@ -15,7 +15,18 @@ public class Rental {
 	private String phone;
 	private String start_date;
 	private String end_date;
+	private String p_category_name;
 	
+	
+	
+	public String getP_category_name() {
+		return p_category_name;
+	}
+
+	public void setP_category_name(String p_category_name) {
+		this.p_category_name = p_category_name;
+	}
+
 	private String imgUrl;
 
 	public int getRental_obj_code() {

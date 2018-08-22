@@ -34,6 +34,11 @@ public class RentalDAOImpl implements RentalDAO {
 		
 		return sqlSession.selectList(ra+"rentalList", null, rb);
 	}
+
+	@Override
+	public Rental getRental(int rental_obj_code) {
+		return sqlSession.selectOne(ra+"getRental", rental_obj_code);
+	}
 	
 	
 }

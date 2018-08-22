@@ -71,9 +71,9 @@
 			<div style="position:relative;">
 				<span id="left_amount">
 					<input type="hidden" name="size" value="">
-					<b>재고: <b></b><input type="number" name="left_amount">
+					<b>재고: <b></b><input type="number" name="left_amount" required>
 				</span>
-				<div style="position:absolute;left:470px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
+				<div style="position:absolute;left:480px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
 			</div>
 			</td>
 		</tr>
@@ -91,7 +91,7 @@
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv">
 	       	<input multiple="multiple" type="file" class="addfile0" accept=".jpg, .png" name="file_0" />
-	        <a href="#this" name="delete" class="btn">삭제하기</a>
+	        <!-- <a href="#this" name="delete" class="btn">삭제하기</a> -->
         </div>
         <a href="#this" id="add" class="btn">파일 추가하기</a>
         <br><br><br>
@@ -101,7 +101,7 @@
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
 	       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
-	        <a href="#this" name="delete1" class="btn1">삭제하기</a>
+	        <!-- <a href="#this" name="delete1" class="btn1">삭제하기</a> -->
         </div>
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
         <br><br><br>
@@ -123,24 +123,43 @@
 </div>
 
 <script type="text/javascript">
-var g_count=1;
+var add_count=1;
+var add_count1=1;
 $(document).ready(function(){
 	$("#add").on("click",function(e){
-		e.preventDefault();
+		add_count=add_count+1;
+		if(add_count > 7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
+		var file_name=document.getElementsByName('file_0');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
+		}
 		fn_fileAdd();
 	});
 	$("a[name='delete']").on("click",function(e){
-	       e.preventDefault();
 	       fn_fileDelete($(this));
-	   });
-});
-$(document).ready(function(){
+	});
 	$("#add1").on("click",function(e){
-		e.preventDefault();
+		add_count1=add_count1+1;
+		if(add_count1 > 7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
+		var file_name=document.getElementsByName('file_1');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
+		}
 		fn_fileAdd1();
 	});
 	$("a[name='delete1']").on("click",function(e){
-		e.preventDefault();
 		fn_fileDelete($(this));
 	});
 });
@@ -154,7 +173,6 @@ function fn_fileAdd(){
     $("#fileDiv").append(str);
      
     $("a[name='delete']").on("click",function(e){
-        e.preventDefault();
         fn_fileDelete($(this));         
     });
 }
@@ -163,7 +181,6 @@ function fn_fileAdd1(){
     $("#fileDiv1").append(str);
      
     $("a[name='delete1']").on("click",function(e){
-        e.preventDefault();
         fn_fileDelete($(this));         
     });
 }
@@ -176,6 +193,20 @@ function validate(){
 	if(!$('.addfile1').val().length){
 		alert("상세설명사진은 반드시 한개 이상 추가해야 합니다.");
 		return false;
+	}
+	var file_name0=document.getElementsByName('file_0');
+	for(var i=0;i<file_name0.length;i++){
+		if(file_name0[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
+	}
+	var file_name1=document.getElementsByName('file_1');
+	for(var i=0;i<file_name1.length;i++){
+		if(file_name1[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
 	}
 	return true;
 }

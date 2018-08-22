@@ -13,6 +13,10 @@
 	</select>
 	
 	<select id="rentalList" resultType="rental">
-		select * from rental_obj order by rental_obj_code desc
+		select * from rental_obj join product_category using(p_category_code) order by rental_obj_code desc
+	</select>
+	
+	<select id="getRental" resultType="rental" parameterType="Integer">
+		select * from rental_obj JOIN product_category using(p_category_code) where rental_obj_code = #{rental_obj_code}
 	</select>
 </mapper>

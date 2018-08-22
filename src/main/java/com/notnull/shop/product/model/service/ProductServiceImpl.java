@@ -112,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
 		try {		
 			result=productDAO.reviewInsert(sqlSession, productReview);
 			review_code=productReview.getReview_code();
-			if(productReviewImgList.size()>0)
+			if(productReviewImgList.size()>0 && productReviewImgList !=null)
 			{
 				for(ProductReviewImg productReviewImg : productReviewImgList)
 				{
