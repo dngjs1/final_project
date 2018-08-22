@@ -132,8 +132,9 @@ span.star-prototype > * {
 		
 }
 		.main_image {
+		
 			max-width : 100%;
-			height : 355px;
+			
 			cursor : pointer;
 			overflow: hidden;
 			}
