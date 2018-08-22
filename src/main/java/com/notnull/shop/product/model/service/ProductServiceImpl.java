@@ -304,4 +304,14 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.checkLike(sqlSession,map);
 	}
 
+	@Override
+	public List ycountLike() {
+		return productDAO.ycountLike(sqlSession);
+	}
+
+	
+	@Override
+	public List ncountLike() {
+		return productDAO.ncountLike(sqlSession);
+	}
 }
