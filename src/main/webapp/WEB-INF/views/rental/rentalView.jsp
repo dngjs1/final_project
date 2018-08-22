@@ -19,14 +19,16 @@ input[name="datetimes"]{cursor: pointer;}
    
 <div class="container">
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${rental.p_category_name }</span></p>
-	<div class="row">
+	<div class="row" style="height:700px">
 		<div class="col-6">
-			<img style="width:100%;" alt="텐트" src="${rental.imgUrl }">
+			<img style="width:600px; height:500px;" alt="텐트" src="${rental.imgUrl }">
 		</div>
 		<div class="col-6">
 			<hr style="border: 1.5px solid black;margin-top: 0px;">
 			<div style="margin-left:10px">
-				<span style="font-size:25px;font-weight:bold">${rental.title }</span><span style="float: right;">별점 들어갈부분</span>
+				<span style="font-size:25px;font-weight:bold">${rental.title }</span><span style="float: right;">별점 들어갈부분</span><br>
+				<span>판매자 : ${rental.member_id }</span><br>
+				<span>주소 : ${rental.address } ${rental.detail_address }</span>
 				<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">대여료 : ${rental.price } 원/24시간</span></div>
 				<p style="color: #00009e;">※ 기본 24시간 대여료입니다.</p>
 				<p style="color: #00009e;">※ 8시간 이하 추가 사용 시 24시간 대여료의 50%가 추가됩니다.</p>
@@ -42,7 +44,7 @@ input[name="datetimes"]{cursor: pointer;}
 				</div>
 				<br>
 				<hr>
-				<br><br><br>
+				<br>
 				<div style="margin:0 0 10px;">
                         <span style="color: tomato;"><span>✔</span>꼭 읽어주세요!</span>
                         <div style="color: #a4a4a4;">
@@ -55,10 +57,10 @@ input[name="datetimes"]{cursor: pointer;}
 	    	</div>
     	</div>
 	</div>
+	<hr style="boarder:0; height:3px; background: #ccc;">
 	<div class="container">
 	${rental.content }
 	</div>
-	<hr style="boarder:0; height:3px; background: #ccc;">
 </div>
 <script>
 	$(function() {
