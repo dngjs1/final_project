@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.member.model.vo.Member;
+import com.notnull.shop.member.model.vo.PointLog;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -124,7 +125,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.updateManagement",m);
 	}
 
+	@Override
+	public List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id) {
+		return sqlSession.selectList("member.selectPointList",member_id);
+	}
 
+	
 
 	
 	
