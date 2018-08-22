@@ -1,5 +1,14 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: hack5
 Build-Jdk: 1.8.0_171
+=======
+<<<<<<< HEAD
+Built-By: dngjs
+=======
+Built-By: pc
+>>>>>>> Super_branch2
+Build-Jdk: 1.8.0_161
+>>>>>>> Super_branch2
 Created-By: Maven Integration for Eclipse
 

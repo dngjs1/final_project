@@ -92,6 +92,7 @@ input[name="datetimes"]{cursor: pointer;}
 			<tr class="tr1">
 				<th style="text-align: center;border-left:none;">게시판글</th>
 				<td>
+                    <span style="color: tomato;"><span>✔</span>이미지 입력시 게시판글의 이미지버튼을 클릭하여 주십시오.</span>
 					<textarea class="form-control" id="summernote" placeholder="글내용" maxlength="500" style="height: 350px;"></textarea>
 				</td>
 			</tr>
@@ -180,6 +181,13 @@ input[name="datetimes"]{cursor: pointer;}
         maxHeight:400,
         lang:'ko-KR',
         focus:false,
+        toolbar: [
+            ["style", ["style"]],
+            ["font", ["bold", "italic", "underline", "clear"]],
+            ["fontsize", ["fontsize"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["insert", ["link", "picture", "hr"]]
+          ],
         callbacks:{
 	          onImageUpload: function(files, editor, welEditable) {
 		            for (var i = files.length - 1; i >= 0; i--) {
