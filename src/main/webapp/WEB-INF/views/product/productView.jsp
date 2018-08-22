@@ -731,6 +731,11 @@ span.star-prototype > * {
   	.detail_img_container .detail_img{
   		max-width: 835px;
   	}
+  	
+  	.countCheck td{
+  		width : 20px;
+  	}
+  	
   </style>
   
   	<div class="detail_img_container">
@@ -796,12 +801,58 @@ span.star-prototype > * {
 			<c:set var="flag" value="false"/>	
 				<c:choose>
 				<c:when test="${likeList.like_status eq 'Y' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>					
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>			
+					<table class='countCheck'>
+					<tr>
+						<td>
+						<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>	
+						</td>
+						<td>
+						<c:forEach var="ycountLikeList" items="${ycountLikeList}">			 	
+							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ycountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>	
+						</td>
+						<td>
+						<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+						</td>
+						<td>
+						<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ncountLikeList.CNT}"></c:out>
+							</c:if>
+						</c:forEach>		
+						</td>
+					</tr>
+					</table>			
 				</c:when>
+				
+				
 				<c:when test="${likeList.like_status eq 'N' }">
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>				
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>					
+				<table class='countCheck'>
+				<tr>
+					<td>
+					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+					</td>
+					<td>
+					<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
+							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ycountLikeList.CNT}"></c:out>
+							</c:if>
+					</c:forEach>
+					</td>
+					<td>
+					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
+					</td>
+					<td>
+					<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
+								<c:out value="${ncountLikeList.CNT}"></c:out>
+							</c:if>
+					</c:forEach>
+					</td>
+				</tr>
+				</table>											
 				</c:when>
 				</c:choose>
 			</c:if>
@@ -810,20 +861,38 @@ span.star-prototype > * {
 	
 	
 		<c:if test="${flag =='true'}">
-			<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-			
-			<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-			
+		<table class='countCheck'>
+		<tr>
+		<td>
+		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</td>
+		<td>
+		<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
+					<c:if test="${ycountLikeList.REVIEW_CODE eq review.review_code }">								
+						<c:out value="${ycountLikeList.CNT}"></c:out>
+					</c:if>
+		</c:forEach>	
+		</td>
+		<td>
+		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</td>
+		<td>
+		<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
+					<c:if test="${ncountLikeList.REVIEW_CODE eq review.review_code }">
+						<c:out value="${ncountLikeList.CNT}"></c:out>
+					</c:if>
+		</c:forEach>	
+		</td>
+		</tr>
+		</table>			
 		</c:if>
-		
-		
-		
-		
+	
 	 </div>
 	 		
 	 <hr>
  </c:forEach>
 <script>
+
 //좋아요
 $('.like').on('click',function(){
 	var thtag=$(this);
@@ -834,7 +903,7 @@ $('.like').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).siblings("[name=review_code]").val(),
+				review_code:$(this).parent().parent().parent().parent().siblings("[name=review_code]").val(),
 				like_status:'Y'
 		};
 		$.ajax({
@@ -849,11 +918,12 @@ $('.like').on('click',function(){
 					
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
+						
 					}else if(data.likeOn==2){
 						thtag.css("color", "#bebebe");	
 					}else{
 						thtag.css("color", "#1E96FF");	
-						thtag.siblings(".dislike").css("color", "#bebebe");
+						thtag.parent().parent().parent().parent().find(".dislike").css("color", "#bebebe");
 					}
 			
 				}
@@ -878,7 +948,7 @@ $('.dislike').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).siblings("[name=review_code]").val(),
+				review_code:$(this).parent().parent().parent().parent().siblings("[name=review_code]").val(),
 				like_status:'N'
 		};
 		$.ajax({
@@ -896,7 +966,7 @@ $('.dislike').on('click',function(){
 						thtag.css("color", "#bebebe");	
 					}else{
 						thtag.css("color", "#FF3232");	
-						thtag.siblings(".like").css("color", "#bebebe");
+						thtag.parent().parent().parent().parent().find(".like").css("color", "#bebebe");
 					}
 					
 					
