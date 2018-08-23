@@ -90,15 +90,8 @@ public interface ProductService {
 	int updateLike(ProductReviewLike productReviewLike);
 	
 	List<ProductReviewLike> selectLikeList();
-		
-	List<ProductReviewLike> selectLikeList(int review_code);
-	
 	
 	String checkLike(Map map);
-	
-	List ycountLike();
-	
-	List ncountLike();
 	
 	int deleteProduct(int product_code);
 }

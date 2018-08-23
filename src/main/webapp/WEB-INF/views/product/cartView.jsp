@@ -331,7 +331,6 @@
 						</td>
 						<td scope="col"><span class="price${vs.count} sell_price" style="font-size:16px">${cart.price }</span><span> 원</span></td>
 						<td scope="col">
-						<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 							<input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
 							<input type="hidden" name="left_amount" value="${cart.left_amount}"/>

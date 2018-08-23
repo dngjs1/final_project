@@ -407,11 +407,11 @@
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 주문 / 배송내역</h2>
 				<table class = "order_board">
 					<colgroup>
-						<col style = "width:18%;">
+						<col style = "width:10%;">
 						<col style = "width:50%;">
+						<col style = "width:15%;">
 						<col style = "width:10%;">
 						<col style = "width:12%;">
-						<col style = "width:10%;">
 					</colgroup>
 					<thead>
 					<tr>
@@ -419,7 +419,7 @@
 						<th scope="col" class = "#">상품정보</th>
 						<th scope="col" class = "#">결제금액</th>
 						<th scope="col" class = "#">진행상황</th>
-						<th scope="col" class = "#"></th>
+						<th scope="col" class = "#">요청</th>
 					</tr>
 					</thead>
 					<tbody>
