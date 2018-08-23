@@ -670,7 +670,7 @@ span.star-prototype > * {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 4px solid #fcfcfb;
-		width : 260px;
+		width : 316px;
 	}
 	
 	.link02:hover {
@@ -689,7 +689,7 @@ span.star-prototype > * {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 4px solid #fcfcfb;
-		width : 260px;
+		width : 315px;
 	}
 	
 	.link03:hover {
