@@ -185,12 +185,10 @@ public class MemberController {
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
 				
-				int totalPoint = service.totalPoint(member_id);
-				System.out.println(totalPoint);
+				
 				
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
-				model.addAttribute("totalPoint",totalPoint);
 				
 				System.out.println("페이지경로는 : " +path_);
 				
@@ -346,6 +344,13 @@ public class MemberController {
 	
 	@RequestMapping("/myPage.do")
 	public String myPage(String memberId, Model model) {
+		System.out.println(memberId);
+		
+		String member_id = memberId;
+		
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
+
 		return "member/myPage";
 	}
 	
