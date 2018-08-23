@@ -177,6 +177,12 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.selectPointList(sqlSession,member_id);
 	}
 
+	@Override
+	public int totalPoint(String member_id) {
+		
+		return memberDAO.totalPoint(sqlSession,member_id);
+	}
+
 
 	
 

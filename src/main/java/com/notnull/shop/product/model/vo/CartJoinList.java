@@ -10,11 +10,13 @@ public class CartJoinList {
 	private int left_amount;
 	private String new_p_img_path;
 	private int price;
+	private String product_delete;
 	
 	public CartJoinList() {}
 
 	public CartJoinList(int cart_code, int product_code, String product_name, int cart_quantity,
-			int product_option_code, String option_size, int left_amount, String new_p_img_path, int price) {
+			int product_option_code, String option_size, int left_amount, String new_p_img_path, int price,
+			String product_delete) {
 		super();
 		this.cart_code = cart_code;
 		this.product_code = product_code;
@@ -25,6 +27,7 @@ public class CartJoinList {
 		this.left_amount = left_amount;
 		this.new_p_img_path = new_p_img_path;
 		this.price = price;
+		this.product_delete = product_delete;
 	}
 
 	@Override
@@ -32,7 +35,7 @@ public class CartJoinList {
 		return "CartJoinList [cart_code=" + cart_code + ", product_code=" + product_code + ", product_name="
 				+ product_name + ", cart_quantity=" + cart_quantity + ", product_option_code=" + product_option_code
 				+ ", option_size=" + option_size + ", left_amount=" + left_amount + ", new_p_img_path=" + new_p_img_path
-				+ ", price=" + price + "]";
+				+ ", price=" + price + ", product_delete=" + product_delete + "]";
 	}
 
 	public int getCart_code() {
@@ -107,5 +110,12 @@ public class CartJoinList {
 		this.price = price;
 	}
 
-	
+	public String getProduct_delete() {
+		return product_delete;
+	}
+
+	public void setProduct_delete(String product_delete) {
+		this.product_delete = product_delete;
+	}
+
 }

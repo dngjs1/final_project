@@ -809,7 +809,7 @@ span.star-prototype > * {
 						<td>
 						<c:forEach var="ycountLikeList" items="${ycountLikeList}">			 	
 							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
-								<c:out value="${ycountLikeList.CNT}"></c:out>
+								<span class='yCount'><c:out value="${ycountLikeList.CNT}"></c:out></span>
 							</c:if>
 						</c:forEach>	
 						</td>
@@ -945,12 +945,19 @@ $('.like').on('click',function(){
 					
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
+						// 좋아요 +1
+						
+						var ycount=thtag.parent().parent().find(".yCount");
+						
+						ycount.html(1);
 						
 					}else if(data.likeOn==2){
 						thtag.css("color", "#bebebe");	
+						// 좋아요 -1
 					}else{
 						thtag.css("color", "#1E96FF");	
 						thtag.parent().parent().parent().parent().find(".dislike").css("color", "#bebebe");
+						// 좋아요 +1 , 싫어요 -1
 					}
 			
 				}
@@ -989,11 +996,14 @@ $('.dislike').on('click',function(){
 					
 					if(data.likeOn==1){
 						thtag.css("color", "#FF3232");
+						//싫어요 +1
 					}else if(data.likeOn==2){
 						thtag.css("color", "#bebebe");	
+						//싫어요 -1
 					}else{
 						thtag.css("color", "#FF3232");	
 						thtag.parent().parent().parent().parent().find(".like").css("color", "#bebebe");
+						//싫어요 +1 , 좋아요 -1
 					}
 					
 					

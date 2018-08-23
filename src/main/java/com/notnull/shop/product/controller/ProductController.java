@@ -316,6 +316,7 @@ public class ProductController {
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		String[] sum_price = request.getParameterValues("sum_price");
 		String[] cart_codes=null;
 		if( request.getParameterValues("cart_code") != null ) {
 			cart_codes = request.getParameterValues("cart_code");
@@ -340,6 +341,8 @@ public class ProductController {
 			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
 			buyInfo2.setPhone2(buyInfo.getPhone2());
 			buyInfo2.setRequest(buyInfo.getRequest());
+			buyInfo2.setTotal_price(Integer.parseInt(sum_price[i]));
+			buyInfo2.setBuy_status("P");
 			buyList.add(buyInfo2);
 		}
 		int result=service.insertBuyList(buyList);
@@ -536,23 +539,6 @@ public class ProductController {
 			}
 			
 		}
-		/*
-		if(check==null && like_status.equals("N")) {
-			result=service.addLike(productReviewLike);
-			likeOn=1;
-		}else {
-			if(check.equals("N") && like_status.equals("N")) {
-				
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(check.equals("Y") && like_status.equals("N")) {
-				productReviewLike.setLike_status("N");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
-			}
-			
-		}
-		*/
 		
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);

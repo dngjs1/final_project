@@ -28,7 +28,7 @@ import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 
 
-@SessionAttributes(value= {"memberLoggedIn"})
+@SessionAttributes(value= {"memberLoggedIn","totalPoint"})
 
 @Controller
 public class MemberController {
@@ -63,9 +63,11 @@ public class MemberController {
 		return "member/memberAgree";
 	}
 	
+	
+	
 	@RequestMapping("/memberEnroll2.do")
 	public String memberEnroll2() {
-		System.out.println("test");
+		
 		return "member/memberEnroll2";
 	}
 	
@@ -182,6 +184,9 @@ public class MemberController {
 		
 		if(m!=null && m.getEsc_status().equals("N")) {
 			if(bcyptPasswordEncoder.matches(member_pw,m.getMember_pw())) {
+				
+				
+				
 				System.out.println("success LOGIN");
 				model.addAttribute("memberLoggedIn",m);
 				
@@ -337,10 +342,17 @@ public class MemberController {
 		return view;
 	}
 	
-	@RequestMapping("/myPage.do")
-	public String myPage(String memberId) {
+	/*@RequestMapping("/myPage.do")
+	public String myPage(String memberId, Model model) {
+		System.out.println(memberId);
+		
+		String member_id = memberId;
+		
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
+
 		return "member/myPage";
-	}
+	}*/
 	
 	@RequestMapping("/adminPage.do")
 	public String adminPage(String memberId) {
@@ -371,7 +383,7 @@ public class MemberController {
 		System.out.println("2 : " +m.getMember_pw());
 
 		String msg ="";
-		String loc ="myPage.do";
+		String loc ="memberOrderTotal.do";
 		
 		int result = service.memberUpdate(m);
 		
