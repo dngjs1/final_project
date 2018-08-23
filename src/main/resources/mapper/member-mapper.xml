@@ -90,4 +90,8 @@
  	<select id="selectPointList" resultType="pointLog" parameterType="string">
  		select * from point_log where member_id=#{member_id} order by point_date
  	</select>
+ 	
+ 	<select id="totalPoint" resultType="_int" parameterType="string">
+ 		select sum(point_increase) from point_log where member_id=#{member_id} group by member_id
+ 	</select>
 </mapper>

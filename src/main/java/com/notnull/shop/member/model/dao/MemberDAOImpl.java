@@ -130,6 +130,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("member.selectPointList",member_id);
 	}
 
+	@Override
+	public int totalPoint(SqlSessionTemplate sqlSession, String member_id) {
+		
+		return sqlSession.selectOne("member.totalPoint",member_id);
+	}
+
 	
 
 	
