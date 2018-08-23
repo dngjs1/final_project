@@ -606,9 +606,6 @@
 						}
 					</style>
 					<div class = "regist-btn-box">
-						 <a href = "${pageContext.request.contextPath}/memberEnroll2.do" class = "btn_black" style = "text-decoration: none;">
-							다음
-						</a> 
 						<button type='button' onclick="agreed();" id="agreebtn" class="btn_black" style ="color:white">다음</button>
 					</div>
 					
