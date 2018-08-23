@@ -609,7 +609,7 @@
 						 <a href = "${pageContext.request.contextPath}/memberEnroll2.do" class = "btn_black" style = "text-decoration: none;">
 							다음
 						</a> 
-						<button  id="agreebtn" class="btn_black" style = "text-decoration: none;color:white">다음</button>
+						<button type='button' onclick="agreed();" id="agreebtn" class="btn_black" style ="color:white">다음</button>
 					</div>
 					
 				</div>
@@ -625,21 +625,15 @@
 </div>
 
 <script>
-
-	$(function(){	
-		$('#agreebtn').click(function(){
-			
-			 alert($("#agreePrivacy").prop("checked"));
-			if($("#agreePrivacy").prop("checked") && $("#agreeLicensing").prop("checked")){
-				alert("왜안가니?");
-					location.href="${pageContext.request.contextPath}/";
-				}
-			else{
-			 alert("약관에 동의해주세요.");
+	function agreed(){
+		alert($("#agreePrivacy").prop("checked"));
+		if($("#agreePrivacy").prop("checked") && $("#agreeLicensing").prop("checked")){
+			location.href="${pageContext.request.contextPath}/memberEnroll2.do";
 			}
-		});
-			
-		});
+		else{
+		 alert("약관에 동의해주세요.");
+		}	
+	}
 </script>
 
 

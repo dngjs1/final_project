@@ -63,9 +63,11 @@ public class MemberController {
 		return "member/memberAgree";
 	}
 	
+	
+	
 	@RequestMapping("/memberEnroll2.do")
 	public String memberEnroll2() {
-		System.out.println("test");
+		
 		return "member/memberEnroll2";
 	}
 	
