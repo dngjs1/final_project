@@ -68,7 +68,7 @@
 					<b>재고: </b><input type="number" name="left_amount" value="${optionList.left_amount}" required>
 					</c:when>
 					<c:otherwise>
-					
+					<span class='size_del'><b>치수: </b><input type='text'  name='size' required> <b>재고: </b><input type='number' name='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br><br></span>
 					</c:otherwise>
 					</c:choose>
 					</c:forEach>
