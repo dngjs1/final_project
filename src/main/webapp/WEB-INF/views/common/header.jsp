@@ -507,14 +507,9 @@
       							<h3>여행쇼핑몰</h3>
       							<ul>
       								<li>
-      									<a href = "#">회사소개</a>
+      									<a href = "${path}/introMain.do">회사소개</a>
       								</li>
-      								<li>
-      									<a href = "#">제휴문의</a>
-      								</li>
-      								<li>
-      									<a href = "#">이용안내</a>
-      								</li>
+      								
       							
       							</ul>
       							</div>
@@ -788,7 +783,7 @@
       					</li>
       					
       					<li>
-      						<a href = "#">사이트소개</a>
+      						<a href = "${path}/introMain.do">사이트소개</a>
       					</li>
       					
       					<li>
