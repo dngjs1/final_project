@@ -789,17 +789,57 @@ span.star-prototype > * {
 		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 	</c:forEach> --%>
 	<hr>
-   <div> 
- <c:forEach var="review" items="${reviewList}">
- <c:set var="flag" value="true"/>
- 	
+<script>
+$(function(){
+	var member_id="${memberLoggedIn.member_id}";
+	var reviewLength=$(".reviewLength").val();
+	
+	var statusList = new Array(); 
+	var idList = new Array();
+	var codeList = new Array();
+	
+	<c:forEach items="${likeList}" var="item">
+	statusList.push("${item.like_status}");
+	idList.push("${item.member_id}");
+	codeList.push("${item.review_code}");
+	</c:forEach>
+	
+	for(var i=0;i<reviewLength;i++){
+		var y_count=0;
+		var n_count=0;
+		for(var j=0;j<statusList.length;j++){
+			if($('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					y_count=y_count+1;
+				}else{
+					n_count=n_count+1;
+				}
+			}
+			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					$('.like'+i).css("color", "#1E96FF");
+				}else{
+					$('.dislike'+i).css("color", "#FF3232");
+				}
+			}
+		}
+		$('.yCount'+i).html(y_count);
+		$('.nCount'+i).html(n_count);
+	}
+});
+	
+</script>
+<!-- 상품평 리뷰 -->
+<div> 
+<c:forEach var="review" items="${reviewList}" varStatus="vs">
+
 	<i class="far fa-user-circle"></i><span style="color:#1EA4FF;font-size:18px;"> ${review.member_id}</span>
 	&emsp;&emsp;<span class="star-prototype">${review.review_star }</span>
 	&emsp;&emsp;<span>${review.review_date}</span>
 
-	<br>
 	<c:if test="${reviewImgList != null}">
-	 <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
+	<br>
+	 <c:forEach var='imgList' items='${reviewImgList}'>
 		<c:if test="${review.review_code eq imgList.review_code }">
 			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
 		</c:if>
@@ -808,111 +848,34 @@ span.star-prototype > * {
 	</c:if>
 		<span>${review.review_content}</span> 	 
 	  <br>	
-
-	
-
-	 <div>
-	 	<input type="hidden" name="review_code" value="${review.review_code }"/> 
-	 	
-
-		<c:forEach var="likeList" items='${likeList }' varStatus="vs">
-			<c:if test="${likeList.review_code eq review.review_code and likeList.member_id eq memberLoggedIn.member_id }">
-			<c:set var="flag" value="false"/>	
-				<c:choose>
-				<c:when test="${likeList.like_status eq 'Y' }">
-					<table class='countCheck'>
-					<tr>
-						<td>
-						<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#1E96FF"></i>	
-						</td>
-						<td>
-						<c:forEach var="ycountLikeList" items="${ycountLikeList}">			 	
-							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
-								<span class='yCount'><c:out value="${ycountLikeList.CNT}"></c:out></span>
-							</c:if>
-						</c:forEach>	
-						</td>
-						<td>
-						<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-						</td>
-						<td>
-						<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
-							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
-								<c:out value="${ncountLikeList.CNT}"></c:out>
-							</c:if>
-						</c:forEach>		
-						</td>
-					</tr>
-					</table>			
-				</c:when>
-				
-				
-				<c:when test="${likeList.like_status eq 'N' }">
-				<table class='countCheck'>
+		<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
+		<table class='countCheck'>
+	 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
+			<tbody>
 				<tr>
 					<td>
-					<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+						<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
 					</td>
 					<td>
-					<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
-							<c:if test="${ycountLikeList.REVIEW_CODE eq likeList.review_code }">
-								<c:out value="${ycountLikeList.CNT}"></c:out>
-							</c:if>
-					</c:forEach>
+						<span class='yCount${vs.index} yCount'>0</span>
 					</td>
 					<td>
-					<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#FF3232"></i>
+						<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
 					</td>
 					<td>
-					<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
-							<c:if test="${ncountLikeList.REVIEW_CODE eq likeList.review_code }">
-								<c:out value="${ncountLikeList.CNT}"></c:out>
-							</c:if>
-					</c:forEach>
+						<span class='nCount${vs.index} nCount'>0</span>
 					</td>
 				</tr>
-				</table>											
-				</c:when>
-				</c:choose>
-			</c:if>
-
-		</c:forEach>		
-	
-	
-		<c:if test="${flag =='true'}">
-		<table class='countCheck'>
-		<tr>
-		<td>
-		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-		<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
-					<c:if test="${ycountLikeList.REVIEW_CODE eq review.review_code }">								
-						<c:out value="${ycountLikeList.CNT}"></c:out>
-					</c:if>
-		</c:forEach>	
-		</td>
-		<td>
-		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-		<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
-					<c:if test="${ncountLikeList.REVIEW_CODE eq review.review_code }">
-						<c:out value="${ncountLikeList.CNT}"></c:out>
-					</c:if>
-		</c:forEach>	
-		</td>
-		</tr>
-		</table>			
-		</c:if>
-	
-	 </div>
-	 		
+			</tbody>
+		</table>				 		
 	 <hr>
  </c:forEach>
+</div>
 <script>
 
 //좋아요
+$(function(){
+	
 $('.like').on('click',function(){
 	var thtag=$(this);
 	var member_id="${memberLoggedIn.member_id}";
@@ -922,7 +885,7 @@ $('.like').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
 				like_status:'Y'
 		};
 		$.ajax({
@@ -934,19 +897,25 @@ $('.like').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					
+					var yCount=thtag.parent().parent().find('.yCount');
+					var nCount=thtag.parent().parent().find('.nCount');
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
-						// 좋아요 +1						
-						var ycount=thtag.parent().parent().find(".yCount");
-				
-						
+						var count= parseInt(yCount.html())+1;
+						yCount.html(count);
+						// 좋아요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");	
+						thtag.css("color", "#bebebe");
+						var count= parseInt(yCount.html())-1;
+						yCount.html(count);
 						// 좋아요 -1
 					}else{
-						thtag.css("color", "#1E96FF");	
-						thtag.parent().parent().parent().parent().find(".dislike").css("color", "#bebebe");
+						thtag.css("color", "#1E96FF");
+						thtag.parent().parent().find('.dislike').css("color", "#bebebe");
+						var count= parseInt(yCount.html())+1;
+						yCount.html(count);
+						var count= parseInt(nCount.html())-1;
+						nCount.html(count);
 						// 좋아요 +1 , 싫어요 -1
 					}
 			
@@ -961,8 +930,6 @@ $('.like').on('click',function(){
 		});
 	}
 });
-
-
 $('.dislike').on('click',function(){
 	var thtag=$(this);
 	var member_id="${memberLoggedIn.member_id}";
@@ -972,7 +939,7 @@ $('.dislike').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
 				like_status:'N'
 		};
 		$.ajax({
@@ -983,16 +950,25 @@ $('.dislike').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					
+					var yCount=thtag.parent().parent().find('.yCount');
+					var nCount=thtag.parent().parent().find('.nCount');
 					if(data.likeOn==1){
 						thtag.css("color", "#FF3232");
+						var count= parseInt(nCount.html())+1;
+						nCount.html(count);
 						//싫어요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");	
+						thtag.css("color", "#bebebe");
+						var count= parseInt(nCount.html())-1;
+						nCount.html(count);
 						//싫어요 -1
 					}else{
-						thtag.css("color", "#FF3232");	
-						thtag.parent().parent().parent().parent().find(".like").css("color", "#bebebe");
+						thtag.css("color", "#FF3232");
+						thtag.parent().parent().find('.like').css("color", "#bebebe");
+						var count= parseInt(nCount.html())+1;
+						nCount.html(count);
+						var count= parseInt(yCount.html())-1;
+						yCount.html(count);
 						//싫어요 +1 , 좋아요 -1
 					}
 					
@@ -1008,6 +984,9 @@ $('.dislike').on('click',function(){
 		});
 	}
 });
+
+
+});
 </script>
  <script>
 //별점
@@ -1019,7 +998,7 @@ $.fn.generateStars = function() {
 $('.star-prototype').generateStars();
  
  </script>
- </div>
+
   상품평 페이징 처리
   
    </div>

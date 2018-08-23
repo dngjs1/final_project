@@ -35,7 +35,7 @@
 			var result = parseInt(quantity) * sell_price;
 			$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			$("#sum_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-			$("[name=sum_price]").val(result);
+			$("[name=total_price]").val(result);
 			$("#sum_total_price").text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			var save_point=parseInt(result*0.02);
 			$("#save_point").text(save_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -55,7 +55,7 @@
 				var result = parseInt(amount) * sell_price;
 				$(".price"+i).text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				$(".sum_price"+i).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-				$("[name=sum_price]").val(result);
+				$(".total_price"+i).val(result);
 				sum=sum+result;
 			}
 			var save_point=parseInt(sum*0.02);
@@ -318,7 +318,7 @@
                      <input type="hidden" name="buy_quantity" value="${cart.CART_QUANTITY}"/>
                      <input type="hidden" name="cart_code" value="${cart.CART_CODE}"/>
                      <input type="hidden" class="name${vs.count }" name="name${vs.count }" value="${cart.PRODUCT_NAME} 등  ${fn:length(cartList)}개"/>
-                     <input type="hidden" name="sum_price">
+                     <input type="hidden" name="total_price" class="total_price${vs.count }">
                      <span>${cart.PRODUCT_NAME}</span><br>
                      <c:if test="${cart.OPTION_SIZE!=null}">
                         <span>(${cart.OPTION_SIZE})</span><br>
@@ -351,7 +351,7 @@
                <input type="hidden" name="product_option_code" value="${productJoinOption.product_option_code}"/>
                <input type="hidden" name="buy_quantity" value="${quantity}"/>
                <input type="hidden" class="name1" name="name1" value="${productJoinOption.product_name}"/>
-               <input type="hidden" name="sum_price">
+               <input type="hidden" name="total_price">
             </td>
             <td><span id="quantity" >${quantity }</span></td>
             <td><span id="price">${productJoinOption.price}</span><span> 원</span></td>
@@ -989,11 +989,11 @@ $(function(){
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
-				/* var frm=$("#frm");
+				var frm=$("#frm");
 				var url="${pageContext.request.contextPath }/buyEnd.do";
 				frm.attr('method', 'post');
 				frm.attr("action",url);
-				frm.submit(); */
+				frm.submit();
 			}
 			alert(msg);
 		});

@@ -176,7 +176,7 @@
         insert into buy_info values(buy_info_seq.nextval, #{product_option_code}, 
         #{buy_quantity}, #{member_id}, #{receiver_post_no},
         #{receiver_address}, #{receiver_d_address},#{receiver_name},
-        #{phone2},#{request}, SYSDATE)
+        #{phone2},#{request}, SYSDATE,#{total_price},#{buy_status})
     </insert>
     
     <insert id="insertPoint" parameterType="pointLog">
@@ -237,7 +237,7 @@
   	</delete>
   	
   	<update id="updateLike" parameterType="ProductReviewLike">
-  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
+  		update product_review_like set like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
   	</update>
   	
   
