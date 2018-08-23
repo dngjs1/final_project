@@ -295,24 +295,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReviewLike> selectLikeList(int review_code) {
-		return productDAO.selectLikeList(sqlSession,review_code);
-	}
-
-	@Override
 	public String checkLike(Map map) {
 		return productDAO.checkLike(sqlSession,map);
-	}
-
-	@Override
-	public List ycountLike() {
-		return productDAO.ycountLike(sqlSession);
-	}
-
-	
-	@Override
-	public List ncountLike() {
-		return productDAO.ncountLike(sqlSession);
 	}
 
 	@Override

@@ -201,8 +201,6 @@ public class ProductController {
 		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
 		List<ProductDetailImg> detailImgList=service.selectDetailImg(productCode);
 		List<ProductImg> imgList=service.selectImgList(productCode);
-		
-
 
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
@@ -223,10 +221,6 @@ public class ProductController {
 				
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
-		/*List ycountLikeList= service.ycountLike();
-		List ncountLikeList=service.ncountLike();
-		request.setAttribute("ycountLikeList", ycountLikeList);
-		request.setAttribute("ncountLikeList", ncountLikeList);*/
 		request.setAttribute("likeList", likeList);
 		
 			return "/product/productView";

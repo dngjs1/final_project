@@ -102,13 +102,7 @@ public interface ProductDAO {
 	
 	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
 	
-	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession,int review_code);
-	
 	String checkLike(SqlSessionTemplate sqlSession,Map map);
-	
-	List ycountLike(SqlSessionTemplate sqlSession);
-	
-	List ncountLike(SqlSessionTemplate sqlSession);
 	
 	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
 }

@@ -248,40 +248,12 @@
   		select * from product_review_like
   	</select>
 
-
- 
-  	<select id="selectLikeList1" resultMap="ProductReviewLikeMap">
-  		select * from product_review_like where review_code=#{review_code}
-  	</select>
-  	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
-  	<select id="selectlikeCountList" resultMap="countLikeMap">
-  		select review_code,count(*) as cnt
-		from product_review_like
-		where like_status=#{status}
-		group by review_code
-  	</select>
- 	-->
-
- 	
  	<select id="checkLike" resultType="string" parameterType="map">
  		select like_status from product_review_like where member_id=#{id} and review_code=#{code}
  	</select>
  
  	<resultMap type="map" id="likecount"></resultMap>
- 
- 	<select id="ycountLike" parameterType="_int" resultMap="likecount">
- 		select review_code, count(*) as CNT from product_review_like
- 		where like_status='Y' 
- 		group by review_code
- 	</select>
- 
- 
-	<select id="ncountLike" parameterType="_int" resultMap="likecount">
- 		select review_code, count(*) as CNT from product_review_like
- 		where like_status='N' 
- 		group by review_code
- 	</select>
- 	
+
  	<update id="deleteProduct" parameterType="_int">
  		update product set product_delete='Y' where product_code=#{product_code}
  	</update>
