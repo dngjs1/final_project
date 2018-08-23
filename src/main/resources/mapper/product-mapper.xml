@@ -237,7 +237,7 @@
   	</delete>
   	
   	<update id="updateLike" parameterType="ProductReviewLike">
-  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
+  		update product_review_like set like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
   	</update>
   	
   
