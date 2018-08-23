@@ -42,4 +42,6 @@ public interface MemberService {
 	int updateManagement(Member m);
 	
 	List<PointLog> selectPointList(String member_id);
+	
+	int totalPoint(String member_id);
 }

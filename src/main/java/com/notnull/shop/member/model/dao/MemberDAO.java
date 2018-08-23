@@ -43,4 +43,6 @@ public interface MemberDAO {
 	int updateManagement(SqlSessionTemplate sqlSession, Member m);
 	
 	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id);
+	
+	int totalPoint(SqlSessionTemplate sqlSession, String member_id);
 }

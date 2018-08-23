@@ -539,23 +539,6 @@ public class ProductController {
 			}
 			
 		}
-		/*
-		if(check==null && like_status.equals("N")) {
-			result=service.addLike(productReviewLike);
-			likeOn=1;
-		}else {
-			if(check.equals("N") && like_status.equals("N")) {
-				
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(check.equals("Y") && like_status.equals("N")) {
-				productReviewLike.setLike_status("N");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
-			}
-			
-		}
-		*/
 		
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);
