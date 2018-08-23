@@ -415,8 +415,8 @@
 					</colgroup>
 					<thead>
 					<tr>
-						<th scope="col" class = "#">주문일자/번호</th>
-						<th scope="col" class = "#">상품명</th>
+						<th scope="col" class = "#">번호</th>
+						<th scope="col" class = "#">상품정보</th>
 						<th scope="col" class = "#">결제금액</th>
 						<th scope="col" class = "#">진행상황</th>
 						<th scope="col" class = "#"></th>

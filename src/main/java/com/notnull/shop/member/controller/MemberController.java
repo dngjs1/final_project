@@ -342,7 +342,7 @@ public class MemberController {
 		return view;
 	}
 	
-	@RequestMapping("/myPage.do")
+	/*@RequestMapping("/myPage.do")
 	public String myPage(String memberId, Model model) {
 		System.out.println(memberId);
 		
@@ -352,7 +352,7 @@ public class MemberController {
 		model.addAttribute("totalPoint",totalPoint);
 
 		return "member/myPage";
-	}
+	}*/
 	
 	@RequestMapping("/adminPage.do")
 	public String adminPage(String memberId) {
@@ -383,7 +383,7 @@ public class MemberController {
 		System.out.println("2 : " +m.getMember_pw());
 
 		String msg ="";
-		String loc ="myPage.do";
+		String loc ="memberOrderTotal.do";
 		
 		int result = service.memberUpdate(m);
 		

@@ -14,14 +14,14 @@ public class BuyInfo {
 	private String phone2;
 	private String request;
 	private Date buy_date;
+	private int total_price;
+	private String buy_status;
 	
-	public BuyInfo() {
-		// TODO Auto-generated constructor stub
-	}
+	public BuyInfo() {}
 
 	public BuyInfo(int buy_code, int product_option_code, int buy_quantity, String member_id, String receiver_post_no,
 			String receiver_address, String receiver_d_address, String receiver_name, String phone2, String request,
-			Date buy_date) {
+			Date buy_date, int total_price, String buy_status) {
 		super();
 		this.buy_code = buy_code;
 		this.product_option_code = product_option_code;
@@ -34,6 +34,8 @@ public class BuyInfo {
 		this.phone2 = phone2;
 		this.request = request;
 		this.buy_date = buy_date;
+		this.total_price = total_price;
+		this.buy_status = buy_status;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class BuyInfo {
 				+ buy_quantity + ", member_id=" + member_id + ", receiver_post_no=" + receiver_post_no
 				+ ", receiver_address=" + receiver_address + ", receiver_d_address=" + receiver_d_address
 				+ ", receiver_name=" + receiver_name + ", phone2=" + phone2 + ", request=" + request + ", buy_date="
-				+ buy_date + "]";
+				+ buy_date + ", total_price=" + total_price + ", buy_status=" + buy_status + "]";
 	}
 
 	public int getBuy_code() {
@@ -131,5 +133,21 @@ public class BuyInfo {
 
 	public void setBuy_date(Date buy_date) {
 		this.buy_date = buy_date;
+	}
+
+	public int getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+
+	public String getBuy_status() {
+		return buy_status;
+	}
+
+	public void setBuy_status(String buy_status) {
+		this.buy_status = buy_status;
 	}
 }
