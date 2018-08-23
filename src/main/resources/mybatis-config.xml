@@ -21,6 +21,7 @@
 		<typeAlias type="com.notnull.shop.product.model.vo.BuyInfo" alias="buyInfo"/>
 		<typeAlias type="com.notnull.shop.rental.model.vo.File" alias="File"/>
 		<typeAlias type="com.notnull.shop.rental.model.vo.Rental" alias="rental"/>
+		<typeAlias type="com.notnull.shop.rental.model.vo.RentalPerson" alias="rentalPerson"/>
 		<typeAlias type="com.notnull.shop.member.model.vo.PointLog" alias="pointLog"/>
 	</typeAliases>
 </configuration>

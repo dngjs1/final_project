@@ -19,6 +19,7 @@ import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.rental.model.service.RentalService;
 import com.notnull.shop.rental.model.vo.Rental;
+import com.notnull.shop.rental.model.vo.RentalPerson;
 
 @Controller
 public class RentalController {
@@ -85,7 +86,7 @@ public class RentalController {
 	
 	//상세보기
 	@RequestMapping(value="/rentalDetail.do", method=RequestMethod.GET)
-	public String detailGet(int rental_obj_code, HttpServletRequest req, Model model) {
+	public String detailGet(@RequestParam(value="rental_obj_code") int rental_obj_code, HttpServletRequest req, Model model) {
 		Rental rental = new Rental();
 		
 		rental = service.getRental(rental_obj_code);
@@ -101,6 +102,28 @@ public class RentalController {
 		model.addAttribute("rental", rental);
 		
 		return "rental/rentalView";
+	}
+	
+	@RequestMapping(value="/insertRentalPerson.do", method=RequestMethod.GET)
+	public String insertRentalPerson(RentalPerson rentalPerson, HttpServletRequest req, Model model) {
+		System.out.println("대여하기");
+		int result = service.insertRentalPerson(rentalPerson);
+		String msg="";
+		String loc="/rentalView.do";
+		if(result>0) {
+			System.out.println("대여완료");
+			msg="대여신청 완료";
+			List<RentalPerson> list = service.selectRentalPerson(rentalPerson.getRental_code());
+			
+			model.addAttribute("rentalPerson", list);
+		} else {
+			System.out.println("대여실패");
+			msg="대여신청 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "/common/msg";
 	}
 	
 }

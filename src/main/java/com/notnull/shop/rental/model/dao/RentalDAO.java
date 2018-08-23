@@ -3,6 +3,7 @@ package com.notnull.shop.rental.model.dao;
 import java.util.List;
 
 import com.notnull.shop.rental.model.vo.Rental;
+import com.notnull.shop.rental.model.vo.RentalPerson;
 
 public interface RentalDAO {
 
@@ -13,5 +14,9 @@ public interface RentalDAO {
 	List<Rental> RentalList(int cPage, int numPerPage);
 
 	Rental getRental(int rental_obj_code);
+
+	int insertRentalPerson(RentalPerson rentalPerson);
+
+	List<RentalPerson> selectRentalPerson(int rental_obj_code);
 
 }

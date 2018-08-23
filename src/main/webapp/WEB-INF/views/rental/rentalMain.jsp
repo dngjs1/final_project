@@ -100,7 +100,7 @@
 			</div>
 			
 			<c:if test="${memberLoggedIn != null }">
-				<button class="btn" id="mapadd"><a href="${path }/shop/rentalWrite.do">등록</a></button>
+				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
 			</c:if>
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
 			<script>

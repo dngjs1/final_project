@@ -867,21 +867,48 @@ span.star-prototype > * {
 		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
 		</td>
 		<td>
-		<c:forEach var="ycountLikeList" items="${ycountLikeList}">				 	
-					<c:if test="${ycountLikeList.REVIEW_CODE eq review.review_code }">								
-						<c:out value="${ycountLikeList.CNT}"></c:out>
-					</c:if>
-		</c:forEach>	
+      <c:set var="doneLoop" value="false"/>
+      <c:forEach var="ycountLikeList" items="${ycountLikeList}" varStatus="status">      
+            <c:choose>          
+               <c:when test="${ycountLikeList.REVIEW_CODE eq review.review_code }">                        
+                  <c:out value="${ycountLikeList.CNT}"></c:out>
+               </c:when>
+               <c:otherwise>
+               	<c:if test="${status ==null }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
+                  <c:if test="${status.first }">                     
+                  <c:out value="0"></c:out>
+                   </c:if>
+                   	<c:set var="doneLoop" value="true"/>
+               </c:otherwise>
+            </c:choose>
+      </c:forEach>     
+      			<c:if test="${empty ycountLikeList }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
 		</td>
 		<td>
 		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
 		</td>
 		<td>
-		<c:forEach var="ncountLikeList" items="${ncountLikeList}">				 	
-					<c:if test="${ncountLikeList.REVIEW_CODE eq review.review_code }">
-						<c:out value="${ncountLikeList.CNT}"></c:out>
-					</c:if>
-		</c:forEach>	
+		<c:set var="doneLoop2" value="false"/>
+      <c:forEach var="ncountLikeList" items="${ncountLikeList}" varStatus="status">      
+            <c:choose>          
+               <c:when test="${ncountLikeList.REVIEW_CODE eq review.review_code }">                        
+                  <c:out value="${ncountLikeList.CNT}"></c:out>
+               </c:when>
+               <c:otherwise>
+                  <c:if test="${status.first }">                     
+                  <c:out value="0"></c:out>
+                   </c:if>
+                   	<c:set var="doneLoop2" value="true"/>
+               </c:otherwise>
+            </c:choose>
+      </c:forEach>   
+      			<c:if test="${empty ncountLikeList }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
 		</td>
 		</tr>
 		</table>			

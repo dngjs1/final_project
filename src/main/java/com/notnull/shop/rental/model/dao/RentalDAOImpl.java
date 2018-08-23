@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.rental.model.vo.Rental;
+import com.notnull.shop.rental.model.vo.RentalPerson;
 
 @Repository
 public class RentalDAOImpl implements RentalDAO {
@@ -39,6 +40,15 @@ public class RentalDAOImpl implements RentalDAO {
 	public Rental getRental(int rental_obj_code) {
 		return sqlSession.selectOne(ra+"getRental", rental_obj_code);
 	}
-	
-	
+
+	@Override
+	public int insertRentalPerson(RentalPerson rentalPerson) {
+		return sqlSession.insert(ra+"insertRentalPerson", rentalPerson);
+	}
+
+	@Override
+	public List<RentalPerson> selectRentalPerson(int rental_obj_code) {
+		return sqlSession.selectOne(ra+"selectRentalPerson", rental_obj_code);
+	}
+
 }
