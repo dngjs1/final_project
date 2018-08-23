@@ -315,6 +315,7 @@
 			</tr>
 			<c:if test="${not empty cartList}">
 				<c:forEach var='cart' items='${cartList}' varStatus="vs">
+				<c:if test="${cart.product_delete eq 'N'}">
 					<tr class="tr2">
 						<td scope="col"><input type="checkbox" name="check" value="${cart.cart_code}" checked/></td>
 						<td scope="col">
@@ -346,6 +347,7 @@
 							onmouseout="this.src='resources/images/cancel1.png'" />
 						</td>
 					</tr>
+				</c:if>
 				</c:forEach>
 			</c:if>
 		</table>

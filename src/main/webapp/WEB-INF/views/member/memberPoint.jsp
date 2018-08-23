@@ -116,36 +116,14 @@
 	float:right;
 }
 </style>
-				
-				
-				
-				<div class = "row">
-				
-				
-				
-				
-
-				
+		
+			<div class = "row">
 				<div class = "col-6">
-					
 				${pageBar }
 				</div>
 				</div>
-				
-			
 			</div>
-			
-			
-
-			
-			
 		</div>
-			
-			
-			
-	
 	</div>
-
-
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
