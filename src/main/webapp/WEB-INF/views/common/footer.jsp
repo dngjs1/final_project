@@ -9,7 +9,7 @@
             <div class="container" id = "footer-list">
   
             <!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 푸터 3분할 영역  시작 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ -->
-                <div class = "row" id ="footer-3divided">
+                <!-- <div class = "row" id ="footer-3divided">
                 	
                 	<div class = "col-5" id = "footer-left">
                 	
@@ -104,11 +104,11 @@
                 	
                 		
                 
-                </div>
+                </div> -->
                 
                 <div class = "footer_menus">
                 	<div class = "footer_menus_inner">
-            	<a href = "#">회사소개</a>
+            	<a href = "${path}/shop/introMain.do">회사소개</a>
             	<a href = "#">제휴문의</a>
             	<a href = "#">이용약관</a>
             	<a href = "#">개인정보보호방침</a>
