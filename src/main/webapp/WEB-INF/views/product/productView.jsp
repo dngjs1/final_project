@@ -826,16 +826,10 @@ $(function(){
 		$('.yCount'+i).html(y_count);
 		$('.nCount'+i).html(n_count);
 	}
-	
-	
-	/* for(var i=0;i<statusList.length;i++){
-		alert(codeList[i]);
-		alert(idList[i]);
-		alert(statusList[i]);
-	} */
 });
 	
 </script>
+<!-- 상품평 리뷰 -->
 <div> 
 <c:forEach var="review" items="${reviewList}" varStatus="vs">
 

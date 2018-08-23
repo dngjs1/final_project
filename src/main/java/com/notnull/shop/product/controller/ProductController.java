@@ -500,7 +500,6 @@ public class ProductController {
 		int review_code=Integer.parseInt(request.getParameter("review_code"));
 		String member_id=request.getParameter("member_id");
 		String like_status=request.getParameter("like_status");
-		//List<ProductReviewLike> likeList=service.selectLikeList(review_code);
 		ProductReviewLike productReviewLike=new ProductReviewLike();
 		int result=0;
 		int likeOn=0;
