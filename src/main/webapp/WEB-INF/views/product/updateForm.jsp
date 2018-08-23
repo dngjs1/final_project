@@ -19,50 +19,41 @@
 
 
 <div class='container' >
-    <form name="fileForm" action="${path }/upload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
+    <form name="fileForm" action="${path }/updateProductEnd.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
   
         <br>
         <h3>상품수정</h3>
         <hr style="border:2px solid #787878"><br>       
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
-        <tr class="tr1">
-			<th style="text-align: center;border-left:none;">카테고리</th>
-			<td>	
-			<select name="p_category_code" class="form-control" style="width:500px;">
-     			<c:forEach var='category' items='${categoryList}' varStatus="vs">
-                  <option value="${category.p_category_code}">${category.p_category_name }</option>
-				</c:forEach>	
-        </select>
-			</td>
-		</tr>       
+         
         <tr class="tr1">
 			<th style="text-align: center;border-left:none;">상품명</th>
 			<td>	
-			<input type="text" class="form-control" name="product_name" id="product_name" required>
+			<input type="text" class="form-control" name="product_name" id="product_name" value="${joinCategory.product_name}" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">가격</th>
 			<td>	
-			<input type="number"  class="form-control" name="price" id="price" required>
+			<input type="number"  class="form-control" name="price" id="price" value="${joinCategory.price }" required>
 			</td>
 		</tr> 
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">출시일</th>
 			<td>	
-			<input type="date" class="form-control"  name="release_date" id="release_date" required>
+			<input type="date" class="form-control"  name="release_date" id="release_date" value="${joinCategory.release_date}" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">제조국</th>
 			<td>	
-			<input type="text" class="form-control" name="country" id="country" required>
+			<input type="text" class="form-control" name="country" id="country" value="${joinCategory.country}" required>
 			</td>
 		</tr>
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">크기</th>
 			<td>
-			 <input type="text"  class="form-control" name="real_size" id="real_size" value="상품 상세 정보 확인"> 
+			 <input type="text"  class="form-control" name="real_size" id="real_size" value="${joinCategory.real_size}"> 
 			</td>
 		</tr>
 		<tr  class="tr1">
@@ -71,7 +62,16 @@
 			<div style="position:relative;">
 				<span id="left_amount">
 					<input type="hidden" name="size" value="">
-					<b>재고: <b></b><input type="number" name="left_amount" required>
+					<c:forEach var="optionList" items="${optionList}">
+					<c:choose>
+					<c:when test="${optionList.option_size == null}">
+					<b>재고: </b><input type="number" name="left_amount" value="${optionList.left_amount}" required>
+					</c:when>
+					<c:otherwise>
+					
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
 				</span>
 				<div style="position:absolute;left:480px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
 			</div>
@@ -80,7 +80,7 @@
 		<tr class="tr1">
 			<th style="text-align: center;border-left:none;">게시판글</th>
 			<td>
-			<input type="textarea" name="p_board_content" id="p_board_content" class="form-control">
+			<input type="textarea" name="p_board_content" id="p_board_content" class="form-control" value="${joinCategory.p_board_content}">
 			</td>
 		</tr>
 		
