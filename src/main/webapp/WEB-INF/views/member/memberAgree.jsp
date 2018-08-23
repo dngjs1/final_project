@@ -623,7 +623,6 @@
 
 <script>
 	function agreed(){
-		alert($("#agreePrivacy").prop("checked"));
 		if($("#agreePrivacy").prop("checked") && $("#agreeLicensing").prop("checked")){
 			location.href="${pageContext.request.contextPath}/memberEnroll2.do";
 			}
