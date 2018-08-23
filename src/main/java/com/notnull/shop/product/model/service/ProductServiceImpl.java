@@ -314,4 +314,9 @@ public class ProductServiceImpl implements ProductService {
 	public List ncountLike() {
 		return productDAO.ncountLike(sqlSession);
 	}
+
+	@Override
+	public int deleteProduct(int product_code) {
+		return productDAO.deleteProduct(sqlSession,product_code);
+	}
 }

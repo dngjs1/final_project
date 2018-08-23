@@ -213,11 +213,30 @@ span.star-prototype > * {
 		<!-- 사진 옆 상품에 대 한 상세정보 전체를 감싸는 div -->
 		<div class = "infoBox">
 		
+			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
+			<input type= "button" class='btn btn-outline-danger' value="삭제" onclick="deleteProduct(${joinCategory.product_code})"/>		
+			<input type= "button" class='btn btn-outline-danger' value="수정" onclick="updateProduct(${joinCategory.product_code})"/>
+			</c:if>
+			
+			
+			
 			<!-- 삼품명을 불러오는 코드부분 -->
 			<h1 style = "box-sizing:border-box;padding-right:150px;position:relative;">${joinCategory.product_name}</h1>
 			
 			
-		
+			<script>
+			function deleteProduct(product_code)
+		      {
+		           location.href="${path}/deleteProduct.do?product_code="+product_code;
+		      }
+			
+			function updateProduct(product_code)
+		      {
+		           location.href="${path}/updateProduct.do?product_code="+product_code;
+		      }
+			
+			</script>
+			
 			<div class = pdt_price>
 			
 			<span id="price">${joinCategory.price}</span>
@@ -918,11 +937,9 @@ $('.like').on('click',function(){
 					
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
-						// 좋아요 +1
-						
+						// 좋아요 +1						
 						var ycount=thtag.parent().parent().find(".yCount");
-						
-						ycount.html(1);
+				
 						
 					}else if(data.likeOn==2){
 						thtag.css("color", "#bebebe");	

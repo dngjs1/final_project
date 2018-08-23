@@ -109,4 +109,6 @@ public interface ProductDAO {
 	List ycountLike(SqlSessionTemplate sqlSession);
 	
 	List ncountLike(SqlSessionTemplate sqlSession);
+	
+	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
 }

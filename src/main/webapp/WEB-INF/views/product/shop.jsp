@@ -121,6 +121,7 @@ $(document).ready(function(){
 
 	<div class = "row">
 		<c:forEach var='image' items='${list }' varStatus="vs">
+			<c:if test="${image.product_delete eq 'N'}">
 			<div class="col-3 Seller_item_secion">
 			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
 				<div style="height:250px;cursor: pointer;" class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}';">
@@ -166,7 +167,7 @@ $(document).ready(function(){
 
 							<div class="col-5 item_icon text-right ">
 								<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
-									title="장바구니에 담기"></i></span> <span class="item_icon"></i> <i
+									title="장바구니에 담기"></i></span> <span class="item_icon"><i
 									class="far fa-kiss-wink-heart mr-1" data-toggle="tooltip"
 									title="좋아요"></i></span> <span class="item_icon"><i
 									class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
@@ -177,6 +178,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
+			</c:if>
 		</c:forEach>		
 	</div><!-- 상품  진열하는  row코드 부분 끝 -->
 	

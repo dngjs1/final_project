@@ -61,6 +61,7 @@ public class ProductController {
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
+		System.out.println(list);
 		return "/product/shop";
 	}
 	
@@ -597,4 +598,27 @@ public class ProductController {
 		mv.setViewName("JsonView");
 		return mv;
 	}
+	
+	@RequestMapping("deleteProduct.do")
+	public String deleteProduct(HttpServletRequest request,int product_code) {
+		System.out.println(product_code);
+		int result= service.deleteProduct(product_code); 
+		
+		if(result > 0) {
+			System.out.println("삭제 성공");
+		}else {
+			System.out.println("삭제 실패");
+		}
+			
+		return "redirect:/product.do";
+	}
+	
+	@RequestMapping("updateProduct.do")
+	public String updateProduct(HttpServletRequest request,int product_code) {
+		request.setAttribute("product_code", product_code);
+			
+		return "/product/updateForm";
+	}
+	
+	
 }

@@ -9,7 +9,7 @@
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
 	<select id="selectProductList" resultMap="productListJoinMap">    
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star
+		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete
 		from product x
 		inner join product_img y
 		on x.product_code = y.product_code
@@ -84,8 +84,8 @@
  	</select>	
  
 	<insert id="insertProduct" parameterType="product">
-	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date) 
-	VALUES(PRODUCT_SEQ.NEXTVAL,#{price},#{product_name},#{release_date},#{country},#{real_size},#{p_category_code},#{p_board_content},sysdate)
+	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date,product_delete) 
+	VALUES(PRODUCT_SEQ.NEXTVAL,#{price},#{product_name},#{release_date},#{country},#{real_size},#{p_category_code},#{p_board_content},sysdate,'N')
 	<selectKey keyProperty="product_code" resultType="_int" order="AFTER"> SELECT PRODUCT_SEQ.CURRVAL FROM DUAL </selectKey>
 	</insert>
 	
@@ -281,4 +281,8 @@
  		where like_status='N' 
  		group by review_code
  	</select>
+ 	
+ 	<update id="deleteProduct" parameterType="_int">
+ 		update product set product_delete='Y' where product_code=#{product_code}
+ 	</update>
 </mapper>

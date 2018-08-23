@@ -238,6 +238,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.ncountLike");
 	}
 
+	@Override
+	public int deleteProduct(SqlSessionTemplate sqlSession, int product_code) {
+		return sqlSession.update("product.deleteProduct",product_code);
+	}
+
 
 	
 }

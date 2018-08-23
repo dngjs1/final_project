@@ -100,4 +100,5 @@ public interface ProductService {
 	
 	List ncountLike();
 	
+	int deleteProduct(int product_code);
 }
