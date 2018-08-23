@@ -919,7 +919,9 @@ $('.like').on('click',function(){
 					if(data.likeOn==1){
 						thtag.css("color", "#1E96FF");
 						// 좋아요 +1
+						
 						var ycount=thtag.parent().parent().find(".yCount");
+						
 						ycount.html(1);
 						
 					}else if(data.likeOn==2){
