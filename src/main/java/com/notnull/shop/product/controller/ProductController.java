@@ -316,6 +316,7 @@ public class ProductController {
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
+		String[] sum_price = request.getParameterValues("sum_price");
 		String[] cart_codes=null;
 		if( request.getParameterValues("cart_code") != null ) {
 			cart_codes = request.getParameterValues("cart_code");
@@ -340,6 +341,8 @@ public class ProductController {
 			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
 			buyInfo2.setPhone2(buyInfo.getPhone2());
 			buyInfo2.setRequest(buyInfo.getRequest());
+			buyInfo2.setTotal_price(Integer.parseInt(sum_price[i]));
+			buyInfo2.setBuy_status("P");
 			buyList.add(buyInfo2);
 		}
 		int result=service.insertBuyList(buyList);
