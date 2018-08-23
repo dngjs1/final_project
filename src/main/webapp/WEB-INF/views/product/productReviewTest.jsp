@@ -20,6 +20,7 @@
 </style>
 
 <c:set var='path' value="${pageContext.request.contextPath}" />
+<div class = "container">
  <form name="productReview" action="${path}/productReviewInsert.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
  	  <input name="product_code" type="hidden" value="${product_code}"/>
  	  <input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
@@ -63,6 +64,7 @@
 
         <input type="submit" value="등록" class="btn" />   
  </form>
+ </div>
  <script>
  $(function(){
 	 $("#review_star").val("0");
