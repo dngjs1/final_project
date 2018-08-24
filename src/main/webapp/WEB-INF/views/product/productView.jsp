@@ -750,11 +750,6 @@ span.star-prototype > * {
   	.detail_img_container .detail_img{
   		max-width: 835px;
   	}
-  	
-  	.countCheck td{
-  		width : 20px;
-  	}
-  	
   </style>
   
   	<div class="detail_img_container">
@@ -773,63 +768,6 @@ span.star-prototype > * {
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <%-- <div> 
-	 <c:set var="total" value="0"/>
-	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
-		<c:set var="total" value="${(total+review.review_star)}"/>
-		<c:set var="count" value="${vs.count }"/>
-	 </c:forEach>
-	 <c:out value="${total/count}"/>
-	 <span class="star-prototype">${total/count}</span>
-	 참여인원:<c:out value="${count }"/>
- </div> --%>
-
- <%-- <div>상품평 이미지</div>
-   <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
-		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
-	</c:forEach> --%>
-	<hr>
-<script>
-$(function(){
-	var member_id="${memberLoggedIn.member_id}";
-	var reviewLength=$(".reviewLength").val();
-	
-	var statusList = new Array(); 
-	var idList = new Array();
-	var codeList = new Array();
-	
-	<c:forEach items="${likeList}" var="item">
-	statusList.push("${item.like_status}");
-	idList.push("${item.member_id}");
-	codeList.push("${item.review_code}");
-	</c:forEach>
-	
-	for(var i=0;i<reviewLength;i++){
-		var y_count=0;
-		var n_count=0;
-		for(var j=0;j<statusList.length;j++){
-			if($('.review_code'+i).val()==codeList[j]){
-				if(statusList[j]=='Y'){
-					y_count=y_count+1;
-				}else{
-					n_count=n_count+1;
-				}
-			}
-			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
-				if(statusList[j]=='Y'){
-					$('.like'+i).css("color", "#1E96FF");
-				}else{
-					$('.dislike'+i).css("color", "#FF3232");
-				}
-			}
-		}
-		$('.yCount'+i).html(y_count);
-		$('.nCount'+i).html(n_count);
-	}
-});
-	
-</script>
-
 
 <style>
 /* <!--상품평 미리보기를 위한 스타일-> */
@@ -988,134 +926,164 @@ $(function(){
 				</c:if>
   				</div>
   				
-  				<style>
-  				.like_dislike {
-  					margin-top : 20px;
-  					padding : 15px;
-  					background-color: #fff;
-  					border:1px solid #ddd;
-  					width : 50%;
-  					}
-  					
-  				</style>
-  				
-  				<!-- 좋아요 싫어요 들어가는 div -->
-  				<div class = "Like_dislike">
-  				<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
-					<table class='countCheck'>
-				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
-						<tbody>
-						
-						
-							<tr>
-								<td>
-									<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
-								</td>
-								<td>
-									<span class='yCount${vs.index} yCount'>0</span>
-								</td>
-								<td>
-									<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-								</td>
-								<td>
-									<span class='nCount${vs.index} nCount'>0</span>
-								</td>
-							</tr>
-							
-							
-							
-						</tbody>
-					</table>
-					<style>
-						#review_like {
-							display: inline-block;
-							margin-right : 3px;
-							border : 1px solid #dadada;
-							width : 50px;
-							line-height: 23px;
-							text-align: center;
-							color : #7b7b7b;
-							cursor: pointer;
-							font-size : 12px;
-						}
-						
-						#review_like:hover {
-							background: #5e5e5e;
-							color : white;
-							
-						}
-						
-						#review_dislike {
-							display: inline-block;
-							margin-right : 3px;
-							border : 1px solid #dadada;
-							width : 50px;
-							line-height: 23px;
-							text-align: center;
-							color : #7b7b7b;
-							cursor: pointer;
-							font-size : 12px;
-						}
-						
-						#review_dislike:hover {
-							background: #5e5e5e;
-							color : white;
-							
-						}
-						
-						.qna {
-							display: inline-block;
-							margin-right : 12px;
-							color : #7b7b7b;
-							font-size : 12px;	
-							font-weight: bold;
-						}
-						
-						.review_score {
-							display: inline-block;
-							background : #5e5e5e;
-							border : 1px solid white;
-							min-width : 20px;
-							line-height: 23px;
-							text-align: center;
-							margin : 0 8px 0 7px;
-							position: relative;
-							padding : 0 5px;
-						}
-						
-						.arrow {
-							width : 0;
-							height : 0;
-							border-top: 10px solid transparent;
-							border-bottom: 10px solid transparent;
-							border-right : 10px solid #5e5e5e;
-							position: absolute;
-							top : 2px;
-							left : -5px;
-							font-size : 0;
-							line-height: 0;
-						}
-					</style>
+ 				<style>
+ 				.like_dislike {
+ 					margin-top : 20px;
+ 					padding : 15px;
+ 					background-color: #fff;
+ 					border:1px solid #ddd;
+ 					width : 50%;
+ 					}
+ 			
+				.review_like {
+					display: inline-block;
+					margin-right : 3px;
+					border : 1px solid #dadada;
+					width : 50px;
+					line-height: 23px;
+					text-align: center;
+					color : #7b7b7b;
+					cursor: pointer;
+					font-size : 12px;
+				}
+				
+				.review_like:hover {
+					background: #5e5e5e;
+					color : white;
 					
-					<div>
-						<div class = "qna">상품평이 도움이 되었나요?</div>
+				}
+				
+				.review_dislike {
+					display: inline-block;
+					margin-right : 3px;
+					border : 1px solid #dadada;
+					width : 50px;
+					line-height: 23px;
+					text-align: center;
+					color : #7b7b7b;
+					cursor: pointer;
+					font-size : 12px;
+				}
+				
+				.review_dislike:hover {
+					background: #5e5e5e;
+					color : white;
+					
+				}
+				
+				.qna {
+					display: inline-block;
+					margin-right : 12px;
+					color : #7b7b7b;
+					font-size : 12px;	
+					font-weight: bold;
+				}
+				
+				.review_score {
+					display: inline-block;
+					background : #5e5e5e;
+					border : 1px solid white;
+					min-width : 20px;
+					line-height: 23px;
+					text-align: center;
+					margin : 0 8px 0 7px;
+					position: relative;
+					padding : 0 5px;
+				}
+				
+				.arrow {
+					width : 0;
+					height : 0;
+					border-top: 10px solid transparent;
+					border-bottom: 10px solid transparent;
+					border-right : 10px solid #5e5e5e;
+					position: absolute;
+					top : 2px;
+					left : -5px;
+					font-size : 0;
+					line-height: 0;
+				}
+			</style>
+<script>
+$(function(){
+	var member_id="${memberLoggedIn.member_id}";
+	var reviewLength=$(".reviewLength").val();
+	
+	var statusList = new Array(); 
+	var idList = new Array();
+	var codeList = new Array();
+	
+	<c:forEach items="${likeList}" var="item">
+	statusList.push("${item.like_status}");
+	idList.push("${item.member_id}");
+	codeList.push("${item.review_code}");
+	</c:forEach>
+	
+	for(var i=0;i<reviewLength;i++){
+		var y_count=0;
+		var n_count=0;
+		for(var j=0;j<statusList.length;j++){
+			if($('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					y_count=y_count+1;
+				}else{
+					n_count=n_count+1;
+				}
+			}
+			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					$('.like'+i).css("color", "#1E96FF");
+				}else{
+					$('.dislike'+i).css("color", "#FF3232");
+				}
+			}
+		}
+		$('.yCount'+i).html(y_count);
+		$('.nCount'+i).html(n_count);
+	}
+});
+	
+</script>
+			<div class = "Like_dislike">
+  				
+					<tbody>	
+					
+						<tr>
+							<td>
+								<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
+							</td>
+							<td>
+								<span class='yCount${vs.index} yCount'>0</span>
+							</td>
+							<td>
+								<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+							</td>
+							<td>
+								<span class='nCount${vs.index} nCount'>0</span>
+							</td>
+						</tr>
 						
-						<!-- 좋아요 싫어요 부분 -->
-						<a id = "review_like">네</a>
-						<a id = "review_dislike">아니요</a>
 						
-						<!-- 왼쪽 화살표로 만들어논 div -->
-						<div class = "review_score">
-							<div class = "arrow">
-							
-							</div>
-							
-							<!-- 좋아요 부분만 나오는 div -->
-							<span class = "review_like_score" style = "color : white; font-size : 14px;">
-								+1
-							</span>
+					</tbody>
+				</table>
+				<div class = "qna">상품평이 도움이 되었나요?</div>
+					<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
+				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
+					<!-- 좋아요 싫어요 부분 -->
+					<a class = "review_like like like${vs.index}">네</a>
+					<a class = "review_dislike dislike dislike${vs.index}">아니요</a>
+					
+					<!-- 왼쪽 화살표로 만들어논 div -->
+					<div class = "review_score">
+						<div class = "arrow">
+						
 						</div>
-					</div>		
+						
+						<!-- 좋아요 부분만 나오는 div -->
+						<span class = "review_like_score yCount${vs.index} yCount" style = "color : white; font-size : 14px;">
+							+0
+						</span>
+					</div>	
   				</div>
   			</div>
   			
