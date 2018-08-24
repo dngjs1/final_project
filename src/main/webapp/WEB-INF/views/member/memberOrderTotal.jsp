@@ -425,9 +425,11 @@
 					<tbody>
 						<c:choose>
 						<c:when test="${not empty orderList}">
+							<c:forEach >
 							<tr>
 								<td></td>
 							</tr>
+							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
