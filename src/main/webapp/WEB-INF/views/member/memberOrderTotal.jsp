@@ -423,9 +423,18 @@
 					</tr>
 					</thead>
 					<tbody>
-						<tr>
-						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
-						</tr>
+						<c:choose>
+						<c:when test="${not empty orderList}">
+							<tr>
+								<td></td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+							</tr>
+						</c:otherwise>
+						</c:choose>
 					</tbody>
 				
 				</table>

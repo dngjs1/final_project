@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServlet;
@@ -90,8 +91,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberOrderTotal.do")
-	public String memberOrderTotal() {
-		
+	public String memberOrderTotal(String member_id,Model model) {
+		List<Map> orderList = service.selectOrderList(member_id);
+		System.out.println(orderList);
+		model.addAttribute(orderList);
 		return "member/memberOrderTotal";
 	}
 	
