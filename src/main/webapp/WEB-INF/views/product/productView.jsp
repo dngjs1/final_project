@@ -829,6 +829,23 @@ $(function(){
 });
 	
 </script>
+
+
+<style>
+
+/* <!--상품평 미리보기를 위한 스타일-> */
+ 
+ #preview{
+	position:absolute;
+	border:1px solid #ccc;
+	background:#333;
+	padding:5px;
+	display:none;
+	color:#fff;
+	}
+
+</style>
+
 <!-- 상품평 리뷰 -->
 <div> 
 <c:forEach var="review" items="${reviewList}" varStatus="vs">
@@ -841,7 +858,11 @@ $(function(){
 	<br>
 	 <c:forEach var='imgList' items='${reviewImgList}'>
 		<c:if test="${review.review_code eq imgList.review_code }">
-			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
+		
+			<a href = "${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" class = "preview">
+			<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:10%; height:10%;"/>
+			</a>			
+
 		</c:if>
 	</c:forEach>
 		<br>	
@@ -999,7 +1020,160 @@ $('.star-prototype').generateStars();
  
  </script>
 
-  상품평 페이징 처리
+  <!-- 상품평 테이블 만드는 곳 -->
+  
+  <style>
+  	.review_post_area {
+  		background-color : #fff;
+  		margin-top : -1px;
+  		border:1px solid #ddd;
+  		padding: 15px 15px 15px 107px;
+  		position: relative;
+  	}
+  	.area_left {
+  		position: absolute;
+  		left : 15px;
+  		top : 15px;
+  	}
+  	
+  	.area_left img {
+  		border: 1px solid #ddd;
+  		width : 75px;
+  	}
+  	
+  	.profile {
+  		height : 45px;
+  		border-bottom : 1px solid #ddd;
+  	}
+  	
+  	.profile p {
+  		width : auto;
+  		float : left;
+  		padding-top : 10px;
+  		line-height: 12px;
+  		color : #000;
+  	
+  	}
+  	
+  	.profile p > span{
+  		padding : 0 10px 0 0 ;
+  		margin-right : 10px;
+  		float : left;
+  		display: block;
+  		border-right: 1px solid #ddd;  	
+  	}
+  	
+  	.star_review {
+  		border-right: 0;
+  	}
+  	
+  	.user_id {
+  		font-weight : bold;
+  	}
+  	
+  	.write_date {
+  		font-weight: normal;
+  		color : #b2b2b2;
+  	}
+  	
+  	.product_name {
+  		margin-bottom: 10px
+  		padding-bottom : 10px;
+  		border-bottom: 1px solid #ddd;
+  		color : #000;
+  	}
+  </style>
+  	<div class = "review_post_area">
+  	
+  		<div class = "area_left">
+  			<img src = "./resources/images/profile_image.gif">
+  		</div>
+  		
+  		<div class = "area_right">
+  		
+  		<!-- 구매자에 대한 프로필 정보가 넘어오는 공간 -->
+  			<div class = "review_contents">
+  				<div class = "profile">
+  					<p>
+  					<!-- 아이디 넘어오는 공간 -->
+  						<span class = "user_id">
+  							admin
+  						</span>
+  						<!-- 구매날짜 넘어오는 공간 -->
+  						<span class = "write_date">
+  							2018.08-24
+  						</span>
+  						<!-- 평점 넘오는 공간 -->
+  						<span class = "star_review" style = "border-right: 0;">
+  							★★★★★
+  						</span>
+  					
+  					
+  					</p>
+  					
+  				</div>
+  			<style>
+  				.product_name {
+  					padding-top : 10px;
+  					margin-bottom: 0;
+  					padding-bottom: 10px;
+  					border-bottom: 1px solid #ddd;
+  					color : #000;
+  					font-weight: bold;
+  					font-size : 14px;
+  				}
+  				
+  				.write_review {
+  					line-height: 20px;
+  					padding:15px 0;	
+  				}
+  				
+  				.content_review {
+  					color : #b2b2b2;
+  					
+  				}
+  			</style>
+  			
+  				<!-- 상품명 넘어오는 공간 -->
+  				<div class = "product_name">
+  					캠핑용품입니다.
+  				</div>
+  				
+  				<!-- 상품평 제목이라고 써져있는 곳 넘어오는 div 공간 -->
+  				<div class = "write_review">
+  					<span class = "content_review">
+  						상품평 제목이라고 써져있는 곳에서 넘어오는 공간
+  					
+  					</span>
+  				</div>
+  				
+  				<!-- 그림 이미지 넘어오는 div공간 -->
+  				<div class = "photo_review">
+  					<img src = "./resources/images/cat.jpg">
+  				</div>
+  				
+  				<style>
+  				.like_dislike {
+  					margin-top : 20px;
+  					padding : 15px;
+  					background-color: #fff;
+  					border:1px solid #ddd;
+  					width : 30%;
+  					}
+  				</style>
+  				
+  				<!-- 좋아요 싫어요 들어가는 div -->
+  				<div class = "Like_dislike">
+  				
+  				<i class="far fa-thumbs-up like"></i>
+  				</div>
+  			</div>
+  			
+  		
+  		</div>
+  	
+  	
+  	</div>
   
    </div>
    <div id="section3" class="container tab-pane fade">

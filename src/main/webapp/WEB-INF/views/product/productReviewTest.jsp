@@ -75,6 +75,8 @@
         <input type="submit" value="등록" class="btn" />   
  </form>
  </div>
+ 
+ 	
  <script>
  $(function(){
 	 $("#review_star").val("0");
