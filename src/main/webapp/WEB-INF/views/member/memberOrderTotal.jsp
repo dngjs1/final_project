@@ -425,9 +425,13 @@
 					<tbody>
 						<c:choose>
 						<c:when test="${not empty orderList}">
-							<c:forEach >
+							<c:forEach var="order" items="${orderList}" varStatus="vs">
 							<tr>
-								<td></td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
 							</tr>
 							</c:forEach>
 						</c:when>

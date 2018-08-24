@@ -339,7 +339,7 @@
       			
       			<c:if test="${memberLoggedIn.member_level ne 'admin' }">
       			<li>
-      				<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?memberId=${memberLoggedIn.member_id}">마이페이지</a>
+      				<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}">마이페이지</a>
       			</li>
       			</c:if>
       			

@@ -93,8 +93,7 @@ public class MemberController {
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
-		System.out.println(orderList);
-		model.addAttribute(orderList);
+		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
 	}
 	
