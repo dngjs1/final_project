@@ -2,6 +2,7 @@ package com.notnull.shop.member.model.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -183,7 +184,9 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.totalPoint(sqlSession,member_id);
 	}
 
-
+	@Override
+	public List<Map> selectOrderList(String member_id) {
+		return memberDAO.selectOrderList(sqlSession,member_id);
+	}
 	
-
 }

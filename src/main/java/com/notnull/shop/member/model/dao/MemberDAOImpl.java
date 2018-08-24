@@ -1,6 +1,7 @@
 package com.notnull.shop.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -136,9 +137,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.totalPoint",member_id);
 	}
 
+	@Override
+	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("member.selectOrderList",member_id);
+	}
 	
-
-	
-	
-
 }
