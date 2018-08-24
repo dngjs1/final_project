@@ -832,10 +832,8 @@ $(function(){
 
 
 <style>
-
 /* <!--상품평 미리보기를 위한 스타일-> */
- 
- #preview{
+ 	#preview{
 	position:absolute;
 	border:1px solid #ccc;
 	background:#333;
@@ -843,57 +841,186 @@ $(function(){
 	display:none;
 	color:#fff;
 	}
-
+	.review_post_area {
+  		background-color : #fff;
+  		margin-top : -1px;
+  		border:1px solid #ddd;
+  		padding: 15px 15px 15px 107px;
+  		position: relative;
+  	}
+  	.area_left {
+  		position: absolute;
+  		left : 15px;
+  		top : 15px;
+  	}
+  	
+  	.area_left img {
+  		border: 1px solid #ddd;
+  		width : 75px;
+  	}
+  	
+  	.profile {
+  		height : 45px;
+  		border-bottom : 1px solid #ddd;
+  	}
+  	
+  	.profile p {
+  		width : auto;
+  		float : left;
+  		padding-top : 10px;
+  		line-height: 12px;
+  		color : #000;
+  	
+  	}
+  	
+  	.profile p > span{
+  		padding : 0 10px 0 0 ;
+  		margin-right : 10px;
+  		float : left;
+  		display: block;
+  		border-right: 1px solid #ddd;  	
+  	}
+  	
+  	.star_review {
+  		border-right: 0;
+  	}
+  	
+  	.user_id {
+  		font-weight : bold;
+  	}
+  	
+  	.write_date {
+  		font-weight: normal;
+  		color : #b2b2b2;
+  	}
+  	
+  	.product_name {
+  		margin-bottom: 10px
+  		padding-bottom : 10px;
+  		border-bottom: 1px solid #ddd;
+  		color : #000;
+  	}
 </style>
 
-<!-- 상품평 리뷰 -->
-<div> 
+<!-- 상품평 테이블 만드는 곳 -->
 <c:forEach var="review" items="${reviewList}" varStatus="vs">
-
-	<i class="far fa-user-circle"></i><span style="color:#1EA4FF;font-size:18px;"> ${review.member_id}</span>
-	&emsp;&emsp;<span class="star-prototype">${review.review_star }</span>
-	&emsp;&emsp;<span>${review.review_date}</span>
-
-	<c:if test="${reviewImgList != null}">
-	<br>
-	 <c:forEach var='imgList' items='${reviewImgList}'>
-		<c:if test="${review.review_code eq imgList.review_code }">
-		
-			<a href = "${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" class = "preview">
-			<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:10%; height:10%;"/>
-			</a>			
-
-		</c:if>
-	</c:forEach>
-		<br>	
-	</c:if>
-		<span>${review.review_content}</span> 	 
-	  <br>	
-		<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
-		<table class='countCheck'>
-	 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
-			<tbody>
-				<tr>
-					<td>
-						<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
-					</td>
-					<td>
-						<span class='yCount${vs.index} yCount'>0</span>
-					</td>
-					<td>
-						<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-					</td>
-					<td>
-						<span class='nCount${vs.index} nCount'>0</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>				 		
-	 <hr>
- </c:forEach>
+  	<div class = "review_post_area">
+  	
+  		<div class = "area_left">
+  			<img src = "./resources/images/profile_image.gif">
+  		</div>
+  		
+  		<div class = "area_right">
+  		
+  		<!-- 구매자에 대한 프로필 정보가 넘어오는 공간 -->
+  			<div class = "review_contents">
+  				<div class = "profile">
+  					<p>
+  					<!-- 아이디 넘어오는 공간 -->
+  						<span class = "user_id">
+  							${review.member_id}
+  						</span>
+  						<!-- 구매날짜 넘어오는 공간 -->
+  						<span class = "write_date">
+  							${review.review_date}
+  						</span>
+  						<!-- 평점 넘오는 공간 -->
+  						<span class = "star_review star-prototype" style = "border-right: 0;">
+  							${review.review_star }
+  						</span>
+  					
+  					
+  					</p>
+  					
+  				</div>
+  			<style>
+  				.product_name {
+  					padding-top : 10px;
+  					margin-bottom: 0;
+  					padding-bottom: 10px;
+  					border-bottom: 1px solid #ddd;
+  					color : #000;
+  					font-weight: bold;
+  					font-size : 14px;
+  				}
+  				
+  				.write_review {
+  					line-height: 20px;
+  					padding:15px 0;	
+  				}
+  				
+  				.content_review {
+  					color : #b2b2b2;
+  					
+  				}
+  			</style>
+  			
+  				<!-- 상품명 넘어오는 공간 -->
+  				<div class = "product_name">
+  					캠핑용품입니다.
+  				</div>
+  				
+  				<!-- 상품평 제목이라고 써져있는 곳 넘어오는 div 공간 -->
+  				<div class = "write_review">
+  					<span class = "content_review">
+  						${review.review_content}
+  					</span>
+  				</div>
+  				
+  				<!-- 그림 이미지 넘어오는 div공간 -->
+  				<div class = "photo_review">
+  				<c:if test="${reviewImgList != null}">
+					<c:forEach var='imgList' items='${reviewImgList}'>
+						<c:if test="${review.review_code eq imgList.review_code }">
+							<a href = "${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" class = "preview">
+							<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:10%; height:10%;"/>
+							</a>			
+						</c:if>
+					</c:forEach>
+				</c:if>
+  				</div>
+  				
+  				<style>
+  				.like_dislike {
+  					margin-top : 20px;
+  					padding : 15px;
+  					background-color: #fff;
+  					border:1px solid #ddd;
+  					width : 30%;
+  					}
+  				</style>
+  				
+  				<!-- 좋아요 싫어요 들어가는 div -->
+  				<div class = "Like_dislike">
+  				<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
+					<table class='countCheck'>
+				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
+						<tbody>
+							<tr>
+								<td>
+									<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
+								</td>
+								<td>
+									<span class='yCount${vs.index} yCount'>0</span>
+								</td>
+								<td>
+									<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+								</td>
+								<td>
+									<span class='nCount${vs.index} nCount'>0</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>		
+  				</div>
+  			</div>
+  			
+  		</div>
+  	
+  	</div>
+</c:forEach>
 </div>
 <script>
-
 //좋아요
 $(function(){
 	
@@ -1008,175 +1135,18 @@ $('.dislike').on('click',function(){
 
 
 });
-</script>
- <script>
+
 //별점
 $.fn.generateStars = function() {
  return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 };
-
 //숫자 평점을 별로 변환하도록 호출하는 함수
 $('.star-prototype').generateStars();
  
- </script>
+</script>
 
-  <!-- 상품평 테이블 만드는 곳 -->
   
-  <style>
-  	.review_post_area {
-  		background-color : #fff;
-  		margin-top : -1px;
-  		border:1px solid #ddd;
-  		padding: 15px 15px 15px 107px;
-  		position: relative;
-  	}
-  	.area_left {
-  		position: absolute;
-  		left : 15px;
-  		top : 15px;
-  	}
-  	
-  	.area_left img {
-  		border: 1px solid #ddd;
-  		width : 75px;
-  	}
-  	
-  	.profile {
-  		height : 45px;
-  		border-bottom : 1px solid #ddd;
-  	}
-  	
-  	.profile p {
-  		width : auto;
-  		float : left;
-  		padding-top : 10px;
-  		line-height: 12px;
-  		color : #000;
-  	
-  	}
-  	
-  	.profile p > span{
-  		padding : 0 10px 0 0 ;
-  		margin-right : 10px;
-  		float : left;
-  		display: block;
-  		border-right: 1px solid #ddd;  	
-  	}
-  	
-  	.star_review {
-  		border-right: 0;
-  	}
-  	
-  	.user_id {
-  		font-weight : bold;
-  	}
-  	
-  	.write_date {
-  		font-weight: normal;
-  		color : #b2b2b2;
-  	}
-  	
-  	.product_name {
-  		margin-bottom: 10px
-  		padding-bottom : 10px;
-  		border-bottom: 1px solid #ddd;
-  		color : #000;
-  	}
-  </style>
-  	<div class = "review_post_area">
-  	
-  		<div class = "area_left">
-  			<img src = "./resources/images/profile_image.gif">
-  		</div>
-  		
-  		<div class = "area_right">
-  		
-  		<!-- 구매자에 대한 프로필 정보가 넘어오는 공간 -->
-  			<div class = "review_contents">
-  				<div class = "profile">
-  					<p>
-  					<!-- 아이디 넘어오는 공간 -->
-  						<span class = "user_id">
-  							admin
-  						</span>
-  						<!-- 구매날짜 넘어오는 공간 -->
-  						<span class = "write_date">
-  							2018.08-24
-  						</span>
-  						<!-- 평점 넘오는 공간 -->
-  						<span class = "star_review" style = "border-right: 0;">
-  							★★★★★
-  						</span>
-  					
-  					
-  					</p>
-  					
-  				</div>
-  			<style>
-  				.product_name {
-  					padding-top : 10px;
-  					margin-bottom: 0;
-  					padding-bottom: 10px;
-  					border-bottom: 1px solid #ddd;
-  					color : #000;
-  					font-weight: bold;
-  					font-size : 14px;
-  				}
-  				
-  				.write_review {
-  					line-height: 20px;
-  					padding:15px 0;	
-  				}
-  				
-  				.content_review {
-  					color : #b2b2b2;
-  					
-  				}
-  			</style>
-  			
-  				<!-- 상품명 넘어오는 공간 -->
-  				<div class = "product_name">
-  					캠핑용품입니다.
-  				</div>
-  				
-  				<!-- 상품평 제목이라고 써져있는 곳 넘어오는 div 공간 -->
-  				<div class = "write_review">
-  					<span class = "content_review">
-  						상품평 제목이라고 써져있는 곳에서 넘어오는 공간
-  					
-  					</span>
-  				</div>
-  				
-  				<!-- 그림 이미지 넘어오는 div공간 -->
-  				<div class = "photo_review">
-  					<img src = "./resources/images/cat.jpg">
-  				</div>
-  				
-  				<style>
-  				.like_dislike {
-  					margin-top : 20px;
-  					padding : 15px;
-  					background-color: #fff;
-  					border:1px solid #ddd;
-  					width : 30%;
-  					}
-  				</style>
-  				
-  				<!-- 좋아요 싫어요 들어가는 div -->
-  				<div class = "Like_dislike">
-  				
-  				<i class="far fa-thumbs-up like"></i>
-  				</div>
-  			</div>
-  			
-  		
-  		</div>
-  	
-  	
-  	</div>
-  
-   </div>
-   <div id="section3" class="container tab-pane fade">
+<div id="section3" class="container tab-pane fade">
 			
   
 
