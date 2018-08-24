@@ -881,9 +881,6 @@ $(function(){
   		border-right: 1px solid #ddd;  	
   	}
   	
-  	.star_review {
-  		border-right: 0;
-  	}
   	
   	.user_id {
   		font-weight : bold;
@@ -899,6 +896,12 @@ $(function(){
   		padding-bottom : 10px;
   		border-bottom: 1px solid #ddd;
   		color : #000;
+  	}
+  	
+  	.review_total {
+  		color : #a4a4a4;
+  		font-size : 12px;
+  		
   	}
 </style>
 
@@ -925,8 +928,13 @@ $(function(){
   							${review.review_date}
   						</span>
   						<!-- 평점 넘오는 공간 -->
-  						<span class = "star_review star-prototype" style = "border-right: 0;">
+  						<span class = "star_review star-prototype">
   							${review.review_star }
+  						</span>
+  						
+  						<!-- 좋아요 싫어요 합친 토탈수가 전체 수 도움된다고 나오는 수가 좋아요 수 -->
+  						<span class = "review_total">
+  							(<b>2</b>명중 <b>1</b>명이 이 상품평이 도움이 된다고 선택했습니다)
   						</span>
   					
   					
@@ -973,7 +981,7 @@ $(function(){
 					<c:forEach var='imgList' items='${reviewImgList}'>
 						<c:if test="${review.review_code eq imgList.review_code }">
 							<a href = "${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" class = "preview">
-							<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:10%; height:10%;"/>
+							<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:20%; height:20%;"/>
 							</a>			
 						</c:if>
 					</c:forEach>
@@ -986,8 +994,9 @@ $(function(){
   					padding : 15px;
   					background-color: #fff;
   					border:1px solid #ddd;
-  					width : 30%;
+  					width : 50%;
   					}
+  					
   				</style>
   				
   				<!-- 좋아요 싫어요 들어가는 div -->
@@ -996,6 +1005,8 @@ $(function(){
 					<table class='countCheck'>
 				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
 						<tbody>
+						
+						
 							<tr>
 								<td>
 									<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
@@ -1010,8 +1021,101 @@ $(function(){
 									<span class='nCount${vs.index} nCount'>0</span>
 								</td>
 							</tr>
+							
+							
+							
 						</tbody>
-					</table>		
+					</table>
+					<style>
+						#review_like {
+							display: inline-block;
+							margin-right : 3px;
+							border : 1px solid #dadada;
+							width : 50px;
+							line-height: 23px;
+							text-align: center;
+							color : #7b7b7b;
+							cursor: pointer;
+							font-size : 12px;
+						}
+						
+						#review_like:hover {
+							background: #5e5e5e;
+							color : white;
+							
+						}
+						
+						#review_dislike {
+							display: inline-block;
+							margin-right : 3px;
+							border : 1px solid #dadada;
+							width : 50px;
+							line-height: 23px;
+							text-align: center;
+							color : #7b7b7b;
+							cursor: pointer;
+							font-size : 12px;
+						}
+						
+						#review_dislike:hover {
+							background: #5e5e5e;
+							color : white;
+							
+						}
+						
+						.qna {
+							display: inline-block;
+							margin-right : 12px;
+							color : #7b7b7b;
+							font-size : 12px;	
+							font-weight: bold;
+						}
+						
+						.review_score {
+							display: inline-block;
+							background : #5e5e5e;
+							border : 1px solid white;
+							min-width : 20px;
+							line-height: 23px;
+							text-align: center;
+							margin : 0 8px 0 7px;
+							position: relative;
+							padding : 0 5px;
+						}
+						
+						.arrow {
+							width : 0;
+							height : 0;
+							border-top: 10px solid transparent;
+							border-bottom: 10px solid transparent;
+							border-right : 10px solid #5e5e5e;
+							position: absolute;
+							top : 2px;
+							left : -5px;
+							font-size : 0;
+							line-height: 0;
+						}
+					</style>
+					
+					<div>
+						<div class = "qna">상품평이 도움이 되었나요?</div>
+						
+						<!-- 좋아요 싫어요 부분 -->
+						<a id = "review_like">네</a>
+						<a id = "review_dislike">아니요</a>
+						
+						<!-- 왼쪽 화살표로 만들어논 div -->
+						<div class = "review_score">
+							<div class = "arrow">
+							
+							</div>
+							
+							<!-- 좋아요 부분만 나오는 div -->
+							<span class = "review_like_score" style = "color : white; font-size : 14px;">
+								+1
+							</span>
+						</div>
+					</div>		
   				</div>
   			</div>
   			
