@@ -872,7 +872,7 @@ span.star-prototype > * {
   						
   						<!-- 좋아요 싫어요 합친 토탈수가 전체 수 도움된다고 나오는 수가 좋아요 수 -->
   						<span class = "review_total">
-  							(<b>2</b>명중 <b>1</b>명이 이 상품평이 도움이 된다고 선택했습니다)
+  							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
   						</span>
   					
   					
@@ -970,7 +970,7 @@ span.star-prototype > * {
 					color : white;
 					
 				}
-				
+
 				.qna {
 					display: inline-block;
 					margin-right : 12px;
@@ -1004,69 +1004,9 @@ span.star-prototype > * {
 					line-height: 0;
 				}
 			</style>
-<script>
-$(function(){
-	var member_id="${memberLoggedIn.member_id}";
-	var reviewLength=$(".reviewLength").val();
-	
-	var statusList = new Array(); 
-	var idList = new Array();
-	var codeList = new Array();
-	
-	<c:forEach items="${likeList}" var="item">
-	statusList.push("${item.like_status}");
-	idList.push("${item.member_id}");
-	codeList.push("${item.review_code}");
-	</c:forEach>
-	
-	for(var i=0;i<reviewLength;i++){
-		var y_count=0;
-		var n_count=0;
-		for(var j=0;j<statusList.length;j++){
-			if($('.review_code'+i).val()==codeList[j]){
-				if(statusList[j]=='Y'){
-					y_count=y_count+1;
-				}else{
-					n_count=n_count+1;
-				}
-			}
-			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
-				if(statusList[j]=='Y'){
-					$('.like'+i).css("color", "#1E96FF");
-				}else{
-					$('.dislike'+i).css("color", "#FF3232");
-				}
-			}
-		}
-		$('.yCount'+i).html(y_count);
-		$('.nCount'+i).html(n_count);
-	}
-});
-	
-</script>
-			<div class = "Like_dislike">
-  				
-					<tbody>	
-					
-						<tr>
-							<td>
-								<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
-							</td>
-							<td>
-								<span class='yCount${vs.index} yCount'>0</span>
-							</td>
-							<td>
-								<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-							</td>
-							<td>
-								<span class='nCount${vs.index} nCount'>0</span>
-							</td>
-						</tr>
-						
-						
-					</tbody>
-				</table>
-				<div class = "qna">상품평이 도움이 되었나요?</div>
+			
+				<div class = "Like_dislike">
+					<div class = "qna">상품평이 도움이 되었나요?</div>
 					<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
 				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
 					<!-- 좋아요 싫어요 부분 -->
@@ -1093,9 +1033,47 @@ $(function(){
 </c:forEach>
 </div>
 <script>
-//좋아요
 $(function(){
+	//좋아요 첫화면
+	var member_id="${memberLoggedIn.member_id}";
+	var reviewLength=$(".reviewLength").val();
 	
+	var statusList = new Array(); 
+	var idList = new Array();
+	var codeList = new Array();
+	
+	<c:forEach items="${likeList}" var="item">
+		statusList.push("${item.like_status}");
+		idList.push("${item.member_id}");
+		codeList.push("${item.review_code}");
+	</c:forEach>
+	
+	for(var i=0;i<reviewLength;i++){
+		var y_count=0;
+		var total_count=0;
+		for(var j=0;j<statusList.length;j++){
+			if($('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					y_count=y_count+1;
+				}
+				total_count=total_count+1;
+			}
+			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
+				if(statusList[j]=='Y'){
+					$('.like'+i).css({"color":"white","background":"#5e5e5e"});
+				}else{
+					$('.dislike'+i).css({"color":"white","background":"#5e5e5e"});
+				}
+			}
+		}
+		$('.yCount'+i).html("+"+y_count);
+		$('.total_count'+i).html(total_count);
+		$('.y_count'+i).html(y_count);
+	}
+});
+
+$(function(){
+//좋아요
 $('.like').on('click',function(){
 	var thtag=$(this);
 	var member_id="${memberLoggedIn.member_id}";
@@ -1105,7 +1083,7 @@ $('.like').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).siblings("[name=review_code]").val(),
 				like_status:'Y'
 		};
 		$.ajax({
@@ -1117,25 +1095,29 @@ $('.like').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					var yCount=thtag.parent().parent().find('.yCount');
-					var nCount=thtag.parent().parent().find('.nCount');
+					var yCount=thtag.siblings(".review_score").find('.yCount');
+					var y_count=thtag.parent().parent().find('.y_count');
+					var total_count=thtag.parent().parent().find('.total_count');
 					if(data.likeOn==1){
-						thtag.css("color", "#1E96FF");
+						thtag.css({"color":"white","background":"#5e5e5e"});
 						var count= parseInt(yCount.html())+1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
+						total_count.html(parseInt(total_count.html())+1);
 						// 좋아요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");
+						thtag.css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())-1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
+						total_count.html(parseInt(total_count.html())-1);
 						// 좋아요 -1
 					}else{
-						thtag.css("color", "#1E96FF");
-						thtag.parent().parent().find('.dislike').css("color", "#bebebe");
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						thtag.parent().parent().find('.dislike').css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())+1;
-						yCount.html(count);
-						var count= parseInt(nCount.html())-1;
-						nCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
 						// 좋아요 +1 , 싫어요 -1
 					}
 			
@@ -1159,7 +1141,7 @@ $('.dislike').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).siblings("[name=review_code]").val(),
 				like_status:'N'
 		};
 		$.ajax({
@@ -1170,25 +1152,23 @@ $('.dislike').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					var yCount=thtag.parent().parent().find('.yCount');
-					var nCount=thtag.parent().parent().find('.nCount');
+					var yCount=thtag.siblings(".review_score").find('.yCount');
+					var y_count=thtag.parent().parent().find('.y_count');
+					var total_count=thtag.parent().parent().find('.total_count');
 					if(data.likeOn==1){
-						thtag.css("color", "#FF3232");
-						var count= parseInt(nCount.html())+1;
-						nCount.html(count);
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						total_count.html(parseInt(total_count.html())+1);
 						//싫어요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");
-						var count= parseInt(nCount.html())-1;
-						nCount.html(count);
+						thtag.css({"color":"#7b7b7b","background":"white"});
+						total_count.html(parseInt(total_count.html())-1);
 						//싫어요 -1
 					}else{
-						thtag.css("color", "#FF3232");
-						thtag.parent().parent().find('.like').css("color", "#bebebe");
-						var count= parseInt(nCount.html())+1;
-						nCount.html(count);
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						thtag.parent().parent().find('.like').css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())-1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
 						//싫어요 +1 , 좋아요 -1
 					}
 					
