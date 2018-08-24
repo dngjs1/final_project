@@ -94,4 +94,17 @@
  	<select id="totalPoint" resultType="_int" parameterType="string">
  		select sum(point_increase) from point_log where member_id=#{member_id} group by member_id
  	</select>
+ 	
+ 	<resultMap type="map" id="selectOrderMap"></resultMap>
+ 	<select id="selectOrderList" parameterType="string" resultMap="selectOrderMap">
+ 		select p.product_code, p.product_name, po.option_size, b.buy_quantity,
+ 		b.total_price, b.buy_date, b.buy_status, pi.new_p_img_path
+ 		from product p
+ 		join product_option po on (p.product_code=po.product_code)
+ 		join product_img pi on (p.product_code=pi.product_code)
+ 		join buy_info b on (po.product_option_code=b.product_option_code)
+ 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+	  	and member_id=#{member_id}
+	  	order by buy_date desc
+ 	</select>
 </mapper>

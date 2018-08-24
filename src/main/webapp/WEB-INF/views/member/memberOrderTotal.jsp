@@ -423,9 +423,24 @@
 					</tr>
 					</thead>
 					<tbody>
-						<tr>
-						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
-						</tr>
+						<c:choose>
+						<c:when test="${not empty orderList}">
+							<c:forEach var="order" items="${orderList}" varStatus="vs">
+							<tr>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+								<td>${vs.index}</td>
+							</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+							</tr>
+						</c:otherwise>
+						</c:choose>
 					</tbody>
 				
 				</table>

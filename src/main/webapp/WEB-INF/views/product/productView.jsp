@@ -670,7 +670,7 @@ span.star-prototype > * {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 4px solid #fcfcfb;
-		width : 260px;
+		width : 316px;
 	}
 	
 	.link02:hover {
@@ -689,7 +689,7 @@ span.star-prototype > * {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 4px solid #fcfcfb;
-		width : 260px;
+		width : 315px;
 	}
 	
 	.link03:hover {
@@ -750,11 +750,6 @@ span.star-prototype > * {
   	.detail_img_container .detail_img{
   		max-width: 835px;
   	}
-  	
-  	.countCheck td{
-  		width : 20px;
-  	}
-  	
   </style>
   
   	<div class="detail_img_container">
@@ -773,24 +768,273 @@ span.star-prototype > * {
 		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
 	}
 </script>
- <%-- <div> 
-	 <c:set var="total" value="0"/>
-	 <c:forEach var="review" items="${reviewList}" varStatus="vs">
-		<c:set var="total" value="${(total+review.review_star)}"/>
-		<c:set var="count" value="${vs.count }"/>
-	 </c:forEach>
-	 <c:out value="${total/count}"/>
-	 <span class="star-prototype">${total/count}</span>
-	 참여인원:<c:out value="${count }"/>
- </div> --%>
 
- <%-- <div>상품평 이미지</div>
-   <c:forEach var='imgList' items='${reviewImgList}' varStatus="vs">
-		<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
-	</c:forEach> --%>
-	<hr>
+<style>
+/* <!--상품평 미리보기를 위한 스타일-> */
+ 	#preview{
+	position:absolute;
+	border:1px solid #ccc;
+	background:#333;
+	padding:5px;
+	display:none;
+	color:#fff;
+	}
+	.review_post_area {
+  		background-color : #fff;
+  		margin-top : -1px;
+  		border:1px solid #ddd;
+  		padding: 15px 15px 15px 107px;
+  		position: relative;
+  	}
+  	.area_left {
+  		position: absolute;
+  		left : 15px;
+  		top : 15px;
+  	}
+  	
+  	.area_left img {
+  		border: 1px solid #ddd;
+  		width : 75px;
+  	}
+  	
+  	.profile {
+  		height : 45px;
+  		border-bottom : 1px solid #ddd;
+  	}
+  	
+  	.profile p {
+  		width : auto;
+  		float : left;
+  		padding-top : 10px;
+  		line-height: 12px;
+  		color : #000;
+  	
+  	}
+  	
+  	.profile p > span{
+  		padding : 0 10px 0 0 ;
+  		margin-right : 10px;
+  		float : left;
+  		display: block;
+  		border-right: 1px solid #ddd;  	
+  	}
+  	
+  	
+  	.user_id {
+  		font-weight : bold;
+  	}
+  	
+  	.write_date {
+  		font-weight: normal;
+  		color : #b2b2b2;
+  	}
+  	
+  	.product_name {
+  		margin-bottom: 10px
+  		padding-bottom : 10px;
+  		border-bottom: 1px solid #ddd;
+  		color : #000;
+  	}
+  	
+  	.review_total {
+  		color : #a4a4a4;
+  		font-size : 12px;
+  		
+  	}
+</style>
+
+<!-- 상품평 테이블 만드는 곳 -->
+<c:forEach var="review" items="${reviewList}" varStatus="vs">
+  	<div class = "review_post_area">
+  	
+  		<div class = "area_left">
+  			<img src = "./resources/images/profile_image.gif">
+  		</div>
+  		
+  		<div class = "area_right">
+  		
+  		<!-- 구매자에 대한 프로필 정보가 넘어오는 공간 -->
+  			<div class = "review_contents">
+  				<div class = "profile">
+  					<p>
+  					<!-- 아이디 넘어오는 공간 -->
+  						<span class = "user_id">
+  							${review.member_id}
+  						</span>
+  						<!-- 구매날짜 넘어오는 공간 -->
+  						<span class = "write_date">
+  							${review.review_date}
+  						</span>
+  						<!-- 평점 넘오는 공간 -->
+  						<span class = "star_review star-prototype">
+  							${review.review_star }
+  						</span>
+  						
+  						<!-- 좋아요 싫어요 합친 토탈수가 전체 수 도움된다고 나오는 수가 좋아요 수 -->
+  						<span class = "review_total">
+  							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
+  						</span>
+  					
+  					
+  					</p>
+  					
+  				</div>
+  			<style>
+  				.product_name {
+  					padding-top : 10px;
+  					margin-bottom: 0;
+  					padding-bottom: 10px;
+  					border-bottom: 1px solid #ddd;
+  					color : #000;
+  					font-weight: bold;
+  					font-size : 14px;
+  				}
+  				
+  				.write_review {
+  					line-height: 20px;
+  					padding:15px 0;	
+  				}
+  				
+  				.content_review {
+  					color : #b2b2b2;
+  					
+  				}
+  			</style>
+  			
+  				<!-- 상품명 넘어오는 공간 -->
+  				<div class = "product_name">
+  					캠핑용품입니다.
+  				</div>
+  				
+  				<!-- 상품평 제목이라고 써져있는 곳 넘어오는 div 공간 -->
+  				<div class = "write_review">
+  					<span class = "content_review">
+  						${review.review_content}
+  					</span>
+  				</div>
+  				
+  				<!-- 그림 이미지 넘어오는 div공간 -->
+  				<div class = "photo_review">
+  				<c:if test="${reviewImgList != null}">
+					<c:forEach var='imgList' items='${reviewImgList}'>
+						<c:if test="${review.review_code eq imgList.review_code }">
+							<a href = "${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" class = "preview">
+							<img src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}" style = "width:20%; height:20%;"/>
+							</a>			
+						</c:if>
+					</c:forEach>
+				</c:if>
+  				</div>
+  				
+ 				<style>
+ 				.like_dislike {
+ 					margin-top : 20px;
+ 					padding : 15px;
+ 					background-color: #fff;
+ 					border:1px solid #ddd;
+ 					width : 50%;
+ 					}
+ 			
+				.review_like {
+					display: inline-block;
+					margin-right : 3px;
+					border : 1px solid #dadada;
+					width : 50px;
+					line-height: 23px;
+					text-align: center;
+					color : #7b7b7b;
+					cursor: pointer;
+					font-size : 12px;
+				}
+				
+				.review_like:hover {
+					background: #5e5e5e;
+					color : white;
+					
+				}
+				
+				.review_dislike {
+					display: inline-block;
+					margin-right : 3px;
+					border : 1px solid #dadada;
+					width : 50px;
+					line-height: 23px;
+					text-align: center;
+					color : #7b7b7b;
+					cursor: pointer;
+					font-size : 12px;
+				}
+				
+				.review_dislike:hover {
+					background: #5e5e5e;
+					color : white;
+					
+				}
+
+				.qna {
+					display: inline-block;
+					margin-right : 12px;
+					color : #7b7b7b;
+					font-size : 12px;	
+					font-weight: bold;
+				}
+				
+				.review_score {
+					display: inline-block;
+					background : #5e5e5e;
+					border : 1px solid white;
+					min-width : 20px;
+					line-height: 23px;
+					text-align: center;
+					margin : 0 8px 0 7px;
+					position: relative;
+					padding : 0 5px;
+				}
+				
+				.arrow {
+					width : 0;
+					height : 0;
+					border-top: 10px solid transparent;
+					border-bottom: 10px solid transparent;
+					border-right : 10px solid #5e5e5e;
+					position: absolute;
+					top : 2px;
+					left : -5px;
+					font-size : 0;
+					line-height: 0;
+				}
+			</style>
+			
+				<div class = "Like_dislike">
+					<div class = "qna">상품평이 도움이 되었나요?</div>
+					<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
+				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
+					<!-- 좋아요 싫어요 부분 -->
+					<a class = "review_like like like${vs.index}">네</a>
+					<a class = "review_dislike dislike dislike${vs.index}">아니요</a>
+					
+					<!-- 왼쪽 화살표로 만들어논 div -->
+					<div class = "review_score">
+						<div class = "arrow">
+						
+						</div>
+						
+						<!-- 좋아요 부분만 나오는 div -->
+						<span class = "review_like_score yCount${vs.index} yCount" style = "color : white; font-size : 14px;">
+							+0
+						</span>
+					</div>	
+  				</div>
+  			</div>
+  			
+  		</div>
+  	
+  	</div>
+</c:forEach>
+</div>
 <script>
 $(function(){
+	//좋아요 첫화면
 	var member_id="${memberLoggedIn.member_id}";
 	var reviewLength=$(".reviewLength").val();
 	
@@ -799,83 +1043,37 @@ $(function(){
 	var codeList = new Array();
 	
 	<c:forEach items="${likeList}" var="item">
-	statusList.push("${item.like_status}");
-	idList.push("${item.member_id}");
-	codeList.push("${item.review_code}");
+		statusList.push("${item.like_status}");
+		idList.push("${item.member_id}");
+		codeList.push("${item.review_code}");
 	</c:forEach>
 	
 	for(var i=0;i<reviewLength;i++){
 		var y_count=0;
-		var n_count=0;
+		var total_count=0;
 		for(var j=0;j<statusList.length;j++){
 			if($('.review_code'+i).val()==codeList[j]){
 				if(statusList[j]=='Y'){
 					y_count=y_count+1;
-				}else{
-					n_count=n_count+1;
 				}
+				total_count=total_count+1;
 			}
 			if(member_id==idList[j] && $('.review_code'+i).val()==codeList[j]){
 				if(statusList[j]=='Y'){
-					$('.like'+i).css("color", "#1E96FF");
+					$('.like'+i).css({"color":"white","background":"#5e5e5e"});
 				}else{
-					$('.dislike'+i).css("color", "#FF3232");
+					$('.dislike'+i).css({"color":"white","background":"#5e5e5e"});
 				}
 			}
 		}
-		$('.yCount'+i).html(y_count);
-		$('.nCount'+i).html(n_count);
+		$('.yCount'+i).html("+"+y_count);
+		$('.total_count'+i).html(total_count);
+		$('.y_count'+i).html(y_count);
 	}
 });
-	
-</script>
-<!-- 상품평 리뷰 -->
-<div> 
-<c:forEach var="review" items="${reviewList}" varStatus="vs">
 
-	<i class="far fa-user-circle"></i><span style="color:#1EA4FF;font-size:18px;"> ${review.member_id}</span>
-	&emsp;&emsp;<span class="star-prototype">${review.review_star }</span>
-	&emsp;&emsp;<span>${review.review_date}</span>
-
-	<c:if test="${reviewImgList != null}">
-	<br>
-	 <c:forEach var='imgList' items='${reviewImgList}'>
-		<c:if test="${review.review_code eq imgList.review_code }">
-			<img width="10%" height="10%" src="${pageContext.request.contextPath }/resources/upload/productReviewImg/${imgList.new_review_img_path}"/>				
-		</c:if>
-	</c:forEach>
-		<br>	
-	</c:if>
-		<span>${review.review_content}</span> 	 
-	  <br>	
-		<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
-		<table class='countCheck'>
-	 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
-			<tbody>
-				<tr>
-					<td>
-						<i class="far fa-thumbs-up like like${vs.index}" style="cursor:pointer; font-size:25px; color:#bebebe"></i>	
-					</td>
-					<td>
-						<span class='yCount${vs.index} yCount'>0</span>
-					</td>
-					<td>
-						<i class="far fa-thumbs-down dislike dislike${vs.index}"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-					</td>
-					<td>
-						<span class='nCount${vs.index} nCount'>0</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>				 		
-	 <hr>
- </c:forEach>
-</div>
-<script>
-
-//좋아요
 $(function(){
-	
+//좋아요
 $('.like').on('click',function(){
 	var thtag=$(this);
 	var member_id="${memberLoggedIn.member_id}";
@@ -885,7 +1083,7 @@ $('.like').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).siblings("[name=review_code]").val(),
 				like_status:'Y'
 		};
 		$.ajax({
@@ -897,25 +1095,29 @@ $('.like').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					var yCount=thtag.parent().parent().find('.yCount');
-					var nCount=thtag.parent().parent().find('.nCount');
+					var yCount=thtag.siblings(".review_score").find('.yCount');
+					var y_count=thtag.parent().parent().find('.y_count');
+					var total_count=thtag.parent().parent().find('.total_count');
 					if(data.likeOn==1){
-						thtag.css("color", "#1E96FF");
+						thtag.css({"color":"white","background":"#5e5e5e"});
 						var count= parseInt(yCount.html())+1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
+						total_count.html(parseInt(total_count.html())+1);
 						// 좋아요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");
+						thtag.css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())-1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
+						total_count.html(parseInt(total_count.html())-1);
 						// 좋아요 -1
 					}else{
-						thtag.css("color", "#1E96FF");
-						thtag.parent().parent().find('.dislike').css("color", "#bebebe");
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						thtag.parent().parent().find('.dislike').css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())+1;
-						yCount.html(count);
-						var count= parseInt(nCount.html())-1;
-						nCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
 						// 좋아요 +1 , 싫어요 -1
 					}
 			
@@ -939,7 +1141,7 @@ $('.dislike').on('click',function(){
 	}else{
 		var likeInfo={
 				member_id:member_id,
-				review_code:$(this).parent().parent().parent().siblings("[name=review_code]").val(),
+				review_code:$(this).siblings("[name=review_code]").val(),
 				like_status:'N'
 		};
 		$.ajax({
@@ -950,25 +1152,23 @@ $('.dislike').on('click',function(){
 					alert("버튼에러");
 					e.preventDefault();
 				}else{
-					var yCount=thtag.parent().parent().find('.yCount');
-					var nCount=thtag.parent().parent().find('.nCount');
+					var yCount=thtag.siblings(".review_score").find('.yCount');
+					var y_count=thtag.parent().parent().find('.y_count');
+					var total_count=thtag.parent().parent().find('.total_count');
 					if(data.likeOn==1){
-						thtag.css("color", "#FF3232");
-						var count= parseInt(nCount.html())+1;
-						nCount.html(count);
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						total_count.html(parseInt(total_count.html())+1);
 						//싫어요 +1
 					}else if(data.likeOn==2){
-						thtag.css("color", "#bebebe");
-						var count= parseInt(nCount.html())-1;
-						nCount.html(count);
+						thtag.css({"color":"#7b7b7b","background":"white"});
+						total_count.html(parseInt(total_count.html())-1);
 						//싫어요 -1
 					}else{
-						thtag.css("color", "#FF3232");
-						thtag.parent().parent().find('.like').css("color", "#bebebe");
-						var count= parseInt(nCount.html())+1;
-						nCount.html(count);
+						thtag.css({"color":"white","background":"#5e5e5e"});
+						thtag.parent().parent().find('.like').css({"color":"#7b7b7b","background":"white"});
 						var count= parseInt(yCount.html())-1;
-						yCount.html(count);
+						yCount.html("+"+count);
+						y_count.html(count);
 						//싫어요 +1 , 좋아요 -1
 					}
 					
@@ -987,22 +1187,18 @@ $('.dislike').on('click',function(){
 
 
 });
-</script>
- <script>
+
 //별점
 $.fn.generateStars = function() {
  return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 };
-
 //숫자 평점을 별로 변환하도록 호출하는 함수
 $('.star-prototype').generateStars();
  
- </script>
+</script>
 
-  상품평 페이징 처리
   
-   </div>
-   <div id="section3" class="container tab-pane fade">
+<div id="section3" class="container tab-pane fade">
 			
   
 

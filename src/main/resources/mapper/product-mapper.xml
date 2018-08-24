@@ -272,9 +272,7 @@
  		select like_status from product_review_like where member_id=#{id} and review_code=#{code}
  	</select>
  
- 	<resultMap type="map" id="likecount"></resultMap>
-
- 	<update id="deleteProduct" parameterType="_int">
+  	<update id="deleteProduct" parameterType="_int">
  		update product set product_delete='Y' where product_code=#{product_code}
  	</update>
 </mapper>

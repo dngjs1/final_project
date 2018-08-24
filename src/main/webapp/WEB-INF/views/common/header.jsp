@@ -31,7 +31,7 @@
   <!-- Optional JavaScript -->
   <!-- 먼저 jQuery가 오고 그 다음 Popper.js 그 다음 Bootstrap JS -->
   <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="./resources/js/main.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <!-- 카카오 로그인 버튼을 위한 개발자 자바스크립트 추가 -->
@@ -339,7 +339,7 @@
       			
       			<c:if test="${memberLoggedIn.member_level ne 'admin' }">
       			<li>
-      				<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?memberId=${memberLoggedIn.member_id}">마이페이지</a>
+      				<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}">마이페이지</a>
       			</li>
       			</c:if>
       			

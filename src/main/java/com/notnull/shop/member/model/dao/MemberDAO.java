@@ -1,6 +1,7 @@
 package com.notnull.shop.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -45,4 +46,6 @@ public interface MemberDAO {
 	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id);
 	
 	int totalPoint(SqlSessionTemplate sqlSession, String member_id);
+	
+	List<Map> selectOrderList(SqlSessionTemplate sqlSession,String member_id);
 }

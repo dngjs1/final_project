@@ -2,9 +2,12 @@ package com.notnull.shop.member.model.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+
+import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
@@ -44,4 +47,6 @@ public interface MemberService {
 	List<PointLog> selectPointList(String member_id);
 	
 	int totalPoint(String member_id);
+	
+	List<Map> selectOrderList(String member_id);
 }
