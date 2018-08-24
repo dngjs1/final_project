@@ -299,7 +299,7 @@
                    
                     
                   </div>
-                  <input class="form-control" style="width:350px;" type="search" name="searchName" placeholder="검색어를 입력하세요" aria-label="Search">
+                  <input class="form-control" style="width:350px;" type="search" name="searchName" placeholder="상품명+카테고리" aria-label="Search">
                   <button class="btn btn-outline-success" type = "submit" style = "margin-left:3px;"><i class="fas fa-search "></i></button>
                   </div>
           </form>
