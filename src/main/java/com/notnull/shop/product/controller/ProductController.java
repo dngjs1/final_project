@@ -65,6 +65,16 @@ public class ProductController {
 		return "/product/shop";
 	}
 	
+	@RequestMapping("/searchProduct.do")
+	public String searchProduct(Model m,HttpServletRequest request) {
+		String searchName=request.getParameter("searchName");
+		
+		List<ProductListJoin> list =service.searchProduct(searchName);
+		m.addAttribute("list",list);
+		System.out.println("!!!!!!!!!!!!!@!@!@!@!@@@@@@@@@@@@"+list);
+		return "/product/shop";
+	}
+	
 	
 	@RequestMapping("/productupload.do")
 	public String fileUpload(Model model) {

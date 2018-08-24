@@ -39,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductListJoin> selectProductList() {
 		return productDAO.selectProductList(sqlSession);
 	}
+	
+	@Override
+	public List<ProductListJoin> searchProduct(String searchName) {
+		return productDAO.searchProduct(sqlSession,searchName);
+	}
+
 
 	@Override
 	public int insertProduct(Product product, List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList) {
@@ -356,5 +362,6 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.deleteProduct(sqlSession,product_code);
 	}
 
+	
 	
 }

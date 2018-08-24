@@ -25,6 +25,8 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
 	
+	List<ProductListJoin> searchProduct(String searchName);
+	
 	List<ProductListJoin> reviewStarOrder();
 	
 	List<ProductListJoin> highPriceOrder();

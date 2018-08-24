@@ -28,6 +28,8 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 public interface ProductDAO {
 	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
 	
+	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
+	
 	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
 	
 	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
