@@ -56,6 +56,22 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("product.insertOption",productOption);
 	}
 
+	
+	@Override
+	public int updateProduct(SqlSessionTemplate sqlSession, Product product) {
+		return sqlSession.update("product.updateProduct",product);
+	}
+
+	@Override
+	public int updateImgList(SqlSessionTemplate sqlSession, ProductImg productImg) {
+		return sqlSession.update("product.updateImgList",productImg);
+	}
+
+	@Override
+	public int updateDetail(SqlSessionTemplate sqlSession, ProductDetailImg productDetailImg) {
+		return sqlSession.update("product.updateDetail",productDetailImg);
+	}
+	
 	@Override
 	public ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectOne("product.selectProduct",productCode);
@@ -226,6 +242,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public int deleteProduct(SqlSessionTemplate sqlSession, int product_code) {
 		return sqlSession.update("product.deleteProduct",product_code);
 	}
+
+	@Override
+	public int deleteOption(SqlSessionTemplate sqlSession, int product_code) {
+		return sqlSession.delete("product.deleteOption",product_code);
+	}
+
 
 
 	

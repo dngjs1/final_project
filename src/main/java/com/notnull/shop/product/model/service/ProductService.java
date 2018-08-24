@@ -35,6 +35,8 @@ public interface ProductService {
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
+	int updateProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
+	
 	List<ProductCategory> selectCategoryList();
 	
 	ProductJoinCategory selectProduct(int productCode);

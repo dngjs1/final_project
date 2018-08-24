@@ -102,6 +102,26 @@
   	<insert id="insertOption" parameterType="productOption">
   	INSERT INTO product_option VALUES (product_option_seq.nextval,#{option_size},#{left_amount},#{product_code})
   	</insert>
+  	
+  	<update id="updateProduct" parameterType="productJoinCategory">
+  	update product set price=#{price},product_name=#{product_name},release_date=#{release_date},country=#{country},p_board_content=#{p_board_content}
+  	where product_code=#{product_code}
+  	</update>
+  	
+  	
+  	<update id="updateImgList" parameterType="productImg">
+  	update product_img set p_img_path=#{p_img_path},new_p_img_path=#{new_p_img_path},product_code=#{product_code}
+  	where p_img_code=#{p_img_code}
+  	</update>
+  	
+  	<update id="updateDetail">
+  	update product_detail_img set p_detail_img_path=#{p_detail_img_path},new_p_detail_img_path=#{new_p_detail_img_path},product_code=#{product_code}
+  	where p_detail_img_code=#{p_detail_img_code}
+  	</update>
+
+  	<delete id="deleteOption" parameterType="_int">
+  	delete from product_option where product_code=#{product_code}
+  	</delete>
   
   	<select id="selectProduct" parameterType="int" resultType="productJoinCategory">
   	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 

@@ -600,9 +600,11 @@ public class ProductController {
 		return "/product/updateForm";
 	}
 	
-	/*@RequestMapping("updateProductEnd.do")
+	@RequestMapping("updateProductEnd.do")
 	public ModelAndView updateProductEnd(MultipartHttpServletRequest mtfRequest, HttpServletRequest request,Product product) {
 
+		product.setProduct_code(Integer.parseInt(request.getParameter("product_code")));
+		
 		
 		String[] sizes=request.getParameterValues("size");
 		String[] sleft_amounts=request.getParameterValues("left_amount");
@@ -622,7 +624,7 @@ public class ProductController {
 				productOptionList.add(productOption);
 			}
 		
- 		상품사진 처리
+ 	
         List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
         String saveDir="";
         File dir=null;
@@ -654,11 +656,11 @@ public class ProductController {
                       
             productImg.setP_img_path(originFileName);
             productImg.setNew_p_img_path(renamedFileName);
-            
+            productImg.setP_img_code(Integer.parseInt(request.getParameter("p_img_code")));
             productImgList.add(productImg);
         }
         
-        상품상세정보 사진 처리
+
         List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
         List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
         saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
@@ -688,7 +690,7 @@ public class ProductController {
                       
             productDetailImg.setP_detail_img_path(originFileName);
             productDetailImg.setNew_p_detail_img_path(renamedFileName);
-            
+            productDetailImg.setP_detail_img_code(Integer.parseInt(request.getParameter("p_detail_img_code")));
             productDetailImgList.add(productDetailImg);
         }
         if(product.getReal_size().isEmpty()) {
@@ -699,11 +701,11 @@ public class ProductController {
         String msg="";
 		if(result>0)
 		{
-			msg="등록을 성공하였습니다.";
+			msg="수정을 성공하였습니다.";
 		}
 		else
 		{
-			msg="등록을 실패하였습니다.";
+			msg="수정을 실패하였습니다.";
 		}
 		
 		mv.addObject("msg", msg);
@@ -712,5 +714,5 @@ public class ProductController {
 		mv.setViewName("common/msg");	
         return mv;
     } 
-	*/
+	
 }

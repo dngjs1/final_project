@@ -85,6 +85,58 @@ public class ProductServiceImpl implements ProductService {
 		return result;
 	}
 
+	
+	@Override
+	public int updateProduct(Product product, List<ProductImg> productImgList,
+			List<ProductDetailImg> productDetailImgList, List<ProductOption> productOptionList) {
+		int result=0;
+		int product_code= product.getProduct_code();
+		
+		try
+		{
+			result=productDAO.updateProduct(sqlSession,product);
+			product_code=product.getProduct_code();
+			if(productImgList.size()>0)
+			{
+				for(ProductImg productImg : productImgList)
+				{
+					productImg.setProduct_code(product_code);
+					result=productDAO.updateImgList(sqlSession,productImg);
+					
+				}
+				
+			}
+			if(productDetailImgList.size()>0)
+			{
+				for(ProductDetailImg productDetailImg : productDetailImgList)
+				{
+					productDetailImg.setProduct_code(product_code);
+					result=productDAO.updateDetail(sqlSession,productDetailImg);
+				
+				}
+			}
+			
+			if(productOptionList.size()>0)
+			{
+				productDAO.deleteOption(sqlSession,product_code);
+				for(ProductOption productOption : productOptionList)
+				{
+					productOption.setProduct_code(product_code);
+					result=productDAO.insertOption(sqlSession,productOption);
+				}
+				
+				
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		
+		return result;
+	}
+	
 	@Override
 	public List<ProductCategory> selectCategoryList() {
 		return productDAO.selectCategoryList(sqlSession);
@@ -303,4 +355,6 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteProduct(int product_code) {
 		return productDAO.deleteProduct(sqlSession,product_code);
 	}
+
+	
 }

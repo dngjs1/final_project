@@ -44,6 +44,12 @@ public interface ProductDAO {
 	
 	int insertOption(SqlSessionTemplate sqlSession,ProductOption productOption);
 	
+	int updateProduct(SqlSessionTemplate sqlSession, Product product);
+	
+	int updateImgList(SqlSessionTemplate sqlSession,ProductImg productImg);
+	
+	int updateDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
+	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
 	ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession,int productCode);
@@ -105,4 +111,6 @@ public interface ProductDAO {
 	String checkLike(SqlSessionTemplate sqlSession,Map map);
 	
 	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
+	
+	int deleteOption(SqlSessionTemplate sqlSession,int product_code);
 }

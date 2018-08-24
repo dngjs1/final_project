@@ -20,7 +20,16 @@
 
 <div class='container' >
     <form name="fileForm" action="${path }/updateProductEnd.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
-  
+  		<input type="hidden" name="product_code" value="${joinCategory.product_code}"/>
+  		<c:forEach var="imgList" items="${imgList}">
+  			<input type="hidden" name="p_img_code" value="${imgList.p_img_code}"/>  		
+  		</c:forEach>
+  		<c:forEach var="detailImgList" items="${detailImgList}">
+  		<input type="hidden" name="p_detail_img_code" value="${detailImgList.p_detail_img_code}"/>
+  		</c:forEach>
+  		<c:forEach var="optionList" items="${optionList}">
+  		<input type="hidden" name="product_option_code" value="${optionList.product_option_code}"/>
+  		</c:forEach>
         <br>
         <h3>상품수정</h3>
         <hr style="border:2px solid #787878"><br>       
@@ -62,16 +71,7 @@
 			<div style="position:relative;">
 				<span id="left_amount">
 					<input type="hidden" name="size" value="">
-					<c:forEach var="optionList" items="${optionList}">
-					<c:choose>
-					<c:when test="${optionList.option_size == null}">
-					<b>재고: </b><input type="number" name="left_amount" value="${optionList.left_amount}" required>
-					</c:when>
-					<c:otherwise>
-					<span class='size_del'><b>치수: </b><input type='text'  name='size' required> <b>재고: </b><input type='number' name='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br><br></span>
-					</c:otherwise>
-					</c:choose>
-					</c:forEach>
+					<b>재고: <b></b><input type="number" name="left_amount" required>
 				</span>
 				<div style="position:absolute;left:480px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
 			</div>
@@ -105,24 +105,23 @@
         </div>
         <a href="#this" id="add1" class="btn1">파일 추가하기</a>
         <br><br><br>
-        <script>
-               
-        function size_add(){
-        	$('#left_amount').remove();
-        	var size_put="<span class='size_del'><b>치수: </b><input type='text'  name='size' required> <b>재고: </b><input type='number' name='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br><br></span>";
-			$('#size_td').append(size_put);
-        }
-        function size_delete(e){
-        	e.parent().remove();
-        }
-        </script>
-        
         
         <input type="submit" value="등록" class="btn" />     
     </form>
 </div>
 
 <script type="text/javascript">
+
+
+function size_add(){
+	$('#left_amount').remove();
+	var size_put="<span class='size_del'><b>치수: </b><input type='text'  name='size' required> <b>재고: </b><input type='number' name='left_amount' required>	<input type='button' style='height:38px;width:100px;' onclick='size_delete($(this))' class='btn' value='삭제하기'/><br><br></span>";
+	$('#size_td').append(size_put);
+}
+function size_delete(e){
+	e.parent().remove();
+}
+
 var add_count=1;
 var add_count1=1;
 $(document).ready(function(){
