@@ -124,7 +124,7 @@ $(document).ready(function(){
 			<c:if test="${image.product_delete eq 'N'}">
 			<div class="col-3 Seller_item_secion">
 			<!-- 상품 이미지에 마우스를 올렸을 시 나오는 부분 -->
-				<div style="height:250px;cursor: pointer;" class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?productCode=${image.product_code}';">
+				<div style="height:250px;cursor: pointer;" class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${image.product_code}';">
 					<img width="100%" height="100%" src="${pageContext.request.contextPath }/resources/upload/productImg/${image.new_p_img_path }" alt="상품"/>
 					<div class="icons">
 						<a class="m-1">

@@ -205,12 +205,12 @@ public class ProductController {
 	@Transactional
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
-		int productCode=Integer.parseInt(request.getParameter("productCode"));
-		ProductJoinCategory joinCategory=service.selectProduct(productCode);
-		List<ProductOption> optionList =service.selectOption(productCode);
-		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
-		List<ProductDetailImg> detailImgList=service.selectDetailImg(productCode);
-		List<ProductImg> imgList=service.selectImgList(productCode);
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		ProductJoinCategory joinCategory=service.selectProduct(product_code);
+		List<ProductOption> optionList =service.selectOption(product_code);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code);
+		List<ProductDetailImg> detailImgList=service.selectDetailImg(product_code);
+		List<ProductImg> imgList=service.selectImgList(product_code);
 
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
@@ -220,12 +220,12 @@ public class ProductController {
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
-		productReviewList=service.selectReview(productCode);
+		productReviewList=service.selectReview(product_code);
 		
 		request.setAttribute("reviewList", productReviewList);
 		
 		//문의사항
-		List<ProductQuestion> questionList=service.selectQuestion(productCode);
+		List<ProductQuestion> questionList=service.selectQuestion(product_code);
 		
 		request.setAttribute("questionList", questionList);
 				
@@ -419,21 +419,21 @@ public class ProductController {
 		{
 			msg="등록을 실패하였습니다.";
 		}
-		
+		mv.addObject("product_code",productReview.getProduct_code());
 		mv.addObject("msg", msg);
-		mv.addObject("loc", "/product.do");
+		mv.addObject("loc", "productView.do");
 		
 		mv.setViewName("common/msg");	
         return mv;
 	}
 
 	
-	@RequestMapping("/productReviewTest.do")
-	public String productReviewTest(Model model,HttpServletRequest request) {
+	@RequestMapping("/productReviewForm.do")
+	public String productReviewForm(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		request.setAttribute("product_code", product_code);
 	
-		return "product/productReviewTest";
+		return "product/productReviewForm";
 	}
 
 

@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 
 public interface MemberService {
 
@@ -49,4 +50,6 @@ public interface MemberService {
 	int totalPoint(String member_id);
 	
 	List<Map> selectOrderList(String member_id);
+	
+	int updateBuyStatus(BuyInfo buyInfo);
 }

@@ -27,6 +27,7 @@ import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
+import com.notnull.shop.product.model.vo.BuyInfo;
 
 
 @SessionAttributes(value= {"memberLoggedIn","totalPoint"})
@@ -602,7 +603,11 @@ public class MemberController {
 		return "/member/memberManagement";
 		
 	}
-	
-	
-
+			
+	@RequestMapping("/refundRequest.do")
+	public void refundRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
+		buyInfo.setBuy_status("R");
+		int result = service.updateBuyStatus(buyInfo);
+		response.getWriter().print(result);	
+	}
 }
