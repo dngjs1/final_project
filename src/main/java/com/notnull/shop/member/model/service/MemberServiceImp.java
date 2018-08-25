@@ -20,6 +20,7 @@ import com.notnull.shop.common.TempKey;
 import com.notnull.shop.member.model.dao.MemberDAO;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 
 @Service
 public class MemberServiceImp implements MemberService {
@@ -187,6 +188,11 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public List<Map> selectOrderList(String member_id) {
 		return memberDAO.selectOrderList(sqlSession,member_id);
+	}
+
+	@Override
+	public int updateBuyStatus(BuyInfo buyInfo) {
+		return memberDAO.updateBuyStatus(sqlSession,buyInfo);
 	}
 	
 }

@@ -269,7 +269,7 @@
          border-left: none;
          
       }
-      .align_left bdl_none {
+      .align_left .bdl_none {
       	 width : 200px;
       	 border-left: none;
          
@@ -308,8 +308,8 @@
       </thead>
       
       <c:if test="${not empty cartList}">
-         <c:forEach var='cart' items='${cartList }' varStatus="vs">
          <tbody>
+         <c:forEach var='cart' items='${cartList }' varStatus="vs">
             <tr class="tr2">
                <td class = "align_left bdl_none" style = "width : 300px;">
                   <div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.NEW_P_IMG_PATH }"> </div>
@@ -326,14 +326,13 @@
                      <span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>
                   </div>
                </td>
-               <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
                <input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
                <td><span class="cart_quantity${vs.count}" style="font-size:15px;font-weight:bold">${cart.CART_QUANTITY}</span></td>
                <td><span class="price${vs.count}" style="font-size:16px">${cart.PRICE}</span><span> 원</span></td>
                <td><span class="sum_price${vs.count}"></span><span> 원</span></td>   
             </tr>
-            </tbody>
          </c:forEach>
+         </tbody>
       </c:if>
      
       <c:if test="${empty cartList }">

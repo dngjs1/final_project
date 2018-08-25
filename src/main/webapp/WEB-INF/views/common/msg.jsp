@@ -13,7 +13,11 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 			alert("${msg}");
-			location.href="${pageContext.request.contextPath}/${loc}";		
+			if("${product_code}".length>0){
+				location.href="${pageContext.request.contextPath}/${loc}?product_code=${product_code}";
+			}else{
+				location.href="${pageContext.request.contextPath}/${loc}";
+			}
 		</script>
 	</head>
 	<body>
