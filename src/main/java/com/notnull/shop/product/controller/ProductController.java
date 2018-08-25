@@ -71,7 +71,6 @@ public class ProductController {
 		
 		List<ProductListJoin> list =service.searchProduct(searchName);
 		m.addAttribute("list",list);
-		System.out.println("!!!!!!!!!!!!!@!@!@!@!@@@@@@@@@@@@"+list);
 		return "/product/shop";
 	}
 	

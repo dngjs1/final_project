@@ -877,8 +877,7 @@ span.star-prototype > * {
   						<span class = "review_total">
   							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
   						</span>
-  					
-  					
+				
   					</p>
   					
   				</div>
@@ -1028,7 +1027,11 @@ span.star-prototype > * {
 						</span>
 					</div>	
   				</div>
+  				<input type= "button" class='btn btn-outline' value="삭제" onclick="deleteReview(${reviewList.review_code})"/>		
+				<input type= "button" class='btn btn-outline' value="수정" onclick="updateReview(${joinCategory.review_code})"/>
+  						
   			</div>
+  			
   			
   		</div>
   	
@@ -1036,6 +1039,16 @@ span.star-prototype > * {
 </c:forEach>
 </div>
 <script>
+
+function deleteReview(review_code)
+{
+     location.href="${path}/deleteReview.do?review_code="+review_code;
+}
+
+function updateReview(review_code)
+{
+     location.href="${path}/updateReview.do?review_code="+review_code;
+}
 $(function(){
 	//좋아요 첫화면
 	var member_id="${memberLoggedIn.member_id}";
