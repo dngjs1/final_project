@@ -39,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductListJoin> selectProductList() {
 		return productDAO.selectProductList(sqlSession);
 	}
+	
+	@Override
+	public List<ProductListJoin> searchProduct(String searchName) {
+		return productDAO.searchProduct(sqlSession,searchName);
+	}
+
 
 	@Override
 	public int insertProduct(Product product, List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList) {
@@ -85,6 +91,58 @@ public class ProductServiceImpl implements ProductService {
 		return result;
 	}
 
+	
+	@Override
+	public int updateProduct(Product product, List<ProductImg> productImgList,
+			List<ProductDetailImg> productDetailImgList, List<ProductOption> productOptionList) {
+		int result=0;
+		int product_code= product.getProduct_code();
+		
+		try
+		{
+			result=productDAO.updateProduct(sqlSession,product);
+			product_code=product.getProduct_code();
+			if(productImgList.size()>0)
+			{
+				for(ProductImg productImg : productImgList)
+				{
+					productImg.setProduct_code(product_code);
+					result=productDAO.updateImgList(sqlSession,productImg);
+					
+				}
+				
+			}
+			if(productDetailImgList.size()>0)
+			{
+				for(ProductDetailImg productDetailImg : productDetailImgList)
+				{
+					productDetailImg.setProduct_code(product_code);
+					result=productDAO.updateDetail(sqlSession,productDetailImg);
+				
+				}
+			}
+			
+			if(productOptionList.size()>0)
+			{
+				productDAO.deleteOption(sqlSession,product_code);
+				for(ProductOption productOption : productOptionList)
+				{
+					productOption.setProduct_code(product_code);
+					result=productDAO.insertOption(sqlSession,productOption);
+				}
+				
+				
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RuntimeException();	
+		}
+		
+		return result;
+	}
+	
 	@Override
 	public List<ProductCategory> selectCategoryList() {
 		return productDAO.selectCategoryList(sqlSession);
@@ -295,23 +353,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductReviewLike> selectLikeList(int review_code) {
-		return productDAO.selectLikeList(sqlSession,review_code);
-	}
-
-	@Override
 	public String checkLike(Map map) {
 		return productDAO.checkLike(sqlSession,map);
 	}
 
 	@Override
-	public List ycountLike() {
-		return productDAO.ycountLike(sqlSession);
+	public int deleteProduct(int product_code) {
+		return productDAO.deleteProduct(sqlSession,product_code);
 	}
 
 	
-	@Override
-	public List ncountLike() {
-		return productDAO.ncountLike(sqlSession);
-	}
+	
 }

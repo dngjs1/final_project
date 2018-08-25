@@ -9,48 +9,71 @@
 	
 	<!-- result타입에는 컬렉션을 쓰는게 아님. 해당하는 vo객체 또는 resultMap을 써야함 -->
 	<select id="selectProductList" resultMap="productListJoinMap">    
-		select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star
+		select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
 		inner join product_img y
-		on x.product_code = y.product_code
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
-		order by product_code desc  
+		order by product_code desc
+	</select>
+ 
+ 
+ 	<select id="searchProduct" parameterType="string" resultMap="productListJoinMap">    
+		select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
+		where (p_img_code in (select min(p_img_code) from product_img group by product_code)
+        and product_name like '%'||#{searchName}||'%') or  (p_img_code in (select min(p_img_code) from product_img group by product_code) and p_category_name=#{searchName})
+		order by product_code desc
 	</select>
  
  
  	<select id="reviewStarOrder" resultMap="productListJoinMap">
- 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+ 	select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
 		inner join product_img y
-		on x.product_code = y.product_code
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 		order by review_star desc nulls last
  	</select>
  
  	<select id="highPriceOrder" resultMap="productListJoinMap">
- 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+ 	select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
 		inner join product_img y
-		on x.product_code = y.product_code
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 		order by price desc  
  	</select>
  	
  	<select id="lowPriceOrder" resultMap="productListJoinMap">
- 	select x.product_code,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+ 	select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
 		inner join product_img y
-		on x.product_code = y.product_code
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 		order by price asc  
  	</select>
  
 
  	<select id="writeDateOrder" resultMap="productListJoinMap">
- 	select x.product_code, x.write_date,  x.product_name, y.new_p_img_path, x.price, (select avg(z.review_star) from product_review z where x.product_code= z.product_code) review_star
+ 	select x.product_code,x.write_date,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
 		inner join product_img y
-		on x.product_code = y.product_code
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 		order by write_date desc  
  	</select>
@@ -84,8 +107,8 @@
  	</select>	
  
 	<insert id="insertProduct" parameterType="product">
-	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date) 
-	VALUES(PRODUCT_SEQ.NEXTVAL,#{price},#{product_name},#{release_date},#{country},#{real_size},#{p_category_code},#{p_board_content},sysdate)
+	INSERT INTO product (product_code, price, product_name, release_date,country,real_size,p_category_code,p_board_content,write_date,product_delete) 
+	VALUES(PRODUCT_SEQ.NEXTVAL,#{price},#{product_name},#{release_date},#{country},#{real_size},#{p_category_code},#{p_board_content},sysdate,'N')
 	<selectKey keyProperty="product_code" resultType="_int" order="AFTER"> SELECT PRODUCT_SEQ.CURRVAL FROM DUAL </selectKey>
 	</insert>
 	
@@ -102,6 +125,26 @@
   	<insert id="insertOption" parameterType="productOption">
   	INSERT INTO product_option VALUES (product_option_seq.nextval,#{option_size},#{left_amount},#{product_code})
   	</insert>
+  	
+  	<update id="updateProduct" parameterType="productJoinCategory">
+  	update product set price=#{price},product_name=#{product_name},release_date=#{release_date},country=#{country},p_board_content=#{p_board_content}
+  	where product_code=#{product_code}
+  	</update>
+  	
+  	
+  	<update id="updateImgList" parameterType="productImg">
+  	update product_img set p_img_path=#{p_img_path},new_p_img_path=#{new_p_img_path},product_code=#{product_code}
+  	where p_img_code=#{p_img_code}
+  	</update>
+  	
+  	<update id="updateDetail">
+  	update product_detail_img set p_detail_img_path=#{p_detail_img_path},new_p_detail_img_path=#{new_p_detail_img_path},product_code=#{product_code}
+  	where p_detail_img_code=#{p_detail_img_code}
+  	</update>
+
+  	<delete id="deleteOption" parameterType="_int">
+  	delete from product_option where product_code=#{product_code}
+  	</delete>
   
   	<select id="selectProduct" parameterType="int" resultType="productJoinCategory">
   	SELECT * FROM product JOIN product_category using(p_category_code) WHERE product_code=#{product_code} 
@@ -176,7 +219,7 @@
         insert into buy_info values(buy_info_seq.nextval, #{product_option_code}, 
         #{buy_quantity}, #{member_id}, #{receiver_post_no},
         #{receiver_address}, #{receiver_d_address},#{receiver_name},
-        #{phone2},#{request}, SYSDATE)
+        #{phone2},#{request}, SYSDATE,#{total_price},#{buy_status})
     </insert>
     
     <insert id="insertPoint" parameterType="pointLog">
@@ -237,7 +280,7 @@
   	</delete>
   	
   	<update id="updateLike" parameterType="ProductReviewLike">
-  		update product_review_like set  like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
+  		update product_review_like set like_status=#{like_status} where review_code=#{review_code} and member_id=#{member_id}	
   	</update>
   	
   
@@ -248,37 +291,11 @@
   		select * from product_review_like
   	</select>
 
-
- 
-  	<select id="selectLikeList1" resultMap="ProductReviewLikeMap">
-  		select * from product_review_like where review_code=#{review_code}
-  	</select>
-  	<!-- <resultMap type="map" id="countLikeMap"></resultMap>
-  	<select id="selectlikeCountList" resultMap="countLikeMap">
-  		select review_code,count(*) as cnt
-		from product_review_like
-		where like_status=#{status}
-		group by review_code
-  	</select>
- 	-->
-
- 	
  	<select id="checkLike" resultType="string" parameterType="map">
  		select like_status from product_review_like where member_id=#{id} and review_code=#{code}
  	</select>
  
- 	<resultMap type="map" id="likecount"></resultMap>
- 
- 	<select id="ycountLike" parameterType="_int" resultMap="likecount">
- 		select review_code, count(*) as CNT from product_review_like
- 		where like_status='Y' 
- 		group by review_code
- 	</select>
- 
- 
-	<select id="ncountLike" parameterType="_int" resultMap="likecount">
- 		select review_code, count(*) as CNT from product_review_like
- 		where like_status='N' 
- 		group by review_code
- 	</select>
+  	<update id="deleteProduct" parameterType="_int">
+ 		update product set product_delete='Y' where product_code=#{product_code}
+ 	</update>
 </mapper>

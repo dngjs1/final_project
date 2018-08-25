@@ -28,6 +28,8 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 public interface ProductDAO {
 	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
 	
+	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
+	
 	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
 	
 	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
@@ -43,6 +45,12 @@ public interface ProductDAO {
 	int insertDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
 	
 	int insertOption(SqlSessionTemplate sqlSession,ProductOption productOption);
+	
+	int updateProduct(SqlSessionTemplate sqlSession, Product product);
+	
+	int updateImgList(SqlSessionTemplate sqlSession,ProductImg productImg);
+	
+	int updateDetail(SqlSessionTemplate sqlSession,ProductDetailImg productDetailImg);
 	
 	List<ProductCategory> selectCategoryList(SqlSessionTemplate sqlSession);
 	
@@ -102,11 +110,9 @@ public interface ProductDAO {
 	
 	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession);
 	
-	List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession,int review_code);
-	
 	String checkLike(SqlSessionTemplate sqlSession,Map map);
 	
-	List ycountLike(SqlSessionTemplate sqlSession);
+	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
 	
-	List ncountLike(SqlSessionTemplate sqlSession);
+	int deleteOption(SqlSessionTemplate sqlSession,int product_code);
 }

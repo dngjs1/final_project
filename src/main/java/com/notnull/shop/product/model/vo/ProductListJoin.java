@@ -10,13 +10,16 @@ public class ProductListJoin {
 	private String new_p_img_path;
 	private int price;
 	private double review_star;
+	private String product_delete;
+	private String p_category_code;
+	private String p_category_name;
 	
 	
 	public ProductListJoin() {}
 
 
 	public ProductListJoin(int product_code, Date write_date, String product_name, String new_p_img_path, int price,
-			double review_star) {
+			double review_star, String product_delete, String p_category_name, String p_category_code) {
 		super();
 		this.product_code = product_code;
 		this.write_date = write_date;
@@ -24,6 +27,9 @@ public class ProductListJoin {
 		this.new_p_img_path = new_p_img_path;
 		this.price = price;
 		this.review_star = review_star;
+		this.product_delete = product_delete;
+		this.p_category_name = p_category_name;
+		this.p_category_code = p_category_code;
 	}
 
 
@@ -87,14 +93,46 @@ public class ProductListJoin {
 	}
 
 
+	public String getProduct_delete() {
+		return product_delete;
+	}
+
+
+	public void setProduct_delete(String product_delete) {
+		this.product_delete = product_delete;
+	}
+
+
+	public String getP_category_name() {
+		return p_category_name;
+	}
+
+
+	public void setP_category_name(String p_category_name) {
+		this.p_category_name = p_category_name;
+	}
+
+
+	public String getP_category_code() {
+		return p_category_code;
+	}
+
+
+	public void setP_category_code(String p_category_code) {
+		this.p_category_code = p_category_code;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ProductListJoin [product_code=" + product_code + ", write_date=" + write_date + ", product_name="
 				+ product_name + ", new_p_img_path=" + new_p_img_path + ", price=" + price + ", review_star="
-				+ review_star + "]";
+				+ review_star + ", product_delete=" + product_delete + ", p_category_name=" + p_category_name
+				+ ", p_category_code=" + p_category_code + "]";
 	}
 
-	
+
+
 	
 	
 	

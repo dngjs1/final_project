@@ -25,6 +25,8 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList();
 	
+	List<ProductListJoin> searchProduct(String searchName);
+	
 	List<ProductListJoin> reviewStarOrder();
 	
 	List<ProductListJoin> highPriceOrder();
@@ -34,6 +36,8 @@ public interface ProductService {
 	List<ProductListJoin> writeDateOrder();
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
+	
+	int updateProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	List<ProductCategory> selectCategoryList();
 	
@@ -90,14 +94,8 @@ public interface ProductService {
 	int updateLike(ProductReviewLike productReviewLike);
 	
 	List<ProductReviewLike> selectLikeList();
-		
-	List<ProductReviewLike> selectLikeList(int review_code);
-	
 	
 	String checkLike(Map map);
 	
-	List ycountLike();
-	
-	List ncountLike();
-	
+	int deleteProduct(int product_code);
 }

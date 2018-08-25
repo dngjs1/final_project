@@ -17,13 +17,24 @@
   cursor: pointer;
 }
 .starR.on{background-position:0 0;}
+
+.product_review {
+	margin-top: 20px;
+	padding : 10px;
+	font-size : 30px;
+	line-height: 38px;
+	font-weight: bold;
+	text-align: left;
+}
 </style>
 
 <c:set var='path' value="${pageContext.request.contextPath}" />
+<div class = "container">
  <form name="productReview" action="${path}/productReviewInsert.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
  	  <input name="product_code" type="hidden" value="${product_code}"/>
  	  <input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
- 	  <h3>상품평 사진</h3>
+ 	  
+ 	  <h3 class = "product_review"><i class="fas fa-chalkboard-teacher"></i> 상품평 등록</h3>
         <hr style="border:2px solid #787878"><br>
     	<div id="fileDiv1">
 	       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
@@ -63,6 +74,9 @@
 
         <input type="submit" value="등록" class="btn" />   
  </form>
+ </div>
+ 
+ 	
  <script>
  $(function(){
 	 $("#review_star").val("0");

@@ -185,7 +185,7 @@
 					</li>
 					
 					<li class = "submenu top">
-						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do" target="_self">
+						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" target="_self">
 							<span class = "txt txt_margin_top">주문 / 배송내역</span>
 						</a>
 					</li>

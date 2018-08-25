@@ -104,268 +104,14 @@
 			<div class = "empty_box">
 			
 			</div>
-			
-			<div class = "myorder_page">
-				<h2 class = "order_title">
-				
-				</h2>
-				<div class = "truck_page">
-					<div class = "truck_page_tit" style = "font-size : 20px;">
-						조회기간
-					</div>
-					
-					<style>
-						.total_page_btn {
-							overflow: hidden;
-							font-size : 0px;
-						}
-						
-						.total_page_btn span {
-							display: inline-block;
-							border-top : 1px solid #c4c4c4;
-							border-right : 1px solid #c4c4c4;
-							border-bottom : 1px solid #c4c4c4;
-						}
-						
-						.total_page_btn span:first-child {
-							border-left : 1px solid #c4c4c4;
-						}
-						
-						.btn_white_01{
-							display: inline-block;
-							height : 35px;
-							width : 72px;
-							border-left: 1px solid #fff;
-							border-right : 1px solid #fff;
-							border-bottom : 1px solid #fff;
-							color : #2e2e2e;
-							font-size : 12px;
-							line-height : 34px;
-							font-weight : bold;
-							text-align: center;
-							vertical-align: middle;
-							box-sizing: border-box;
-							cursor: pointer;
-					
-						}
-						
-						
-					</style>
-					<div class = "truck_page_cont">
-						<div class = "truck_page_cont_in">
-							<div class = "total_page_btn">
-								<span>
-									<a href = "#" class = "btn_white_01">오늘</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">1주일</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">1개월</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">2개월</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">3개월</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">6개월</a>
-								</span>
-								
-								<span>
-									<a href = "#" class = "btn_white_01">1년</a>
-								</span>
-							</div>
-							<style>
-							.total_page_select {
-								margin-top : 9px;
-								font-size : 15px;
-								color : #2e2e2e;
-							}
-							.select_option {
-								display : inline-block;
-								position: relative;
-								height : 39px;
-								border : 1px solid #c4c4c4;
-								color : #000;
-								box-sizing: border-box;
-								text-align: left;
-								vertical-align: middle;
-								z-index: 500;
-								border: none;
-							}
-							
-							.txt1 {
-								display: inline-block;
-								padding : 0 6px;
-							}
-							</style>
-							<div class = "total_page_select">
-								<div class = "select_option" >
-									<select class="custom-select">
-  										<option selected>선택</option>
-  										<option value="1">2018</option>
-									</select>
-								</div>
-								
-								<span class = "txt1">년</span>
-								
-								<div  class = "select_option" >
-									<select class="custom-select">
-  										<option value="1">1</option>
-  										<option value="2">2</option>
-  										<option value="3">3</option>
-  										<option value="4">4</option>
-  										<option value="5">5</option>
-  										<option value="6">6</option>
-  										<option value="7">7</option>
-  										<option value="8">8</option>
-  										<option value="9">9</option>
-  										<option value="10">10</option>
-  										<option value="11">11</option>
-  										<option value="12">12</option>
-									</select>
-								</div>
-								
-								<span class = "txt1">월</span>
-								
-								<div  class = "select_option" >
-									<select class="custom-select">
-  										<option value="1">1</option>
-  										<option value="2">2</option>
-  										<option value="3">3</option>
-  										<option value="4">4</option>
-  										<option value="5">5</option>
-  										<option value="6">6</option>
-  										<option value="7">7</option>
-  										<option value="8">8</option>
-  										<option value="9">9</option>
-  										<option value="10">10</option>
-  										<option value="11">11</option>
-  										<option value="12">12</option>
-  										<option value="13">13</option>
-  										<option value="14">14</option>
-  										<option value="15">15</option>
-  										<option value="16">16</option>
-  										<option value="17">17</option>
-  										<option value="18">18</option>
-  										<option value="19">19</option>
-  										<option value="20">20</option>
-  										<option value="21">21</option>
-  										<option value="22">22</option>
-  										<option value="23">23</option>
-  										<option value="24">24</option>
-  										<option value="25">25</option>
-  										<option value="26">26</option>
-  										<option value="27">27</option>
-  										<option value="28">28</option>
-  										<option value="29">29</option>
-  										<option value="30">30</option>
-  										<option value="31">31</option>
-									</select>
-								</div>
-								
-								<span class = "txt1">일</span>
-								
-								<span class = "txt1">~</span>
-								
-								<div class = "select_option" >
-									<select class="custom-select">
-  										<option selected>선택</option>
-  										<option value="1">2018</option>
-									</select>
-								</div>
-								
-								<span class = "txt1">년</span>
-								
-								<div  class = "select_option" >
-									<select class="custom-select">
-  										<option value="1">1</option>
-  										<option value="2">2</option>
-  										<option value="3">3</option>
-  										<option value="4">4</option>
-  										<option value="5">5</option>
-  										<option value="6">6</option>
-  										<option value="7">7</option>
-  										<option value="8">8</option>
-  										<option value="9">9</option>
-  										<option value="10">10</option>
-  										<option value="11">11</option>
-  										<option value="12">12</option>
-									</select>
-								</div>
-								
-								<span class = "txt1">월</span>
-								
-								<div  class = "select_option" >
-									<select class="custom-select">
-										
-  										<option value="1">1</option>
-  										<option value="2">2</option>
-  										<option value="3">3</option>
-  										<option value="4">4</option>
-  										<option value="5">5</option>
-  										<option value="6">6</option>
-  										<option value="7">7</option>
-  										<option value="8">8</option>
-  										<option value="9">9</option>
-  										<option value="10">10</option>
-  										<option value="11">11</option>
-  										<option value="12">12</option>
-  										<option value="13">13</option>
-  										<option value="14">14</option>
-  										<option value="15">15</option>
-  										<option value="16">16</option>
-  										<option value="17">17</option>
-  										<option value="18">18</option>
-  										<option value="19">19</option>
-  										<option value="20">20</option>
-  										<option value="21">21</option>
-  										<option value="22">22</option>
-  										<option value="23">23</option>
-  										<option value="24">24</option>
-  										<option value="25">25</option>
-  										<option value="26">26</option>
-  										<option value="27">27</option>
-  										<option value="28">28</option>
-  										<option value="29">29</option>
-  										<option value="30">30</option>
-  										<option value="31">31</option>
-									</select>
-								</div>
-								<style>
-								.btn_black_01{
-									border : 1px solid #707070;
-								}
-								
-								</style>
-								<span class = "txt1">일</span>
-								
-								<button type="submit" value = "submit"class="btn btn-dark btn_black_01">조회</button>
-							</div>
-							
-						</div>
-					</div>
-				
-				</div>
-			</div>
-			
+
 			<style>
-			
 				.mypage_wrap {
-					padding-bottom: 100px;
 					background : #fcfcfb;
 					overflow: hidden;
 				}
 				
 				.mypage_wrap2 {
-					padding-bottom: 100px;
 					background : #fcfcfb;
 					overflow: hidden;
 				}
@@ -397,35 +143,140 @@
 				}
 				
 				.order_board td {
-					padding: 23px 0;
-					border-bottom:1px solid #eaeaea;
-					background:#fcfcfb;
-					text-align:center;
+					 padding : 23px 0;
+			         border-left : 1px solid #eaeaea;
+			         border-botto : 1px solid #eaeaea;
+			         background : #fcfcfb;
+			         text-align : center;
+			         font-weight: bold;
+			         font-size : 16px;
 				}
+				
+				.order_board td.align_left {
+			         padding : 23px 10px 23px 15px;
+			         border-left: none;
+			         
+			      }
+			      .align_left .bdl_none {
+			      	 width : 200px;
+			      	 border-left: none;
+			         
+			      }
+			      .request_btn {
+			      	width : 100px;
+			      	margin : 2px;
+			      }
 			</style>
+			<script>
+				$(function(){
+					for(var i=0;i<parseInt($('.orderLength').val());i++){
+						$(".buy_date"+i).html($(".buy_date"+i).html().replace(".0",""));
+						
+						var buy_status=$(".buy_status"+i);
+						if(buy_status.html()=="P"){
+							buy_status.html("결제완료");
+						}else if(buy_status.html()=="D"){
+							buy_status.html("배송중");
+						}else if(buy_status.html()=="SD"){
+							buy_status.html("배송완료");
+						}else if(buy_status.html()=="R"){
+							buy_status.html("환불요청중");
+						}else if(buy_status.html()=="SR"){
+							buy_status.html("환불완료");
+						}
+						
+						$(".total_price"+i).html($(".total_price"+i).html().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+					}
+				});
+				$(function(){
+					$('.refund_request').click(function(){
+						var buy_status=$(this).parent().parent().find(".buy_status");
+						$.ajax({
+							url:"${pageContext.request.contextPath}/refundRequest.do",
+							data:{buy_code:$(this).val()},
+							success:function(data){
+								if(data.trim()=='0'){
+									alert("환불요청에 실패하였습니다.");
+									return false;
+								}else{
+									alert("환불이 요청되었습니다.");
+									buy_status.html("환불요청중");
+								}
+							},
+							error:function(jpxhr,textStatus,errormsg){
+								console.log("ajax전송실패.");
+								console.log(jpxhr);
+								console.log(textStatus);
+								console.log(errormsg);
+							}
+						});
+					});
+				});
+				$(function(){		
+					$('.click_product').on('click',function(){
+						var product_code=$(this).parent().parent().find('.product_code').val();
+						location.href="${pageContext.request.contextPath}/productView.do?product_code="+product_code;
+					});
+					
+					$('.write_product_review').click(function(){
+						var product_code=$(this).parent().parent().find('.product_code').val();
+						$('[name=product_code]').val(product_code);
+						$("#testModal").modal();
+					});
+				});
+			</script>
 			<div class = "mypage_wrap">
 				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 주문 / 배송내역</h2>
 				<table class = "order_board">
 					<colgroup>
-						<col style = "width:18%;">
-						<col style = "width:50%;">
-						<col style = "width:10%;">
-						<col style = "width:12%;">
-						<col style = "width:10%;">
-					</colgroup>
+						 <col style = "width:25%;">
+				         <col style = "width:30%;">
+				         <col style = "width:15%;">
+				         <col style = "width:15%;">
+				         <col style = "width:15%;">
+				    </colgroup>
 					<thead>
 					<tr>
-						<th scope="col" class = "#">번호</th>
-						<th scope="col" class = "#">상품정보</th>
-						<th scope="col" class = "#">결제금액</th>
-						<th scope="col" class = "#">진행상황</th>
-						<th scope="col" class = "#"></th>
+						<th scope="col">주문일자</th>
+						<th scope="col">상품정보</th>
+						<th scope="col">결제금액</th>
+						<th scope="col">진행상황</th>
+						<th scope="col">요청</th>
 					</tr>
 					</thead>
 					<tbody>
-						<tr>
-						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
-						</tr>
+						<c:choose>
+						<c:when test="${not empty orderList}">
+							<input type="hidden" class="orderLength" value="${fn:length(orderList)}"/>
+							<c:forEach var="order" items="${orderList}" varStatus="vs">
+							<tr>
+							   <td class="buy_date${vs.index}">${order.BUY_DATE }</td>
+				               <td class = "align_left bdl_none" style = "width : 300px;">
+				                  <div class="click_product" style="float: left;width:100px;cursor:pointer;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${order.NEW_P_IMG_PATH }"> </div>
+				                  <div style="float: left;text-align:left;margin-left:15px;">
+				                     <span class="click_product" style="cursor:pointer;">${order.PRODUCT_NAME}</span><br>
+				                     <c:if test="${order.OPTION_SIZE!=null}">
+				                        <span>(${order.OPTION_SIZE}),</span>
+				                     </c:if>
+				                     <span> ${order.BUY_QUANTITY} 개</span>
+				                  </div>
+				                  <input type="hidden" class="product_code" value="${order.PRODUCT_CODE}">
+				               </td>
+				               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
+				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
+				               <td>
+				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" value="${order.BUY_CODE}">환불 요청</button><br>
+				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
+				               </td>
+           					</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+							</tr>
+						</c:otherwise>
+						</c:choose>
 					</tbody>
 				
 				</table>
@@ -444,13 +295,164 @@
     						<li class="page-item">
       							<a class="page-link" href="#">다음</a>
     						</li>
-  </ul>
-</nav>
-				
+					  </ul>
+					</nav>
 				</div>
 			</div>
 			
-			
+<style>
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
+
+.product_review {
+	margin-top: 20px;
+	padding : 10px;
+	font-size : 30px;
+	line-height: 38px;
+	font-weight: bold;
+	text-align: left;
+}
+
+</style>
+
+
+
+		<!-- 상품평 폼 모달창 -->	
+<div class="modal" id="testModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<c:set var='path' value="${pageContext.request.contextPath}" />
+			<form name="productReview" action="${path}/productReviewInsert.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+				<input name="product_code" type="hidden"/>
+				<input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
+
+		    	<div class="modal-body">
+
+			 	 <h3>상품평 등록</h3>
+			        <hr style="border:2px solid #787878"><br>       
+			        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
+			             
+					<tr class="tr1">
+						<th style="text-align: center;border-left:none;">내용</th>
+						<td>	
+						<input type="text" class="form-control" name="review_content" id="review_content" required>
+						</td>
+					</tr>
+					<tr class="tr1">
+						<th style="text-align: center;border-left:none;">별점</th>
+						<td>	
+						
+						<div class="starRev">
+						  <span class="starR">1</span>
+						  <span class="starR">2</span>
+						  <span class="starR">3</span>
+						  <span class="starR">4</span>
+						  <span class="starR">5</span>
+						</div>
+						<input type="hidden" class="form-control" name="review_star" id="review_star" required>
+						
+						</td>
+					</tr>
+			        </table>
+			        
+			        <hr style="border:2px solid #787878">
+			        <h4>상품 사진</h4>
+			        <div id="fileDiv1">
+				       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
+				        <button type="button" class="btn btn-danger" name="delete1">삭제하기</button>
+	        		</div>
+	        		<br>
+			        <button type="button" class="btn btn-primary" id="add1">사진 추가하기</button>
+		        </div>
+
+				<div class="modal-footer">
+		        	<input type="submit" class="btn" value="등록"/>   
+					<button type="button" class="btn" data-dismiss="modal">닫기</button>
+				</div>
+	
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	$("#review_star").val("0");
+});
+	
+$('.starRev span').click(function(){
+  $(this).parent().children('span').removeClass('on');
+  $(this).addClass('on').prevAll('span').addClass('on');
+  return false;
+});
+$('.starRev span').click(function(){
+	  if($(this).html()==1) $("#review_star").val("1");
+	  else if($(this).html()==2) $("#review_star").val("2");
+	  else if($(this).html()==3) $("#review_star").val("3");
+	  else if($(this).html()==4) $("#review_star").val("4");
+	  else if($(this).html()==5) $("#review_star").val("5");	  
+}); 
+
+var add_count=1;
+
+$(document).ready(function(){
+	$("#add1").on("click",function(e){
+		add_count=add_count+1;
+		if(add_count>7){
+			alert("사진은 최대 7개까지 올릴 수 있습니다.");
+			return false;
+		}
+		var file_name=document.getElementsByName('file_1');
+		for(var i=0;i<file_name.length;i++){
+			if(file_name[i].value.length<1){
+				alert("사진파일을 전부 올리셔야 추가가 가능합니다.");
+				return false;
+			}
+		}
+		fn_fileAdd1();
+	});
+	$("a[name='delete1']").on("click",function(e){
+		fn_fileDelete($(this));
+	});
+});
+	 
+ 
+function fn_fileDelete(obj){
+	obj.parent().remove();
+}
+
+function fn_fileAdd1(){
+    var str = "<p><input type='file' class='addfile1' accept='.jpg, .png' name='file_1'/><a href='#this' name='delete1' class='btn'>삭제하기</a></p> ";
+    $("#fileDiv1").append(str);
+     
+    $("a[name='delete1']").on("click",function(e){
+        e.preventDefault();
+        fn_fileDelete($(this));         
+    });
+}
+
+function validate(){
+	var file_name=document.getElementsByName('file_1');
+	if(file_name.length<2){
+		return true;
+	}
+	for(var i=0;i<file_name.length;i++){
+		if(file_name[i].value.length<1){
+			alert("추가되어있는 사진파일을 전부 올리셔야 합니다.");
+			return false;
+		}
+	}
+	return true;
+}
+</script>
 			
 			
 			
@@ -459,10 +461,4 @@
 			
 			
 		</div>
-	
-	
-	</div>
-
-
-</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

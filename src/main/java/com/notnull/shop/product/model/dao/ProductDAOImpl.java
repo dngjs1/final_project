@@ -30,6 +30,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("product.selectProductList");
 	}
+	
+	@Override
+	public List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession, String searchName) {
+		return sqlSession.selectList("product.searchProduct",searchName);
+	}
 
 	@Override
 	public int insertProduct(SqlSessionTemplate sqlSession, Product product) {
@@ -56,6 +61,22 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("product.insertOption",productOption);
 	}
 
+	
+	@Override
+	public int updateProduct(SqlSessionTemplate sqlSession, Product product) {
+		return sqlSession.update("product.updateProduct",product);
+	}
+
+	@Override
+	public int updateImgList(SqlSessionTemplate sqlSession, ProductImg productImg) {
+		return sqlSession.update("product.updateImgList",productImg);
+	}
+
+	@Override
+	public int updateDetail(SqlSessionTemplate sqlSession, ProductDetailImg productDetailImg) {
+		return sqlSession.update("product.updateDetail",productDetailImg);
+	}
+	
 	@Override
 	public ProductJoinCategory selectProduct(SqlSessionTemplate sqlSession, int productCode) {
 		return sqlSession.selectOne("product.selectProduct",productCode);
@@ -218,25 +239,22 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReviewLike> selectLikeList(SqlSessionTemplate sqlSession, int review_code) {
-		return sqlSession.selectList("product.selectLikeList1",review_code);
-	}
-
-	@Override
 	public String checkLike(SqlSessionTemplate sqlSession, Map map) {
 		return sqlSession.selectOne("product.checkLike",map);
 	}
 
 	@Override
-	public List ycountLike(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.ycountLike");
+	public int deleteProduct(SqlSessionTemplate sqlSession, int product_code) {
+		return sqlSession.update("product.deleteProduct",product_code);
 	}
 
-	
 	@Override
-	public List ncountLike(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.ncountLike");
+	public int deleteOption(SqlSessionTemplate sqlSession, int product_code) {
+		return sqlSession.delete("product.deleteOption",product_code);
 	}
+
+
+
 
 
 	

@@ -61,6 +61,17 @@ public class ProductController {
 		
 		List<ProductListJoin> list = service.selectProductList();
 		m.addAttribute("list",list);
+		System.out.println(list);
+		return "/product/shop";
+	}
+	
+	@RequestMapping("/searchProduct.do")
+	public String searchProduct(Model m,HttpServletRequest request) {
+		String searchName=request.getParameter("searchName");
+		
+		List<ProductListJoin> list =service.searchProduct(searchName);
+		m.addAttribute("list",list);
+		System.out.println("!!!!!!!!!!!!!@!@!@!@!@@@@@@@@@@@@"+list);
 		return "/product/shop";
 	}
 	
@@ -194,14 +205,12 @@ public class ProductController {
 	@Transactional
 	@RequestMapping("/productView.do")
 	public String productView(Model model,HttpServletRequest request) {
-		int productCode=Integer.parseInt(request.getParameter("productCode"));
-		ProductJoinCategory joinCategory=service.selectProduct(productCode);
-		List<ProductOption> optionList =service.selectOption(productCode);
-		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(productCode);
-		List<ProductDetailImg> detailImgList=service.selectDetailImg(productCode);
-		List<ProductImg> imgList=service.selectImgList(productCode);
-		
-
+		int product_code=Integer.parseInt(request.getParameter("product_code"));
+		ProductJoinCategory joinCategory=service.selectProduct(product_code);
+		List<ProductOption> optionList =service.selectOption(product_code);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code);
+		List<ProductDetailImg> detailImgList=service.selectDetailImg(product_code);
+		List<ProductImg> imgList=service.selectImgList(product_code);
 
 		model.addAttribute("joinCategory", joinCategory);
 		model.addAttribute("optionList", optionList);
@@ -211,28 +220,18 @@ public class ProductController {
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
-		productReviewList=service.selectReview(productCode);
+		productReviewList=service.selectReview(product_code);
 		
 		request.setAttribute("reviewList", productReviewList);
 		
 		//문의사항
-		List<ProductQuestion> questionList=service.selectQuestion(productCode);
+		List<ProductQuestion> questionList=service.selectQuestion(product_code);
 		
 		request.setAttribute("questionList", questionList);
 				
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
-		List ycountLikeList= service.ycountLike();
-		
-		List ncountLikeList=service.ncountLike();
-		
-		
-		System.out.println(ycountLikeList);
-		System.out.println(ncountLikeList);
-		
 		request.setAttribute("likeList", likeList);
-		request.setAttribute("ycountLikeList", ycountLikeList);
-		request.setAttribute("ncountLikeList", ncountLikeList);
 		
 			return "/product/productView";
 	}
@@ -312,11 +311,12 @@ public class ProductController {
 		model.addAttribute("cartList",cartList);
 		return "/product/buyForm";
 	}
+	
 	@RequestMapping("/buyEnd.do")
 	public String buyEnd(BuyInfo buyInfo,Model model,HttpServletRequest request) {
 		String[] product_option_codes = request.getParameterValues("product_option_code");
 		String[] buy_quantitys = request.getParameterValues("buy_quantity");
-		String[] sum_price = request.getParameterValues("sum_price");
+		String[] total_price = request.getParameterValues("total_price");
 		String[] cart_codes=null;
 		if( request.getParameterValues("cart_code") != null ) {
 			cart_codes = request.getParameterValues("cart_code");
@@ -341,7 +341,7 @@ public class ProductController {
 			buyInfo2.setReceiver_name(buyInfo.getReceiver_name());
 			buyInfo2.setPhone2(buyInfo.getPhone2());
 			buyInfo2.setRequest(buyInfo.getRequest());
-			buyInfo2.setTotal_price(Integer.parseInt(sum_price[i]));
+			buyInfo2.setTotal_price(Integer.parseInt(total_price[i]));
 			buyInfo2.setBuy_status("P");
 			buyList.add(buyInfo2);
 		}
@@ -419,21 +419,21 @@ public class ProductController {
 		{
 			msg="등록을 실패하였습니다.";
 		}
-		
+		mv.addObject("product_code",productReview.getProduct_code());
 		mv.addObject("msg", msg);
-		mv.addObject("loc", "/product.do");
+		mv.addObject("loc", "productView.do");
 		
 		mv.setViewName("common/msg");	
         return mv;
 	}
 
 	
-	@RequestMapping("/productReviewTest.do")
-	public String productReviewTest(Model model,HttpServletRequest request) {
+	@RequestMapping("/productReviewForm.do")
+	public String productReviewForm(Model model,HttpServletRequest request) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		request.setAttribute("product_code", product_code);
 	
-		return "product/productReviewTest";
+		return "product/productReviewForm";
 	}
 
 
@@ -504,14 +504,9 @@ public class ProductController {
 		int review_code=Integer.parseInt(request.getParameter("review_code"));
 		String member_id=request.getParameter("member_id");
 		String like_status=request.getParameter("like_status");
-		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
 		ProductReviewLike productReviewLike=new ProductReviewLike();
 		int result=0;
 		int likeOn=0;
-		
-		System.out.println(review_code);
-		System.out.println(member_id);
-		System.out.println(like_status);
 		
 		Map map = new HashMap();
 		map.put("id", member_id);
@@ -519,25 +514,19 @@ public class ProductController {
 		
 		String check = service.checkLike(map);
 		
-		System.out.println(check);
 		productReviewLike.setReview_code(review_code);
 		productReviewLike.setMember_id(member_id);
 		productReviewLike.setLike_status(like_status);		
 			
-		if(check==null && like_status.equals("Y")) {
+		if(check==null) {
 			result=service.addLike(productReviewLike);
 			likeOn=1;
-		}else {
-			if(check.equals("Y") && like_status.equals("Y")) {
-				
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(check.equals("N") && like_status.equals("Y")) {
-				productReviewLike.setLike_status("Y");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
-			}
-			
+		}else if(check.equals("Y")) {
+			result=service.deleteLike(productReviewLike);
+			likeOn=2;
+		}else if(check.equals("N")) {
+			result=service.updateLike(productReviewLike);
+			likeOn=3;
 		}
 		
 		mv.addObject("result", result);
@@ -554,7 +543,6 @@ public class ProductController {
 		int review_code=Integer.parseInt(request.getParameter("review_code"));
 		String member_id=request.getParameter("member_id");
 		String like_status=request.getParameter("like_status");
-		List<ProductReviewLike> likeList=service.selectLikeList(review_code);
 		ProductReviewLike productReviewLike=new ProductReviewLike();
 		int result=0;
 		int likeOn=0;
@@ -569,30 +557,21 @@ public class ProductController {
 		
 		String check = service.checkLike(map);
 		
-		System.out.println(check);
 		productReviewLike.setReview_code(review_code);
 		productReviewLike.setMember_id(member_id);
 		productReviewLike.setLike_status(like_status);		
 			
-	
-		
-		if(check==null && like_status.equals("N")) {
+		if(check==null) {
 			result=service.addLike(productReviewLike);
 			likeOn=1;
-		}else {
-			if(check.equals("N") && like_status.equals("N")) {
-				
-				result=service.deleteLike(productReviewLike);
-				likeOn=2;
-			}else if(check.equals("Y") && like_status.equals("N")) {
-				productReviewLike.setLike_status("N");
-				result=service.updateLike(productReviewLike);
-				likeOn=3;
-			}
-			
+		}else if(check.equals("N")) {
+			result=service.deleteLike(productReviewLike);
+			likeOn=2;
+		}else if(check.equals("Y")) {
+			result=service.updateLike(productReviewLike);
+			likeOn=3;
 		}
-		
-		
+
 		mv.addObject("result", result);
 		mv.addObject("likeOn", likeOn);
 		
@@ -600,4 +579,150 @@ public class ProductController {
 		mv.setViewName("JsonView");
 		return mv;
 	}
+	
+	@RequestMapping("deleteProduct.do")
+	public String deleteProduct(HttpServletRequest request,int product_code) {
+		System.out.println(product_code);
+		int result= service.deleteProduct(product_code); 
+		
+		if(result > 0) {
+			System.out.println("삭제 성공");
+		}else {
+			System.out.println("삭제 실패");
+		}
+			
+		return "redirect:/product.do";
+	}
+	
+	@RequestMapping("updateProduct.do")
+	public String updateProduct(HttpServletRequest request,int product_code) {
+		request.setAttribute("product_code", product_code);
+		ProductJoinCategory joinCategory=service.selectProduct(product_code);	
+		List<ProductImg> imgList=service.selectImgList(product_code);
+		List<ProductDetailImg> detailImgList=service.selectDetailImg(product_code);
+		List<ProductOption> optionList =service.selectOption(product_code);
+		
+		request.setAttribute("joinCategory", joinCategory);
+		request.setAttribute("imgList", imgList);
+		request.setAttribute("detailImgList", detailImgList);
+		request.setAttribute("optionList", optionList);
+		
+		return "/product/updateForm";
+	}
+	
+	@RequestMapping("updateProductEnd.do")
+	public ModelAndView updateProductEnd(MultipartHttpServletRequest mtfRequest, HttpServletRequest request,Product product) {
+
+		product.setProduct_code(Integer.parseInt(request.getParameter("product_code")));
+		
+		
+		String[] sizes=request.getParameterValues("size");
+		String[] sleft_amounts=request.getParameterValues("left_amount");
+		
+		List<ProductOption> productOptionList=new ArrayList<ProductOption>();
+			int[] left_amounts = new int[sleft_amounts.length];
+			
+			for(int i=0;i<sleft_amounts.length;i++) {
+				int a= Integer.parseInt(sleft_amounts[i]);
+				left_amounts[i]=a;
+			}
+			
+			for(int i =0; i<sizes.length;i++) {
+				ProductOption productOption = new ProductOption();
+				productOption.setLeft_amount(left_amounts[i]);
+				productOption.setOption_size(sizes[i]);
+				productOptionList.add(productOption);
+			}
+		
+ 	
+        List<MultipartFile> fileList = mtfRequest.getFiles("file_0");
+        String saveDir="";
+        File dir=null;
+        List<ProductImg> productImgList= new ArrayList<ProductImg>();
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productImg/");
+        dir=new File(saveDir);
+		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+		
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+            
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductImg productImg = new ProductImg();
+                      
+            productImg.setP_img_path(originFileName);
+            productImg.setNew_p_img_path(renamedFileName);
+            productImg.setP_img_code(Integer.parseInt(request.getParameter("p_img_code")));
+            productImgList.add(productImg);
+        }
+        
+
+        List<MultipartFile> fileList1 = mtfRequest.getFiles("file_1");
+        List<ProductDetailImg> productDetailImgList = new ArrayList<ProductDetailImg>();
+        saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/productDetailImg/");
+        dir=new File(saveDir);
+        if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+        
+        for (MultipartFile mf : fileList1) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            String ext=originFileName.substring(originFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+
+            String safeFile = saveDir + System.currentTimeMillis() + originFileName;
+            try {
+                mf.transferTo(new File(saveDir+File.separator+renamedFileName));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            ProductDetailImg productDetailImg = new ProductDetailImg();
+                      
+            productDetailImg.setP_detail_img_path(originFileName);
+            productDetailImg.setNew_p_detail_img_path(renamedFileName);
+            productDetailImg.setP_detail_img_code(Integer.parseInt(request.getParameter("p_detail_img_code")));
+            productDetailImgList.add(productDetailImg);
+        }
+        if(product.getReal_size().isEmpty()) {
+        	product.setReal_size("상품 상세 정보 확인");
+        }
+        int result= service.updateProduct(product,productImgList,productDetailImgList,productOptionList);
+        ModelAndView mv=new ModelAndView();
+        String msg="";
+		if(result>0)
+		{
+			msg="수정을 성공하였습니다.";
+		}
+		else
+		{
+			msg="수정을 실패하였습니다.";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "/product.do");
+		
+		mv.setViewName("common/msg");	
+        return mv;
+    } 
+	
 }

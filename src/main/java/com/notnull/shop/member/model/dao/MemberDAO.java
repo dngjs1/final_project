@@ -1,11 +1,13 @@
 package com.notnull.shop.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 
 public interface MemberDAO {
 	
@@ -45,4 +47,8 @@ public interface MemberDAO {
 	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id);
 	
 	int totalPoint(SqlSessionTemplate sqlSession, String member_id);
+	
+	List<Map> selectOrderList(SqlSessionTemplate sqlSession,String member_id);
+	
+	int updateBuyStatus(SqlSessionTemplate sqlSession,BuyInfo buyInfo);
 }

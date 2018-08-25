@@ -13,11 +13,12 @@ public class Product {
 	private String p_category_code;
 	private String p_board_content;
 	private Date write_date;
+	private String product_delete;
 	
 	public Product() {}
 
 	public Product(int product_code, int price, String product_name, Date release_date, String country,
-			String real_size, String p_category_code, String p_board_content, Date write_date) {
+			String real_size, String p_category_code, String p_board_content, Date write_date, String product_delete) {
 		super();
 		this.product_code = product_code;
 		this.price = price;
@@ -28,6 +29,7 @@ public class Product {
 		this.p_category_code = p_category_code;
 		this.p_board_content = p_board_content;
 		this.write_date = write_date;
+		this.product_delete = product_delete;
 	}
 
 	public int getProduct_code() {
@@ -102,12 +104,20 @@ public class Product {
 		this.write_date = write_date;
 	}
 
+	public String getProduct_delete() {
+		return product_delete;
+	}
+
+	public void setProduct_delete(String product_delete) {
+		this.product_delete = product_delete;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [product_code=" + product_code + ", price=" + price + ", product_name=" + product_name
 				+ ", release_date=" + release_date + ", country=" + country + ", real_size=" + real_size
 				+ ", p_category_code=" + p_category_code + ", p_board_content=" + p_board_content + ", write_date="
-				+ write_date + "]";
+				+ write_date + ", product_delete=" + product_delete + "]";
 	}
 
 	

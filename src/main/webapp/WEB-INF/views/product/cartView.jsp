@@ -167,26 +167,12 @@
 		})
 	});
 	
-	function validate(){
-		if($('.member_id').val()==null||$('.member_id').val().length<1){
-			alert("로그인 후 이용해주시기 바랍니다.");
-			return false;
-		}
-		if($(".total-price").text()=="장바구니에 상품을 골라주세요."){
-			alert("상품을 한개이상 골라주세요");
-			return false;
-		}
-		var left_amount=document.getElementsByName("left_amount");
-		var cart_quantity=document.getElementsByName("cart_quantity");
-		var product_name=document.getElementsByName("product_name");
-		for(var i=0;i<left_amount.length;i++){
-			if(parseInt(left_amount[i].value) < parseInt(cart_quantity[i].value)){
-				alert(product_name[i].value+"의 재고가 부족합니다. (남은수량 : "+left_amount[i].value+")");
-				return false;
-			}
-		}
-		return true;
-	}
+	$(function(){
+		$('.click_product').on('click',function(){
+			var product_code=$(this).parent().parent().find('.product_code').val();
+			location.href="${pageContext.request.contextPath}/productView.do?product_code="+product_code;
+		});
+	});
 </script>
 
 <style>
@@ -302,7 +288,7 @@
 	</style>
 	<h2 class = "cart_title_01">내가 담은 상품리스트</h2>
 	
-	<form id="frm" action="${pageContext.request.contextPath }/buyForm2.do" onsubmit="return validate();" method="get">
+	<form id="frm" method="get">
 		<input type="hidden" name="member_id" class="member_id" value="${memberLoggedIn.member_id}"/>
 		<table class="table cart_board" style="font-size:13px;" >
 			<tr class="tr1">
@@ -319,19 +305,19 @@
 					<tr class="tr2">
 						<td scope="col"><input type="checkbox" name="check" value="${cart.cart_code}" checked/></td>
 						<td scope="col">
-							<div style="float: left;width:80px"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.new_p_img_path }"></div>
+							<div class="click_product" style="float: left;width:80px;cursor:pointer;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${cart.new_p_img_path }"></div>
 							<div style="float: left;text-align:left;margin-left:15px;">
-								<span style="font-weight:bold;font-size:15px;">${cart.product_name}</span><br>
+								<span class="click_product" style="font-weight:bold;font-size:15px;cursor:pointer;">${cart.product_name}</span><br>
 								<c:if test="${cart.option_size != null }">
 									<span>사이즈 : ${cart.option_size}</span>
 								</c:if>
 								<br>
 								<span><span style="font-size:16px;color:#148CFF;"><%=strdate%></span> 도착 예정</span>					
 							</div>
+							<input type="hidden" class="product_code" value="${cart.product_code}">
 						</td>
 						<td scope="col"><span class="price${vs.count} sell_price" style="font-size:16px">${cart.price }</span><span> 원</span></td>
 						<td scope="col">
-						<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 							<input type="hidden" class="cartLength" value="${fn:length(cartList)}"/>
 							<input type="hidden" class="cart_code" value="${cart.cart_code}"/>
 							<input type="hidden" name="left_amount" value="${cart.left_amount}"/>
@@ -592,74 +578,90 @@
 		</ul>
 	</div>
 	
-	<style>
-		.btn_button {
-			margin-top : 20px;
-			text-align: right;
-		}
-		
-		.btn_cancel01 {
-			display:inline-block;
-			width:211px;
-			height:60px;
-			border: none;
-			background: #2d2e33;
-			color : #fff;
-			font-size: 18px;
-			line-height: 58px;
-			font-weight: bold;
-			text-align: center;
-			vertical-align: middle;
-			box-sizing: border-box;
-			cursor: pointer;
-		}
-		
-		.btn_submit01 {
-			margin-left : 5px;
-			display : inline-block;
-			width : 211px;
-			height : 60px;
-			background: #E2758C;
-			border : none;
-			color : #fff;
-			font-size : 18px;
-			line-height: 58px;
-			font-weight: bold;
-			text-align: center;
-			vertical-align: middle;
-			box-sizing: border-box;
-			cursor : pointer;
-		}
-	</style>
-	<div class = "btn_button">
-		<button id = "select-delete" class = "btn_cancel01">선택삭제</a>
-		<button id = "buy" type = "submit" class = "btn_submit01">구매하기</a>
-	</div>
-		<!-- <div style="width:100%;border:2px solid #DDDDDD;padding:15px;text-align:center;font-size:15px;">
-			<span>
-				<span>총 상품가격 </span><span class="font-price total-product-price"></span><span> 원</span><span> + </span>
-				<span>배송비 </span><span class="font-price deli-price">2500</span><span> 원</span><span> = </span>
-			</span>
-				<span>총 주문금액 </span><span class="font-price total-price" style="font-size:22px;color:#2e2e2e;"></span><span> 원</span>
+		<style>
+			.btn_button {
+				margin-top : 20px;
+				text-align: right;
+			}
+			
+			.btn_cancel01 {
+				display:inline-block;
+				width:211px;
+				height:60px;
+				border: none;
+				background: #2d2e33;
+				color : #fff;
+				font-size: 18px;
+				line-height: 58px;
+				font-weight: bold;
+				text-align: center;
+				vertical-align: middle;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			
+			.btn_submit01 {
+				margin-left : 5px;
+				display : inline-block;
+				width : 211px;
+				height : 60px;
+				background: #E2758C;
+				border : none;
+				color : #fff;
+				font-size : 18px;
+				line-height: 58px;
+				font-weight: bold;
+				text-align: center;
+				vertical-align: middle;
+				box-sizing: border-box;
+				cursor : pointer;
+			}
+		</style>
+		<div class = "btn_button">
+			<button type = "button" id = "select-delete" class = "btn_cancel01">선택삭제</button>
+			<button type = "button" id = "buy" class = "btn_submit01">구매하기</button>
 		</div>
-	<br>
-		<div style="text-align:center">
-			<button id="select-delete" type="button" class="btn btn-default">선택삭제</button>
-			<button id="buy" type="submit" class="btn btn-primary">구매하기</button>
-		</div> -->
 	</form>
 <script>
-$('#select-delete').click(function(e){
-	var member_id=$('.member_id').val();
-	if(member_id==null||member_id.length<1){
-		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
-	}else{
+$(function(){
+	$('#buy').click(function(){
+		if($('.member_id').val()==null||$('.member_id').val().length<1){
+			alert("로그인 후 이용해주시기 바랍니다.");
+			return false;
+		}
+		if($(".total-price").text()=="0"){
+			alert("상품을 한개이상 골라주세요");
+			return false;
+		}
+		var left_amount=document.getElementsByName("left_amount");
+		var cart_quantity=document.getElementsByName("cart_quantity");
+		var product_name=document.getElementsByName("product_name");
+		for(var i=0;i<left_amount.length;i++){
+			if(parseInt(left_amount[i].value) < parseInt(cart_quantity[i].value)){
+				alert(product_name[i].value+"의 재고가 부족합니다. (남은수량 : "+left_amount[i].value+")");
+				return false;
+			}
+		}
 		var frm=$("#frm");
-		var url="${pageContext.request.contextPath }/deleteSelectCart.do";
+		var url="${pageContext.request.contextPath }/buyForm2.do";
 		frm.attr("action",url);
 		frm.submit();
-	}
+	});
+	$('#select-delete').click(function(e){
+		var member_id=$('.member_id').val();
+		if(member_id==null||member_id.length<1){
+			alert("로그인 후 이용해주시기 바랍니다.");
+			return false;
+		}else if($(".total-price").text()=="0"){
+			alert("상품을 한개이상 골라주세요");
+			return false;
+		}else{
+			var frm=$("#frm");
+			var url="${pageContext.request.contextPath }/deleteSelectCart.do";
+			frm.attr("action",url);
+			frm.submit();
+		}
+	});
 });
 </script>
 </div>
