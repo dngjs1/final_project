@@ -45,10 +45,13 @@ public class RentalController {
 		for(Rental rental : list) {
 		    String re1=".*?";	// Non-greedy match on filler
 		    String re2="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
+			String re3 = rental.getContent().replaceAll("</p>", "p");
+			String re4 = re3.replaceAll("<p>", "p");
+			
 
 		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		    
-		    Matcher m = p.matcher(rental.getContent());
+		    Matcher m = p.matcher(re4);
 		    if (m.find())
 		    {
 		    	rental.setImgUrl("."+m.group(1));
@@ -84,22 +87,24 @@ public class RentalController {
 		return "redirect:/rentalMain.do";
 	}
 	
+	
 	//상세보기
 	@RequestMapping(value="/rentalDetail.do", method=RequestMethod.GET)
 	public String detailGet(@RequestParam(value="rental_obj_code") int rental_obj_code, HttpServletRequest req, Model model) {
 		Rental rental = new Rental();
 
 		List<RentalPerson> list = service.selectRentalPerson(rental_obj_code);
-		
+				
 		rental = service.getRental(rental_obj_code);
 		String re1=".*?";	// Non-greedy match on filler
 		String re2="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
-		String re3="</?[p][a-z0-9]*[^<>]*>";
-
-	    Pattern p = Pattern.compile(re1+re2+re3,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-	    Matcher m = p.matcher(rental.getContent());
-	    System.out.println(rental);
-	    System.out.println(m);
+		
+		String re3 = rental.getContent().replaceAll("</p>", "p");
+		String re4 = re3.replaceAll("<p>", "p");
+		
+		
+	    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	    Matcher m = p.matcher(re4);
 	    if (m.find()) {
 		    rental.setImgUrl("."+m.group(1));
 		}
