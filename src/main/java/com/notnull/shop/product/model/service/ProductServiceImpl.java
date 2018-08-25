@@ -36,10 +36,15 @@ public class ProductServiceImpl implements ProductService {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ProductListJoin> selectProductList() {
-		return productDAO.selectProductList(sqlSession);
+	public List<ProductListJoin> selectProductList(int cPage,int numPerPage) {
+		return productDAO.selectProductList(sqlSession,cPage,numPerPage);
 	}
 	
+	@Override
+	public int productListCount() {
+		return productDAO.productListCount(sqlSession);
+	}
+
 	@Override
 	public List<ProductListJoin> searchProduct(String searchName) {
 		return productDAO.searchProduct(sqlSession,searchName);
@@ -158,11 +163,18 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectOption(sqlSession,productCode);
 	}
 
+	
 	@Override
-	public List<ProductReview> selectReview(int productCode) {
-		return productDAO.selectReview(sqlSession,productCode);
+	public List<ProductReview> selectReview(int productCode, int cPage, int numPerPage) {
+		return productDAO.selectReview(sqlSession,productCode,cPage,numPerPage);
 	}
 
+	@Override
+	public int selectProductReviewCount(int product_code) {
+		return productDAO.selectProductReviewCount(sqlSession,product_code);
+	}
+
+	
 	@Override
 	public int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList) {
 		int result=0;
@@ -362,6 +374,15 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.deleteProduct(sqlSession,product_code);
 	}
 
+	
+	@Override
+	public List<ProductReviewImgJoin> selectReviewImg(int productCode, int cPage, int numPerPage) {
+		return productDAO.selectReviewImg(sqlSession,productCode,cPage,numPerPage);
+	}
+
+
+	
+	
 	
 	
 }

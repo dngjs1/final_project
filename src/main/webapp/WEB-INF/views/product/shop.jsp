@@ -198,6 +198,6 @@ $('.star-prototype').generateStars();
 <a href="#" id="toTop" style="display: block;"><span id="toTopHover"
 	style="opacity: 1;"></span></a>
 
-
+${pageBar }
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

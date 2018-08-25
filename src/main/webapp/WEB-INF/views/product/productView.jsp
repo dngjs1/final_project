@@ -710,7 +710,7 @@ span.star-prototype > * {
     </li>
     
     <li class="nav-item">
-       <a class="nav-link link02" data-toggle="tab" href="#section2">상품평</a>
+       <a class="nav-link link02" data-toggle="tab" id="productReivews" href="#section2">상품평</a>
     </li>
     
     <li class="nav-item">
@@ -765,7 +765,7 @@ span.star-prototype > * {
  <br>		
  <input type="button" value="테스트" onclick="fn_productReview()"/>
  <hr>
- <h4>상품평</h4> 
+ <h4  class="productReviews">상품평</h4>
  <script>
 	function fn_productReview(){
 		location.href="${pageContext.request.contextPath}/productReviewForm.do?product_code=${joinCategory.product_code}";
@@ -1027,9 +1027,9 @@ span.star-prototype > * {
 						</span>
 					</div>	
   				</div>
-  				<input type= "button" class='btn btn-outline' value="삭제" onclick="deleteReview(${reviewList.review_code})"/>		
+  			<%-- 	<input type= "button" class='btn btn-outline' value="삭제" onclick="deleteReview(${reviewList.review_code})"/>		
 				<input type= "button" class='btn btn-outline' value="수정" onclick="updateReview(${joinCategory.review_code})"/>
-  						
+  				 --%>		
   			</div>
   			
   			
@@ -1037,10 +1037,13 @@ span.star-prototype > * {
   	
   	</div>
 </c:forEach>
+ ${pageBar }
 </div>
 <script>
 
-function deleteReview(review_code)
+
+
+/* function deleteReview(review_code)
 {
      location.href="${path}/deleteReview.do?review_code="+review_code;
 }
@@ -1048,7 +1051,7 @@ function deleteReview(review_code)
 function updateReview(review_code)
 {
      location.href="${path}/updateReview.do?review_code="+review_code;
-}
+} */
 $(function(){
 	//좋아요 첫화면
 	var member_id="${memberLoggedIn.member_id}";
@@ -1463,7 +1466,7 @@ function changeImg(src) {
 </script>
 
  
-  
+ 
 </div>
 
 

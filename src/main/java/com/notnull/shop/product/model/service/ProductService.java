@@ -23,7 +23,9 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 public interface ProductService {
 
-	List<ProductListJoin> selectProductList();
+	List<ProductListJoin> selectProductList(int cPage,int numPerPage);
+	
+	int productListCount();
 	
 	List<ProductListJoin> searchProduct(String searchName);
 	
@@ -40,10 +42,18 @@ public interface ProductService {
 	int updateProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	List<ProductCategory> selectCategoryList();
-	
+		
+	List<ProductReviewImgJoin> selectReviewImg(int productCode,int cPage,int numPerPage);
+		
 	ProductJoinCategory selectProduct(int productCode);
 	
 	List<ProductOption> selectOption(int productCode);
+	
+	List<ProductReviewImgJoin> selectReviewImg(int productCode);
+	
+	List<ProductDetailImg> selectDetailImg(int productCode);
+	
+	List<ProductImg> selectImgList(int productCode);
 	
 	int insertCart(Cart cart);
 	
@@ -69,15 +79,11 @@ public interface ProductService {
 	
 	int updateLeftList(List<BuyInfo> buyList);
 	
-	List<ProductReview> selectReview(int productCode);
+	List<ProductReview> selectReview(int productCode,int cPage,int numPerPage);
+	
+	int selectProductReviewCount(int product_code);
 	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
-	
-	List<ProductReviewImgJoin> selectReviewImg(int productCode);
-	
-	List<ProductDetailImg> selectDetailImg(int productCode);
-	
-	List<ProductImg> selectImgList(int productCode);
 	
 	int addQuestion(ProductQuestion productQuestion);
 	

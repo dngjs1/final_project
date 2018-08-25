@@ -19,6 +19,10 @@
 		order by product_code desc
 	</select>
  
+ 	<select id="productListCount" resultType="_int">
+		select count(*) from product 	
+ 	</select>
+ 
  
  	<select id="searchProduct" parameterType="string" resultMap="productListJoinMap">    
 		select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
@@ -156,6 +160,10 @@
   	
   	<select id="selectReview" parameterType="int" resultType="productReview">
   	 select * from product_review WHERE product_code=#{product_code} 
+  	</select>
+  	
+  	<select id="selectProductReviewCount" resultType="_int">
+  		select count(*) from product_review WHERE product_code=#{product_code}
   	</select>
   	
   	<insert id="insertCart" parameterType="cart">
