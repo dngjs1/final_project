@@ -158,11 +158,11 @@
 						</a>
 					</li>
 					
-					<li class = "submenu top">
+					<%-- <li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/memberUpdate.do" target="_self">
 							<span class = "txt txt_margin_top">회원정보 수정</span>
 						</a>
-					</li>
+					</li> --%>
 					
 					<c:if test="${memberLoggedIn.member_id eq 'admin' }">
 						<li class = "submenu btm">
