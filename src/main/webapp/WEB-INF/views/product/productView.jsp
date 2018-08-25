@@ -221,10 +221,13 @@ span.star-prototype > * {
 			
 			
 			<!-- 삼품명을 불러오는 코드부분 -->
-			<h1 style = "box-sizing:border-box;padding-right:150px;position:relative;">${joinCategory.product_name}</h1>
+			<h1 class="product_name1" style = "box-sizing:border-box;padding-right:150px;position:relative;">${joinCategory.product_name}</h1>
 			
 			
 			<script>
+			$(function(){
+				$('.product_name').html($('.product_name1').html());
+			});
 			function deleteProduct(product_code)
 		      {
 		           location.href="${path}/deleteProduct.do?product_code="+product_code;
@@ -765,7 +768,7 @@ span.star-prototype > * {
  <h4>상품평</h4> 
  <script>
 	function fn_productReview(){
-		location.href="${pageContext.request.contextPath}/productReviewTest.do?product_code=${joinCategory.product_code}";
+		location.href="${pageContext.request.contextPath}/productReviewForm.do?product_code=${joinCategory.product_code}";
 	}
 </script>
 
@@ -903,7 +906,7 @@ span.star-prototype > * {
   			
   				<!-- 상품명 넘어오는 공간 -->
   				<div class = "product_name">
-  					캠핑용품입니다.
+  					
   				</div>
   				
   				<!-- 상품평 제목이라고 써져있는 곳 넘어오는 div 공간 -->

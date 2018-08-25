@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.product.model.vo.BuyInfo;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -140,6 +141,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("member.selectOrderList",member_id);
+	}
+
+	@Override
+	public int updateBuyStatus(SqlSessionTemplate sqlSession, BuyInfo buyInfo) {
+		return sqlSession.update("member.updateBuyStatus",buyInfo);
 	}
 	
 }
