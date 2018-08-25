@@ -128,7 +128,7 @@
 			        minLevel: 10 // 클러스터 할 최소 지도 레벨 
 			    });
 		
-				<c:forEach items="${list }" var="rental" varStatus="status">
+				<c:forEach items="${list2 }" var="rental" varStatus="status">
 				 // 주소로 좌표를 검색합니다
 					geocoder.addressSearch('${rental.address}', function(result, status) {
 					    // 정상적으로 검색이 완료됐으면 
@@ -149,7 +149,7 @@
 					            		'<div id="iw-container">'+
 					            			'<div class="iw-title">${rental.p_category_name}</div>'+
 					            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
-					            				'<span>물품명 : </span> <span>"${rental.title}"</span><br><span>주소 :</span><span>"${rental.address}"</span></a>'
+					            				'<span>물품명 : </span> <span>"${rental.title}"</span><br><span>주소 :</span><span>"${rental.address}"</span><br><span>연락처 :</span><span>"${rental.phone}"</span></a>'
 					        });
 						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 

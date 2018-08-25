@@ -19,4 +19,6 @@ public interface RentalDAO {
 
 	List<RentalPerson> selectRentalPerson(int rental_obj_code);
 
+	List<Rental> RentalListAll();
+
 }

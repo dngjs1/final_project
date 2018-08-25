@@ -34,11 +34,14 @@ public class RentalController {
 	@RequestMapping(value= "/rentalMain.do", method=RequestMethod.GET)
 	public String ListRental(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, Model model) {
 		List<Rental> list;
+		List<Rental> list2;
 		int numPerPage = 5;
 		
 		int totalCount = service.selectRentalCount();
-		
+		//페이징
 		list = service.RentalList(cPage, numPerPage);
+		//지도
+		list2 = service.RentalListAll();
 		
 		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalCount, "/rentalMain.do");
 		
@@ -58,7 +61,25 @@ public class RentalController {
 		    }
 		    
 		}
+		
+		for(Rental rental : list2) {
+		    String re5=".*?";	// Non-greedy match on filler
+		    String re6="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
+			String re7 = rental.getContent().replaceAll("</p>", "p");
+			String re8 = re7.replaceAll("<p>", "p");
+			
+
+		    Pattern p = Pattern.compile(re5+re6,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    
+		    Matcher m = p.matcher(re8);
+		    if (m.find())
+		    {
+		    	rental.setImgUrl("."+m.group(1));
+		    }
+		    
+		}
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
 		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("cPage", cPage);
 		model.addAttribute("totalCount",totalCount);

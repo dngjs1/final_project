@@ -47,5 +47,10 @@ public class RentalServiceImpl implements RentalService{
 		return dao.selectRentalPerson(rental_obj_code);
 	}
 
+	@Override
+	public List<Rental> RentalListAll() {
+		return dao.RentalListAll();
+	}
+
 
 }

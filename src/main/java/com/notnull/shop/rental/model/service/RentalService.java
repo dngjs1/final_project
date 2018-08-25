@@ -19,4 +19,6 @@ public interface RentalService {
 
 	public List<RentalPerson> selectRentalPerson(int rental_obj_code);
 
+	public List<Rental> RentalListAll();
+
 }
