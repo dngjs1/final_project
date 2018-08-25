@@ -88,18 +88,23 @@ public class RentalController {
 	@RequestMapping(value="/rentalDetail.do", method=RequestMethod.GET)
 	public String detailGet(@RequestParam(value="rental_obj_code") int rental_obj_code, HttpServletRequest req, Model model) {
 		Rental rental = new Rental();
+
+		List<RentalPerson> list = service.selectRentalPerson(rental_obj_code);
 		
 		rental = service.getRental(rental_obj_code);
 		String re1=".*?";	// Non-greedy match on filler
 		String re2="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
+		String re3="</?[p][a-z0-9]*[^<>]*>";
 
-	    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		    
+	    Pattern p = Pattern.compile(re1+re2+re3,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	    Matcher m = p.matcher(rental.getContent());
+	    System.out.println(rental);
+	    System.out.println(m);
 	    if (m.find()) {
 		    rental.setImgUrl("."+m.group(1));
 		}
 		model.addAttribute("rental", rental);
+		model.addAttribute("rentalPerson", list);
 		
 		return "rental/rentalView";
 	}
@@ -109,13 +114,10 @@ public class RentalController {
 		System.out.println("대여하기");
 		int result = service.insertRentalPerson(rentalPerson);
 		String msg="";
-		String loc="/rentalView.do";
+		String loc="/rentalMain.do";
 		if(result>0) {
 			System.out.println("대여완료");
 			msg="대여신청 완료";
-			List<RentalPerson> list = service.selectRentalPerson(rentalPerson.getRental_code());
-			
-			model.addAttribute("rentalPerson", list);
 		} else {
 			System.out.println("대여실패");
 			msg="대여신청 실패";

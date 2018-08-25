@@ -30,7 +30,7 @@ input[name="datetimes"]{cursor: pointer;}
 		<div class="col-6">
 			<hr style="border: 1.5px solid black;margin-top: 0px;">
 			<div style="margin-left:10px">
-				<form id="form" action="${path }/insertRentalPerson.do" method="get" onsubmit="return buy();">
+				<form id="form" action="${path }/insertRentalPerson.do" method="get" enctype="multipart/form-data" onsubmit="return FormSubmit();">
 					<input type="hidden" id="rental_obj_code" name="rental_obj_code" value="${rental.rental_obj_code }"  />
 					<input type="hidden" id="member_id" name="member_id" value="${memberLoggedIn.member_id }" id="member_id" readonly="readonly">
 					
@@ -50,7 +50,7 @@ input[name="datetimes"]{cursor: pointer;}
 					</div>
 					<br><br><br>
 					<div style="float: right;">
-						<button class="btn btn-primary " name="button" type="button" onclick="buy();">대여신청</button> 
+						<button class="btn btn-primary" name="button" type="button" onclick="buy();">대여신청</button> 
 						<button id="hiddenBtn" type="submit" style="display: none;"></button>
 					</div>
 					<br>
@@ -76,21 +76,23 @@ input[name="datetimes"]{cursor: pointer;}
 </div>
 <script>
 	$(function() {
+		var price = ${rental.price};
 		  $('input[name="datetimes"]').daterangepicker({
 		    timePicker: true,
+		    startDate: "${rental.start_date}",
+		    endDate: "${rental.end_date}",
 		    minDate: "${rental.start_date}",
 		    maxDate: "${rental.end_date}",
 		    locale: {
 		        format: 'YYYY-MM-DD HH:mm:ss'
-		    }
-		    ,isInvalidDate : function(date){
-
-		  		var dateRanges = "${rentalPerson}";
-		  		
-		  		for(var j=0; j<dateRanges.length; j++){
-
-		            return (date >= dateRange[j].start_date && date <= dateRange[j].start_date);
-		  		}
+		    },isInvalidDate : function(date){
+		    	//다른 사람이 예약한 날짜 못하게 막음
+				<c:forEach items="${rentalPerson }" var="rental" varStatus="status">
+					if (date.format('YYYY-MM-DD HH:mm:ss') >= "${rental.start_date}" && date.format('YYYY-MM-DD HH:mm:ss') <= "${rental.end_date}") {
+						return true;
+					}
+				</c:forEach>
+	           return false;
   		      } 
 		  },function(start, end, label) {
 				  result = (end-start)/(1000*3600*24);
@@ -98,20 +100,29 @@ input[name="datetimes"]{cursor: pointer;}
 				  result2 = ((end-start)%(1000*3600*24))/(1000*3600);
 				  if(result2 == 0 ) {
 					  if(result2>0 && result2<=8){
-						  $("#del_price").text(${rental.price}*result+${rental.price}*0.5+"원");
+						  $("#del_price").text(price*result+price*0.5+"원");
 					  } else{
-						  $("#del_price").text(${rental.price}*result+"원");
+						  $("#del_price").text(price*result+"원");
 					  }
 				  } else{
-					  $("#del_price").text(${rental.price}+"원");
+					  $("#del_price").text(price+"원");
 				  }
 			});
-	});
 	  $('input[name="datetimes"]').change(function(){
 			var odate = $(this).val();
 			$("#start_date").val(odate.substring(0,19));
 			$("#end_date").val(odate.substring(22,42));
 	  });
+	});
+	/* function redu(date){
+		var dateRanges = "${rentalPerson}";
+		var date1;
+		for(var j=0; j> dateRanges.length; j++) {
+			date1 = date1 + "||" + (date.format('YYYY-MM-DD HH:mm:ss') >= "${rentalPerson[j].start_date}" && date.format('YYYY-MM-DD HH:mm:ss') <= "${rentalPerson[j].end_date}");
+		}
+		alert(date1);
+		return date1;
+	} */
 </script>
  
 <!-- 결제 -->
