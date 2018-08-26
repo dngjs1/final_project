@@ -95,7 +95,104 @@
 	.map-list{
 		height:90%
 	}
-	
+</style>
+<div class="container-fluid">
+	<div class="map-container">
+		<div class="map-area">
+			<div id="map">
+			</div>
+			<form onsubmit="searchPlaces(); return false;">
+					<label>동 이름 : </label>
+					<label><input type="text" id="keyword" size="15" class="form-control" ></label>
+                    <label><button type="submit" class="btn btn-primary">검색하기</button></label> 
+                </form>
+			<c:if test="${memberLoggedIn != null }">
+				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
+			</c:if>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
+			<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+				    mapOption = { 
+				        center: new daum.maps.LatLng(35.829024062214266, 127.88727134463655), // 지도의 중심좌표
+				        level: 12 // 지도의 확대 레벨
+				    };
+		
+				var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다z
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new daum.maps.services.Geocoder();
+				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+				var mapTypeControl = new daum.maps.MapTypeControl();		 // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+				 // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+				 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+			
+				 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+				 var zoomControl = new daum.maps.ZoomControl();
+				 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+			    // 마커 클러스터러를 생성합니다 
+			    var clusterer = new daum.maps.MarkerClusterer({
+			        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+			        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+			        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+			    });
+		
+				<c:forEach items="${list2 }" var="rental" varStatus="status">
+				 // 주소로 좌표를 검색합니다
+					geocoder.addressSearch('${rental.address}', function(result, status) {
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === daum.maps.services.Status.OK) {
+					    	
+					    	 displayPlaces(${rental});
+					    	
+					
+					    } 
+					}); 
+			 	</c:forEach>
+			 	function displayPlaces(places){
+			 		for(var i=0; i<places.length; i++){
+			 			 
+				        var coords = new daum.maps.LatLng(places[i].y, places[i].x);
+				        // 결과값으로 받은 위치를 마커로 표시합니다
+				        var marker = new daum.maps.Marker({
+				            map: map,
+				            position: coords,
+				            clickable:true
+				        });
+
+				        // 인포윈도우로 장소에 대한 설명을 표시합니다
+				        var infowindow = new daum.maps.InfoWindow({
+				            content: '<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">'+
+				            		'<div id="iw-container">'+
+				            			'<div class="iw-title">${rental.p_category_name}</div>'+
+				            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
+				            				'<span><strong>물품명 : </strong></span> <span>"${rental.title}"</span><br><span><strong>주소 : </strong></span><span>"${rental.address}"</span><br><span><strong>연락처 : </strong></span><span>"${rental.phone}"</span></a>'
+				        });
+					    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+					    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+					    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+					    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+					    daum.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
+
+				        clusterer.addMarker(marker);
+			 		}
+			 	}
+		
+				// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+				function makeOverListener(map, marker, infowindow) {
+				    return function() {
+				        infowindow.open(map, marker);
+				    };
+				}
+				
+				// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+				function makeOutListener(infowindow) {
+				    return function() {
+				        infowindow.close();
+				    };
+				}
+				
+			</script>
+		</div>
+		<style>
 			#iw-container {
 				margin-bottom: 10px;
 				width:200px;
@@ -121,135 +218,19 @@
 				overflow-x: hidden;
 			}
 		</style>
-<div class="container-fluid">
-	<div class="map-container">
-		<div class="map-area">
-			<div id="map">
-			</div>
-			<c:if test="${memberLoggedIn != null }">
-				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
-			</c:if>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
-
-		</div>
-		
 		<div class="map-content">
 	        <!-- search -->
 	        <div class="map-search">
 	            <div class="item-type">
 	                <h4>카테고리</h4>
-	                <form id="searchFrm" onsubmit="return false;">
-						<input type="text" name="keyword" id="keyword" onkeydown="goButton();">
-						<button type="button" onclick="getRestaurant();">검색</button> 
-	 	            	<label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-	 	 	        	<label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
-	                	<label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
-	                	<label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
-	                </form>
-        		</div>
+	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 카테고리2 </label>
+        </div>
+	        	
 	        </div>
-	        <script>
-	    	$(document).ready(function(){
-	    		//페이지 최초로딩시 등록된 음식점 모두 띄우기
-	    		getRental();
-	    	});
-	        	function getRental(){
-	        		var rentalTagArr = [];//배열 초기화
-	        	    $("[name=rentalSearch]:checked").each(function(i){
-	        	    	//alert($(this).val());
-	        	    	rentalTagArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-	        	    });
-	        		
-	        		var srchFrmData = {
-	        			rentalTag : rentalTagArr
-	        		}
-
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-					    mapOption = { 
-					        center: new daum.maps.LatLng(35.829024062214266, 127.88727134463655), // 지도의 중심좌표
-					        level: 12 // 지도의 확대 레벨
-					    };
-					var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다z
-					var geocoder = new daum.maps.services.Geocoder();
-					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-					var mapTypeControl = new daum.maps.MapTypeControl();		 // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-					 // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-					 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
-				
-					 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-					 var zoomControl = new daum.maps.ZoomControl();
-					 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-				    // 마커 클러스터러를 생성합니다 
-				    var clusterer = new daum.maps.MarkerClusterer({
-				        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-				        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-				        minLevel: 10 // 클러스터 할 최소 지도 레벨 
-				    });
-				    // 데이터를 가져오기 위해 jQuery를 사용합니다
-				    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-				    $.ajaxSettings.traditional = true;
-				    $.ajax({
-				    	url:"",
-				    	async: false,
-				    	data:srchFrmData,
-				    	dataType:"json",
-				    	success: function(data){
-				    		if(data.positions.length==0){
-				    			alert('검색 된 물품이 없습니다.');
-				    			return;
-				    		}
-				    		
-							<c:forEach items="${list2 }" var="rental" varStatus="status">
-							 // 주소로 좌표를 검색합니다
-								geocoder.addressSearch('${rental.address}', function(result, status) {
-								    // 정상적으로 검색이 완료됐으면 
-								     if (status === daum.maps.services.Status.OK) {
-								    	
-								        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-								        // 결과값으로 받은 위치를 마커로 표시합니다
-								        var marker = new daum.maps.Marker({
-								            map: map,
-								            position: coords,
-								            clickable:true
-								        });
-								
-								        // 인포윈도우로 장소에 대한 설명을 표시합니다
-								        var infowindow = new daum.maps.InfoWindow({
-								            content: '<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">'+
-								            		'<div id="iw-container">'+
-								            			'<div class="iw-title">${rental.p_category_name}</div>'+
-								            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
-								            				'<span><strong>물품명 : </strong></span> <span>"${rental.title}"</span><br><span><strong>주소 : </strong></span><span>"${rental.address}"</span><br><span><strong>연락처 : </strong></span><span>"${rental.phone}"</span></a>'
-								        });
-									    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-									    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-									    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-									    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
-									    daum.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
-
-								        clusterer.addMarker(marker);
-								    } 
-								}); 
-						 	</c:forEach>
-							// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-							function makeOverListener(map, marker, infowindow) {
-							    return function() {
-							        infowindow.open(map, marker);
-							    };
-							}
-							
-							// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-							function makeOutListener(infowindow) {
-							    return function() {
-							        infowindow.close();
-							    };
-							}
-				    	}
-				    });
-			
-	        	}
-	        </script>
-	        <%-- <div class="map-list" style="overflow: scroll;">
+	        <div class="map-list" style="overflow: scroll;">
 				<c:forEach items="${list }" var="rental" varStatus="status">
 				<c:if test="${empty rental }">
 					상품이 존재하지 않습니다.
@@ -287,7 +268,7 @@
 				</c:forEach>
 			
 				${pageBar }
-			</div> --%>
+			</div>
 		</div>
 	</div>
     
