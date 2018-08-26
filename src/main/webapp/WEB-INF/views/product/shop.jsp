@@ -204,6 +204,8 @@ $(document).ready(function(){
 </script> -->
 
 	<div class = "row">
+		<c:set var="index" value="0"/>
+		<input type="hidden" class="listLength" value="${fn:length(list)}"/>
 		<c:forEach var='image' items='${list }' varStatus="vs">
 			<c:if test="${image.product_delete eq 'N'}">
 			<div class="col-3 Seller_item_secion">
@@ -234,7 +236,7 @@ $(document).ready(function(){
 						</div>
 						<div class="point col-5 ml-1" style="text-align: center">
 							<span class="item_font">
-								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : 64P</B>
+								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : <B class="point${index}">${image.price }</B>P</B>
 							</span>
 						</div>
 		
@@ -248,20 +250,12 @@ $(document).ready(function(){
 								<span class="star-prototype">${image.review_star}</span>			
 							
 							</div>
-
-							<div class="col-5 item_icon text-right ">
-								<span class="item_icon"><i class="fas fa-shopping-cart mr-1" data-toggle="tooltip"
-									title="장바구니에 담기"></i></span> <span class="item_icon"><i
-									class="far fa-kiss-wink-heart mr-1" data-toggle="tooltip"
-									title="좋아요"></i></span> <span class="item_icon"><i
-									class="fas fa-external-link-alt mr-1" data-toggle="tooltip"
-									title="상세보기"></i></span>
-							</div>
 						</div>
 		
 					</div>
 				</div>
 			</div>
+			<c:set var="index" value="${index+1}"/>
 			</c:if>
 		</c:forEach>		
 	</div><!-- 상품  진열하는  row코드 부분 끝 -->
@@ -270,6 +264,12 @@ $(document).ready(function(){
 
 </div><!-- 전체 div 를 감싸는 container  끝 -->
 <script>
+$(function(){
+	for(var i=0;i<parseInt($('.listLength').val());i++){
+	var point=parseInt($('.point'+i).html());
+	$('.point'+i).html(parseInt(point*0.02));
+	}
+});
 //별점
 $.fn.generateStars = function() {
  return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
