@@ -123,7 +123,7 @@ span.star-prototype > * {
 	
 	<style>
 		.sub_images {
-			margin-left : 17px;
+			margin-left : 16px;
 		}
 		.sub_images:hover {
 		box-shadow: 10px 10px 20px #b4b2b2;
@@ -133,10 +133,13 @@ span.star-prototype > * {
 }
 		.main_image {
 		
-			max-width : 100%;
-			
+			width : 100%;
+			height : 370px;
 			cursor : pointer;
-			overflow: hidden;
+			margin-left : auto;
+			margin-right : auto;
+			border-bottom: 1px solid #ddd;
+			margin-bottom : 23px;
 			}
 
 		#mainImg {
@@ -161,7 +164,7 @@ span.star-prototype > * {
   		
   		<c:if test="${vs.index>=0}">
   		
-  		<div class = "sub_images" style = "float:left; padding-right:10px;">
+  		<div class = "sub_images" style = "float:left; padding-right:19px;">
   		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
   			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</div>
@@ -710,7 +713,7 @@ span.star-prototype > * {
     </li>
     
     <li class="nav-item">
-       <a class="nav-link link02" data-toggle="tab" href="#section2">상품평</a>
+       <a class="nav-link link02" data-toggle="tab" id="productReivews" href="#section2">상품평</a>
     </li>
     
     <li class="nav-item">
@@ -765,7 +768,7 @@ span.star-prototype > * {
  <br>		
  <input type="button" value="테스트" onclick="fn_productReview()"/>
  <hr>
- <h4>상품평</h4> 
+ <h4 >상품평</h4>
  <script>
 	function fn_productReview(){
 		location.href="${pageContext.request.contextPath}/productReviewForm.do?product_code=${joinCategory.product_code}";
@@ -877,8 +880,7 @@ span.star-prototype > * {
   						<span class = "review_total">
   							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
   						</span>
-  					
-  					
+				
   					</p>
   					
   				</div>
@@ -1008,10 +1010,10 @@ span.star-prototype > * {
 				}
 			</style>
 			
-				<div class = "Like_dislike">
+				<div class = "Like_dislike" style=display:inline;>
 					<div class = "qna">상품평이 도움이 되었나요?</div>
 					<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
-				 	<input type="hidden" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
+				 	<input type="hidden" id="review_code" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
 					<!-- 좋아요 싫어요 부분 -->
 					<a class = "review_like like like${vs.index}">네</a>
 					<a class = "review_dislike dislike dislike${vs.index}">아니요</a>
@@ -1028,14 +1030,31 @@ span.star-prototype > * {
 						</span>
 					</div>	
   				</div>
+  				<c:choose>
+  				<c:when test="${memberLoggedIn.member_level eq 'admin'}">
+  				<input type= "button" style="float:right;" class='btn btn-outline-danger' value="삭제" onclick="deleteReview(${review.review_code})"/>		  						
+  				</c:when>
+  				<c:when test="${review.member_id eq memberLoggedIn.member_id}">
+  					<input type= "button" style="float:right;" class='btn btn-outline-danger' value="삭제" onclick="deleteReview(${review.review_code})"/>		  						 				
+  				</c:when>  				
+  				</c:choose>
   			</div>
+  			
   			
   		</div>
   	
   	</div>
 </c:forEach>
+
 </div>
 <script>
+
+function deleteReview(review_code)
+{
+     location.href="${path}/deleteReview.do?review_code="+review_code+"&product_code="+$('#product_code').val();
+} 
+
+
 $(function(){
 	//좋아요 첫화면
 	var member_id="${memberLoggedIn.member_id}";
@@ -1433,7 +1452,7 @@ $(document).on("click",".input",function(){
 });
 //삭제
 $(document).on("click",".delete",function(e){
-	alert("!!!삭제버튼");
+
 	var p_question_code = $(this).val();
 	var product_code=$('#product_code').val();
 	var member_level=$('#member_level').val();
@@ -1506,7 +1525,7 @@ function changeImg(src) {
 </script>
 
  
-  
+ 
 </div>
 
 

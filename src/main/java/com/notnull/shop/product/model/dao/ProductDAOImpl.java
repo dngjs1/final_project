@@ -3,6 +3,7 @@ package com.notnull.shop.product.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -27,9 +28,18 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 public class ProductDAOImpl implements ProductDAO {
 
 	@Override
-	public List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.selectProductList");
+	public List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		
+		return sqlSession.selectList("product.selectProductList",null,rb);
 	}
+	
+	@Override
+	public int productListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("product.productListCount");
+	}
+
 	
 	@Override
 	public List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession, String searchName) {
@@ -91,6 +101,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode) {
 		return sqlSession.selectList("product.selectReview",productCode);
 	}
+	
+	@Override
+	public int selectProductReviewCount(SqlSessionTemplate sqlSession, int product_code) {
+		return sqlSession.selectOne("product.selectProductReviewCount",product_code);
+	}
+
 
 	@Override
 	public int reviewInsert(SqlSessionTemplate sqlSession, ProductReview productReview) {
@@ -108,23 +124,28 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.reviewStarOrder");
+	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.reviewStarOrder",null,rb);
+	}
+	
+	
+	@Override
+	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.highPriceOrder",null,rb);
 	}
 
 	@Override
-	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.highPriceOrder");
+	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.lowPriceOrder",null,rb);
 	}
 
 	@Override
-	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.lowPriceOrder");
-	}
-
-	@Override
-	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.writeDateOrder");
+	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.writeDateOrder",null,rb);
 	}
 
 	@Override
@@ -254,8 +275,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 
+	@Override
+	public int deleteReview(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.delete("product.deleteReview",review_code);
+	}
 
-
-
+	
 	
 }

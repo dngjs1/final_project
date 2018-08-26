@@ -23,5 +23,7 @@
 		<typeAlias type="com.notnull.shop.rental.model.vo.Rental" alias="rental"/>
 		<typeAlias type="com.notnull.shop.rental.model.vo.RentalPerson" alias="rentalPerson"/>
 		<typeAlias type="com.notnull.shop.member.model.vo.PointLog" alias="pointLog"/>
+		<typeAlias type="com.notnull.shop.member.model.vo.Question" alias="question"/>
+		<typeAlias type="com.notnull.shop.member.model.vo.Answer" alias="answer"/>
 	</typeAliases>
 </configuration>

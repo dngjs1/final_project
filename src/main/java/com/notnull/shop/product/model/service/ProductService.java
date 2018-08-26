@@ -23,27 +23,35 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 public interface ProductService {
 
-	List<ProductListJoin> selectProductList();
+	List<ProductListJoin> selectProductList(int cPage,int numPerPage);
+	
+	int productListCount();
 	
 	List<ProductListJoin> searchProduct(String searchName);
 	
-	List<ProductListJoin> reviewStarOrder();
+	List<ProductListJoin> reviewStarOrder(int cPage,int numPerPage);
 	
-	List<ProductListJoin> highPriceOrder();
+	List<ProductListJoin> highPriceOrder(int cPage,int numPerPage);
 	
-	List<ProductListJoin> lowPriceOrder();
+	List<ProductListJoin> lowPriceOrder(int cPage,int numPerPage);
 	
-	List<ProductListJoin> writeDateOrder();
+	List<ProductListJoin> writeDateOrder(int cPage,int numPerPage);
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	int updateProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);
 	
 	List<ProductCategory> selectCategoryList();
-	
+		
 	ProductJoinCategory selectProduct(int productCode);
 	
 	List<ProductOption> selectOption(int productCode);
+	
+	List<ProductReviewImgJoin> selectReviewImg(int productCode);
+	
+	List<ProductDetailImg> selectDetailImg(int productCode);
+	
+	List<ProductImg> selectImgList(int productCode);
 	
 	int insertCart(Cart cart);
 	
@@ -71,13 +79,9 @@ public interface ProductService {
 	
 	List<ProductReview> selectReview(int productCode);
 	
+	int selectProductReviewCount(int product_code);
+	
 	int reviewInsert(ProductReview productReview,List<ProductReviewImg> productReviewImgList);
-	
-	List<ProductReviewImgJoin> selectReviewImg(int productCode);
-	
-	List<ProductDetailImg> selectDetailImg(int productCode);
-	
-	List<ProductImg> selectImgList(int productCode);
 	
 	int addQuestion(ProductQuestion productQuestion);
 	
@@ -98,4 +102,6 @@ public interface ProductService {
 	String checkLike(Map map);
 	
 	int deleteProduct(int product_code);
+	
+	int deleteReview(int review_code);
 }

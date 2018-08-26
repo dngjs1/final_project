@@ -333,7 +333,7 @@
       			
       			<c:if test="${memberLoggedIn.member_level eq 'admin' }">
       				<li>
-      					<a href = "${pageContext.request.contextPath}/adminPage.do">관리페이지</a>
+      					<a href = "${pageContext.request.contextPath}/memberManagement.do">관리페이지</a>
       				</li>
       			</c:if>
       			

@@ -26,17 +26,19 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 public interface ProductDAO {
-	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
+	
+	int productListCount(SqlSessionTemplate sqlSession);
 	
 	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
 	
-	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
@@ -84,6 +86,8 @@ public interface ProductDAO {
 	
 	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
+	int selectProductReviewCount(SqlSessionTemplate sqlSession,int product_code);
+	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);
 	
 	List<ProductImg> selectImgList(SqlSessionTemplate sqlSession,int productCode);
@@ -115,4 +119,7 @@ public interface ProductDAO {
 	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
 	
 	int deleteOption(SqlSessionTemplate sqlSession,int product_code);
+	
+	int deleteReview(SqlSessionTemplate sqlSession,int review_code);
+	
 }
