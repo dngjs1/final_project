@@ -81,10 +81,18 @@
 				}
 			</style>
 			
+			<script>
+				function writeQuestion() {
+					location.href="${pageContext.request.contextPath}/writeQuestion.do";
+				}
+			</script>
+			
+			
+			
 						<div class = "mypage_wrap">
 				
 					<h2 class = "mypage_title02" style="display:inline;"><i class="card_buy far fa-credit-card"></i>1:1 문의 내역</h2>
-				 		<button type="button" class="insert_btn" style="position: relative; top:20px;" >글쓰기</button>
+				 		<button type="button" onclick="writeQuestion()" class="insert_btn" style="position: relative; top:20px; right:20px;" >문의하기</button>
 				
 				
 				<table class = "order_board">
@@ -98,7 +106,7 @@
 					<tr>
 						<th scope="col" class = "#">번호</th>
 						<th scope="col" class = "#">작성일</th>
-						<th scope="col" class = "#">제목</th>
+						<th scope="col" class = "#">문의내용</th>
 						<th scope="col" class = "#">답변상태</th>
 					</tr>
 					</thead>
