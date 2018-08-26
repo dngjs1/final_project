@@ -77,14 +77,35 @@
 					text-align: center;
 					vertical-align: middle;
 					cursor:pointer;
-					float:right;
+					float:right;					
 				}
+				.qContent { 
+					display: inline-block; 
+					width: 200px; 
+					white-space: nowrap; 
+					overflow: hidden; 
+					text-overflow: ellipsis;
+				
+				}
+				
 			</style>
 			
 			<script>
 				function writeQuestion() {
 					location.href="${pageContext.request.contextPath}/writeQuestion.do";
 				}
+				
+				$(function(){
+					$('.memberManage').hover(function(){
+							$(this).children().attr("style","background-color:#c8c8c8;");
+						},function(){
+							$(this).children().attr("style","background-color:#fcfcfb;");
+					});
+				$('.memberManage').click(function(){
+					var question_code = $(this).children('#question_code').val();
+					location.href="${pageContext.request.contextPath }/selectedQuestion.do?question_code="+question_code; 
+					});
+				});
 			</script>
 			
 			
@@ -111,13 +132,16 @@
 					</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${pointList }" var="point" varStatus="vs">
-							<tr style="cursor:pointer;">
+						<c:forEach items="${list }" var="list" varStatus="vs">
+							<tr class="memberManage" style="cursor:pointer;">
 								<td scope="col">${vs.count}</td>
-								<td scope="col">${point.point_date}</td>
-								<td scope="col">${point.point_content}</td>
-								<td scope="col">${point.point_increase}</td>
+								<td scope="col">${list.question_date}</td>
+								<td scope="col">
+									<span class="qContent"> ${list.question_content}</span>
+								</td>
+								<td scope="col">${list.status=='Y'?'답변완료':'답변미완료'}</td>
 							</tr>
+							<input type="hidden" id="question_code" value="${list.question_code }"/>
 						</c:forEach>	
 					</tbody>
 					
@@ -125,6 +149,8 @@
 				<br>
 				
 <style>
+
+
 .search_btn {
 	width : 50px;
 	height : 30px;
