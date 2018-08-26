@@ -165,8 +165,6 @@
 		$(function(){
 			for(var i=0;i<parseInt($('.orderLength').val());i++){
 				$(".buy_date"+i).html($(".buy_date"+i).html().replace(".0",""));
-				
-<<<<<<< HEAD
 				var buy_status=$(".buy_status"+i);
 				if(buy_status.html()=="P"){
 					buy_status.html("결제완료");
@@ -178,16 +176,6 @@
 					buy_status.html("환불요청중");
 				}else if(buy_status.html()=="SR"){
 					buy_status.html("환불완료");
-=======
-				.order_board td {
-					 padding : 23px 0;
-			         border-left : 1px solid #eaeaea;
-			         border-bottom : 1px solid #eaeaea;
-			         background : #fcfcfb;
-			         text-align : center;
-			         font-weight: bold;
-			         font-size : 16px;
->>>>>>> c67c80d52c07ce017a71af4fc0ea94082911a7eb
 				}
 				
 				$(".total_price"+i).html($(".total_price"+i).html().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -286,72 +274,12 @@
 					<tr>
 						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
 					</tr>
-<<<<<<< HEAD
 				</c:otherwise>
 				</c:choose>
 			</tbody>
 		
 		</table>
 	</div>
-	
-	<div class = "paging_box" style = "padding:20px;">
-		<div class = "paging">
-			<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-  						<li class="page-item disabled">
-    							<a class="page-link" href="#" tabindex="-1">이전</a>
-  						</li>
-  						<li class="page-item"><a class="page-link" href="#">1</a></li>
-  						<li class="page-item"><a class="page-link" href="#">2</a></li>
-  						<li class="page-item"><a class="page-link" href="#">3</a></li>
-  						<li class="page-item">
-    							<a class="page-link" href="#">다음</a>
-  						</li>
-			  </ul>
-			</nav>
-		</div>
-	</div>
-=======
-					</thead>
-					<tbody>
-						<c:choose>
-						<c:when test="${not empty orderList}">
-							<input type="hidden" class="orderLength" value="${fn:length(orderList)}"/>
-							<c:forEach var="order" items="${orderList}" varStatus="vs">
-							<tr>
-							   <td class="buy_date${vs.index}">${order.BUY_DATE }</td>
-				               <td class = "align_left bdl_none" style = "width : 300px;">
-				                  <div class="click_product" style="float: left;width:100px;cursor:pointer;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${order.NEW_P_IMG_PATH }"> </div>
-				                  <div style="float: left;text-align:left;margin-left:15px;">
-				                     <span class="click_product" style="cursor:pointer;">${order.PRODUCT_NAME}</span><br>
-				                     <c:if test="${order.OPTION_SIZE!=null}">
-				                        <span>(${order.OPTION_SIZE}),</span>
-				                     </c:if>
-				                     <span> ${order.BUY_QUANTITY} 개</span>
-				                  </div>
-				                  <input type="hidden" class="product_code" value="${order.PRODUCT_CODE}">
-				               </td>
-				               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
-				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
-				               <td>
-				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" value="${order.BUY_CODE}">환불 요청</button><br>
-				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">후기 작성</button>
-
-				               </td>
-           					</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
-							</tr>
-						</c:otherwise>
-						</c:choose>
-					</tbody>
-				
-				</table>
-			</div>
-			
 			<div class = "paging_box" style = "padding:20px;">
 				<div class = "paging">
 					<nav aria-label="Page navigation example">
@@ -369,8 +297,6 @@
 					</nav>
 				</div>
 			</div>
->>>>>>> c67c80d52c07ce017a71af4fc0ea94082911a7eb
-			
 <style>
 .starR{
   background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
