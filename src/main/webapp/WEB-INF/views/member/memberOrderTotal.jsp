@@ -12,287 +12,293 @@
 
 <jsp:include page="/WEB-INF/views/member/commonMypage.jsp"/>
 
-		<div class = "col-10">
-			<div class = "location">
-				<a href = "#" class = "home"><i class="fas fa-home"></i></a>
-				>
-				<a href = "#">주문 / 배송내역</a>
+<div class = "col-10">
+	<div class = "location">
+		<a href = "#" class = "home"><i class="fas fa-home"></i></a>
+		>
+		<a href = "#">주문 / 배송내역</a>
+	</div>
+	
+	<style>
+	.myorder_page {
+		
+	}
+	
+	.order_title {
+		margin-top : 0;
+		padding : 0 10px;
+		font-size : 20px;
+		line-height: 79px;
+		font-weight: bold;
+		text-align: left;
+	}
+	
+	.truck_page_tit{
+		background : #AFB3C6;
+		display: table-cell;
+		height : 122px;
+		width : 140px;
+		text-align: center;
+		font-size: 52px;
+		font-weight: bold;
+		color : #2e2e2e;
+		line-height: 22px;
+		box-sizing: border-box;
+		vertical-align: middle;
+	}
+	
+	.truck_page_cont {
+		display: table-cell;
+		background: #fcfcfb;
+		width: 862px;
+		height: 122px;
+		box-sizing: border-box;
+		vertical-align: middle;
+		border : 1px solid #d9d9d9;
+	}
+	.truck_page_cont_in {
+		padding-left: 20px;
+	}
+	
+	.truck_page_cont_in p {
+		font-size : 15px;
+		color : 2e2e2e;
+		line-height: 20px;
+	}
+	
+	</style>
+	<div class = "myorder_page">
+		<h2 class = "order_title">
+		
+		</h2>
+		<div class = "truck_page">
+			<div class = "truck_page_tit">
+				<i class="fas fa-truck"></i>
 			</div>
 			
 			<style>
-			.myorder_page {
+				.truck_page_cont_in p {
+					line-height: 10px;
+					font-weight: bold;
 				
-			}
-			
-			.order_title {
-				margin-top : 0;
-				padding : 0 10px;
-				font-size : 20px;
-				line-height: 79px;
-				font-weight: bold;
-				text-align: left;
-			}
-			
-			.truck_page_tit{
-				background : #AFB3C6;
-				display: table-cell;
-				height : 122px;
-				width : 140px;
-				text-align: center;
-				font-size: 52px;
-				font-weight: bold;
-				color : #2e2e2e;
-				line-height: 22px;
-				box-sizing: border-box;
-				vertical-align: middle;
-			}
-			
-			.truck_page_cont {
-				display: table-cell;
-				background: #fcfcfb;
-				width: 862px;
-				height: 122px;
-				box-sizing: border-box;
-				vertical-align: middle;
-				border : 1px solid #d9d9d9;
-			}
-			.truck_page_cont_in {
-				padding-left: 20px;
-			}
-			
-			.truck_page_cont_in p {
-				font-size : 15px;
-				color : 2e2e2e;
-				line-height: 20px;
-			}
-			
-			</style>
-			<div class = "myorder_page">
-				<h2 class = "order_title">
-				
-				</h2>
-				<div class = "truck_page">
-					<div class = "truck_page_tit">
-						<i class="fas fa-truck"></i>
-					</div>
-					
-					<style>
-						.truck_page_cont_in p {
-							line-height: 10px;
-							font-weight: bold;
-						
-						}
-					</style>
-					<div class = "truck_page_cont">
-						<div class = "truck_page_cont_in">
-							<p></p>
-							<p>환불 / 배송 / 매진된 상품에 관련해서는 1:1상담을 이용하세요</p>
-							<P>어차피 게시글 남기셔도 살 때는 맘대로지만 환불은 마음대로 안됩니다</P>
-							<p>환불은 최장 1년이 걸릴 수 있습니다.</p>
-						</div>
-					</div>
-				
-				</div>
-			</div>
-			<style>
-				.empty_box {
-					height : 10px;
 				}
 			</style>
-			
-			
-			<div class = "empty_box">
-			
+			<div class = "truck_page_cont">
+				<div class = "truck_page_cont_in">
+					<p></p>
+					<p>환불 / 배송 / 매진된 상품에 관련해서는 1:1상담을 이용하세요</p>
+					<P>어차피 게시글 남기셔도 살 때는 맘대로지만 환불은 마음대로 안됩니다</P>
+					<p>환불은 최장 1년이 걸릴 수 있습니다.</p>
+				</div>
 			</div>
+		
+		</div>
+	</div>
+	<style>
+		.empty_box {
+			height : 10px;
+		}
+	</style>
+	
+	
+	<div class = "empty_box">
+	
+	</div>
 
-			<style>
-				.mypage_wrap {
-					background : #fcfcfb;
-					overflow: hidden;
+	<style>
+		.mypage_wrap {
+			background : #fcfcfb;
+			overflow: hidden;
+		}
+		
+		.mypage_title02 {
+			margin-top: 0;
+			font-size: 20px;
+			line-height: 79px;
+			font-weight: bold;
+			text-align: left;
+		}
+		
+		.order_board{
+			width:100%;
+			font-size : 15px;
+			line-height: 18px;
+			table-layout: fixed;
+			word-wrap : break-word;
+		}
+		
+		.order_board th {
+			padding: 21px 0;
+			background: #C5C5E6;
+			color : black;
+			font-weight: bold;
+			text-align: center;
+			border-left : 1px solid #eaeaea;
+		}
+		
+		.order_board td {
+			 padding : 23px 0;
+	         border-left : 1px solid #eaeaea;
+	         border-botto : 1px solid #eaeaea;
+	         background : #fcfcfb;
+	         text-align : center;
+	         font-weight: bold;
+	         font-size : 16px;
+		}
+		
+		.order_board td.align_left {
+	         padding : 23px 10px 23px 15px;
+	         border-left: none;
+	         
+	      }
+	      .align_left .bdl_none {
+	      	 width : 200px;
+	      	 border-left: none;
+	         
+	      }
+	      .request_btn {
+	      	width : 100px;
+	      	margin : 2px;
+	      }
+	</style>
+	<script>
+		$(function(){
+			for(var i=0;i<parseInt($('.orderLength').val());i++){
+				$(".buy_date"+i).html($(".buy_date"+i).html().replace(".0",""));
+				
+				var buy_status=$(".buy_status"+i);
+				if(buy_status.html()=="P"){
+					buy_status.html("결제완료");
+				}else if(buy_status.html()=="D"){
+					buy_status.html("배송중");
+				}else if(buy_status.html()=="SD"){
+					buy_status.html("배송완료");
+				}else if(buy_status.html()=="R"){
+					buy_status.html("환불요청중");
+				}else if(buy_status.html()=="SR"){
+					buy_status.html("환불완료");
 				}
 				
-				.mypage_title02 {
-					margin-top: 0;
-					font-size: 20px;
-					line-height: 79px;
-					font-weight: bold;
-					text-align: left;
-				}
-				
-				.order_board{
-					width:100%;
-					font-size : 15px;
-					line-height: 18px;
-					table-layout: fixed;
-					word-wrap : break-word;
-				}
-				
-				.order_board th {
-					padding: 21px 0;
-					background: #C5C5E6;
-					color : black;
-					font-weight: bold;
-					text-align: center;
-					border-left : 1px solid #eaeaea;
-				}
-				
-				.order_board td {
-					 padding : 23px 0;
-			         border-left : 1px solid #eaeaea;
-			         border-botto : 1px solid #eaeaea;
-			         background : #fcfcfb;
-			         text-align : center;
-			         font-weight: bold;
-			         font-size : 16px;
-				}
-				
-				.order_board td.align_left {
-			         padding : 23px 10px 23px 15px;
-			         border-left: none;
-			         
-			      }
-			      .align_left .bdl_none {
-			      	 width : 200px;
-			      	 border-left: none;
-			         
-			      }
-			      .request_btn {
-			      	width : 100px;
-			      	margin : 2px;
-			      }
-			</style>
-			<script>
-				$(function(){
-					for(var i=0;i<parseInt($('.orderLength').val());i++){
-						$(".buy_date"+i).html($(".buy_date"+i).html().replace(".0",""));
-						
-						var buy_status=$(".buy_status"+i);
-						if(buy_status.html()=="P"){
-							buy_status.html("결제완료");
-						}else if(buy_status.html()=="D"){
-							buy_status.html("배송중");
-						}else if(buy_status.html()=="SD"){
-							buy_status.html("배송완료");
-						}else if(buy_status.html()=="R"){
-							buy_status.html("환불요청중");
-						}else if(buy_status.html()=="SR"){
-							buy_status.html("환불완료");
-						}
-						
-						$(".total_price"+i).html($(".total_price"+i).html().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-					}
-				});
-				$(function(){
-					$('.refund_request').click(function(){
-						var buy_status=$(this).parent().parent().find(".buy_status");
-						$.ajax({
-							url:"${pageContext.request.contextPath}/refundRequest.do",
-							data:{buy_code:$(this).val()},
-							success:function(data){
-								if(data.trim()=='0'){
-									alert("환불요청에 실패하였습니다.");
-									return false;
-								}else{
-									alert("환불이 요청되었습니다.");
-									buy_status.html("환불요청중");
-								}
-							},
-							error:function(jpxhr,textStatus,errormsg){
-								console.log("ajax전송실패.");
-								console.log(jpxhr);
-								console.log(textStatus);
-								console.log(errormsg);
+				$(".total_price"+i).html($(".total_price"+i).html().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			}
+		});
+		$(function(){
+			$('.refund_request').click(function(){
+				var buy_status=$(this).parent().parent().find(".buy_status");
+				if(buy_status.html()=='환불요청중'){
+					alert('이미 환불이 요청되었습니다.');
+				}else if(buy_status.html()!='결제완료'){
+					alert('배송이 시작된 상품 환불은 고객센터로 문의 해주세요.');
+				}else{
+					$.ajax({
+						url:"${pageContext.request.contextPath}/refundRequest.do",
+						data:{buy_code:$(this).val()},
+						success:function(data){
+							if(data.trim()=='0'){
+								alert("환불요청에 실패하였습니다.");
+								return false;
+							}else{
+								alert("환불이 요청되었습니다.");
+								buy_status.html("환불요청중");
 							}
-						});
+						},
+						error:function(jpxhr,textStatus,errormsg){
+							console.log("ajax전송실패.");
+							console.log(jpxhr);
+							console.log(textStatus);
+							console.log(errormsg);
+						}
 					});
-				});
-				$(function(){		
-					$('.click_product').on('click',function(){
-						var product_code=$(this).parent().parent().find('.product_code').val();
-						location.href="${pageContext.request.contextPath}/productView.do?product_code="+product_code;
-					});
-					
-					$('.write_product_review').click(function(){
-						var product_code=$(this).parent().parent().find('.product_code').val();
-						$('[name=product_code]').val(product_code);
-						$("#testModal").modal();
-					});
-				});
-			</script>
-			<div class = "mypage_wrap">
-				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 주문 / 배송내역</h2>
-				<table class = "order_board">
-					<colgroup>
-						 <col style = "width:25%;">
-				         <col style = "width:30%;">
-				         <col style = "width:15%;">
-				         <col style = "width:15%;">
-				         <col style = "width:15%;">
-				    </colgroup>
-					<thead>
-					<tr>
-						<th scope="col">주문일자</th>
-						<th scope="col">상품정보</th>
-						<th scope="col">결제금액</th>
-						<th scope="col">진행상황</th>
-						<th scope="col">요청</th>
-					</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-						<c:when test="${not empty orderList}">
-							<input type="hidden" class="orderLength" value="${fn:length(orderList)}"/>
-							<c:forEach var="order" items="${orderList}" varStatus="vs">
-							<tr>
-							   <td class="buy_date${vs.index}">${order.BUY_DATE }</td>
-				               <td class = "align_left bdl_none" style = "width : 300px;">
-				                  <div class="click_product" style="float: left;width:100px;cursor:pointer;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${order.NEW_P_IMG_PATH }"> </div>
-				                  <div style="float: left;text-align:left;margin-left:15px;">
-				                     <span class="click_product" style="cursor:pointer;">${order.PRODUCT_NAME}</span><br>
-				                     <c:if test="${order.OPTION_SIZE!=null}">
-				                        <span>(${order.OPTION_SIZE}),</span>
-				                     </c:if>
-				                     <span> ${order.BUY_QUANTITY} 개</span>
-				                  </div>
-				                  <input type="hidden" class="product_code" value="${order.PRODUCT_CODE}">
-				               </td>
-				               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
-				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
-				               <td>
-				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" style="cursor:pointer;" value="${order.BUY_CODE}">환불 요청</button><br>
-				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
-				               </td>
-           					</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
-							</tr>
-						</c:otherwise>
-						</c:choose>
-					</tbody>
-				
-				</table>
-			</div>
+				}
+			});
+		});
+		$(function(){		
+			$('.click_product').on('click',function(){
+				var product_code=$(this).parent().parent().find('.product_code').val();
+				location.href="${pageContext.request.contextPath}/productView.do?product_code="+product_code;
+			});
 			
-			<div class = "paging_box" style = "padding:20px;">
-				<div class = "paging">
-					<nav aria-label="Page navigation example">
-  						<ul class="pagination justify-content-center">
-    						<li class="page-item disabled">
-      							<a class="page-link" href="#" tabindex="-1">이전</a>
-    						</li>
-    						<li class="page-item"><a class="page-link" href="#">1</a></li>
-    						<li class="page-item"><a class="page-link" href="#">2</a></li>
-    						<li class="page-item"><a class="page-link" href="#">3</a></li>
-    						<li class="page-item">
-      							<a class="page-link" href="#">다음</a>
-    						</li>
-					  </ul>
-					</nav>
-				</div>
-			</div>
+			$('.write_product_review').click(function(){
+				var product_code=$(this).parent().parent().find('.product_code').val();
+				$('[name=product_code]').val(product_code);
+				$("#testModal").modal();
+			});
+		});
+	</script>
+	<div class = "mypage_wrap">
+		<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 주문 / 배송내역</h2>
+		<table class = "order_board">
+			<colgroup>
+				 <col style = "width:25%;">
+		         <col style = "width:30%;">
+		         <col style = "width:15%;">
+		         <col style = "width:15%;">
+		         <col style = "width:15%;">
+		    </colgroup>
+			<thead>
+			<tr>
+				<th scope="col">주문일자</th>
+				<th scope="col">상품정보</th>
+				<th scope="col">결제금액</th>
+				<th scope="col">진행상황</th>
+				<th scope="col">요청</th>
+			</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+				<c:when test="${not empty orderList}">
+					<input type="hidden" class="orderLength" value="${fn:length(orderList)}"/>
+					<c:forEach var="order" items="${orderList}" varStatus="vs">
+					<tr>
+					   <td class="buy_date${vs.index}">${order.BUY_DATE }</td>
+		               <td class = "align_left bdl_none" style = "width : 300px;">
+		                  <div class="click_product" style="float: left;width:100px;cursor:pointer;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${order.NEW_P_IMG_PATH }"> </div>
+		                  <div style="float: left;text-align:left;margin-left:15px;">
+		                     <span class="click_product" style="cursor:pointer;">${order.PRODUCT_NAME}</span><br>
+		                     <c:if test="${order.OPTION_SIZE!=null}">
+		                        <span>(${order.OPTION_SIZE}),</span>
+		                     </c:if>
+		                     <span> ${order.BUY_QUANTITY} 개</span>
+		                  </div>
+		                  <input type="hidden" class="product_code" value="${order.PRODUCT_CODE}">
+		               </td>
+		               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
+		               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
+		               <td>
+		               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" style="cursor:pointer;" value="${order.BUY_CODE}">환불 요청</button><br>
+		               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
+		               </td>
+         					</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+					</tr>
+				</c:otherwise>
+				</c:choose>
+			</tbody>
+		
+		</table>
+	</div>
+	
+	<div class = "paging_box" style = "padding:20px;">
+		<div class = "paging">
+			<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+  						<li class="page-item disabled">
+    							<a class="page-link" href="#" tabindex="-1">이전</a>
+  						</li>
+  						<li class="page-item"><a class="page-link" href="#">1</a></li>
+  						<li class="page-item"><a class="page-link" href="#">2</a></li>
+  						<li class="page-item"><a class="page-link" href="#">3</a></li>
+  						<li class="page-item">
+    							<a class="page-link" href="#">다음</a>
+  						</li>
+			  </ul>
+			</nav>
+		</div>
+	</div>
 			
 <style>
 .starR{
@@ -448,11 +454,5 @@ function validate(){
 }
 </script>
 			
-			
-			
-			
-
-			
-			
-		</div>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

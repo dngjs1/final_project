@@ -142,6 +142,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("member.selectOrderList",member_id);
 	}
+	
+	@Override
+	public List<Map> selectOrderList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("member.selectOrderList2");
+	}
 
 	@Override
 	public int updateBuyStatus(SqlSessionTemplate sqlSession, BuyInfo buyInfo) {

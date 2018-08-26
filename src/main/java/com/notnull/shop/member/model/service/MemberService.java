@@ -50,6 +50,7 @@ public interface MemberService {
 	int totalPoint(String member_id);
 	
 	List<Map> selectOrderList(String member_id);
+	List<Map> selectOrderList();
 	
 	int updateBuyStatus(BuyInfo buyInfo);
 }

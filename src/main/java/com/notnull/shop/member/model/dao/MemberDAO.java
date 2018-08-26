@@ -49,6 +49,7 @@ public interface MemberDAO {
 	int totalPoint(SqlSessionTemplate sqlSession, String member_id);
 	
 	List<Map> selectOrderList(SqlSessionTemplate sqlSession,String member_id);
+	List<Map> selectOrderList(SqlSessionTemplate sqlSession);
 	
 	int updateBuyStatus(SqlSessionTemplate sqlSession,BuyInfo buyInfo);
 }

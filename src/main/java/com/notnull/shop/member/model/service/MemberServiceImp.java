@@ -189,6 +189,11 @@ public class MemberServiceImp implements MemberService {
 	public List<Map> selectOrderList(String member_id) {
 		return memberDAO.selectOrderList(sqlSession,member_id);
 	}
+	
+	@Override
+	public List<Map> selectOrderList() {
+		return memberDAO.selectOrderList(sqlSession);
+	}
 
 	@Override
 	public int updateBuyStatus(BuyInfo buyInfo) {
