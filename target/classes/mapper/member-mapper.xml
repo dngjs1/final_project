@@ -139,7 +139,7 @@
  	</select>
  	
  	<select id="adminQuestionList" resultType="question">
- 		select * from question order by question_date desc
+ 		select * from question order by status 
  	</select>
  	
  	<insert id="insertAnswer" parameterType="answer">

@@ -105,7 +105,7 @@
     <form id="form" action="${pageContext.request.contextPath }/writeAnswerEnd.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
         <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
         
-        <h4>답변 작성</h4>
+        <h4>답변 작성~</h4>
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px;">	  
 			<input type="hidden" name="member_id" value="${memberLoggedIn.member_id }" id="member_id" readonly="readonly">
 	        <input type="hidden" name="question_code" value="${question.question_code }" readonly/>   
@@ -155,11 +155,7 @@
         lang:'ko-KR',
         focus:false,
         toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "italic", "underline", "clear"]],
-            ["fontsize", ["fontsize"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["insert", ["link",  "hr"]]
+          
           ],
         callbacks:{
 	          onImageUpload: function(files, editor, welEditable) {
