@@ -4,6 +4,7 @@ package com.notnull.shop.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.notnull.shop.common.PageCreate;
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.member.model.vo.Question;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
 
@@ -616,8 +618,27 @@ public class MemberController {
 	}
 	
 	@RequestMapping("question.do")
-	public String question() {
-		//
+	public String question(Model model,
+							HttpServletResponse response,
+								HttpServletRequest request) {
+		Member m = (Member)(request.getSession().getAttribute("memberLoggedIn"));
+		
+		List<Question> qList = service.selectQuestionList(m.getMember_id());
+		
+		List<Question> question = new ArrayList<Question>();
+		
+		for(Question q : qList) {
+			
+			String str = q.getQuestion_content();
+			str=str.replaceAll("<p>", "");
+			str=str.replaceAll("</p>"," ");
+			q.setQuestion_content(str);
+			question.add(q);
+		}
+		
+		
+		model.addAttribute("list",question);
+		
 		return "/member/myPage_question";
 	}
 	
@@ -631,10 +652,33 @@ public class MemberController {
 									@RequestParam(value="member_id")String member_id,
 										@RequestParam(value="question_content")String question_content) {
 		
-		System.out.println(member_id);
-		System.out.println(question_content);
+		Question q = new Question();
+		q.setMember_id(member_id);
+		q.setQuestion_content(question_content);
 		
+		int i = service.insertQuestion(q);
 		
-		return "/member/myPage_question";
+		System.out.println(i);
+		
+		String msg="";
+		String loc="question.do";
+		String view = "/common/msg";
+		
+		if(i==1) {
+			msg="작성완료!!";
+		}else {
+			msg="작성실패!!";
+			
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return view;
+	}
+	
+	@RequestMapping("selectedQuestion.do")
+	public String selectedQuestion(Model model, String question_code) {
+		return "/member/myPage_selectedQuestion";
 	}
 }

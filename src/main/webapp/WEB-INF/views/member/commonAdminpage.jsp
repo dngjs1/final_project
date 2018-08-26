@@ -154,7 +154,7 @@
 				<ul class = "menu">
 					<li>
 						<a>
-							<span class = "txt">개인정보</span>
+							<span class = "txt">회원정보</span>
 						</a>
 					</li>
 					
@@ -215,7 +215,7 @@
 					
 					<li>
 						<a>
-							<span class = "txt">1:1 상담</span>
+							<span class = "txt">1:1 상담 답변하기</span>
 						</a>
 					</li>
 					

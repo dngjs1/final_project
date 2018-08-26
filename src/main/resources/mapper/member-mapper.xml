@@ -111,4 +111,18 @@
  	<update id="updateBuyStatus" parameterType="buyinfo">
  		update buy_info set buy_status=#{buy_status} where buy_code=#{buy_code}
  	</update>
+ 	
+ 	<insert id="insertQuestion" parameterType="question">
+ 		insert into question values(question_seq.nextval,
+ 										#{member_id},
+ 											#{question_content},
+ 												sysdate,
+ 													default)
+ 	</insert>
+ 	
+ 	<select id="selectQuestionList" resultType="question">
+ 		select * from question where member_id = #{member_id}
+ 	</select>
+ 	
+ 	
 </mapper>
