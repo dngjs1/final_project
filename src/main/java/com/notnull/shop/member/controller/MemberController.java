@@ -4,6 +4,7 @@ package com.notnull.shop.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.notnull.shop.common.PageCreate;
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.member.model.vo.Question;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
 
@@ -91,9 +93,18 @@ public class MemberController {
 		return "member/memberPoint";
 	}
 	
+	@RequestMapping("/memberRefund.do")
+	public String memberRefund(String member_id,Model model) {
+		List<Map> orderList = service.selectOrderList(member_id);
+		model.addAttribute("orderList",orderList);
+		return "member/memberRefund";
+	}
+	
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
 	}
@@ -345,7 +356,7 @@ public class MemberController {
 		return view;
 	}
 	
-	/*@RequestMapping("/myPage.do")
+	@RequestMapping("/myPage.do")
 	public String myPage(String memberId, Model model) {
 		System.out.println(memberId);
 		
@@ -353,9 +364,11 @@ public class MemberController {
 		
 		int totalPoint = service.totalPoint(member_id);
 		model.addAttribute("totalPoint",totalPoint);
-
+		
+		System.out.println(totalPoint);
+		
 		return "member/myPage";
-	}*/
+	}
 	
 	@RequestMapping("/adminPage.do")
 	public String adminPage(String memberId) {
@@ -609,5 +622,77 @@ public class MemberController {
 		buyInfo.setBuy_status("R");
 		int result = service.updateBuyStatus(buyInfo);
 		response.getWriter().print(result);	
+	}
+	
+	@RequestMapping("/cancelRequest.do")
+	public void cancelRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
+		buyInfo.setBuy_status("P");
+		int result = service.updateBuyStatus(buyInfo);
+		response.getWriter().print(result);
+	}
+	
+	@RequestMapping("question.do")
+	public String question(Model model,
+							HttpServletResponse response,
+								HttpServletRequest request) {
+		Member m = (Member)(request.getSession().getAttribute("memberLoggedIn"));
+		
+		List<Question> qList = service.selectQuestionList(m.getMember_id());
+		
+		List<Question> question = new ArrayList<Question>();
+		
+		for(Question q : qList) {
+			
+			String str = q.getQuestion_content();
+			str=str.replaceAll("<p>", "");
+			str=str.replaceAll("</p>"," ");
+			q.setQuestion_content(str);
+			question.add(q);
+		}
+		
+		
+		model.addAttribute("list",question);
+		
+		return "/member/myPage_question";
+	}
+	
+	@RequestMapping("writeQuestion.do")
+	public String writeQuestion() {
+		return "/member/myPage_writeQuestion";
+	}
+	
+	@RequestMapping("writeQuestionEnd.do")
+	public String writeQuestionEnd(Model model,
+									@RequestParam(value="member_id")String member_id,
+										@RequestParam(value="question_content")String question_content) {
+		
+		Question q = new Question();
+		q.setMember_id(member_id);
+		q.setQuestion_content(question_content);
+		
+		int i = service.insertQuestion(q);
+		
+		System.out.println(i);
+		
+		String msg="";
+		String loc="question.do";
+		String view = "/common/msg";
+		
+		if(i==1) {
+			msg="작성완료!!";
+		}else {
+			msg="작성실패!!";
+			
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return view;
+	}
+	
+	@RequestMapping("selectedQuestion.do")
+	public String selectedQuestion(Model model, String question_code) {
+		return "/member/myPage_selectedQuestion";
 	}
 }

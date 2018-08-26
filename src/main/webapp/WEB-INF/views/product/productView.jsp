@@ -123,7 +123,7 @@ span.star-prototype > * {
 	
 	<style>
 		.sub_images {
-			margin-left : 17px;
+			margin-left : 16px;
 		}
 		.sub_images:hover {
 		box-shadow: 10px 10px 20px #b4b2b2;
@@ -133,10 +133,14 @@ span.star-prototype > * {
 }
 		.main_image {
 		
-			max-width : 100%;
-			
+			width : 100%;
+			height : 409px;
 			cursor : pointer;
-			overflow: hidden;
+			
+			margin-left : auto;
+			margin-right : auto;
+			border-bottom: 1px solid #ddd;
+			margin-bottom : 23px;
 			}
 
 		#mainImg {
@@ -161,7 +165,7 @@ span.star-prototype > * {
   		
   		<c:if test="${vs.index>=0}">
   		
-  		<div class = "sub_images" style = "float:left; padding-right:10px;">
+  		<div class = "sub_images" style = "float:left; padding-right:19px;">
   		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
   			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</div>

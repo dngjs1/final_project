@@ -111,12 +111,6 @@
 					overflow: hidden;
 				}
 				
-				.mypage_wrap2 {
-					background : #fcfcfb;
-					overflow: hidden;
-				}
-				
-				
 				.mypage_title02 {
 					margin-top: 0;
 					font-size: 20px;
@@ -145,7 +139,7 @@
 				.order_board td {
 					 padding : 23px 0;
 			         border-left : 1px solid #eaeaea;
-			         border-botto : 1px solid #eaeaea;
+			         border-bottom : 1px solid #eaeaea;
 			         background : #fcfcfb;
 			         text-align : center;
 			         font-weight: bold;
@@ -266,7 +260,8 @@
 				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
 				               <td>
 				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" value="${order.BUY_CODE}">환불 요청</button><br>
-				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
+				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">후기 작성</button>
+
 				               </td>
            					</tr>
 							</c:forEach>
@@ -335,10 +330,153 @@
 				<input name="member_id" type="hidden" value="${memberLoggedIn.member_id}"/>
 
 		    	<div class="modal-body">
-
-			 	 <h3>상품평 등록</h3>
-			        <hr style="border:2px solid #787878"><br>       
-			        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
+			
+			<!-- 타이틀 부분 -->
+			
+			<style>
+				.product_view {
+					margin-top:20px;
+					padding-bottom : 5px;
+					font-size : 26px;
+					line-height : 38px;
+					font-weight: bold;
+				}
+			</style>
+			 	 <h3 class = "product_view">
+			 	 <i class = "fas fa-chalkboard-teacher">
+			 	 </i>&nbsp;구매후기 작성
+			 	 </h3>
+			         
+			         <div class = "review_info">
+ 	  	<dl>
+			<dt>후기 등록 시 안내사항</dt> 	  	
+ 	  		
+ 	  		<dd>
+ 	  			<ul class = "list_style">
+ 	  				<li>
+ 	  					- 구매 후기 작성 시 100원의 포인트를 드립니다.
+ 	  				</li>
+ 	  			
+ 	  				<li>
+ 	  					- 직접 상품만을 촬영한 사진을 등록하셔야 합니다.
+ 	  				</li>
+ 	  				
+ 	  				<li>
+ 	  					- 이메일, 휴대전화 번호 등의 개인정보/광고/비속어가 포함된
+ 	  					후기는 통보없이 삭제됨을 알려드립니다.
+ 	  				</li>
+ 	  				
+ 	  				<li>
+ 	  					- 작성된 후기는 Try Trip의 홍보 컨텐츠로 사용될 수 있습니다.
+ 	  				</li>
+ 	  				
+ 	  				<li>
+ 	  					- 후기 도용 시 포인트 2배 회수, 1년간 구매후기 등록이 제한되며 
+ 	  					포인트 지급또한 3개월동안 지급받을 수 없습니다.
+ 	  				</li>
+ 	  			</ul>
+ 	  		</dd>
+ 	  	
+ 	  	</dl>
+ 	  	
+ 	  	
+ 	  	<style>
+ 	  		.write_review_box {
+ 	  			padding-top : 10px;
+ 	  			padding-bottom: 6px;
+ 	  			
+ 	  			margin-bottom : 10px;
+ 	  		}
+ 	  		
+ 	  		.starRev {
+ 	  			
+ 	  			max-width : 230px;
+ 	  		}
+ 	  	</style>
+ 	  	
+ 	  	<div class = "write_review_box row">
+ 	  	
+ 	  		<div class="starRev col-4">
+			  <span class="starR">1</span>
+			  <span class="starR">2</span>
+			  <span class="starR">3</span>
+			  <span class="starR">4</span>
+			  <span class="starR">5</span>
+			</div>
+			<input type="hidden" class="form-control" name="review_star" id="review_star" required>
+			<div class = "col-8">
+			<input type="text" class="form-control" name="review_content" id="review_content" placeholder="내용" required>
+			</div>
+ 	  	</div>
+ 	  	
+ 	  	<style>
+ 	  	
+ 	  	.review_info {
+		clear : both;
+		padding : 19px 0 0 0;
+		border-top : 1px solid #ddd;
+		padding-bottom : 10px;
+	}
+	
+	.review info dl dt {
+		margin-bottom : 10px;
+		font-weight: bold;
+	}
+	
+	.list_style li {
+		color : #b2b2b2;
+		line-height: 28px;
+		font-size : 15px;
+		
+	}
+ 	  		.image-inner {
+ 	  			float : left;
+ 	  			display : block;
+ 	  			width : 67px;
+ 	  			height : 67px;
+ 	  			border : 1px solid #ddd;
+ 	  			margin-right : 10px;
+ 	  			background : url(./resources/images/plus_file.png) no-repeat center;
+ 	  			overflow: hidden;
+ 	  			background-size: 100% auto !important;
+ 	  			position : relative;
+ 	  		}
+ 	  		
+ 	  		/* #fileDiv1 span input {
+ 	  			display : block;
+ 	  			width : 67px;
+ 	  			height : 67px;
+ 	  			opacity: 0;
+ 	  		} */
+ 	  		
+ 	  		#submit_btn_black {
+ 	  			float : left;
+ 	  			width : 158px;
+ 	  			line-height : 58px;
+ 	  			text-align: center;
+ 	  			font-size : 16px;
+ 	  			background : #000;
+ 	  			color : #fff;
+ 	  			font-weight: bold; 	  			
+ 	  		}
+ 	  	</style>
+ 	  	
+ 	  	<div id = "fileDiv1" title = "첨부이미지">
+ 	  	
+ 	  	<!-- <span class = "image-inner" imageindex = "0"> -->
+ 	  		<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
+ 	  <!-- 	</span>	 -->
+ 	  	
+ 	  	    <a href="#this" id="add1" class="btn btn-success" style = "color : white; ">사진추가</a>
+	        <a href="#this" name="delete1" class="btn btn-dark" style = "color : white; ">삭제하기</a>
+	        
+	        
+ 	  	</div>
+ 	  
+ 	  </div>
+	
+			              
+			        <!-- <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
 			             
 					<tr class="tr1">
 						<th style="text-align: center;border-left:none;">내용</th>
@@ -361,9 +499,9 @@
 						
 						</td>
 					</tr>
-			        </table>
+			        </table> -->
 			        
-			        <hr style="border:2px solid #787878">
+			        <!-- <hr style="border:2px solid #787878">
 			        <h4>상품 사진</h4>
 			        <div id="fileDiv1">
 				       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
@@ -372,11 +510,24 @@
 	        		<br>
 			        <button type="button" class="btn btn-primary" id="add1">사진 추가하기</button>
 		        </div>
-
+-->	
+				<style>
+					.cancel_btn {
+						width : 134px;
+						height : 38px;
+						border:none;
+						background : #92979b;
+						color : #fff;
+						font-size : 18px;
+						font-weight: bold;
+						text-align: center;
+						vertical-align: middle;
+					}
+				</style>
 				<div class="modal-footer">
-		        	<input type="submit" class="btn" value="등록"/>   
-					<button type="button" class="btn" data-dismiss="modal">닫기</button>
-				</div>
+		        	<a id ="submit_btb_black"><input type="submit" class="btn" value="작성완료" style ="background-color : black; color : white; font-weight : bold; width:134; border-radius: 0;"/></a>   
+					<button type="button" class="cancel_btn" data-dismiss="modal">닫기</button>
+				</div> 
 	
 			</form>
 		</div>

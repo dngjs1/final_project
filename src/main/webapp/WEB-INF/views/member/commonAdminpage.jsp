@@ -154,15 +154,15 @@
 				<ul class = "menu">
 					<li>
 						<a>
-							<span class = "txt">개인정보</span>
+							<span class = "txt">회원정보</span>
 						</a>
 					</li>
 					
-					<li class = "submenu top">
+					<%-- <li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/memberUpdate.do" target="_self">
 							<span class = "txt txt_margin_top">회원정보 수정</span>
 						</a>
-					</li>
+					</li> --%>
 					
 					<c:if test="${memberLoggedIn.member_id eq 'admin' }">
 						<li class = "submenu btm">
@@ -178,18 +178,21 @@
 					
 					<li>
 						<a>
-							<span class = "txt">나의 쇼핑정보</span>
+							<span class = "txt">회원 요청 관리</span>
 						</a>
 					</li>
 					
 					<li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do" target="_self">
-							<span class = "txt txt_margin_top">주문 / 배송내역</span>
+							<span class = "txt txt_margin_top">주문 / 배송내역 관리</span>
 						</a>
 					</li>
 					
 					<li class = "submenu">
 						<a href = "#" target = "_self">
+<<<<<<< HEAD
+							<span class = "txt">1:1 문의 관리</span>
+=======
 							<span class = "txt">취소/반품/환불내역</span>
 						</a>
 					</li>
@@ -215,7 +218,7 @@
 					
 					<li>
 						<a>
-							<span class = "txt">1:1 상담</span>
+							<span class = "txt">1:1 상담 답변하기</span>
 						</a>
 					</li>
 					
@@ -228,8 +231,10 @@
 					<li>
 						<a>
 							<span class = "txt">상품Q&A</span>
+>>>>>>> branch_jec_1.0.2
 						</a>
 					</li>
+
 				</ul>
 				</div>
 			

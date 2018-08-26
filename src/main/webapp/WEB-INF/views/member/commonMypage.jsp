@@ -89,7 +89,13 @@
 					<li style = "margin-top:15px; "><center><b><span><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</span></b></center></li>
 					<li><hr></li>
 					<li style = "padding:0 22px; font-size: 14px;"><b>회원등급</b> : <span><c:out value = "${memberLoggedIn.member_level }"></c:out></span></li>
-					<li style = "padding:0 22px; font-size: 14px;"><b>포인트</b> : <span><c:out value ="${totalPoint }"/></span>
+					<li style = "padding:0 22px; font-size: 14px;"><b>포인트</b> : <span>
+					
+						<c:out value ="${totalPoint }"/>
+						
+						
+					</span>
+					
 				</ul>
 				</c:if>
 			</div>
@@ -191,8 +197,8 @@
 					</li>
 					
 					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">취소/반품/환불내역</span>
+						<a href = "${pageContext.request.contextPath}/memberRefund.do?member_id=${memberLoggedIn.member_id}" target = "_self">
+							<span class = "txt">취소/환불내역</span>
 						</a>
 					</li>
 					
@@ -203,8 +209,8 @@
 					</li>
 					
 					<li>
-						<a>
-							<span class = "txt">1:1 상담</span>
+						<a href="${pageContext.request.contextPath }/question.do">
+							<span class = "txt">1:1 문의</span>
 						</a>
 					</li>
 					

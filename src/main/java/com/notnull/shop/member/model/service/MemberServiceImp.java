@@ -20,6 +20,7 @@ import com.notnull.shop.common.TempKey;
 import com.notnull.shop.member.model.dao.MemberDAO;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.member.model.vo.Question;
 import com.notnull.shop.product.model.vo.BuyInfo;
 
 @Service
@@ -193,6 +194,18 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public int updateBuyStatus(BuyInfo buyInfo) {
 		return memberDAO.updateBuyStatus(sqlSession,buyInfo);
+	}
+
+	@Override
+	public int insertQuestion(Question q) {
+		
+		return memberDAO.insertQuestion(sqlSession, q);
+	}
+
+	@Override
+	public List<Question> selectQuestionList(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectQuestionList(sqlSession, member_id);
 	}
 	
 }
