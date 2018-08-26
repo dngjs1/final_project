@@ -262,7 +262,7 @@
 
 				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" style="cursor:pointer;" value="${order.BUY_CODE}">환불 요청</button><br>
 				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
-=======
+
 				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" value="${order.BUY_CODE}">환불 요청</button><br>
 				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">후기 작성</button>
 
