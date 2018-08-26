@@ -101,6 +101,8 @@ public class MemberController {
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
 	}
@@ -352,7 +354,7 @@ public class MemberController {
 		return view;
 	}
 	
-	/*@RequestMapping("/myPage.do")
+	@RequestMapping("/myPage.do")
 	public String myPage(String memberId, Model model) {
 		System.out.println(memberId);
 		
@@ -360,9 +362,11 @@ public class MemberController {
 		
 		int totalPoint = service.totalPoint(member_id);
 		model.addAttribute("totalPoint",totalPoint);
-
+		
+		System.out.println(totalPoint);
+		
 		return "member/myPage";
-	}*/
+	}
 	
 	@RequestMapping("/adminPage.do")
 	public String adminPage(String memberId) {
@@ -618,10 +622,16 @@ public class MemberController {
 		response.getWriter().print(result);	
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/cancelRequest.do")
 	public void cancelRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
 		buyInfo.setBuy_status("P");
 		int result = service.updateBuyStatus(buyInfo);
 		response.getWriter().print(result);
+=======
+	@RequestMapping("question.do")
+	public String question() {
+		return "/member/myPage_question";
+>>>>>>> 94334802272727e5635a23d34b229bffe725b2af
 	}
 }

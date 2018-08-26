@@ -123,7 +123,7 @@ span.star-prototype > * {
 	
 	<style>
 		.sub_images {
-			margin-left : 17px;
+			margin-left : 16px;
 		}
 		.sub_images:hover {
 		box-shadow: 10px 10px 20px #b4b2b2;
@@ -133,10 +133,14 @@ span.star-prototype > * {
 }
 		.main_image {
 		
-			max-width : 100%;
-			
+			width : 100%;
+			height : 409px;
 			cursor : pointer;
-			overflow: hidden;
+			
+			margin-left : auto;
+			margin-right : auto;
+			border-bottom: 1px solid #ddd;
+			margin-bottom : 23px;
 			}
 
 		#mainImg {
@@ -161,7 +165,7 @@ span.star-prototype > * {
   		
   		<c:if test="${vs.index>=0}">
   		
-  		<div class = "sub_images" style = "float:left; padding-right:10px;">
+  		<div class = "sub_images" style = "float:left; padding-right:19px;">
   		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
   			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</div>
@@ -710,7 +714,7 @@ span.star-prototype > * {
     </li>
     
     <li class="nav-item">
-       <a class="nav-link link02" data-toggle="tab" href="#section2">상품평</a>
+       <a class="nav-link link02" data-toggle="tab" id="productReivews" href="#section2">상품평</a>
     </li>
     
     <li class="nav-item">
@@ -765,7 +769,7 @@ span.star-prototype > * {
  <br>		
  <input type="button" value="테스트" onclick="fn_productReview()"/>
  <hr>
- <h4>상품평</h4> 
+ <h4  class="productReviews">상품평</h4>
  <script>
 	function fn_productReview(){
 		location.href="${pageContext.request.contextPath}/productReviewForm.do?product_code=${joinCategory.product_code}";
@@ -877,8 +881,7 @@ span.star-prototype > * {
   						<span class = "review_total">
   							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
   						</span>
-  					
-  					
+				
   					</p>
   					
   				</div>
@@ -1028,14 +1031,31 @@ span.star-prototype > * {
 						</span>
 					</div>	
   				</div>
+  			<%-- 	<input type= "button" class='btn btn-outline' value="삭제" onclick="deleteReview(${reviewList.review_code})"/>		
+				<input type= "button" class='btn btn-outline' value="수정" onclick="updateReview(${joinCategory.review_code})"/>
+  				 --%>		
   			</div>
+  			
   			
   		</div>
   	
   	</div>
 </c:forEach>
+ ${pageBar }
 </div>
 <script>
+
+
+
+/* function deleteReview(review_code)
+{
+     location.href="${path}/deleteReview.do?review_code="+review_code;
+}
+
+function updateReview(review_code)
+{
+     location.href="${path}/updateReview.do?review_code="+review_code;
+} */
 $(function(){
 	//좋아요 첫화면
 	var member_id="${memberLoggedIn.member_id}";
@@ -1450,7 +1470,7 @@ function changeImg(src) {
 </script>
 
  
-  
+ 
 </div>
 
 

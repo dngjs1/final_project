@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 
 <style>
 .location{
@@ -74,12 +70,12 @@
 			<div class = "lmenu_title">
 			<i class="fas fa-user-edit" style = "color:#fff; font-size : 40px;"></i>
 				<div class = "title">
-				<a href = "${pageContext.request.contextPath}/myPage.do" style = "text-decoration: none; color : #fff;">
-				마이페이지
+				<a href = "${pageContext.request.contextPath}/adminPage.do" style = "text-decoration: none; color : #fff;">
+				관리페이지
 				</a>
 				</div>
 				
-				<div class = "subTitle">MYPAGE</div>
+				<div class = "subTitle">ADMIN.PAGE</div>
 			</div>
 			
 			<div align = "left" style = "overflow: hidden; background-color: #D8E5C4;">
@@ -89,12 +85,6 @@
 					<li style = "margin-top:15px; "><center><b><span><c:out value="${memberLoggedIn.member_name }"></c:out>님 환영합니다.</span></b></center></li>
 					<li><hr></li>
 					<li style = "padding:0 22px; font-size: 14px;"><b>회원등급</b> : <span><c:out value = "${memberLoggedIn.member_level }"></c:out></span></li>
-					<li style = "padding:0 22px; font-size: 14px;"><b>포인트</b> : <span>
-					
-						<c:out value ="${totalPoint }"/>
-						
-						
-					</span>
 					
 				</ul>
 				</c:if>
@@ -168,19 +158,21 @@
 						</a>
 					</li>
 					
-					<li class = "submenu top">
+					<%-- <li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/memberUpdate.do" target="_self">
 							<span class = "txt txt_margin_top">회원정보 수정</span>
 						</a>
-					</li>
+					</li> --%>
+					
+					<c:if test="${memberLoggedIn.member_id eq 'admin' }">
+						<li class = "submenu btm">
+							<a href = "${pageContext.request.contextPath }/memberManagement.do" target = "_self">
+								<span class = "txt txt_margin_bottom">회원관리</span>
+							</a>
+						</li>
+					</c:if>
 					
 					
-					
-					<li class = "submenu btm ">
-						<a href = "${pageContext.request.contextPath}/memberExit.do" target = "_self">
-							<span class = "txt txt_margin_bottom">회원탈퇴</span>
-						</a>
-					</li>
 					
 				
 					
@@ -191,26 +183,39 @@
 					</li>
 					
 					<li class = "submenu top">
-						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" target="_self">
+						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do" target="_self">
 							<span class = "txt txt_margin_top">주문 / 배송내역</span>
 						</a>
 					</li>
 					
 					<li class = "submenu">
-						<a href = "${pageContext.request.contextPath}/memberRefund.do?member_id=${memberLoggedIn.member_id}" target = "_self">
-							<span class = "txt">취소/환불내역</span>
+						<a href = "#" target = "_self">
+							<span class = "txt">취소/반품/환불내역</span>
 						</a>
 					</li>
 					
 					<li class = "submenu">
-						<a href = "${pageContext.request.contextPath}/memberPoint.do?member_id=${memberLoggedIn.member_id}" target = "_self">
+						<a href = "#" target = "_self">
+							<span class = "txt">장바구니</span>
+						</a>
+					</li>
+					
+					<li class = "submenu">
+						<a href = "${pageContext.request.contextPath}/memberPoint.do" target = "_self">
 							<span class = "txt">나의 포인트</span>
+						</a>
+					</li>
+	
+			
+					<li class = "submenu btm" >
+						<a href = "#" target = "_self">
+							<span class = "txt txt_margin_bottom">나의 배송지</span>
 						</a>
 					</li>
 					
 					<li>
-						<a href="${pageContext.request.contextPath }/question.do">
-							<span class = "txt">1:1 문의</span>
+						<a>
+							<span class = "txt">1:1 상담</span>
 						</a>
 					</li>
 					
@@ -231,3 +236,7 @@
 			
 			
 		</div>
+		
+
+
+

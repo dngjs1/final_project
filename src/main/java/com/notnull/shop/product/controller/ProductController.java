@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.notnull.shop.common.PageCreate;
+import com.notnull.shop.common.PageCreate1;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
@@ -55,13 +57,26 @@ public class ProductController {
 	private ProductService service;
 	
 	
-	@RequestMapping("/product.do")
-	public String selectProductList(Model m ,HttpServletRequest request) {
+	@RequestMapping("product.do")
+	public String selectProductList(Model m ,
+									HttpServletRequest request,
+									@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		
 		
-		List<ProductListJoin> list = service.selectProductList();
+		int numPerPage = 10;
+		
+		List<ProductListJoin> list = service.selectProductList(cPage, numPerPage);
+		
+		int totalCount = service.productListCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"product.do");
+		
+		m.addAttribute("pageBar", pageBar);
 		m.addAttribute("list",list);
-		System.out.println(list);
+		m.addAttribute("cPage", cPage);
+		m.addAttribute("totalCount", totalCount);
+		
+		
 		return "/product/shop";
 	}
 	
@@ -71,7 +86,6 @@ public class ProductController {
 		
 		List<ProductListJoin> list =service.searchProduct(searchName);
 		m.addAttribute("list",list);
-		System.out.println("!!!!!!!!!!!!!@!@!@!@!@@@@@@@@@@@@"+list);
 		return "/product/shop";
 	}
 	
@@ -203,12 +217,17 @@ public class ProductController {
     }
 	
 	@Transactional
-	@RequestMapping("/productView.do")
-	public String productView(Model model,HttpServletRequest request) {
+	@RequestMapping("productView.do")
+	public String productView(Model model,
+								HttpServletRequest request,
+									HttpServletResponse response,
+									@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		int numPerPage = 1;
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		ProductJoinCategory joinCategory=service.selectProduct(product_code);
 		List<ProductOption> optionList =service.selectOption(product_code);
-		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code,cPage, numPerPage);
 		List<ProductDetailImg> detailImgList=service.selectDetailImg(product_code);
 		List<ProductImg> imgList=service.selectImgList(product_code);
 
@@ -220,9 +239,19 @@ public class ProductController {
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
-		productReviewList=service.selectReview(product_code);
+		productReviewList=service.selectReview(product_code,cPage, numPerPage);
 		
-		request.setAttribute("reviewList", productReviewList);
+		int totalCount=service.selectProductReviewCount(product_code);
+		
+		String pageBar = new PageCreate1().getPageBar(cPage,numPerPage,totalCount,product_code,"productView.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("reviewList",productReviewList);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("product_code",product_code);
+		
+		
 		
 		//문의사항
 		List<ProductQuestion> questionList=service.selectQuestion(product_code);
@@ -231,9 +260,9 @@ public class ProductController {
 				
 		List<ProductReviewLike> likeList=service.selectLikeList();
 		
-		request.setAttribute("likeList", likeList);
+		model.addAttribute("likeList", likeList);
 		
-			return "/product/productView";
+		return "/product/productView";
 	}
 	
 	

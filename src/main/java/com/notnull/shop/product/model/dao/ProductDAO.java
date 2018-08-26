@@ -26,7 +26,9 @@ import com.notnull.shop.product.model.vo.ProductReviewLike;
 
 
 public interface ProductDAO {
-	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
+	
+	int productListCount(SqlSessionTemplate sqlSession);
 	
 	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
 	
@@ -82,7 +84,9 @@ public interface ProductDAO {
 	
 	int updateLeftList(SqlSessionTemplate sqlSession,BuyInfo buy);
 	
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode,int cPage,int numPerPage);
+	
+	int selectProductReviewCount(SqlSessionTemplate sqlSession,int product_code);
 	
 	List<ProductDetailImg> selectDetailImg(SqlSessionTemplate sqlSession,int productCode);
 	
@@ -115,4 +119,7 @@ public interface ProductDAO {
 	int deleteProduct(SqlSessionTemplate sqlSession,int product_code);
 	
 	int deleteOption(SqlSessionTemplate sqlSession,int product_code);
+	
+	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode,int cPage,int numPerPage);
+	
 }
