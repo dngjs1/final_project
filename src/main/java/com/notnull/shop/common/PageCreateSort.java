@@ -5,7 +5,6 @@ public class PageCreateSort{
 	{
 		String pageBar="";
 		int pageSize=5;
-		System.out.println("@@@@"+p_category_name);
 		int totalPage=(int)Math.ceil((double)totalCount/numPerPage);
 		int pageNo=((cPage-1)/pageSize)*pageSize+1;
 		int pageEnd=pageNo+pageSize-1;

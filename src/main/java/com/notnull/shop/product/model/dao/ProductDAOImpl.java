@@ -36,6 +36,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public List<ProductListJoin> selectProductList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("product.selectProductList");
+	}
+	
+	@Override
 	public int productListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("product.productListCount");
 	}
@@ -292,6 +297,5 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.delete("product.deleteReview",review_code);
 	}
 
-	
-	
+
 }

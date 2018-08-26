@@ -25,6 +25,7 @@ public interface ProductService {
 
 	List<ProductListJoin> selectProductList(int cPage,int numPerPage);
 	
+	List<ProductListJoin> selectProductList();
 	int productListCount();
 	
 	List<ProductListJoin> searchProduct(String searchName);

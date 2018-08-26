@@ -538,7 +538,7 @@ public class ProductController {
 	public String categorySort(Model model,HttpServletRequest request,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		
 	    String p_category_name=request.getParameter("p_category_name");
-		int numPerPage = 2;
+		int numPerPage = 8;
 		
 		List<ProductListJoin> list = service.categorySort(p_category_name,cPage, numPerPage);
 		

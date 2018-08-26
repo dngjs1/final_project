@@ -41,6 +41,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<ProductListJoin> selectProductList() {
+		return productDAO.selectProductList(sqlSession);
+	}
+	
+	@Override
 	public int productListCount() {
 		return productDAO.productListCount(sqlSession);
 	}

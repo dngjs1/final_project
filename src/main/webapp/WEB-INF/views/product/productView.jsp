@@ -766,8 +766,8 @@ span.star-prototype > * {
   </div>
   <div id="section2" class="container tab-pane fade">
  <br>		
- <input type="button" value="테스트" onclick="fn_productReview()"/>
- <hr>
+ <!-- <input type="button" value="테스트" onclick="fn_productReview()"/>
+ <hr> -->
  <h4 >상품평</h4>
  <script>
 	function fn_productReview(){
@@ -1372,7 +1372,7 @@ $(document).on("click",".input",function(){
 	var member_id=$('#member_id').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else{
 		
 		$.ajax({
@@ -1405,7 +1405,7 @@ $(document).on("click",".delete",function(e){
 	
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin' || member_id==writer){
 		
 		$.ajax({
@@ -1439,7 +1439,7 @@ $(document).on("click",".answer",function(e){
 	var member_level=$('#member_level').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin'){
 		$.ajax({
 			
