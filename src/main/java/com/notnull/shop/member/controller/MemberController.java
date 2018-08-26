@@ -622,13 +622,13 @@ public class MemberController {
 		response.getWriter().print(result);	
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/cancelRequest.do")
 	public void cancelRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
 		buyInfo.setBuy_status("P");
 		int result = service.updateBuyStatus(buyInfo);
 		response.getWriter().print(result);
-=======
+	}
+	
 	@RequestMapping("question.do")
 	public String question() {
 		//
@@ -650,6 +650,5 @@ public class MemberController {
 		
 		
 		return "/member/myPage_question";
->>>>>>> 94334802272727e5635a23d34b229bffe725b2af
 	}
 }
