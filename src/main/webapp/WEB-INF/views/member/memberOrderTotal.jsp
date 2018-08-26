@@ -111,12 +111,6 @@
 					overflow: hidden;
 				}
 				
-				.mypage_wrap2 {
-					background : #fcfcfb;
-					overflow: hidden;
-				}
-				
-				
 				.mypage_title02 {
 					margin-top: 0;
 					font-size: 20px;
@@ -265,7 +259,7 @@
 				               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
 				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
 				               <td>
-				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" value="${order.BUY_CODE}">환불 요청</button><br>
+				               	<button class="refund_request request_btn btn btn-outline-secondary rounded-0" style="cursor:pointer;" value="${order.BUY_CODE}">환불 요청</button><br>
 				               	<button class="write_product_review request_btn btn btn-outline-secondary rounded-0">상품평 쓰기</button>
 				               </td>
            					</tr>

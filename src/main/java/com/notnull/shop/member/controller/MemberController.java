@@ -91,6 +91,13 @@ public class MemberController {
 		return "member/memberPoint";
 	}
 	
+	@RequestMapping("/memberRefund.do")
+	public String memberRefund(String member_id,Model model) {
+		List<Map> orderList = service.selectOrderList(member_id);
+		model.addAttribute("orderList",orderList);
+		return "member/memberRefund";
+	}
+	
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
@@ -609,5 +616,12 @@ public class MemberController {
 		buyInfo.setBuy_status("R");
 		int result = service.updateBuyStatus(buyInfo);
 		response.getWriter().print(result);	
+	}
+	
+	@RequestMapping("/cancelRequest.do")
+	public void cancelRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
+		buyInfo.setBuy_status("P");
+		int result = service.updateBuyStatus(buyInfo);
+		response.getWriter().print(result);
 	}
 }

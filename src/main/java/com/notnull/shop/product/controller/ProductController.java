@@ -457,7 +457,7 @@ public class ProductController {
 	@RequestMapping("/lowPriceOrder.do")
 	public String lowPriceOrder(Model model) {
 		List<ProductListJoin> list = service.lowPriceOrder();
-		model.addAttribute("list",list);		
+		model.addAttribute("list",list);
 		return "/product/shop";
 		
 	}

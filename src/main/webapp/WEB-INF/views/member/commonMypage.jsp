@@ -191,8 +191,8 @@
 					</li>
 					
 					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">취소/반품/환불내역</span>
+						<a href = "${pageContext.request.contextPath}/memberRefund.do?member_id=${memberLoggedIn.member_id}" target = "_self">
+							<span class = "txt">취소/환불내역</span>
 						</a>
 					</li>
 					
