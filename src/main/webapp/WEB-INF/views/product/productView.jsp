@@ -713,7 +713,7 @@ span.star-prototype > * {
     </li>
     
     <li class="nav-item">
-       <a class="nav-link link02" data-toggle="tab" id="productReivews" href="#section2">상품평</a>
+       <a class="nav-link link02" data-toggle="tab" id="productReivews" href="#section2">구매후기</a>
     </li>
     
     <li class="nav-item">
@@ -878,7 +878,7 @@ span.star-prototype > * {
   						
   						<!-- 좋아요 싫어요 합친 토탈수가 전체 수 도움된다고 나오는 수가 좋아요 수 -->
   						<span class = "review_total">
-  							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 상품평이 도움이 된다고 선택했습니다)
+  							(<b class="total_count total_count${vs.index}"></b>명중 <b class="y_count y_count${vs.index}"></b>명이 이 글이 도움이 된다고 선택했습니다)
   						</span>
 				
   					</p>
@@ -1011,7 +1011,7 @@ span.star-prototype > * {
 			</style>
 			
 				<div class = "Like_dislike" style=display:inline;>
-					<div class = "qna">상품평이 도움이 되었나요?</div>
+					<div class = "qna">구매후기가 도움이 되었나요?</div>
 					<input type="hidden" class="reviewLength" value="${fn:length(reviewList)}"/>
 				 	<input type="hidden" id="review_code" name="review_code" class="review_code${vs.index}" value="${review.review_code }"/> 
 					<!-- 좋아요 싫어요 부분 -->
@@ -1224,7 +1224,7 @@ $('.star-prototype').generateStars();
 			
   
 
-  상품문의
+  
   <div class="container">
  <form id="commentForm" name="commentForm" method="post">
     <br><br>
@@ -1256,37 +1256,61 @@ $('.star-prototype').generateStars();
   
   </div>
 		<div id="comment-container">
-			<table id="tbl-comment">
+			<table id="tbl-comment" style = "margin-left:30px;">
 				    <%
 				    if(questionList != null){
 				        for(ProductQuestion productQuestion : questionList)
 				        {
 				       	 if(productQuestion.getQuestion_level()==1){%>
-					    <tr class='level1'>
-					        <td>
-					            <sub class=comment-writer><%=productQuestion.getMember_id() %></sub>
+					    <tr class='level1' style = "background-color:white;">
+					        <td style = "width:10%; text-align: center;color:#000; vertical-align: middle; font-weight:bold; font-size:16px;">
+					            질문<br><br>
+					           
 					            <sub class=comment-date><%=productQuestion.getQuestion_date()%></sub>
-						    <br /> <br />
+						    </td>
+						    
+						    <td style = "width:80%; text-align:left; padding-left:30px; padding-right:30px; ">
 					            <%=productQuestion.getP_question_content() %>
 							</td>
-					        <td>
+					        <td style = "width:10%; text-align:center; font-weight:bold; font-size:20px; padding-bottom:20px; padding-top:30px;">
+					         	<sub class=comment-writer><%=productQuestion.getMember_id() %></sub><br><br>
 					            <button class="btn btn-outline-success btn-sm" value="<%=productQuestion.getP_question_code()%>">답글</button>
 					            <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
 					        </td>
+					      
 					        
 					    </tr>
 				  		<%}
 				        else
 				        {%>
-				        	<tr class='level2'>
-				        		<td style="padding-left: 40px">
+				        	<%-- <tr class='level2'>
+				        		<td>
 				        			<sub><%=productQuestion.getMember_id()%></sub>
 				        			<sub><%=productQuestion.getQuestion_date()%></sub>
 				        			<br>
 				        			<%=productQuestion.getP_question_content()%>
 				        		</td>
 				        		<td></td>
-				        	</tr>
+				        	</tr> --%>
+				        	
+				        	<tr class='level2' style = "border:1px solid #ddd; background : #f3f3f3;">
+				        		<td style = "width:10%;height:140px; text-align: center;color:#000; padding:14px 14px 10px 14px; vertical-align: middle; font-weight:bold; font-size:16px;">
+				        		
+				        		답변<br><br>
+				        		<sub><%=productQuestion.getQuestion_date()%></sub>
+				        		
+				        		</td>
+				        		<td style = "text-align: left; width:80%; padding-left:30px; padding-right:30px;">
+				        		<%=productQuestion.getP_question_content()%>
+				        	
+				        		
+				        		</td>
+				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
+				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        			</td>
+				        			<td>
+				        			</td>
+				        			
 				        	
 				     	<% }
 				        
