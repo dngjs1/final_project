@@ -104,6 +104,8 @@ public class MemberController {
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
 	}

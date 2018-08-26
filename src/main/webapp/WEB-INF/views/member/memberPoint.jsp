@@ -64,7 +64,7 @@
 	</style>
 	
 	<div class = "mypage_wrap">
-		<h2 class = "mypage_title02"><i class="fab fa-product-hunt"></i> 포인트 이용내역</h2>
+		<h2 class = "mypage_title02" style="display:inline;"><i class="fab fa-product-hunt"></i> 포인트 이용내역</h2>
 		<table class = "order_board">
 			<colgroup>
 				<col style = "width:10%;">
