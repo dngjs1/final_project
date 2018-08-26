@@ -617,6 +617,24 @@ public class MemberController {
 	
 	@RequestMapping("question.do")
 	public String question() {
+		//
+		return "/member/myPage_question";
+	}
+	
+	@RequestMapping("writeQuestion.do")
+	public String writeQuestion() {
+		return "/member/myPage_writeQuestion";
+	}
+	
+	@RequestMapping("writeQuestionEnd.do")
+	public String writeQuestionEnd(Model model,
+									@RequestParam(value="member_id")String member_id,
+										@RequestParam(value="question_content")String question_content) {
+		
+		System.out.println(member_id);
+		System.out.println(question_content);
+		
+		
 		return "/member/myPage_question";
 	}
 }
