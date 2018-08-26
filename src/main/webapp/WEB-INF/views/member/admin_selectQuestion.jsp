@@ -43,7 +43,7 @@
 <div class='container' >
      
         <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px;">	  
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	        <tr class="tr1">
 				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;">아이디</th>
 				<td>	
@@ -106,7 +106,7 @@
         <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
         
         
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px;">	  
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width:100%;">	  
 			<input type="hidden" name="member_id" value="${memberLoggedIn.member_id }" id="member_id" readonly="readonly">
 	        <input type="hidden" name="question_code" value="${question.question_code }" readonly/>   
 
@@ -127,7 +127,7 @@
 	<div class='container' >
 
         <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px; position: relative; right:15px;">	  
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%; position: relative; right:15px;">	  
 	      
 
 			<tr class="tr1">
