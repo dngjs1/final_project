@@ -533,6 +533,28 @@ public class ProductController {
 		
 	}
 	
+	@RequestMapping("categorySort.do")
+	public String categorySort(Model model,HttpServletRequest request,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+	    String p_category_name=request.getParameter("p_category_name");
+		System.out.println("!@#!@#!$!#%@"+p_category_name);
+		int numPerPage = 8;
+		
+		List<ProductListJoin> list = service.categorySort(p_category_name,cPage, numPerPage);
+		
+		int totalCount = service.categorySortCount(p_category_name);
+		System.out.println("토탈카운트!@!@!@"+totalCount);
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"categorySort.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		return "/product/shop";
+		
+	}
+	
+	
 	
 	@RequestMapping("/addQuestion.do")
 	public String addQuestion(HttpServletRequest request,HttpServletResponse response, ProductQuestion productQuestion) throws IOException {

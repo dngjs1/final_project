@@ -147,6 +147,18 @@ public class ProductDAOImpl implements ProductDAO {
 		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
 		return sqlSession.selectList("product.writeDateOrder",null,rb);
 	}
+	
+	@Override
+	public List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.categorySort",p_category_name,rb);
+	}
+
+	@Override
+	public int categorySortCount(SqlSessionTemplate sqlSession, String p_category_name) {
+		return sqlSession.selectOne("product.categorySortCount",p_category_name);
+	}
+
 
 	@Override
 	public int insertCart(SqlSessionTemplate sqlSession, Cart cart) {

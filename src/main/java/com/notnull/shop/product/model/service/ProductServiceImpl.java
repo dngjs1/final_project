@@ -225,6 +225,17 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductListJoin> writeDateOrder(int cPage,int numPerPage) {
 		return productDAO.writeDateOrder(sqlSession,cPage,numPerPage);
 	}
+	
+	@Override
+	public List<ProductListJoin> categorySort(String p_category_name,int cPage, int numPerPage) {
+		return productDAO.categorySort(sqlSession,p_category_name,cPage,numPerPage);
+	}
+	
+	@Override
+	public int categorySortCount(String p_category_name) {
+		return productDAO.categorySortCount(sqlSession,p_category_name);
+	}
+
 
 	@Override
 	public int insertCart(Cart cart) {
@@ -380,9 +391,6 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.deleteReview(sqlSession,review_code);
 	}
 
-
-	
-	
 	
 	
 }
