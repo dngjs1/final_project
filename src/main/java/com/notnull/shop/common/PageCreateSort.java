@@ -1,15 +1,15 @@
 package com.notnull.shop.common;
 
-public class PageCreate1 {
-	public String getPageBar(int cPage, int numPerPage, int totalCount, int product_code, String url)
+public class PageCreateSort{
+	public String getPageBar(int cPage, int numPerPage, int totalCount, String url,String p_category_name)
 	{
 		String pageBar="";
 		int pageSize=5;
-		
+		System.out.println("@@@@"+p_category_name);
 		int totalPage=(int)Math.ceil((double)totalCount/numPerPage);
 		int pageNo=((cPage-1)/pageSize)*pageSize+1;
 		int pageEnd=pageNo+pageSize-1;
-		pageBar+="<ul class='pagination justify-content-center pagination-sm' >";
+		pageBar+="<ul class='pagination justify-content-center pagination-sm'>";
 		
 		//이전
 		if(pageNo==1)
@@ -35,7 +35,7 @@ public class PageCreate1 {
 			else
 			{
 				pageBar += "<li class='page-item'>";
-				pageBar += "<a class='page-link'  href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
 				pageBar += "</li>";
 			}
 			pageNo++;
@@ -55,13 +55,8 @@ public class PageCreate1 {
 		
 		pageBar+="<script>";
 		pageBar+="function fn_paging(cPage,numPerPage){";
-		pageBar+="location.href='"+url+"?product_code="+product_code+"&cPage='+cPage;";
-		
-		pageBar+="$('#productReivews').click();";
-		pageBar+="alert('fuck u');";
-		
+		pageBar+="location.href='"+url+"?p_category_name="+p_category_name+"&cPage='+cPage;";	
 		pageBar+="}";
-		
 		pageBar+="</script>";
 		
 		

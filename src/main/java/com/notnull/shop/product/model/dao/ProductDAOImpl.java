@@ -98,9 +98,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode,int cPage,int numPerPage) {
-		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);		
-		return sqlSession.selectList("product.selectReview",productCode,rb);
+	public List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode) {
+		return sqlSession.selectList("product.selectReview",productCode);
 	}
 	
 	@Override
@@ -125,24 +124,41 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.reviewStarOrder");
+	public List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.reviewStarOrder",null,rb);
+	}
+	
+	
+	@Override
+	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.highPriceOrder",null,rb);
 	}
 
 	@Override
-	public List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.highPriceOrder");
+	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.lowPriceOrder",null,rb);
 	}
 
 	@Override
-	public List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.lowPriceOrder");
+	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.writeDateOrder",null,rb);
+	}
+	
+	@Override
+	public List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.categorySort",p_category_name,rb);
 	}
 
 	@Override
-	public List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("product.writeDateOrder");
+	public int categorySortCount(SqlSessionTemplate sqlSession, String p_category_name) {
+		return sqlSession.selectOne("product.categorySortCount",p_category_name);
 	}
+
 
 	@Override
 	public int insertCart(SqlSessionTemplate sqlSession, Cart cart) {
@@ -272,9 +288,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession, int productCode, int cPage,int numPerPage) {
-		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
-		return sqlSession.selectList("product.selectReviewImg",productCode,rb);
+	public int deleteReview(SqlSessionTemplate sqlSession, int review_code) {
+		return sqlSession.delete("product.deleteReview",review_code);
 	}
 
 	

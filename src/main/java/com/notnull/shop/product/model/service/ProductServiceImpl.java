@@ -165,8 +165,8 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public List<ProductReview> selectReview(int productCode, int cPage, int numPerPage) {
-		return productDAO.selectReview(sqlSession,productCode,cPage,numPerPage);
+	public List<ProductReview> selectReview(int productCode) {
+		return productDAO.selectReview(sqlSession,productCode);
 	}
 
 	@Override
@@ -207,24 +207,35 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductListJoin> reviewStarOrder() {
-		return productDAO.reviewStarOrder(sqlSession);
+	public List<ProductListJoin> reviewStarOrder(int cPage,int numPerPage ) {
+		return productDAO.reviewStarOrder(sqlSession,cPage,numPerPage);
+	}
+	
+	@Override
+	public List<ProductListJoin> highPriceOrder(int cPage,int numPerPage) {
+		return productDAO.highPriceOrder(sqlSession,cPage,numPerPage);
 	}
 
 	@Override
-	public List<ProductListJoin> highPriceOrder() {
-		return productDAO.highPriceOrder(sqlSession);
+	public List<ProductListJoin> lowPriceOrder(int cPage,int numPerPage) {
+		return productDAO.lowPriceOrder(sqlSession,cPage,numPerPage);
 	}
 
 	@Override
-	public List<ProductListJoin> lowPriceOrder() {
-		return productDAO.lowPriceOrder(sqlSession);
+	public List<ProductListJoin> writeDateOrder(int cPage,int numPerPage) {
+		return productDAO.writeDateOrder(sqlSession,cPage,numPerPage);
+	}
+	
+	@Override
+	public List<ProductListJoin> categorySort(String p_category_name,int cPage, int numPerPage) {
+		return productDAO.categorySort(sqlSession,p_category_name,cPage,numPerPage);
+	}
+	
+	@Override
+	public int categorySortCount(String p_category_name) {
+		return productDAO.categorySortCount(sqlSession,p_category_name);
 	}
 
-	@Override
-	public List<ProductListJoin> writeDateOrder() {
-		return productDAO.writeDateOrder(sqlSession);
-	}
 
 	@Override
 	public int insertCart(Cart cart) {
@@ -374,15 +385,12 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.deleteProduct(sqlSession,product_code);
 	}
 
-	
+
 	@Override
-	public List<ProductReviewImgJoin> selectReviewImg(int productCode, int cPage, int numPerPage) {
-		return productDAO.selectReviewImg(sqlSession,productCode,cPage,numPerPage);
+	public int deleteReview(int review_code) {
+		return productDAO.deleteReview(sqlSession,review_code);
 	}
 
-
-	
-	
 	
 	
 }

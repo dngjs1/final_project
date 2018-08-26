@@ -103,10 +103,15 @@ public class MemberController {
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
-		int totalPoint = service.totalPoint(member_id);
-		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
+	}
+	
+	@RequestMapping("/adminOrderTotal.do")
+	public String adminOrderTotal(String member_id,Model model) {
+		List<Map> orderList = service.selectOrderList();
+		model.addAttribute("orderList",orderList);
+		return "member/adminOrderTotal";
 	}
 	
 	@RequestMapping("/memberExit.do")
@@ -627,6 +632,15 @@ public class MemberController {
 	@RequestMapping("/cancelRequest.do")
 	public void cancelRequest(BuyInfo buyInfo,HttpServletResponse response) throws IOException{
 		buyInfo.setBuy_status("P");
+		int result = service.updateBuyStatus(buyInfo);
+		response.getWriter().print(result);
+	}
+	
+	@RequestMapping("/choice_status.do")
+	public void choice_status(BuyInfo buyInfo,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String buy_status=request.getParameter("buy_status");
+		System.out.println(buy_status);
+		buyInfo.setBuy_status(buy_status);
 		int result = service.updateBuyStatus(buyInfo);
 		response.getWriter().print(result);
 	}
