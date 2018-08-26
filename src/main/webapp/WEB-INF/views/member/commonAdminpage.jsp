@@ -190,9 +190,9 @@
 					
 					<li class = "submenu">
 						<a href = "#" target = "_self">
-<<<<<<< HEAD
+
 							<span class = "txt">1:1 문의 관리</span>
-=======
+
 							<span class = "txt">취소/반품/환불내역</span>
 						</a>
 					</li>
@@ -231,7 +231,7 @@
 					<li>
 						<a>
 							<span class = "txt">상품Q&A</span>
->>>>>>> branch_jec_1.0.2
+
 						</a>
 					</li>
 
