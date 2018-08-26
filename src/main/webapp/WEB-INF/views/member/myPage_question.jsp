@@ -102,8 +102,8 @@
 							$(this).children().attr("style","background-color:#fcfcfb;");
 					});
 				$('.memberManage').click(function(){
-					var question_code = $(this).children('#question_code').val();
-					location.href="${pageContext.request.contextPath }/selectedQuestion.do?question_code="+question_code; 
+					var code = $(this).children('.question_code').html();
+				 	location.href="${pageContext.request.contextPath }/selectedQuestion.do?question_code="+code; 
 					});
 				});
 			</script>
@@ -140,8 +140,8 @@
 									<span class="qContent"> ${list.question_content}</span>
 								</td>
 								<td scope="col">${list.status=='Y'?'답변완료':'답변미완료'}</td>
+								<td class="question_code">${list.question_code }<td>
 							</tr>
-							<input type="hidden" id="question_code" value="${list.question_code }"/>
 						</c:forEach>	
 					</tbody>
 					

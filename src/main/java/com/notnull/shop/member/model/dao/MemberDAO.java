@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.member.model.vo.Question;
@@ -56,4 +57,10 @@ public interface MemberDAO {
 	
 	int insertQuestion(SqlSessionTemplate sqlSession, Question q);
 	List<Question> selectQuestionList(SqlSessionTemplate sqlSession, String member_id);
+	Question selectedQuestion(SqlSessionTemplate sqlSession, int question_code);
+	Answer selectedAnswer(SqlSessionTemplate sqlSession, int question_code);
+	
+	List<Question> adminQuestionList(SqlSessionTemplate sqlSession);
+	int insertAnswer(SqlSessionTemplate sqlSession, Answer answer);
+	void updateQuestionStatus(SqlSessionTemplate sqlSession, int question_code);
 }

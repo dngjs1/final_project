@@ -194,6 +194,29 @@
 							<span class = "txt">1:1 문의 관리</span>
 						</a>
 					</li>
+<<<<<<< HEAD
+=======
+					
+					<li>
+						<a href ="${pageContext.request.contextPath }/adminQuestionList.do">
+							<span class = "txt">1:1 답변하기</span>
+						</a>
+					</li>
+					
+					<li>
+						<a>
+							<span class = "txt">나의 질문과 답변</span>
+						</a>
+					</li>
+					
+					<li>
+						<a>
+							<span class = "txt">상품Q&A</span>
+
+						</a>
+					</li>
+
+>>>>>>> branch_jec_1.0.2
 				</ul>
 				</div>
 			
