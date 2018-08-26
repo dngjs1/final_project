@@ -178,58 +178,22 @@
 					
 					<li>
 						<a>
-							<span class = "txt">나의 쇼핑정보</span>
+							<span class = "txt">회원 요청 관리</span>
 						</a>
 					</li>
 					
 					<li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do" target="_self">
-							<span class = "txt txt_margin_top">주문 / 배송내역</span>
+							<span class = "txt txt_margin_top">주문 / 배송내역 관리</span>
 						</a>
 					</li>
 					
 					<li class = "submenu">
 						<a href = "#" target = "_self">
-							<span class = "txt">취소/반품/환불내역</span>
+							<span class = "txt">1:1 문의 관리</span>
 						</a>
 					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">장바구니</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "${pageContext.request.contextPath}/memberPoint.do" target = "_self">
-							<span class = "txt">나의 포인트</span>
-						</a>
-					</li>
-	
-			
-					<li class = "submenu btm" >
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">나의 배송지</span>
-						</a>
-					</li>
-					
-					<li>
-						<a>
-							<span class = "txt">1:1 상담</span>
-						</a>
-					</li>
-					
-					<li>
-						<a>
-							<span class = "txt">나의 질문과 답변</span>
-						</a>
-					</li>
-					
-					<li>
-						<a>
-							<span class = "txt">상품Q&A</span>
-						</a>
-					</li>
+
 				</ul>
 				</div>
 			

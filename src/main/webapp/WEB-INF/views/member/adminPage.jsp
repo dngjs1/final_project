@@ -16,7 +16,7 @@
 			<div class = "location">
 				<a href = "#" class = "home"><i class="fas fa-home"></i></a>
 				>
-				<a href = "#">마이페이지</a>
+				<a href = "#">관리페이지</a>
 			</div>
 			
 			<hr>
