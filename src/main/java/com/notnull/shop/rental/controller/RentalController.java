@@ -35,7 +35,7 @@ public class RentalController {
 	public String ListRental(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, Model model) {
 		List<Rental> list;
 		List<Rental> list2;
-		int numPerPage = 5;
+		int numPerPage = 10;
 		
 		int totalCount = service.selectRentalCount();
 		//페이징
@@ -43,7 +43,6 @@ public class RentalController {
 		//지도
 		list2 = service.RentalListAll();
 		
-		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalCount, "/rentalMain.do");
 		
 		for(Rental rental : list) {
 		    String re1=".*?";	// Non-greedy match on filler
@@ -78,6 +77,9 @@ public class RentalController {
 		    }
 		    
 		}
+		
+		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalCount, "/shop/rentalMain.do");
+		
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		model.addAttribute("pageBar", pageBar);

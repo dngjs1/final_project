@@ -40,7 +40,7 @@
 	  width: 400px;
 	  height: 100%;
 	  overflow-x: hidden;
-	  /*overflow-y:scroll;*/
+	  /* overflow-y:scroll; */
 	  overflow: hidden;
 	  background: none;
 	}
@@ -92,6 +92,9 @@
 	    box-shadow: 
 	}
 	
+	.map-list{
+		height:90%
+	}
 </style>
 <div class="container-fluid">
 	<div class="map-container">
@@ -139,8 +142,7 @@
 					        var marker = new daum.maps.Marker({
 					            map: map,
 					            position: coords,
-					            clickable:true,
-					            title:'${rental.title}'
+					            clickable:true
 					        });
 					
 					        // 인포윈도우로 장소에 대한 설명을 표시합니다
@@ -149,7 +151,7 @@
 					            		'<div id="iw-container">'+
 					            			'<div class="iw-title">${rental.p_category_name}</div>'+
 					            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
-					            				'<span>물품명 : </span> <span>"${rental.title}"</span><br><span>주소 :</span><span>"${rental.address}"</span><br><span>연락처 :</span><span>"${rental.phone}"</span></a>'
+					            				'<span><strong>물품명 : </strong></span> <span>"${rental.title}"</span><br><span><strong>주소 : </strong></span><span>"${rental.address}"</span><br><span><strong>연락처 : </strong></span><span>"${rental.phone}"</span></a>'
 					        });
 						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -174,6 +176,7 @@
 				    return function() {
 				        infowindow.close();
 				    };
+				}name="rentalSearch"]")
 				}
 				
 			</script>
@@ -209,47 +212,52 @@
 	        <div class="map-search">
 	            <div class="item-type">
 	                <h4>카테고리</h4>
-	                <label><input type="checkbox" name="room" class="item_room" value="01" checked /> 오픈형 원룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="02" checked /> 분리형 원룸 </label>
-	                <label><input type="checkbox" name="room" class="item_room" value="03" checked /> 복층형 원룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="04" checked /> 투룸</label>
-	                <label><input type="checkbox" name="room" class="item_room" value="05" checked /> 쓰리룸+</label>
-	            </div>
+	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p5" checked /> 카테고리2 </label>
+        </div>
 	        	
 	        </div>
-	        <div  style="overflow: scroll;">
-			<c:forEach items="${list }" var="rental" varStatus="status">
-			<c:if test="${status.index % 6 == 0 }">
-			<div class="list-item">
-			</c:if>
-				<div style="text-align: -webkit-center;">
-			      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
-				      <div class="thumbnail" style="overflow: hidden;">      
-				      	<c:choose>	 
-					      <c:when test="${rental.imgUrl == null }">
-					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-					      </c:when>
-					      <c:when test="${rental.imgUrl == './img' }">
-					   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-					      </c:when>
-				          <c:when test="${rental.imgUrl != null}">
-				          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
-				          </c:when>
-				        </c:choose>
-				      
-				      <div class="context">
-				      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
-				        <strong>[${rental.p_category_name }] ${rental.title }</strong>
-				        <p> ${rental.price } 원</p>
-				       </div>      
-				      </div>
-			        </a>
+	        <div class="map-list" style="overflow: scroll;">
+				<c:forEach items="${list }" var="rental" varStatus="status">
+				<c:if test="${empty rental }">
+					상품이 존재하지 않습니다.
+				</c:if>
+				<c:if test="${status.index % 6 == 0 }">
+				<div class="list-item">
+				</c:if>
+					<div style="text-align: -webkit-center;">
+				      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
+					      <div class="thumbnail" style="overflow: hidden;">      
+					      	<c:choose>	 
+						      <c:when test="${rental.imgUrl == null }">
+						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+						      </c:when>
+						      <c:when test="${rental.imgUrl == './img' }">
+						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+						      </c:when>
+					          <c:when test="${rental.imgUrl != null}">
+					          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
+					          </c:when>
+					        </c:choose>
+					      
+					      <div class="context">
+					      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
+					        <strong>[${rental.p_category_name }] ${rental.title }</strong>
+					        <p> ${rental.price } 원</p>
+					       </div>      
+					      </div>
+				        </a>
+					</div>
+					<br>
+				<c:if test="${status.index % 6 == 5 }">
 				</div>
-				<br>
-			<c:if test="${status.index % 6 == 5 }">
-			</div>
-			</c:if>
-			</c:forEach>
+				</c:if>
+				</c:forEach>
+			
+				${pageBar }
 			</div>
 		</div>
 	</div>
