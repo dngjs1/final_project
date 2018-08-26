@@ -470,7 +470,7 @@
  	  <!-- 	</span>	 -->
  	  	
  	  	    <a href="#this" id="add1" class="btn btn-success" style = "color : white; ">사진추가</a>
-	        <a href="#this" name="delete1" class="btn btn-dark" style = "color : white; ">삭제하기</a>
+	        <!-- <a href="#this" name="delete1" class="btn btn-dark" style = "color : white; ">삭제하기</a> -->
 	        
 	        
  	  	</div>
