@@ -194,8 +194,7 @@
 							<span class = "txt">1:1 문의 관리</span>
 						</a>
 					</li>
-<<<<<<< HEAD
-=======
+
 					
 					<li>
 						<a href ="${pageContext.request.contextPath }/adminQuestionList.do">
@@ -216,7 +215,7 @@
 						</a>
 					</li>
 
->>>>>>> branch_jec_1.0.2
+
 				</ul>
 				</div>
 			
