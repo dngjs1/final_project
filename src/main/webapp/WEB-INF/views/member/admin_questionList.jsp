@@ -7,19 +7,18 @@
 	<jsp:param value=" " name="pageTitle"/>
 </jsp:include>
 
-<jsp:include page="/WEB-INF/views/member/commonMypage.jsp"/>
+<jsp:include page="/WEB-INF/views/member/commonAdminpage.jsp"></jsp:include>
 
 
 <div class = "col-10">
 			<div class = "location">
 				<a href = "#" class = "home"><i class="fas fa-home"></i></a>
 				>
-				<a href = "#">1:1 문의</a>
+				<a href = "#">1:1문의 답변</a>
 			</div>
 			
 			<hr>
-			
-				<style>
+			<style>
 			
 				.mypage_wrap {
 					padding-bottom: 100px;
@@ -67,95 +66,54 @@
 					background:#fcfcfb;
 					text-align:center;
 				}
-				.insert_btn {
-					height : 40px;
-					border: none;
-					background: #2D2E33;
-					color : #fff;
-					font-size : 15px;
-					font-weight: bold;
-					text-align: center;
-					vertical-align: middle;
-					cursor:pointer;
-					float:right;					
-				}
-				.qContent { 
-					display: inline-block; 
-					width: 200px; 
-					white-space: nowrap; 
-					overflow: hidden; 
-					text-overflow: ellipsis;
-				
-				}
-				
 			</style>
-			
-			<script>
-				function writeQuestion() {
-					location.href="${pageContext.request.contextPath}/writeQuestion.do";
-				}
-				
-				$(function(){
-					$('.memberManage').hover(function(){
-							$(this).children().attr("style","background-color:#c8c8c8;");
-						},function(){
-							$(this).children().attr("style","background-color:#fcfcfb;");
-					});
-				$('.memberManage').click(function(){
-					var code = $(this).children('.question_code').html();
-				 	location.href="${pageContext.request.contextPath }/selectedQuestion.do?question_code="+code; 
-					});
-				});
-			</script>
-			
-			
-			
-						<div class = "mypage_wrap">
-				
-					<h2 class = "mypage_title02" style="display:inline;"><i class="card_buy far fa-credit-card"></i>1:1 문의 내역</h2>
-				 		<button type="button" onclick="writeQuestion()" class="insert_btn" style="position: relative; top:20px; right:20px;" >문의하기</button>
-				
-				
+			<div class = "mypage_wrap">
+				<h2 class = "mypage_title02"><i class="card_buy far fa-credit-card"></i> 1:1문의 답변</h2>
 				<table class = "order_board">
 					<colgroup>
 						<col style = "width:10%;">
-						<col style = "width:30%;">
-						<col style = "width:40%;">
-						<col style = "width:20%;">			
+						<col style = "width:20%;">
+						<col style = "width:25%;">
+						<col style = "width:45%;">
+						<col style = "width:20%;">
+
 					</colgroup> 
 					<thead>
 					<tr>
 						<th scope="col" class = "#">번호</th>
+						<th scope="col" class = "#">ID</th>
 						<th scope="col" class = "#">작성일</th>
-						<th scope="col" class = "#">문의내용</th>
-						<th scope="col" class = "#">답변상태</th>
+						<th scope="col" class = "#">내용</th>
+						<th scope="col" class = "#">답변여부</th>
 					</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="list" varStatus="vs">
-							<tr class="memberManage" style="cursor:pointer;">
-								<td scope="col">${vs.count}</td>
-								<td scope="col">${list.question_date}</td>
-								<td scope="col">
-									<span class="qContent"> ${list.question_content}</span>
+							<tr class ="memberManage" style="cursor:pointer;">
+								<td class="question_code"><c:out value="${list.question_code}"/></td>
+								<td><c:out value="${list.member_id }"/></td>
+								<td><c:out value="${list.question_date }"/></td>
+								<td>
+									<span class="qContent">
+										<c:out value="${list.question_content }"/>
+									</sapn>
 								</td>
-								<td scope="col">${list.status=='Y'?'답변완료':'답변미완료'}</td>
-								<td class="question_code">${list.question_code }<td>
+								<td>${list.status=='Y'?"답변완료":"답변미완료"}</td>
 							</tr>
-						</c:forEach>	
+						</c:forEach>									
 					</tbody>
 					
 				</table>
 				<br>
 				
+
+				<!-- <div style="position:relative; top:30px;"> -->
 <style>
-
-
 .search_btn {
 	width : 50px;
 	height : 30px;
 	border: none;
-	background: #007bff;
+	background: #b5babd;
 	color : #fff;
 	font-size : 15px;
 	font-weight: bold;
@@ -164,17 +122,77 @@
 	cursor:pointer;
 	float:right;
 }
+.qContent { 
+	display: inline-block; 
+	width: 200px; 
+	white-space: nowrap; 
+	overflow: hidden; 
+	text-overflow: ellipsis;
+
+}
 </style>
+				
+				
+				
+				<div class = "row">
+				
+				
+				
 		
-			<div class = "row">
 				<div class = "col-6">
+					
 				${pageBar }
 				</div>
 				</div>
+				
+			
 			</div>
+			
+			<div style = "height : 50px;">
+			
+			</div>
+
+
+			
+			
 		</div>
+	
+	
 	</div>
+
+
 </div>
+
+
+<script>
+	$(function(){
+		$('.memberManage').hover(function(){
+				$(this).children().attr("style","background-color:#c8c8c8;");
+			},function(){
+				$(this).children().attr("style","background-color:#fcfcfb;");
+			});
+		
+		
+		$('.memberManage').click(function(){
+			var code = $(this).children('.question_code').html();
+			location.href="${pageContext.request.contextPath }/adminSelectedQuestion.do?question_code="+code; 
+		});
+	});
+	
+	
+	function searchMember() {
+		var info = $('#searchInfo').val();
+		location.href="${pageContext.request.contextPath}/searchMember.do?info="+info;
+	}
+	
+	$("#searchInfo").keyup(function(e){
+		if(e.keyCode == 13) { 
+			searchMember(); 
+		}
+	});
+	
+	
+</script>
 
 
 

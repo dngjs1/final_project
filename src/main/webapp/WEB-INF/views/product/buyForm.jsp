@@ -534,22 +534,6 @@
             
                   </dl>
                   <dl>
-                     <dt>쿠폰할인</dt>   
-                     <dd>
-                        <div class = "dd_left">
-                           <input type = "text" class = "text02" id ="#" style = "width:137px;" readonly="true">&nbsp;원
-                  
-                        </div>
-                        
-                        <div class = "dd_right">
-                           <span class = "btn_gray">쿠폰적용
-                           </span>
-                           (보유 <em style = "font-style: normal; font-weight: bold;">0장</em>)
-                        
-                        </div>
-                        </dd>
-                  </dl>
-                  <dl>
                      <dt>포인트</dt>
                         <dd>
                            <div class = "dd_left">

@@ -186,6 +186,8 @@
 				var buy_status=$(this).parent().parent().find(".buy_status");
 				if(buy_status.html()=='환불요청중'){
 					alert('이미 환불이 요청되었습니다.');
+				}else if(buy_status.html()=='환불완료'){
+					alert('환불이 완료된 상품입니다.');
 				}else if(buy_status.html()!='결제완료'){
 					alert('배송이 시작된 상품 환불은 고객센터로 문의 해주세요.');
 				}else{

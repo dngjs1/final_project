@@ -125,7 +125,6 @@
 	.member_link {
 		margin-top: 22px;
 		padding-bottom : 10px;
-		border-bottom: 5px solid #2e2e2e;
 		color: #c5c5c5;
 		font-size : 15px;
 		line-height: 34px;
@@ -219,7 +218,9 @@
 		}
 
 	</style>
-	<div class = "etc_div" >
+	
+	<!-- 다른 소셜로 로그인하기 영역 카카오 로그인 안되는 관계로 주석처리로 삭제 -->
+	<%-- <div class = "etc_div" >
 		<h6 style = "padding-top:10px;"><center><b>다른 소셜로 로그인하기</b></center></h6>
 	
 		<ul class = "kakao_login">
@@ -227,7 +228,8 @@
 				<a class = "kakao" href = "#">카카오 로그인</a>
 			</li>
 		</ul>
-	</div>
+	</div> --%>
+	
 	</div>
 	</form>
 	</div>

@@ -23,11 +23,12 @@
 }
 
 .title01 {
-	margin-top: 10;
+	margin-top: 30px;
 	padding: 0 10px;
 	font-size : 20px;
 	line-height:30px;
 	font-weight: bold;
+	padding-bottom : 10px;
 }
 </style>
 <div class = "container">
@@ -220,72 +221,12 @@
 						</a>
 					</li>
 					
-					<li>
-					<a>
-						<span class = "txt">자주묻는 질문</span>
-					</a>
-					</li>
-					
-					<li class = "submenu top">
-						<a href = "${pageContext.request.contextPath }/findMember.do" target = "_self">
-							<span class = "txt txt_margin_top">아이디/비밀번호 찾기</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target="_self">
-							<span class = "txt">회원정보</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">배송관련</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">상품문의</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">반품/교환/취소/환불</span>
-						</a>
-					</li>
-					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">주문결제</span>
-						</a>
-					</li>
-					
-					<li class = "submenu btm">
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">포인트</span>
-						</a>
-					</li>
 					
 					
-					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">공지사항</span>
-					</a>
-					</li>
 					
-					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">커뮤니티게시판</span>
-					</a>
-					</li>
 					
-					<li>
-					<a href = "#" target = "_self">
-						<span class = "txt">1:1친절상담</span>
-					</a>
-					</li>
+					
+					
 		
 				</ul>
 			
@@ -643,7 +584,7 @@
 			</div>
 			<div class = "title_div">
 				<h2 class = title01>
-					FAQ
+					자주 묻는 질문
 				</h2>
 			</div>
 			<style>
@@ -698,7 +639,7 @@
 				<form action="post" >
 					<input type = "hidden" name = "#" id = "#">
 					
-					<div align  = "center" class = "search" style = "width:100%">
+					<!-- <div align  = "center" class = "search" style = "width:100%">
 						<table border = "0" cellspacing = "0" cellpadding = "5">
 							<tbody>
 								<tr>
@@ -708,7 +649,177 @@
 								</tr>	
 							</tbody>
 						</table>
-					</div>
+					</div> -->
+					
+					<style>
+						.search_icon {
+							display: inline-block;
+							margin-left : 10px;
+							left: 20px;
+							width : 35px;
+							height : 35px;
+							margin-top : 10px;
+							border-radius: 100%;
+							background : #2d2e33;
+							color : #fff;
+							font-size : 20px;
+							line-height : 30px;
+							text-align: center;
+						}
+						
+						.answer {
+							padding-left : 10px;
+							font-size : 14px;
+							color : #b2b2b2;
+							margin-top : 9px;
+							margin-bottom : 11px;
+							padding-top : 10px;
+							padding-bottom : 10px;
+						
+						}
+						
+						.qs {
+							font-style : normal;
+							font-weight: bold;
+							margin-bottom : 10px;
+						}
+						
+						.answer_icon {
+							display : inline-block;
+							left : 20px;
+							width : 35px;
+							height : 35px;
+							border-radius: 100%;
+							background : #92979b;
+							color : #2d2e33;
+							font-size : 20px;
+							text-align: center;
+							vertical-align: middle;
+							padding-top:7px;
+							padding-left :2px;
+							
+						
+						}
+						
+						.nav-tabs {
+								width:: 167px;
+							}
+							
+					    .nav-link {
+					    	width: 167px;
+					    	text-align: center;
+					    }
+					</style>
+				 	<nav class="nav nav-tabs" id="qs_tap" role="tablist">
+  						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-id_pw" aria-selected="true"><b>ID/pw 찾기</b></a>
+  						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><b>회원정보</b></a>
+  						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><b>배송관련</b></a>
+  						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact01" role="tab" aria-controls="nav-contact01" aria-selected="false"><b>상품문의</b></a>
+  						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact02" role="tab" aria-controls="nav-contact02" aria-selected="false"><b>주문/결제</b></a>
+  						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact03" role="tab" aria-controls="nav-contact03" aria-selected="false"><b>포인트</b></a>
+  						
+					</nav>
+					
+					<style>
+						.qs {
+							font-style: normal;
+							font-weight: bold;
+						}
+					</style>
+					<div class="tab-content" id="nav-tabContent">
+  						<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-id_pw-tab" >
+  						
+  						<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">아이디/비밀먼호를 어떻게 찾을 수 있나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 상단에 ID/비밀번호 찾기를 누르시면 등록하신 이메일을 통해 찾으실 수 있습니다.
+  						</div>
+  						
+  						</div>
+  						
+  						<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  						
+  						<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">회원 탈퇴 후 재가입 할 수 있나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  							탈퇴 후 재가입은 가능하지만 보유하고 있는 적립금과 장바구니 저장삼품들은 자동 소멸됩니다.
+  						</div>
+  						
+  						</div>
+  						<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+  							
+  							<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">배송기간은 얼마나 걸리나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								주말을 제외하고 15시 이전에 구매하시면 당일배송되어 2일이 소요되고
+  								15시 이후 구매하시면 3일이 소요됩니다.
+  						</div>
+  						
+  						<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">교환기간은 얼마나 걸리나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								교환은 제품 수거 후에 재발송 되기 때문에 평균배송일보다 조금 깁니다.
+ 								일반적으로 수거되고 새상품을 받으시기까지 5~10일정도 소요됩니다.
+  						</div>
+  						
+  						</div>
+  						
+  						<div class="tab-pane fade" id="nav-contact01" role="tabpanel" aria-labelledby="nav-contact-tab01">
+  							
+  							<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">A/S절차는 어떻게 되나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								1:1문의를 통해 신청을 받습니다.
+  			
+  						</div>
+  						
+  						
+  						</div>
+  						
+  						<div class="tab-pane fade" id="nav-contact02" role="tabpanel" aria-labelledby="nav-contact-tab02">
+  							
+  							<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">결제는 어떤 방식이 있나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								결제는 카드를 통해서만 가능합니다.
+  						</div>
+  						
+  						<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">장바구니가 무엇인가요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								Try Trip의 상품을 보다 편리하게 이용하실 수 있도록 한 곳에 상품을 모아두는 기능입니다.
+  						</div>
+  						
+  						
+  						</div>
+  						
+  						<div class="tab-pane fade" id="nav-contact03" role="tabpanel" aria-labelledby="nav-contact-tab03">
+  							
+  							<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">포인트란 무엇인가요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								상품 결제 시 현금(포인트1점 = 현금1원)처럼 사용하실 수 있습니다.
+  						</div>
+  						
+  						<span class = "search_icon fas fa-search"></span> 
+  						<em class = "qs">포인트는 어떻게 적립하나요?</em>
+  						<div class = "answer">
+  							<span class = "answer_icon fas fa-angle-right"></span> 
+  								구매후기 작성을 통해 적립하시거나 상품구매 시 1%를 적립해드립니다.
+  						</div>
+  						
+  						
+  						</div>
+  						
+					</div> 
+					
 					
 				</form>
 			</div>

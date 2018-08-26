@@ -13,20 +13,26 @@
 </jsp:include>
 
 <style>
-.tr1 th{text-align:center;background-color:#E1F6FA}
+.tr1 th{
+
+		text-align:center;
+		background-color:#E1F6FA;
+		vertical-align : middle;
+		font-size : 16px;
+
+}
 .tr2 td{vertical-align:middle;text-align:center;}
 </style>
 
 
 <div class='container' >
     <form name="fileForm" action="${path }/upload.do" method="post" onSubmit="return validate();" enctype="multipart/form-data">
-  
-        <br>
-        <h3>상품등록</h3>
-        <hr style="border:2px solid #787878"><br>       
+
+        <h3><B>상품등록</B></h3>
+        <hr style="border:2px solid #787878">     
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
         <tr class="tr1">
-			<th style="text-align: center;border-left:none;">카테고리</th>
+			<th style="text-align: center;border-left:none; vertical-align: middle;">카테고리</th>
 			<td>	
 			<select name="p_category_code" class="form-control" style="width:500px;">
      			<c:forEach var='category' items='${categoryList}' varStatus="vs">
@@ -36,7 +42,7 @@
 			</td>
 		</tr>       
         <tr class="tr1">
-			<th style="text-align: center;border-left:none;">상품명</th>
+			<th style="text-align: center;border-left:none; vertical-align: middle;">상품명</th>
 			<td>	
 			<input type="text" class="form-control" name="product_name" id="product_name" required>
 			</td>
@@ -73,7 +79,8 @@
 					<input type="hidden" name="size" value="">
 					<b>재고: <b></b><input type="number" name="left_amount" required>
 				</span>
-				<div style="position:absolute;left:480px;top:-8px;"><input type="button" style="height:38px;width:120px;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
+				<div style="position:absolute;left:480px;top:-8px;">
+				<input type="button" style="height:32px;width:120px;  margin-top:0px; padding-top:5px;background-color: palegoldenrod;" onclick="size_add()" class="btn" value="사이즈 추가"/>	</div>		
 			</div>
 			</td>
 		</tr>

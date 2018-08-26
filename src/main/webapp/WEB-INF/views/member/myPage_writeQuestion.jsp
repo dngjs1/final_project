@@ -47,12 +47,7 @@
 <div class='container' >
     <form id="form" action="${pageContext.request.contextPath }/writeQuestionEnd.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
   
-		<%-- <input type="hidden" name="rental_obj_code" value="${param.rental_obj_code }" /> --%>
-		<input type="hidden" id="content" name="content" value="" />
-		<input type="hidden" id="start_date" name="start_date" value="" />
-		<input type="hidden" id="end_date" name="end_date" value="" />
-        <br>
-      
+	
         <hr style="border:2px solid #787878"><br>       
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 1000px;">	  
 	        <tr class="tr1">
@@ -80,7 +75,7 @@
   <script>
     $(document).ready(function() {
       $('#summernote').summernote({
-        placeholder: '사진 또는 게시글을 등록하여 주십시오',
+        placeholder: "",
         tabsize: 2,
         height: 400,
         minHeight:400,
@@ -88,11 +83,6 @@
         lang:'ko-KR',
         focus:false,
         toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "italic", "underline", "clear"]],
-            ["fontsize", ["fontsize"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["insert", ["link", "picture", "hr"]]
           ],
         callbacks:{
 	          onImageUpload: function(files, editor, welEditable) {

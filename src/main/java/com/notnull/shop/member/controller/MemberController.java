@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.common.PageCreate;
 import com.notnull.shop.member.model.service.MemberService;
+import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.member.model.vo.Question;
@@ -103,6 +104,8 @@ public class MemberController {
 	@RequestMapping("/memberOrderTotal.do")
 	public String memberOrderTotal(String member_id,Model model) {
 		List<Map> orderList = service.selectOrderList(member_id);
+		int totalPoint = service.totalPoint(member_id);
+		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
 		return "member/memberOrderTotal";
 	}
@@ -706,7 +709,59 @@ public class MemberController {
 	}
 	
 	@RequestMapping("selectedQuestion.do")
-	public String selectedQuestion(Model model, String question_code) {
+	public String selectedQuestion(Model model, int question_code) {
+		
+		Question q = service.selectedQuestion(question_code);
+		//답변 완료시 답변도 넘어가도록 수정해야한다.	
+		Answer a = service.selectedAnswer(question_code);
+		
+		model.addAttribute("question",q);
+		model.addAttribute("answer",a);
+		
 		return "/member/myPage_selectedQuestion";
 	}
+	
+	@RequestMapping("adminQuestionList.do")
+	public String adminQuestionList(Model model) {
+		List<Question> list = service.adminQuestionList();
+		
+		List<Question> question = new ArrayList<Question>();
+		
+		for(Question q : list) {	
+			String str = q.getQuestion_content();
+			str=str.replaceAll("<p>", "");
+			str=str.replaceAll("</p>"," ");
+			q.setQuestion_content(str);
+			question.add(q);
+		}
+		
+		
+		model.addAttribute("list",question);
+		
+		return "/member/admin_questionList";
+	}
+	
+	@RequestMapping("adminSelectedQuestion.do")
+	public String adminSelectedQuestion(Model model, int question_code) {
+		
+		Question q = service.selectedQuestion(question_code);
+		
+		model.addAttribute("question",q);
+		if(q.getStatus().equals("Y")) {
+			Answer a = service.selectedAnswer(question_code);
+			model.addAttribute("answer", a);
+		}
+		
+		return "/member/admin_selectQuestion";
+	}
+	
+	@RequestMapping("writeAnswerEnd.do")
+	public String writeAnswerEnd(Model model,Answer answer) {
+		
+		int i = service.insertAnswer(answer);
+		
+		
+		return "redirect:/adminQuestionList.do";
+	}
+	
 }

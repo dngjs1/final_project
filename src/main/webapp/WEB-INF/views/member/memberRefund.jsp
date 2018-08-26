@@ -14,7 +14,7 @@ $(function(){
 		var buy_status=$(".buy_status"+i);
 		if(buy_status.html()=="R"){
 			buy_status.html("환불요청중");
-		}else if(buy_status.html()=="SR"){
+		}else{
 			buy_status.html("환불완료");
 		}
 		
@@ -137,9 +137,11 @@ $(function(){
 					<tbody>
 						<c:choose>
 						<c:when test="${not empty orderList}">
+							<c:set var="index" value="0"/>
 							<input type="hidden" class="orderLength" value="${fn:length(orderList)}"/>
 							<c:forEach var="order" items="${orderList}" varStatus="vs">
 							<c:if test="${order.BUY_STATUS=='R' or order.BUY_STATUS=='SR'}">
+							
 							<tr>
 				               <td class = "align_left bdl_none" style = "width : 300px;">
 				                  <div class="click_product" style="float: left;width:100px;cursor:pointer;margin-left:20px;"><img style="width:100%;" src="${pageContext.request.contextPath }/resources/upload/productImg/${order.NEW_P_IMG_PATH }"> </div>
@@ -152,8 +154,8 @@ $(function(){
 				                  </div>
 				                  <input type="hidden" class="product_code" value="${order.PRODUCT_CODE}">
 				               </td>
-				               <td><span class="total_price${vs.index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
-				               <td><span class="buy_status${vs.index} buy_status">${order.BUY_STATUS}</span></td>
+				               <td><span class="total_price${index}">${order.TOTAL_PRICE}</span><span> 원</span></td>
+				               <td><span class="buy_status${index} buy_status">${order.BUY_STATUS}</span></td>
 				               <td>
 				               <c:choose>
 				               <c:when test="${order.BUY_STATUS=='R'}">
@@ -165,6 +167,7 @@ $(function(){
 				               </c:choose>
 				               </td>
            					</tr>
+           					<c:set var="index" value="${index+1}"/>
            					</c:if>
 							</c:forEach>
 						</c:when>
