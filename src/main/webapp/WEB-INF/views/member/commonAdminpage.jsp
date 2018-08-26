@@ -217,8 +217,8 @@
 					</li>
 					
 					<li>
-						<a>
-							<span class = "txt">1:1 상담 답변하기</span>
+						<a href ="${pageContext.request.contextPath }/adminQuestionList.do">
+							<span class = "txt">1:1 답변하기</span>
 						</a>
 					</li>
 					

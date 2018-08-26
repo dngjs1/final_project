@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.member.model.vo.Question;
@@ -57,4 +58,10 @@ public interface MemberService {
 	
 	int insertQuestion(Question q);
 	List<Question> selectQuestionList(String member_id);
+	Question selectedQuestion(int question_code);
+	Answer selectedAnswer(int question_code);
+	
+	List<Question> adminQuestionList();
+	int insertAnswer(Answer answer);
+	
 }

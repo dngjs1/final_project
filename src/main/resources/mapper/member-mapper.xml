@@ -124,5 +124,23 @@
  		select * from question where member_id = #{member_id}
  	</select>
  	
+ 	<select id="selectedQuestion" resultType="question" parameterType="_int">
+ 		select * from question where question_code = #{question_code} 
+ 	</select>
  	
+ 	<select id="adminQuestionList" resultType="question">
+ 		select * from question order by question_date desc
+ 	</select>
+ 	
+ 	<insert id="insertAnswer" parameterType="answer">
+ 		insert into answer values(#{question_code},#{member_id},#{answer_content},sysdate)
+ 	</insert>
+ 	
+ 	<update id="updateQuestionStatus" parameterType="_int">
+ 		update question set status='Y' where question_code=#{question_code}
+ 	</update>
+ 	
+ 	<select id="selectedAnswer" parameterType="_int" resultType="answer">
+ 		select * from answer where question_code =#{question_code}
+ 	</select>
 </mapper>
