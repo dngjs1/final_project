@@ -83,11 +83,6 @@
         lang:'ko-KR',
         focus:false,
         toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "italic", "underline", "clear"]],
-            ["fontsize", ["fontsize"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["insert", ["link",  "hr"]]
           ],
         callbacks:{
 	          onImageUpload: function(files, editor, welEditable) {

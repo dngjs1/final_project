@@ -138,12 +138,7 @@
 				
 				
 				
-				
-				<div class = "col-3" style = "margin-left : 20px;">
-					<input type="text" name="searchInfo" id="searchInfo" style="border:solid #b5babd; font-size:15px" placeholder="ID 검색" /> 
-					<button type="button" onclick="searchMember()" class="search_btn">검색</button>
-				</div>
-				
+		
 				<div class = "col-6">
 					
 				${pageBar }

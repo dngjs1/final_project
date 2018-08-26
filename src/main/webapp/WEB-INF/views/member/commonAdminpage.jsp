@@ -153,54 +153,29 @@
 			<!-- 왼쪽 메뉴 시작 -->
 			<div class = "lmenu_menu">
 				<ul class = "menu">
+				<c:if test="${memberLoggedIn.member_id eq 'admin' }">
 					<li>
 						<a>
-							<span class = "txt">회원정보</span>
-						</a>
-					</li>
-					
-					<%-- <li class = "submenu top">
-						<a href = "${pageContext.request.contextPath}/memberUpdate.do" target="_self">
-							<span class = "txt txt_margin_top">회원정보 수정</span>
-						</a>
-					</li> --%>
-					
-					<c:if test="${memberLoggedIn.member_id eq 'admin' }">
-						<li class = "submenu btm">
 							<a href = "${pageContext.request.contextPath }/memberManagement.do" target = "_self">
-								<span class = "txt txt_margin_bottom">회원관리</span>
+								<span class = "txt">회원관리</span>
 							</a>
-						</li>
-					</c:if>
-					
-					
-					
-				
+						</a>
+					</li>
+				</c:if>
 					
 					<li>
-						<a>
-							<span class = "txt">회원 요청 관리</span>
-						</a>
-					</li>
-					
-					<li class = "submenu top">
 						<a href = "${pageContext.request.contextPath}/adminOrderTotal.do" target="_self">
-							<span class = "txt txt_margin_top">주문 / 배송내역 관리</span>
+							<span class = "txt">주문 / 배송내역 관리</span>
 						</a>
 					</li>
 					
-					<li class = "submenu">
-						<a href = "#" target = "_self">
-							<span class = "txt">1:1 문의 관리</span>
-						</a>
-					</li>
-
-					
+		
 					<li>
 						<a href ="${pageContext.request.contextPath }/adminQuestionList.do">
 							<span class = "txt">1:1 답변하기</span>
 						</a>
 					</li>
+					
 					
 					<li>
 						<a>
