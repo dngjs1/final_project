@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.member.model.vo.Question;
@@ -164,6 +165,36 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Question> selectQuestionList(SqlSessionTemplate sqlSession, String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("member.selectQuestionList",member_id);
+	}
+
+	@Override
+	public Question selectedQuestion(SqlSessionTemplate sqlSession, int question_code) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectedQuestion",question_code);
+	}
+
+	@Override
+	public List<Question> adminQuestionList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.adminQuestionList");
+	}
+
+	@Override
+	public int insertAnswer(SqlSessionTemplate sqlSession, Answer answer) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("member.insertAnswer",answer);
+	}
+
+	@Override
+	public void updateQuestionStatus(SqlSessionTemplate sqlSession, int question_code) {
+		// TODO Auto-generated method stub
+		sqlSession.update("member.updateQuestionStatus",question_code);
+	}
+
+	@Override
+	public Answer selectedAnswer(SqlSessionTemplate sqlSession, int question_code) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectedAnswer",question_code);
 	}
 	
 }
