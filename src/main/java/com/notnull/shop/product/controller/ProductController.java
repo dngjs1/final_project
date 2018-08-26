@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.common.PageCreate;
+import com.notnull.shop.common.PageCreateSort;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
@@ -532,6 +533,26 @@ public class ProductController {
 		return "/product/shop";
 		
 	}
+	
+	@RequestMapping("categorySort.do")
+	public String categorySort(Model model,HttpServletRequest request,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+	    String p_category_name=request.getParameter("p_category_name");
+		int numPerPage = 2;
+		
+		List<ProductListJoin> list = service.categorySort(p_category_name,cPage, numPerPage);
+		
+		int totalCount = service.categorySortCount(p_category_name);
+		String pageBar = new PageCreateSort().getPageBar(cPage,numPerPage,totalCount,"categorySort.do",p_category_name);
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		return "/product/shop";
+		
+	}
+	
 	
 	
 	@RequestMapping("/addQuestion.do")

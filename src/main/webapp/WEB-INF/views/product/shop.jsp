@@ -107,22 +107,22 @@ span.star-prototype > * {
 			</div>
 			
 			<div class = "ct_box">
-				<a href = "#">캠핑</a>
+				<a href = "${pageContext.request.contextPath}/categorySort.do?p_category_name=캠핑">캠핑</a>
 
 			</div>			
 			
 			<div class = "ct_box">
-				<a href = "#">낚시</a>
+				<a href = "${pageContext.request.contextPath}/categorySort.do?p_category_name=낚시">낚시</a>
 
 			</div>
 			
 			<div class = "ct_box">
-				<a href = "#">등산</a>
+				<a href = "${pageContext.request.contextPath}/categorySort.do?p_category_name=등산">등산</a>
 
 			</div>
 			
 			<div class = "ct_box">
-				<a href = "#">수영</a>
+				<a href = "${pageContext.request.contextPath}/categorySort.do?p_category_name=수영">수영</a>
 
 			</div>
 		</div>
