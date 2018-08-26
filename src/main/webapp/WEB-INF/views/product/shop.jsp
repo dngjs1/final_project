@@ -199,5 +199,10 @@ $('.star-prototype').generateStars();
 	style="opacity: 1;"></span></a>
 
 ${pageBar }
+<script >
+
+console.log("${list}");
+
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

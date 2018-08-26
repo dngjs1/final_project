@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.common.PageCreate;
-import com.notnull.shop.common.PageCreate1;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.BuyInfo;
@@ -63,7 +62,7 @@ public class ProductController {
 									@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		
 		
-		int numPerPage = 10;
+		int numPerPage = 8;
 		
 		List<ProductListJoin> list = service.selectProductList(cPage, numPerPage);
 		
@@ -75,7 +74,7 @@ public class ProductController {
 		m.addAttribute("list",list);
 		m.addAttribute("cPage", cPage);
 		m.addAttribute("totalCount", totalCount);
-		
+	
 		
 		return "/product/shop";
 	}
@@ -218,16 +217,11 @@ public class ProductController {
 	
 	@Transactional
 	@RequestMapping("productView.do")
-	public String productView(Model model,
-								HttpServletRequest request,
-									HttpServletResponse response,
-									@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
-		
-		int numPerPage = 1;
+	public String productView(Model model,HttpServletRequest request,HttpServletResponse response) {
 		int product_code=Integer.parseInt(request.getParameter("product_code"));
 		ProductJoinCategory joinCategory=service.selectProduct(product_code);
 		List<ProductOption> optionList =service.selectOption(product_code);
-		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code,cPage, numPerPage);
+		List<ProductReviewImgJoin> reviewImgList=service.selectReviewImg(product_code);
 		List<ProductDetailImg> detailImgList=service.selectDetailImg(product_code);
 		List<ProductImg> imgList=service.selectImgList(product_code);
 
@@ -239,16 +233,11 @@ public class ProductController {
 		
 		List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 		
-		productReviewList=service.selectReview(product_code,cPage, numPerPage);
+		productReviewList=service.selectReview(product_code);
 		
-		int totalCount=service.selectProductReviewCount(product_code);
 		
-		String pageBar = new PageCreate1().getPageBar(cPage,numPerPage,totalCount,product_code,"productView.do");
 		
-		model.addAttribute("pageBar", pageBar);
-		model.addAttribute("reviewList",productReviewList);
-		model.addAttribute("cPage", cPage);
-		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("reviewList",productReviewList);	
 		model.addAttribute("product_code",product_code);
 		
 		
@@ -467,34 +456,79 @@ public class ProductController {
 
 
 	
-	@RequestMapping("/reviewStarOrder.do")
-	public String reviewStarOrder(Model model) {
-		List<ProductListJoin> list = service.reviewStarOrder();
-		model.addAttribute("list",list);		
+	@RequestMapping("reviewStarOrder.do")
+	public String reviewStarOrder(Model model,
+			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		int numPerPage = 8;
+		
+		List<ProductListJoin> list = service.reviewStarOrder(cPage, numPerPage);
+		
+		int totalCount = service.productListCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"reviewStarOrder.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
 		return "/product/shop";
 		
 	}
 	
-	@RequestMapping("/highPriceOrder.do")
-	public String highPriceOrder(Model model) {
-		List<ProductListJoin> list = service.highPriceOrder();
-		model.addAttribute("list",list);		
+	@RequestMapping("highPriceOrder.do")
+	public String highPriceOrder(Model model,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		int numPerPage = 8;
+		
+		List<ProductListJoin> list = service.highPriceOrder(cPage, numPerPage);
+		
+		int totalCount = service.productListCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"highPriceOrder.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
+		return "/product/shop";
+		
+	
+	}
+	
+	@RequestMapping("lowPriceOrder.do")
+	public String lowPriceOrder(Model model,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 8;
+		
+		List<ProductListJoin> list = service.lowPriceOrder(cPage, numPerPage);
+		int totalCount = service.productListCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"lowPriceOrder.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
 		return "/product/shop";
 		
 	}
 	
-	@RequestMapping("/lowPriceOrder.do")
-	public String lowPriceOrder(Model model) {
-		List<ProductListJoin> list = service.lowPriceOrder();
-		model.addAttribute("list",list);		
-		return "/product/shop";
+	@RequestMapping("writeDateOrder.do")
+	public String writeDateOrder(Model model,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 8;
 		
-	}
-	
-	@RequestMapping("/writeDateOrder.do")
-	public String writeDateOrder(Model model) {
-		List<ProductListJoin> list = service.writeDateOrder();
-		model.addAttribute("list",list);		
+		List<ProductListJoin> list = service.writeDateOrder(cPage, numPerPage);
+		
+		int totalCount = service.productListCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"writeDateOrder.do");
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("list",list);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
 		return "/product/shop";
 		
 	}
@@ -753,5 +787,14 @@ public class ProductController {
 		mv.setViewName("common/msg");	
         return mv;
     } 
+	
+	@RequestMapping("deleteReview.do")
+	public String deleteReview(HttpServletRequest request,String product_code,RedirectAttributes re){
+		int review_code=Integer.parseInt(request.getParameter("review_code"));
+		int result = service.deleteReview(review_code);
+		re.addAttribute("product_code", product_code);
+		return "redirect:/productView.do";
+	}
+	
 	
 }
