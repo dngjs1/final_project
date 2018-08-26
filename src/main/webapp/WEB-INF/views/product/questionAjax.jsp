@@ -18,14 +18,19 @@
 				        for(ProductQuestion productQuestion : questionList)
 				        {
 				       	 if(productQuestion.getQuestion_level()==1){%>
-					    <tr class='level1'>
-					        <td>
-					            <sub class=comment-writer><%=productQuestion.getMember_id() %></sub>
+					    <tr class='level1' style = "background-color:white;">
+					        <td style = "width:10%; text-align:center; color:#000; vertical-align: middle; font-weight:bold; font-size:16px;">
+					            질문<br><br>
+					            <%-- <sub class=comment-writer><%=productQuestion.getMember_id() %></sub> --%>
 					            <sub class=comment-date><%=productQuestion.getQuestion_date()%></sub>
-						    <br /> <br />
+						    </td>
+						    
+						    <td style = "width:80%; text-align:left; padding-left:30px; padding-right:30px; ">
 					            <%=productQuestion.getP_question_content() %>
-						</td>
-					        <td>
+							</td>
+							
+							<td style = "width:10%; text-align:center; font-weight:bold; font-size:20px; padding-bottom:20px; padding-top:30px;">
+					        	<sub class=comment-writer><%=productQuestion.getMember_id() %></sub><br><br><br>
 					            <button class="btn btn-outline-success btn-sm" value="<%=productQuestion.getP_question_code()%>">답글</button>
 					            <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
 					        </td>
@@ -34,12 +39,18 @@
 				  		<%}
 				        else
 				        {%>
-				        	<tr class='level2'>
-				        		<td style="padding-left: 40px">
-				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        	<tr class='level2' style = "border:1px solid #ddd; background : #f3f3f3;">
+				        		<td style = "width:10%;height:140px; text-align: center;color:#000; padding:14px 14px 10px 14px; vertical-align: middle; font-weight:bold; font-size:16px;">
+				        			답변<br><br>
 				        			<sub><%=productQuestion.getQuestion_date()%></sub>
-				        			<br>
+				        		</td>
+				        		
+				        		<td style = "text-align: left; width:80%; padding-left:30px; padding-right:30px;">
+				        			
 				        			<%=productQuestion.getP_question_content()%>
+				        		</td>
+				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
+				        			<sub><%=productQuestion.getMember_id()%></sub>
 				        		</td>
 				        		<td></td>
 				        	</tr>
