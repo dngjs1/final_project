@@ -47,6 +47,7 @@
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 		order by review_star desc nulls last
  	</select>
+ 	
  
  	<select id="highPriceOrder" resultMap="productListJoinMap">
  	select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
@@ -306,4 +307,8 @@
   	<update id="deleteProduct" parameterType="_int">
  		update product set product_delete='Y' where product_code=#{product_code}
  	</update>
+ 	
+ 	<delete id="deleteReview" parameterType="_int">
+ 		delete from product_review where review_code=#{review_code}
+ 	</delete>
 </mapper>

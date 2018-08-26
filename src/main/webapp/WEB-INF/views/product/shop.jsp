@@ -44,6 +44,91 @@ span.star-prototype > * {
 	
 	</div><!-- 검색 전체를 감싸는 div 끝 -->
 	
+	<!-- 카테고리 관련 div시작 -->
+	
+	<style>
+		.product_category {
+			margin : 50px 0;
+			padding : 10px 0 15px;
+			background: #fff;
+			border-top : 1px solid #000;
+			border-bottom : 1px solid #000;
+			text-align: left;
+			
+		}
+		
+		#category_list {
+			height : 48px;
+		}
+		
+		.ct_title {
+			float:left;
+			width : 130px;
+			height : 40px;
+			margin : 4px 0;
+			color : #000;
+			font-size : 17px;
+			line-height: 40px;
+			font-weight: bold;
+			padding-left : 8px;
+		}
+		
+		.ct_box {
+			display : table;
+			float : left;
+			width : 138px;
+			height : 40px;
+			margin : 4px 10px 4px 0;
+		}
+		
+		.ct_box a {
+			display : table-cell;
+			position: relative;
+			border : 1px solid #2d2e33;
+			color : #2d2e33;
+			font-size : 16px;
+			line-height: 15px;
+			text-align: center;
+			vertical-align: middle;
+			text-decoration: none;
+			font-weight: bold;
+			
+		}
+		
+		.ct_box a:hover {
+			background-color: #e0e0e0;
+		}
+	</style>
+	<div class = "product_category">
+		<div id = "category_list">
+		
+			<div class = "ct_title">
+				<span>카테고리</span>
+			</div>
+			
+			<div class = "ct_box">
+				<a href = "#">캠핑</a>
+
+			</div>			
+			
+			<div class = "ct_box">
+				<a href = "#">낚시</a>
+
+			</div>
+			
+			<div class = "ct_box">
+				<a href = "#">등산</a>
+
+			</div>
+			
+			<div class = "ct_box">
+				<a href = "#">수영</a>
+
+			</div>
+		</div>
+	
+	
+	</div>
 	<style>
 		.view_type_box{
 			margin-top : 18px;
@@ -86,7 +171,6 @@ span.star-prototype > * {
 		}
 	</style>
 	<!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
-	
 	<div class = "view_type_box">
 		
 		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
@@ -199,5 +283,10 @@ $('.star-prototype').generateStars();
 	style="opacity: 1;"></span></a>
 
 ${pageBar }
+<script >
+
+console.log("${list}");
+
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

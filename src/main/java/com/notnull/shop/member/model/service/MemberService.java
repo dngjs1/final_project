@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.member.model.vo.Question;
 import com.notnull.shop.product.model.vo.BuyInfo;
 
 public interface MemberService {
@@ -53,4 +54,8 @@ public interface MemberService {
 	List<Map> selectOrderList();
 	
 	int updateBuyStatus(BuyInfo buyInfo);
+	
+	
+	int insertQuestion(Question q);
+	List<Question> selectQuestionList(String member_id);
 }

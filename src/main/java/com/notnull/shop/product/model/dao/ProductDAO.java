@@ -32,13 +32,13 @@ public interface ProductDAO {
 	
 	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
 	
-	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> highPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> lowPriceOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
-	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession);
+	List<ProductListJoin> writeDateOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);
 
@@ -84,7 +84,7 @@ public interface ProductDAO {
 	
 	int updateLeftList(SqlSessionTemplate sqlSession,BuyInfo buy);
 	
-	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode,int cPage,int numPerPage);
+	List<ProductReview> selectReview(SqlSessionTemplate sqlSession,int productCode);
 	
 	int selectProductReviewCount(SqlSessionTemplate sqlSession,int product_code);
 	
@@ -120,6 +120,6 @@ public interface ProductDAO {
 	
 	int deleteOption(SqlSessionTemplate sqlSession,int product_code);
 	
-	List<ProductReviewImgJoin> selectReviewImg(SqlSessionTemplate sqlSession,int productCode,int cPage,int numPerPage);
+	int deleteReview(SqlSessionTemplate sqlSession,int review_code);
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
+import com.notnull.shop.member.model.vo.Question;
 import com.notnull.shop.product.model.vo.BuyInfo;
 
 @Repository
@@ -151,6 +152,18 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updateBuyStatus(SqlSessionTemplate sqlSession, BuyInfo buyInfo) {
 		return sqlSession.update("member.updateBuyStatus",buyInfo);
+	}
+
+	@Override
+	public int insertQuestion(SqlSessionTemplate sqlSession, Question q) {
+		
+		return sqlSession.insert("member.insertQuestion",q);
+	}
+
+	@Override
+	public List<Question> selectQuestionList(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.selectQuestionList",member_id);
 	}
 	
 }
