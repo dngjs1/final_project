@@ -101,7 +101,11 @@
 		<div class="map-area">
 			<div id="map">
 			</div>
-			
+			<form onsubmit="searchPlaces(); return false;">
+					<label>동 이름 : </label>
+					<label><input type="text" id="keyword" size="15" class="form-control" ></label>
+                    <label><button type="submit" class="btn btn-primary">검색하기</button></label> 
+                </form>
 			<c:if test="${memberLoggedIn != null }">
 				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
 			</c:if>
@@ -157,7 +161,7 @@
 						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 						    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
-						    //daum.maps.event.addListener(marker, 'click', makeOutListener(infowindow));
+						    daum.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
 
 					        clusterer.addMarker(marker);
 					    } 
@@ -176,7 +180,6 @@
 				    return function() {
 				        infowindow.close();
 				    };
-				}name="rentalSearch"]")
 				}
 				
 			</script>
