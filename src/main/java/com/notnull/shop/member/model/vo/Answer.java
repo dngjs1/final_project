@@ -5,18 +5,18 @@ import java.sql.Date;
 public class Answer {
 	private int question_code;
 	private String member_id;
-	private String answer_code;
+	private String answer_content;
 	private Date answer_date;
 	
 	public Answer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Answer(int question_code, String member_id, String answer_code, Date answer_date) {
+	public Answer(int question_code, String member_id, String answer_content, Date answer_date) {
 		super();
 		this.question_code = question_code;
 		this.member_id = member_id;
-		this.answer_code = answer_code;
+		this.answer_content = answer_content;
 		this.answer_date = answer_date;
 	}
 
@@ -36,12 +36,12 @@ public class Answer {
 		this.member_id = member_id;
 	}
 
-	public String getAnswer_code() {
-		return answer_code;
+	public String getAnswer_content() {
+		return answer_content;
 	}
 
-	public void setAnswer_code(String answer_code) {
-		this.answer_code = answer_code;
+	public void setAnswer_content(String answer_content) {
+		this.answer_content = answer_content;
 	}
 
 	public Date getAnswer_date() {
@@ -54,10 +54,10 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		return "Answer [question_code=" + question_code + ", member_id=" + member_id + ", answer_code=" + answer_code
-				+ ", answer_date=" + answer_date + "]";
+		return "Answer [question_code=" + question_code + ", member_id=" + member_id + ", answer_content="
+				+ answer_content + ", answer_date=" + answer_date + "]";
 	}
-	
+
 	
 
 }

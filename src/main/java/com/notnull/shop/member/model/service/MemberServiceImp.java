@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.notnull.shop.common.MailHandler;
 import com.notnull.shop.common.TempKey;
 import com.notnull.shop.member.model.dao.MemberDAO;
+import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.member.model.vo.Question;
@@ -211,6 +212,36 @@ public class MemberServiceImp implements MemberService {
 	public List<Question> selectQuestionList(String member_id) {
 		// TODO Auto-generated method stub
 		return memberDAO.selectQuestionList(sqlSession, member_id);
+	}
+
+	@Override
+	public Question selectedQuestion(int question_code) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectedQuestion(sqlSession, question_code);
+	}
+
+	@Override
+	public List<Question> adminQuestionList() {
+		// TODO Auto-generated method stub
+		return memberDAO.adminQuestionList(sqlSession);
+	}
+	
+	@Transactional
+	@Override
+	public int insertAnswer(Answer answer) {
+		// TODO Auto-generated method stub
+		int check= memberDAO.insertAnswer(sqlSession, answer);
+			if(check==1) {
+				memberDAO.updateQuestionStatus(sqlSession,answer.getQuestion_code());
+			}
+		
+		return check;
+	}
+
+	@Override
+	public Answer selectedAnswer(int question_code) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectedAnswer(sqlSession, question_code);
 	}
 	
 }
