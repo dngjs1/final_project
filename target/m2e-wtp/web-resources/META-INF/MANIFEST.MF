@@ -1,15 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-<<<<<<< HEAD
 Built-By: pc
 Build-Jdk: 1.8.0_161
-=======
-Built-By: hack5
-Build-Jdk: 1.8.0_171
->>>>>>> Super_branch2
-=======
-Built-By: JC
-Build-Jdk: 9.0.4
->>>>>>> Super_branch2
 Created-By: Maven Integration for Eclipse
 

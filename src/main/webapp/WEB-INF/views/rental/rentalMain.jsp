@@ -21,7 +21,7 @@
 	  position: absolute;
 	  left: 0;
 	  top: 0;
-	  right: 400px;
+	  right: 0;
 	  bottom: 0;
 	  background: repeat 0 0;
 	  border-right: 1px solid #bbbbbb;
@@ -37,7 +37,7 @@
 	  right: 0;
 	  top: 0;
 	  bottom: 0;
-	  width: 400px;
+	  width: 100%;
 	  height: 100%;
 	  overflow-x: hidden;
 	  /* overflow-y:scroll; */
@@ -45,7 +45,8 @@
 	  background: none;
 	}
 		
-	.map-search {
+	/* .map-search {
+	  z-index:1;
 	  position: relative;
 	  width: 100%;
 	  height: 100px;
@@ -77,12 +78,12 @@
 	  width: 30%;
 	  margin-bottom: 3px;
 	  font-size: 13px;
-	}
+	} */
 	
 	#mapadd{
 	    display: block;
 	    position: absolute;
-	    left: 57px;
+	    left: 90%;
 	    top: 43px;
 	    z-index: 100;
 	    padding: 15px;
@@ -92,29 +93,86 @@
 	    box-shadow: 
 	}
 	
-	.map-list{
-		height:90%
-	}
+	
+			.map_list, .map_list *{margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+			.map_list a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+			.map_list {position:relative;width:100%;height:500px;}
+			.list-item {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 </style>
 <div class="container-fluid">
 	<div class="map-container">
 		<div class="map-area">
 			<div id="map">
 			</div>
-			<form onsubmit="searchPlaces(); return false;">
-					<label>동 이름 : </label>
-					<label><input type="text" id="keyword" size="15" class="form-control" ></label>
-                    <label><button type="submit" class="btn btn-primary">검색하기</button></label> 
-                </form>
+			<div class="map-content">
+	        <!-- search -->
+	        <div class="map-list" style="overflow: scroll;">
+	        	<c:forEach items="${list }" var="rental" varStatus="status">
+				<c:if test="${empty rental }">
+					상품이 존재하지 않습니다.
+				</c:if>
+				<c:if test="${status.index % 6 == 0 }">
+				<div class="list-item">
+				</c:if>
+				<c:if test="${status.first }">
+	        	<div class="item-type">
+	                <h4>카테고리</h4>
+	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 카테고리2 </label>
+	                <br>
+	                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
+	                <button id="myBtn" onclick="search()">검색</button>
+        		</div>
+				</c:if>
+					<div style="text-align: -webkit-center;">
+				      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
+					      <div class="thumbnail" style="overflow: hidden;">      
+					      	<c:choose>	 
+						      <c:when test="${rental.imgUrl == null }">
+						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+						      </c:when>
+						      <c:when test="${rental.imgUrl == './img' }">
+						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+						      </c:when>
+					          <c:when test="${rental.imgUrl != null}">
+					          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
+					          </c:when>
+					        </c:choose>
+					      
+					      <div class="context">
+					      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
+					        <strong>[${rental.p_category_name }] ${rental.title }</strong>
+					        <p> ${rental.price } 원</p>
+					       </div>      
+					      </div>
+				        </a>
+					</div>
+					<br>
+				<c:if test="${status.index % 6 == 5 }">
+				</c:if>
+				</c:forEach>
+				${pageBar }
+				</div>
+			
+			</div>
+			
 			<c:if test="${memberLoggedIn != null }">
 				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
 			</c:if>
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
 			<script>
+					function enterkey() {
+				        if (window.event.keyCode == 13) {
+				 			document.getElementById("myBtn").click();
+				        }
+				}
+
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 				    mapOption = { 
-				        center: new daum.maps.LatLng(35.829024062214266, 127.88727134463655), // 지도의 중심좌표
-				        level: 12 // 지도의 확대 레벨
+				        center: new daum.maps.LatLng(36.94032188492738, 127.69048004109848), // 지도의 중심좌표
+				        level: 11 // 지도의 확대 레벨
 				    };
 		
 				var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다z
@@ -132,49 +190,61 @@
 			    var clusterer = new daum.maps.MarkerClusterer({
 			        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 			        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-			        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+			        minLevel: 6 // 클러스터 할 최소 지도 레벨 
 			    });
-		
+				function search(){
+					var input = document.getElementById("input").value;
+					if(input != "") {
+						geocoder.addressSearch(input, function(result, status){
+							 // 정상적으로 검색이 완료됐으면 
+						     if (status === daum.maps.services.Status.OK) {
+									var moveLatLon = new daum.maps.LatLng(result[0].y, result[0].x);
+									map.setLevel(3);
+									map.panTo(moveLatLon);
+						     } else{
+						    	 alert("잘못된 주소입니다.");
+						    	 return;
+						     }
+						});
+					} else{
+
+						var moveLatLon = new daum.maps.LatLng(36.94032188492738, 127.69048004109848);
+						map.setLevel(11);
+						map.panTo(moveLatLon);
+					}
+				}
 				<c:forEach items="${list2 }" var="rental" varStatus="status">
 				 // 주소로 좌표를 검색합니다
 					geocoder.addressSearch('${rental.address}', function(result, status) {
 					    // 정상적으로 검색이 완료됐으면 
 					     if (status === daum.maps.services.Status.OK) {
 					    	
-					    	 displayPlaces(${rental});
-					    	
+					        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker = new daum.maps.Marker({
+					            map: map,
+					            position: coords,
+					            clickable:true
+					        });
 					
+					        // 인포윈도우로 장소에 대한 설명을 표시합니다
+					        var infowindow = new daum.maps.InfoWindow({
+					            content: '<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">'+
+					            		'<div id="iw-container">'+
+					            			'<div class="iw-title">${rental.p_category_name}</div>'+
+					            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
+					            				'<span><strong>물품명 : </strong></span> <span>"${rental.title}"</span><br><span><strong>주소 : </strong></span><span>"${rental.address}"</span><br><span><strong>연락처 : </strong></span><span>"${rental.phone}"</span></a>'
+					        });
+						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+						    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+						    daum.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
+
+					        clusterer.addMarker(marker);
 					    } 
 					}); 
 			 	</c:forEach>
-			 	function displayPlaces(places){
-			 		for(var i=0; i<places.length; i++){
-			 			 
-				        var coords = new daum.maps.LatLng(places[i].y, places[i].x);
-				        // 결과값으로 받은 위치를 마커로 표시합니다
-				        var marker = new daum.maps.Marker({
-				            map: map,
-				            position: coords,
-				            clickable:true
-				        });
-
-				        // 인포윈도우로 장소에 대한 설명을 표시합니다
-				        var infowindow = new daum.maps.InfoWindow({
-				            content: '<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">'+
-				            		'<div id="iw-container">'+
-				            			'<div class="iw-title">${rental.p_category_name}</div>'+
-				            				'<img src=${rental.imgUrl} style="width:100%; height:150px;"/><br>'+
-				            				'<span><strong>물품명 : </strong></span> <span>"${rental.title}"</span><br><span><strong>주소 : </strong></span><span>"${rental.address}"</span><br><span><strong>연락처 : </strong></span><span>"${rental.phone}"</span></a>'
-				        });
-					    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-					    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-					    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-					    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
-					    daum.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
-
-				        clusterer.addMarker(marker);
-			 		}
-			 	}
 		
 				// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 				function makeOverListener(map, marker, infowindow) {
@@ -218,57 +288,7 @@
 				overflow-x: hidden;
 			}
 		</style>
-		<div class="map-content">
-	        <!-- search -->
-	        <div class="map-search">
-	            <div class="item-type">
-	                <h4>카테고리</h4>
-	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 카테고리2 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 카테고리2 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 카테고리2 </label>
-        </div>
-	        	
-	        </div>
-	        <div class="map-list" style="overflow: scroll;">
-				<c:forEach items="${list }" var="rental" varStatus="status">
-				<c:if test="${empty rental }">
-					상품이 존재하지 않습니다.
-				</c:if>
-				<c:if test="${status.index % 6 == 0 }">
-				<div class="list-item">
-				</c:if>
-					<div style="text-align: -webkit-center;">
-				      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
-					      <div class="thumbnail" style="overflow: hidden;">      
-					      	<c:choose>	 
-						      <c:when test="${rental.imgUrl == null }">
-						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-						      </c:when>
-						      <c:when test="${rental.imgUrl == './img' }">
-						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-						      </c:when>
-					          <c:when test="${rental.imgUrl != null}">
-					          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
-					          </c:when>
-					        </c:choose>
-					      
-					      <div class="context">
-					      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
-					        <strong>[${rental.p_category_name }] ${rental.title }</strong>
-					        <p> ${rental.price } 원</p>
-					       </div>      
-					      </div>
-				        </a>
-					</div>
-					<br>
-				<c:if test="${status.index % 6 == 5 }">
-				</div>
-				</c:if>
-				</c:forEach>
-			
-				${pageBar }
-			</div>
+		
 		</div>
 	</div>
     

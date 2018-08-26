@@ -79,9 +79,7 @@ input[name="datetimes"]{cursor: pointer;}
 		var price = ${rental.price};
 		  $('input[name="datetimes"]').daterangepicker({
 		    timePicker: true,
-		    startDate: "${rental.start_date}",
-		    endDate: "${rental.end_date}",
-		    minDate: "${rental.start_date}",
+		    minDate: new Date,
 		    maxDate: "${rental.end_date}",
 		    locale: {
 		        format: 'YYYY-MM-DD HH:mm:ss'
@@ -96,9 +94,8 @@ input[name="datetimes"]{cursor: pointer;}
   		      } 
 		  },function(start, end, label) {
 				  result = (end-start)/(1000*3600*24);
-				  result = Math.floor(result);
-				  result2 = ((end-start)%(1000*3600*24))/(1000*3600);
-				  if(result2 == 0 ) {
+				  result2 = (end-start)%(1000*3600*24);
+				  if(result2 != 0 ) {
 					  if(result2>0 && result2<=8){
 						  $("#del_price").text(price*result+price*0.5+"원");
 					  } else{
