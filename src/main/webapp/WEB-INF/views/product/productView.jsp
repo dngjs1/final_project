@@ -134,9 +134,8 @@ span.star-prototype > * {
 		.main_image {
 		
 			width : 100%;
-			height : 409px;
+			height : 370px;
 			cursor : pointer;
-			
 			margin-left : auto;
 			margin-right : auto;
 			border-bottom: 1px solid #ddd;
