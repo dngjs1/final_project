@@ -13,7 +13,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script src="${path }/resources/js/summernote-ko-KR.js"></script>
 
+<style>
+	.location {
+		
+		font-size : 17px;
+		font-weight:bold;
+	}
 	
+	.location a {
+		font-size : 20px;
+	}
+	
+</style>
 <div class = "col-10">
 	<div class = "location">
 		<a href = "#" class = "home"><i class="fas fa-home"></i></a>
@@ -41,15 +52,23 @@
 	
 	
 	}
+	
+	.tr1  th {
+		width: 15%;
+	}
+	
+	.tr1 td {
+		
+	}
 </style>
 
 
-<div class='container' >
-    <form id="form" action="${pageContext.request.contextPath }/writeQuestionEnd.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
+<div >
+    <form id="form" action="${pageContext.request.contextPath }/writeQuestionEnd.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();" ">
   
 	
-        <hr style="border:2px solid #787878"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 1000px;">	  
+        <hr style="border:1px solid #2e2e2e;"><br>       
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	        <tr class="tr1">
 				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px;">아이디</th>
 				<td>	
@@ -60,7 +79,7 @@
 			<tr class="tr1">
 				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px;">문의내용</th>
 				<td>
-					<textarea class="form-control" name="question_content" id="summernote" placeholder="글내용" maxlength="500" style="height: 350px;"></textarea>
+					<textarea class="form-control" name="question_content" id="summernote" placeholder="내용을 작성하세요" maxlength="500" style="height: 350px; border:none;"></textarea>
 				</td>
 			</tr>
         </table>
