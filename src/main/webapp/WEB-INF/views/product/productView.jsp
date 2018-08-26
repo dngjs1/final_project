@@ -134,7 +134,7 @@ span.star-prototype > * {
 		.main_image {
 		
 			width : 100%;
-			height : 370px;
+			height : 51%;
 			cursor : pointer;
 			margin-left : auto;
 			margin-right : auto;
@@ -919,7 +919,7 @@ span.star-prototype > * {
   				</div>
   				
   				<!-- 그림 이미지 넘어오는 div공간 -->
-  				<div class = "photo_review">
+  				<div class = "photo_review" style = "padding-bottom:20px;">
   				<c:if test="${reviewImgList != null}">
 					<c:forEach var='imgList' items='${reviewImgList}'>
 						<c:if test="${review.review_code eq imgList.review_code }">
