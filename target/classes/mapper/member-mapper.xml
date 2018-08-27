@@ -111,6 +111,11 @@
 	  	and member_id=#{member_id}
 	  	order by buy_date desc
  	</select>
+ 	
+ 	<select id="orderListCount" resultType="_int" parameterType="string">
+ 	select count(*) from buy_info where member_id=#{member_id}
+ 	</select>
+ 	
  	<select id="selectOrderList2" parameterType="string" resultMap="selectOrderMap">
  		select p.product_code, p.product_name, po.option_size, b.buy_code, b.member_id,
  		b.buy_quantity, b.total_price, b.buy_date, b.buy_status, pi.new_p_img_path

@@ -147,6 +147,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, String member_id,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectOrderList",member_id,rb);
+	}
+	
+
+	@Override
+	public int orderListCount(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("member.orderListCount",member_id);
+	}
+	
+	@Override
 	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("member.selectOrderList",member_id);
 	}
@@ -202,6 +214,7 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectedAnswer",question_code);
 	}
+
 
 
 	

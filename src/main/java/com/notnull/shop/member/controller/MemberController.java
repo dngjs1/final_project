@@ -24,6 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.notnull.shop.common.PageCreate;
+import com.notnull.shop.common.PageCreateById;
 import com.notnull.shop.member.model.service.MemberService;
 import com.notnull.shop.member.model.vo.Answer;
 import com.notnull.shop.member.model.vo.Member;
@@ -101,12 +102,25 @@ public class MemberController {
 		return "member/memberRefund";
 	}
 	
-	@RequestMapping("/memberOrderTotal.do")
-	public String memberOrderTotal(String member_id,Model model) {
-		List<Map> orderList = service.selectOrderList(member_id);
+	@RequestMapping("memberOrderTotal.do")
+	public String memberOrderTotal(String member_id,Model model,
+									HttpServletRequest request,
+										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 2;
+		
+		List<Map> orderList = service.selectOrderList(member_id,cPage, numPerPage);
+		int totalCount = service.orderListCount(member_id);
 		int totalPoint = service.totalPoint(member_id);
+		
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"memberOrderTotal.do",member_id);
+		
 		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+	
 		return "member/memberOrderTotal";
 	}
 	

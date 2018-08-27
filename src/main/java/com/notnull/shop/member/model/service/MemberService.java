@@ -53,6 +53,11 @@ public interface MemberService {
 	int totalPoint(String member_id);
 	
 	List<Map> selectOrderList(String member_id);
+	
+	List<Map> selectOrderList(String member_id,int cPage,int numPerPage);
+	
+	int orderListCount(String member_id);
+	
 	List<Map> selectOrderList();
 	
 	int updateBuyStatus(BuyInfo buyInfo);
