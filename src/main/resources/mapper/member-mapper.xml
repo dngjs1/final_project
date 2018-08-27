@@ -38,6 +38,10 @@
   	<select id="duplicateIdCheck" parameterType="string" resultType="_int">
  		select count(*) from member where member_id=#{id}
 	</select>
+	<select id="duplicateEmailCheck" parameterType="string" resultType="_int">
+		select count(*) from member where email=#{email}
+	</select>
+	
 	
 	<select id="selectEncode" parameterType="string" resultType="string">
 	 	select member_pw from member where member_id=#{id}

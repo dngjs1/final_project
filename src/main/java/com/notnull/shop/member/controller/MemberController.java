@@ -168,6 +168,21 @@ public class MemberController {
 		return mv;
 	}
 	
+	//ModelAndView 이용 
+	@RequestMapping("/checkEmailDuplicate.do" )
+	public ModelAndView checkEmailDuplicate(String email, ModelAndView mv) {
+
+		System.out.println(email);
+
+		boolean check = service.emailDuplicateCheck(email)==0?true:false;
+		
+		
+		mv.addObject("check",check);
+		mv.setViewName("JsonView");
+		
+		return mv;
+	}
+	
 	
 	//Ajax 아이디 중복확인
 //	@RequestMapping("/checkIdDuplicate.do")

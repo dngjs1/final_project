@@ -70,7 +70,13 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne("member.duplicateIdCheck",id);
 	}
-
+	
+	@Override
+	public int emailDuplicateCheck(SqlSessionTemplate sqlSession, String email) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.duplicateEmailCheck",email);
+	}
+	
 	@Override
 	public int memberUpdate(SqlSessionTemplate sqlSession, Member m) {
 		
@@ -196,5 +202,7 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectedAnswer",question_code);
 	}
+
+
 	
 }

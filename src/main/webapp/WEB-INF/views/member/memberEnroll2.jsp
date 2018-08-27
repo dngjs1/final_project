@@ -139,6 +139,12 @@
    #error{color:red;
    		display:none;
    		}
+   #email_ok{color:green;
+   		display:none;
+   		}
+   #email_error{color:red;
+   		display:none;
+   		}
 
 </style> 
 
@@ -237,7 +243,48 @@ $(function(){
 
 </script>
 
+<!-- Email 중복 유효성 검사 Ajax -->
+<script>
+$(function(){
+    $('#email').blur(function(){
+    	
+    	console.log($(this).val());
+    
+  
+          $('#email_ok').hide();
+          $('#email_error').hide();
+          $('#email_check').show();
+          $('#emailDuplicateCheck').val(0);
+       
+        
+       $.ajax({
+          url:"${pageContext.request.contextPath}/checkEmailDuplicate.do",
+          type   : "post",
+          dataType: "json",
+          data:{email:$(this).val()},
+          success:function(data){
+          	
+        	/* if(data.trim()=='true') */  
+          if(data.check==true){
+                $('#emailDuplicateCheck').val(1);
+             }else{
+                $('#email_error').show();
+                $('#email_check').hide();
+                $('#emailDuplicateCheck').val(0);
+             }
+        
+          },
+          error:function(jpxhr,textStatus,errormsg){
+             console.log("ajax전송 실패")
+             console.log(jpxhr);
+             console.log(textStatus);
+             console.log(errormsg);
+          }
+       });
+    });
+ });
 
+</script>
 
 
 <!-- 유효성검사  -->
@@ -270,6 +317,14 @@ $(function(){
 		$("#idDuplicateCheck").focus();
 		return false;
 	}
+	
+	var idEmail = $("#emailDuplicateCheck");
+	if($("#emailDuplicateCheck").val()==0) {
+		alert("중복된 이메일 주소입니다. 다시 입력하세요.")
+		$("#emailDuplicateCheck").focus();
+		return false;
+	}
+
 	
 	return true;
 } 
@@ -528,7 +583,9 @@ $(function(){
 			<li>
 				<input type = "email" id = "email" name = "email" class = "text" placeholder="*이메일 입력 (ex : abc@naver.com)" style = "width : 450px; border:solid gray" required>
 				<span style = "color : #777777;font-size:15px; margin-left:14px;"><strong>이메일 수신 :</strong></span><input type = "checkbox" name = "email_alarm" value="Y" style = "margin-left: 5px;">
-				<p class = "example" id = "#">이메일 인증을 위해 이메일 형식에 맞게 입력해주세요.</p>
+				<p class="example" id = "email_check">이메일 인증을 위해 이메일 형식에 맞게 입력해주세요.</p>
+                <p class="example" id="email_error">중복된 이메일 주소입니다.</p>
+                <input type="hidden" name="emailDuplicateCheck" id="emailDuplicateCheck" value=0 />
 				
 			</li>
 			
