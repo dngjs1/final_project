@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.notnull.shop.common.PageCreate;
+import com.notnull.shop.common.PageCreateByName;
 import com.notnull.shop.common.PageCreateSort;
 import com.notnull.shop.member.model.vo.PointLog;
 import com.notnull.shop.product.model.service.ProductService;
@@ -80,12 +81,25 @@ public class ProductController {
 		return "/product/shop";
 	}
 	
-	@RequestMapping("/searchProduct.do")
-	public String searchProduct(Model m,HttpServletRequest request) {
+	@RequestMapping("searchProduct.do")
+	public String searchProduct(Model m,HttpServletRequest request,
+							@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		String searchName=request.getParameter("searchName");
 		
-		List<ProductListJoin> list =service.searchProduct(searchName);
+		int numPerPage = 8;
+		
+		List<ProductListJoin> list =service.searchProduct(searchName,cPage,numPerPage);
+		
+		int totalCount = service.searchProductCount(searchName);
+		
+		String pageBar = new PageCreateByName().getPageBar(cPage,numPerPage,totalCount,"searchProduct.do",searchName);
+		
+		m.addAttribute("pageBar", pageBar);
 		m.addAttribute("list",list);
+		m.addAttribute("cPage", cPage);
+		m.addAttribute("totalCount", totalCount);
+		
+
 		return "/product/shop";
 	}
 	

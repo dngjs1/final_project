@@ -43,10 +43,16 @@ public class ProductDAOImpl implements ProductDAO {
 
 	
 	@Override
-	public List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession, String searchName) {
-		return sqlSession.selectList("product.searchProduct",searchName);
+	public List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession, String searchName,int cPage,int numPerPage ) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("product.searchProduct",searchName,rb);
 	}
 
+	@Override
+	public int searchProductCount(SqlSessionTemplate sqlSession,String searchName) {
+		return sqlSession.selectOne("product.searchProductCount",searchName);
+	}
+	
 	@Override
 	public int insertProduct(SqlSessionTemplate sqlSession, Product product) {
 		return sqlSession.insert("product.insertProduct",product);
@@ -297,6 +303,9 @@ public class ProductDAOImpl implements ProductDAO {
 	public int deleteReview(SqlSessionTemplate sqlSession, int review_code) {
 		return sqlSession.delete("product.deleteReview",review_code);
 	}
+
+
+
 	
 	
 }
