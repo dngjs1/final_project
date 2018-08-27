@@ -48,7 +48,7 @@ span.star-prototype > * {
 	
 	<style>
 		.product_category {
-			margin : 50px 0;
+			
 			padding : 10px 0 15px;
 			background: #fff;
 			border-top : 1px solid #000;
@@ -98,7 +98,31 @@ span.star-prototype > * {
 		.ct_box a:hover {
 			background-color: #e0e0e0;
 		}
-	</style>
+	</style><!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
+	<div class = "view_type_box">
+		
+		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
+		
+		<div class = "view_type opacity" style="display:inline-block;">
+			<a href = "#" style = "background-color : 2e2e2e;">전체상품 </a>
+			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
+			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
+			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>
+			<a href ="${pageContext.request.contextPath}/reviewStarOrder.do">상품평점순</a>
+		</div>
+		<div class="add">
+			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
+				<input type="button" value="상품 추가" class='btn btn-outline-success' onclick='fn_goboardForm();'/>
+			</c:if>
+		</div>
+		<script>
+			function fn_goboardForm(){
+				location.href="${pageContext.request.contextPath}/productupload.do";
+			}
+		</script>
+		
+	</div><!-- 옵션 박스 div 끝 -->
+	
 	<div class = "product_category">
 		<div id = "category_list">
 		
@@ -131,8 +155,8 @@ span.star-prototype > * {
 	</div>
 	<style>
 		.view_type_box{
-			margin-top : 18px;
-			margin-bottom : 18px;
+			margin-top : 50px;
+			margin-bottom : 50px;
 			height : 68px;
 			border : 1px solid #e0e0e0;
 			background : #fff;
@@ -148,16 +172,18 @@ span.star-prototype > * {
 		.view_type_box .view_type{
 			float: left;
 			margin-right: 20px;
-			font-size : 12px;
+			font-size : 16px;
 			line-height : 68px;
+			font-weight:bold;
 		}
 		.view_type_box .view_type a:first-child {
 			background:none;
 		}
 		
 		.view_type_box .view_type a {
-			padding: 0 12px;
+			padding: 0 26px;
 			color : #000;		
+			text-decoration: none;
 		}
 		
 		.Seller_item_secion{
@@ -170,29 +196,7 @@ span.star-prototype > * {
 			margin-top: 13px;
 		}
 	</style>
-	<!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
-	<div class = "view_type_box">
-		
-		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
-		
-		<div class = "view_type opacity" style="display:inline-block;">
-			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
-			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
-			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>
-			<a href ="${pageContext.request.contextPath}/reviewStarOrder.do">상품평점순</a>
-		</div>
-		<div class="add">
-			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
-				<input type="button" value="상품 추가" class='btn btn-outline-success' onclick='fn_goboardForm();'/>
-			</c:if>
-		</div>
-		<script>
-			function fn_goboardForm(){
-				location.href="${pageContext.request.contextPath}/productupload.do";
-			}
-		</script>
-		
-	</div><!-- 옵션 박스 div 끝 -->
+	
 	
 <!-- <script>
 
