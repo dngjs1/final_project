@@ -701,12 +701,31 @@ span.star-prototype > * {
 	.link03:hover {
 	border-bottom: 4px solid black;
 }
+
+.jbFixed {
+        position: fixed;
+        top: 0px;
+      }
 </style>
 
+<script>
+/* 스크롤 고정 */
+$( document ).ready( function() {
+	var jbOffset = $( '.aaaa' ).offset();
+	$( window ).scroll( function() {
+		if ( $( document ).scrollTop() > jbOffset.top ) {
+			$( '.aaaa' ).addClass( 'jbFixed' );
+		}
+		else {
+			$( '.aaaa' ).removeClass( 'jbFixed' );
+		}
+	});
+});
+</script>
 
 <div class="container">
 
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs aaaa" role="tablist">
   
      <li class="nav-item">
        <a class="nav-link active link01" data-toggle="tab" href="#section1">상품 상세</a>
