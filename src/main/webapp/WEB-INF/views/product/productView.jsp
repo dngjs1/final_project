@@ -1436,15 +1436,7 @@ $('.star-prototype').generateStars();
 		        <th>배송기간</th>
 		        <td colspan="3">
 		            <ul>
-		                <li class="prod-delivery-period-contents etc-pdd-info">
-								ㆍ<span>쿠팡맨 배송 지역 : 주문 및 결제 완료 후, 1-2일 이내 도착</span>
-		                </li>
-		                <li class="prod-delivery-period-contents">
-		                    ㆍ쿠팡맨 미배송 지역 : 주문 및 결제 완료 후, 2-3일 이내 도착
-		                    <p class="prod-delivery-period__notice">
-		                            - 도서 산간 지역 등은 하루가 더 소요될 수 있습니다.
-		                    </p>
-		                </li>
+		                <li class="prod-delivery-period-contents">ㆍ도서 산간 지역 등은 하루가 더 소요될 수 있습니다.</li>
 		                <li class="prod-delivery-period-contents">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</li>
 		            </ul>
 		        </td>
@@ -1468,7 +1460,7 @@ $('.star-prototype').generateStars();
 		    <tr>
 		        <th>교환/반품 신청 기준일</th>
 		            <td>
-		                <p>ㆍ단순변심에 의한 로켓배송 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용 고객부담)</p>
+		                <p>ㆍ단순변심에 의한 배송 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용 고객부담)</p>
 		                <p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터<br>
 		                    <span class="prod-delivery-return-policy__limit-list__indent">30일 이내에 청약철회 가능</span>
 		                </p>
