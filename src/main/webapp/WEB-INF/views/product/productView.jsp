@@ -134,7 +134,7 @@ span.star-prototype > * {
 		.main_image {
 		
 			width : 100%;
-			height : 370px;
+			height : 51%;
 			cursor : pointer;
 			margin-left : auto;
 			margin-right : auto;
@@ -733,7 +733,7 @@ span.star-prototype > * {
 			
   
 	
-  <b>필수 표기정보</b>
+  <h3 style = "padding-left:10px; padding-top:10px; margin-top:24px;"><b>제품 상세정보</b></h3>
   <table class="table table-bordered">
   	<tr>
   		<td width="15%" style="background-color:#D5D5D5">품명 및 모델명</td>
@@ -766,8 +766,6 @@ span.star-prototype > * {
   </div>
   <div id="section2" class="container tab-pane fade">
  <br>		
- <input type="button" value="테스트" onclick="fn_productReview()"/>
- <hr>
  <h4 >상품평</h4>
  <script>
 	function fn_productReview(){
@@ -919,7 +917,7 @@ span.star-prototype > * {
   				</div>
   				
   				<!-- 그림 이미지 넘어오는 div공간 -->
-  				<div class = "photo_review">
+  				<div class = "photo_review" style = "padding-bottom:20px;">
   				<c:if test="${reviewImgList != null}">
 					<c:forEach var='imgList' items='${reviewImgList}'>
 						<c:if test="${review.review_code eq imgList.review_code }">
@@ -1064,11 +1062,67 @@ $(function(){
 	var idList = new Array();
 	var codeList = new Array();
 	
+<<<<<<< HEAD
+		<c:if test="${flag =='true'}">
+		<table class='countCheck'>
+		<tr>
+		<td>
+		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</td>
+		<td>
+      <c:set var="doneLoop" value="false"/>
+      <c:forEach var="ycountLikeList" items="${ycountLikeList}" varStatus="status">      
+            <c:choose>          
+               <c:when test="${ycountLikeList.REVIEW_CODE eq review.review_code }">                        
+                  <c:out value="${ycountLikeList.CNT}"></c:out>
+               </c:when>
+               <c:otherwise>
+               	<c:if test="${status ==null }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
+                  <c:if test="${status.first }">                     
+                  <c:out value="0"></c:out>
+                   </c:if>
+                   	<c:set var="doneLoop" value="true"/>
+               </c:otherwise>
+            </c:choose>
+      </c:forEach>     
+      			<c:if test="${empty ycountLikeList }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
+		</td>
+		<td>
+		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
+		</td>
+		<td>
+		<c:set var="doneLoop2" value="false"/>
+      <c:forEach var="ncountLikeList" items="${ncountLikeList}" varStatus="status">      
+            <c:choose>          
+               <c:when test="${ncountLikeList.REVIEW_CODE eq review.review_code }">                        
+                  <c:out value="${ncountLikeList.CNT}"></c:out>
+               </c:when>
+               <c:otherwise>
+                  <c:if test="${status.first }">                     
+                  <c:out value="0"></c:out>
+                   </c:if>
+                   	<c:set var="doneLoop2" value="true"/>
+               </c:otherwise>
+            </c:choose>
+      </c:forEach>   
+      			<c:if test="${empty ncountLikeList }">                    
+                  <c:out value="0"></c:out>
+                   </c:if>
+		</td>
+		</tr>
+		</table>			
+		</c:if>
+=======
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
 		codeList.push("${item.review_code}");
 	</c:forEach>
+>>>>>>> Super_branch2
 	
 	for(var i=0;i<reviewLength;i++){
 		var y_count=0;
@@ -1230,21 +1284,22 @@ $('.star-prototype').generateStars();
     <br><br>
         <div>
             <div>
-                <span><strong>Question</strong></span> 
+                <span><strong>문의사항</strong></span> 
             </div>
             <div>
                 <table class="table">                    
                     <tr>
-                        <td>
-                            <textarea  style="width: 1100px" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
+                        <td style = padding-left:0; >
+                       
+                            <textarea  style="width: 100%;" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
                             <br>
-                            <div>
+                            <div style = "float:right;">
                             <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
 							<input type='hidden' id="member_id" name='member_id' value='${memberLoggedIn.member_id}'/>
 							<input type='hidden' id="member_level" name='member_level' value='${memberLoggedIn.member_level}'/>							
 							<input type='hidden' name='question_level' value='1'/>
 							<input type='hidden' name='p_question_code_ref' value='0' />
-                            <input type="button" class="btn pull-right btn-success input" value="등록"  />                
+                            <input type="button" class="btn pull-right btn-success input" value="등록" style="width:120px; height:50px; margin-top:10px;" />                
                             </div>
                         </td>
                     </tr>
@@ -1255,8 +1310,8 @@ $('.star-prototype').generateStars();
   </form>
   
   </div>
-		<div id="comment-container">
-			<table id="tbl-comment" style = "margin-left:30px;">
+		<div id="comment-container" style = "margin-left:1%;">
+			<table id="tbl-comment">
 				    <%
 				    if(questionList != null){
 				        for(ProductQuestion productQuestion : questionList)
@@ -1306,9 +1361,11 @@ $('.star-prototype').generateStars();
 				        		
 				        		</td>
 				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
-				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        			<sub><%=productQuestion.getMember_id()%></sub><br><br>
+				        		 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
 				        			</td>
 				        			<td>
+				        			
 				        			</td>
 				        			
 				        	
@@ -1396,7 +1453,7 @@ $(document).on("click",".input",function(){
 	var member_id=$('#member_id').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else{
 		
 		$.ajax({
@@ -1429,7 +1486,7 @@ $(document).on("click",".delete",function(e){
 	
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin' || member_id==writer){
 		
 		$.ajax({
@@ -1463,7 +1520,7 @@ $(document).on("click",".answer",function(e){
 	var member_level=$('#member_level').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin'){
 		$.ajax({
 			

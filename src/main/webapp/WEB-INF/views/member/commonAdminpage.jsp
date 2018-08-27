@@ -102,12 +102,13 @@
 			.lmenu_menu .menu .txt {
 				font-size : 14px;
 				font-weight: bold;
-				color : #686868;
+				color : #2e2e2e;
 				padding: 0 22px;
 				line-height: 52px;
 				display: block;
 			}
 			
+						
 			.lmenu_menu .menu .submenu{
 				text-align: left;
 				background-color: #ffffff;
@@ -130,7 +131,7 @@
 				font:inherit;
 				font-size: 13px;
 				font-weight: normal;
-				color: #686868;
+				color: #2e2e2e;
 				padding: 5px 0px 5px 0;
 				display: block;
 				cursor: pointer;
@@ -177,18 +178,7 @@
 					</li>
 					
 					
-					<li>
-						<a>
-							<span class = "txt">나의 질문과 답변</span>
-						</a>
-					</li>
-					
-					<li>
-						<a>
-							<span class = "txt">상품Q&A</span>
-
-						</a>
-					</li>
+		
 
 
 				</ul>

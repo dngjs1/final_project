@@ -19,4 +19,13 @@
 	<select id="getRental" resultType="rental" parameterType="Integer">
 		select * from rental_obj JOIN product_category using(p_category_code) where rental_obj_code = #{rental_obj_code}
 	</select>
+	
+	<insert id="insertRentalPerson" parameterType="rentalPerson">
+		insert into rental values(rental_seq.nextval, #{rental_obj_code}, #{member_id}, to_date(#{start_date}, 'YYYY-MM-DD HH24:mi:ss'), to_date(#{end_date}, 'YYYY-MM-DD HH24:mi:ss'))
+	</insert>
+	
+	<select id="selectRentalPerson" resultType="rentalPerson" parameterType="Integer">
+		select * from rental where rental_obj_code=#{rental_obj_code}
+	</select>
+	
 </mapper>

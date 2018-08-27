@@ -54,8 +54,8 @@
 				
 				.order_board th {
 					padding: 21px 0;
-					background: #b5babd;
-					color : #fff;
+					background: #ddd;
+					color : black;
 					font-weight: bold;
 					text-align: center;
 					border-left : 1px solid #eaeaea;
@@ -77,7 +77,9 @@
 					text-align: center;
 					vertical-align: middle;
 					cursor:pointer;
-					float:right;					
+					float:right;	
+					width:12%;
+					margin-top:1%;				
 				}
 				.qContent { 
 					display: inline-block; 
@@ -107,28 +109,32 @@
 					});
 				});
 			</script>
-			
+			<style>
+				.column {
+					
+				}
+			</style>
 			
 			
 						<div class = "mypage_wrap">
 				
 					<h2 class = "mypage_title02" style="display:inline;"><i class="card_buy far fa-credit-card"></i>1:1 문의 내역</h2>
-				 		<button type="button" onclick="writeQuestion()" class="insert_btn" style="position: relative; top:20px; right:20px;" >문의하기</button>
+				 		<!-- <button type="button" onclick="writeQuestion()" class="insert_btn" style="position: relative; top:20px; right:20px;" >문의하기</button> -->
 				
 				
 				<table class = "order_board">
 					<colgroup>
 						<col style = "width:10%;">
-						<col style = "width:30%;">
-						<col style = "width:40%;">
+						<col style = "width:20%;">
+						<col style = "width:50%;">
 						<col style = "width:20%;">			
 					</colgroup> 
 					<thead>
 					<tr>
-						<th scope="col" class = "#">번호</th>
-						<th scope="col" class = "#">작성일</th>
-						<th scope="col" class = "#">문의내용</th>
-						<th scope="col" class = "#">답변상태</th>
+						<th scope="col" class = "column">번호</th>
+						<th scope="col" class = "column">작성일</th>
+						<th scope="col" class = "column">문의내용</th>
+						<th scope="col" class = "column">답변상태</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -139,13 +145,17 @@
 								<td scope="col">
 									<span class="qContent"> ${list.question_content}</span>
 								</td>
-								<td scope="col">${list.status=='Y'?'답변완료':'답변미완료'}</td>
+								<td scope="col" style = "font-weight: bold;">${list.status=='Y'?'답변완료':'답변미완료'}</td>
 								<td class="question_code">${list.question_code }<td>
 							</tr>
 						</c:forEach>	
 					</tbody>
 					
 				</table>
+				<div>
+					<button type="button" onclick="writeQuestion()" class="insert_btn">문의하기</button>
+					</div>
+				
 				<br>
 				
 <style>

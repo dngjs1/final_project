@@ -18,7 +18,11 @@
 </div>
 
 <style>
-.tr1 th{text-align:center;background-color:b5babd}
+.tr1 th
+	{
+			text-align:center; 
+			background-color:b5babd;
+		}
 .tr2 td{vertical-align:middle;text-align:center;}
 .button_btn {
 	width : 70px;
@@ -40,22 +44,23 @@
 </style>
 
 
-<div class='container' >
+<div >
    
-		
-        <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px;">	  
+		<div>
+        <hr style="border:2px solid #787878;  right:130px;"><br>  
+        </div>     
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	        <tr class="tr1">
-				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;">아이디</th>
+				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 15%;">아이디</th>
 				<td>	
-					<input type="text" class="form-control" name="member_id" value="${question.member_id }" id="member_id" readonly="readonly">
+					<input type="text" class="form-control" name="member_id" value="${question.member_id }" id="member_id" readonly="readonly" ">
 				</td>
 			</tr>        
 
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px;" >문의내용</th>
+				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width:15%;" >문의내용</th>
 				<td>
-					<span class="form-control" name="question_content" id="summernote" maxlength="500" style="height: 250px;">
+					<span class="form-control" name="question_content" id="summernote" maxlength="500" style="height: 250px; width:85%; border:none;">
 						${question.question_content }
 					</span>
 				</td>
@@ -64,19 +69,24 @@
 </div>
 
 <c:if test="${!empty answer }">
-<div class='container' >
+<div >
    
-		
-        <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 800px;">	  
+	
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	      
 
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;" >답변 내용</th>
-				<td>
-					<span class="form-control" name="question_content" id="summernote" maxlength="500" style="height: 250px;">
+				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:18px; width: 15%; background-color:#eee;" >
+				
+				답변</th>
+				<td style = "width:75%; background-color: #eee;">
+					<span class="form-control" name="question_content" id="summernote" maxlength="500" style=" width:80%; border:none; background-color: #eee;">
 						${answer.answer_content }
 					</span>
+				</td>
+				
+				<td style = "width:10%; font-size:18px; font-weight: bold; background-color : #eee; vertical-align: middle; text-align: center;">
+					관리자
 				</td>
 			</tr>
         </table>
