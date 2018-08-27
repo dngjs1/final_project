@@ -28,6 +28,7 @@ public interface MemberService {
 	int findMemberPassword(String id, String email ) throws MessagingException;
 	
 	int idDuplicateCheck(String id);
+	int emailDuplicateCheck(String email);
 	
 	int memberUpdate(Member m);
 	

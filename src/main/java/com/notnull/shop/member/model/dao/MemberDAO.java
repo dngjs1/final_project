@@ -28,6 +28,7 @@ public interface MemberDAO {
 	int tempPassword(SqlSessionTemplate sqlSession, String id, String tempPw);
 	
 	int idDuplicateCheck(SqlSessionTemplate sqlSession, String id);
+	int emailDuplicateCheck(SqlSessionTemplate sqlSession, String email);
 	
 	int memberUpdate(SqlSessionTemplate sqlSession, Member m);
 	

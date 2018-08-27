@@ -121,6 +121,13 @@ public class MemberServiceImp implements MemberService {
 		
 		return memberDAO.idDuplicateCheck(sqlSession, id);
 	}
+	
+	@Override
+	public int emailDuplicateCheck(String email) {
+		// TODO Auto-generated method stub
+		return memberDAO.emailDuplicateCheck(sqlSession,email);
+	}
+	
 
 	@Override
 	public int memberUpdate(Member m) {
@@ -244,5 +251,7 @@ public class MemberServiceImp implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDAO.selectedAnswer(sqlSession, question_code);
 	}
+
+
 	
 }
