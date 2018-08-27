@@ -40,9 +40,9 @@
 </style>
 
 
-<div class='container' >
+<div>
      
-        <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
+            
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	        <tr class="tr1">
 				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;">아이디</th>
@@ -69,21 +69,19 @@
 <script src="${path }/resources/js/summernote-ko-KR.js"></script>
 
 	
-<div class = "col-10">
-	<div class = "location">
+<div>
 	
-</div>
 
 <style>
 .tr1 th{text-align:center;background-color:b5babd}
 .tr2 td{vertical-align:middle;text-align:center;}
 .button_btn {
-	width : 70px;
-	height : 40px;
+	width : 120px;
+	height : 50px;
 	border: none;
 	background: #2D2E33;
 	color : #fff;
-	font-size : 15px;
+	font-size : 19px;
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
@@ -101,9 +99,9 @@
 
 <!-- 답변 작성  -->
 <c:if test="${empty answer }">
-<div class='container' style="position: relative; right:15px;">
+<div>
     <form id="form" action="${pageContext.request.contextPath }/writeAnswerEnd.do" method="post" enctype="multipart/form-data" onsubmit="return FormSubmit();">
-        <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
+          
         
         
         <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width:100%;">	  
@@ -111,8 +109,8 @@
 	        <input type="hidden" name="question_code" value="${question.question_code }" readonly/>   
 
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;">답변 작성</th>
-				<td>
+				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 12%; background-color: #eee;">답변 작성</th>
+				<td style ="background-color: #eee;">
 					<textarea class="form-control" name="answer_content" id="summernote" placeholder="글내용" maxlength="500" style="height: 250px;"></textarea>
 				</td>
 			</tr>
@@ -124,20 +122,21 @@
     </form>
 </c:if>
 <c:if test="${!empty answer }">
-	<div class='container' >
+	<div>
 
-        <hr style="border:2px solid #787878; width:1020px; position: relative; right:130px;"><br>       
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%; position: relative; right:15px;">	  
+       
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	      
 
 			<tr class="tr1">
-				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 123px;" >답변 내용</th>
-				<td>
+				<th style="text-align: center;border-left:none; vertical-align:middle; font-size:15px; width: 12%; background-color: #eee;" >답변 내용</th>
+				<td style = "background-color: #eee;">
 					<span class="form-control" name="question_content"  maxlength="500" style="height: 250px;">
 						${answer.answer_content }
 					</span>
 				</td>
 			</tr>
+			
         </table>
 </div>
 </c:if>

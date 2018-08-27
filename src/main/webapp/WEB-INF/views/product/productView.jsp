@@ -733,7 +733,7 @@ span.star-prototype > * {
 			
   
 	
-  <b>필수 표기정보</b>
+  <h3 style = "padding-left:10px; padding-top:10px; margin-top:24px;"><b>제품 상세정보</b></h3>
   <table class="table table-bordered">
   	<tr>
   		<td width="15%" style="background-color:#D5D5D5">품명 및 모델명</td>
@@ -1286,21 +1286,22 @@ $('.star-prototype').generateStars();
     <br><br>
         <div>
             <div>
-                <span><strong>Question</strong></span> 
+                <span><strong>문의사항</strong></span> 
             </div>
             <div>
                 <table class="table">                    
                     <tr>
-                        <td>
-                            <textarea  style="width: 1100px" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
+                        <td style = padding-left:0; >
+                       
+                            <textarea  style="width: 100%;" rows="3" cols="30" id="p_question_content" name="p_question_content" placeholder="문의사항을 입력하세요"></textarea>
                             <br>
-                            <div>
+                            <div style = "float:right;">
                             <input type="hidden" id="product_code" name="product_code" value="${joinCategory.product_code }" />        
 							<input type='hidden' id="member_id" name='member_id' value='${memberLoggedIn.member_id}'/>
 							<input type='hidden' id="member_level" name='member_level' value='${memberLoggedIn.member_level}'/>							
 							<input type='hidden' name='question_level' value='1'/>
 							<input type='hidden' name='p_question_code_ref' value='0' />
-                            <input type="button" class="btn pull-right btn-success input" value="등록"  />                
+                            <input type="button" class="btn pull-right btn-success input" value="등록" style="width:120px; height:50px; margin-top:10px;" />                
                             </div>
                         </td>
                     </tr>
@@ -1311,8 +1312,8 @@ $('.star-prototype').generateStars();
   </form>
   
   </div>
-		<div id="comment-container">
-			<table id="tbl-comment" style = "margin-left:30px;">
+		<div id="comment-container" style = "margin-left:1%;">
+			<table id="tbl-comment">
 				    <%
 				    if(questionList != null){
 				        for(ProductQuestion productQuestion : questionList)
