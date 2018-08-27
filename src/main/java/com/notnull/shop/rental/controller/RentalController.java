@@ -30,12 +30,49 @@ public class RentalController {
 	@Autowired
 	private ProductService service2;
 	
+	@RequestMapping(value="/rentalSearch.do", method=RequestMethod.POST)
+	public String ListRentalSearch(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, @RequestParam(value="rentalSearch[]") String[] rentalSearch, Model model) {
+		List<Rental> list;
+		int numPerPage = 5;
+		
+		System.out.println(rentalSearch);
+		int totalCount = service.selectRentalSearchCount(rentalSearch);
+		
+		list = service.RentalListSearch(cPage, numPerPage, rentalSearch);
+
+		for(Rental rental : list) {
+		    String re1=".*?";	// Non-greedy match on filler
+		    String re2="((?:\\/[\\w\\.\\-]+)+)";	// Unix Path 1
+			String re3 = rental.getContent().replaceAll("</p>", "p");
+			String re4 = re3.replaceAll("<p>", "p");
+			
+
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    
+		    Matcher m = p.matcher(re4);
+		    if (m.find())
+		    {
+		    	rental.setImgUrl("."+m.group(1));
+		    }
+		    
+		}
+
+		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalCount, "/shop/rentalMain.do");
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount",totalCount);
+		
+		return "rental/rentalMain";
+	}
+	
 	//리스트
 	@RequestMapping(value= "/rentalMain.do", method=RequestMethod.GET)
 	public String ListRental(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, Model model) {
 		List<Rental> list;
 		List<Rental> list2;
-		int numPerPage = 10;
+		int numPerPage = 5;
 		
 		int totalCount = service.selectRentalCount();
 		//페이징

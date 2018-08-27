@@ -1,5 +1,6 @@
 package com.notnull.shop.rental.model.vo;
 
+import java.util.List;
 
 public class Rental {
 	
@@ -17,9 +18,6 @@ public class Rental {
 	private String end_date;
 	private String p_category_name;
 	private String member_level;
-	
-	
-	
 	
 	
 	public String getMember_level() {

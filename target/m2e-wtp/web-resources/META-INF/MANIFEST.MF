@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: JC
 Build-Jdk: 9.0.4
+=======
+Built-By: dngjs
+Build-Jdk: 1.8.0_161
+>>>>>>> 15f617d738cdc5bd6b2fbcc5e41296f18e426c82
 Created-By: Maven Integration for Eclipse
 
