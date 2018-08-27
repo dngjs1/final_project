@@ -1061,8 +1061,7 @@ $(function(){
 	var statusList = new Array(); 
 	var idList = new Array();
 	var codeList = new Array();
-	
-<<<<<<< HEAD
+
 		<c:if test="${flag =='true'}">
 		<table class='countCheck'>
 		<tr>
@@ -1116,14 +1115,14 @@ $(function(){
 		</tr>
 		</table>			
 		</c:if>
-=======
+
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
 		codeList.push("${item.review_code}");
 	</c:forEach>
->>>>>>> Super_branch2
-	
+
+
 	for(var i=0;i<reviewLength;i++){
 		var y_count=0;
 		var total_count=0;
@@ -1362,11 +1361,10 @@ $('.star-prototype').generateStars();
 				        		</td>
 				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
 				        			<sub><%=productQuestion.getMember_id()%></sub><br><br>
-				        		 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
-				        			</td>
-				        			<td>
-				        			
-				        			</td>
+				        			 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
+				        		</td>
+			        			<td>
+			        			</td>
 				        			
 				        	
 				     	<% }
@@ -1416,34 +1414,105 @@ $('.star-prototype').generateStars();
 	</div>
 	
 	<div id="section4" class="container tab-pane fade">
-	
-		<table style = "margin : 0px; border-spacing: 0px; border-collapse: collapse; border : 0; width : 100%; cellspacing = "0" cellpadding = "0">
-			
-			
-			<tbody>
-			
-			<tr>
-				<td style = "line-height: 13pt; marin:0px; padding:0px;">
-					
-				</td>
-				
-			</tr>
-			
-			
-			<tr>
-				<td style = "line-height: 13pt; margin:0px; padding:0px; height:30;">
-					<strong>배송정보</strong>
-				</td>
-			</tr>
-			
+		<h5 style="margin-top:20px;">배송정보</h5>
 		
-			
-			</tbody>
-		
-		
-		
-		
+		<style>
+		.table th{
+			background-color: #dcdcdc;
+		}
+		</style>
+		<table class="table table-bordered">
+		    <colgroup>
+		        <col width="150px">
+		        <col width="340px">
+		        <col width="150px">
+		        <col width="*">
+		    </colgroup>
+		    <tbody>
+		    <tr>
+		        <th>배송방법</th>
+		        <td>순차배송</td>
+		            <th rowspan="2">배송비</th>
+		            <td rowspan="2">
+		                무료배송<br>- 상품 중 20,000원 이상 구매 시 무료배송<br>- 도서산간 지역 추가비용 없음
+		            </td>
+		    </tr>
+		    <tr>
+		        <th>묶음배송 여부</th>
+		        <td>가능</td>
+		    </tr>
+		    <tr>
+		        <th>배송기간</th>
+		        <td colspan="3">
+		            <ul>
+		                <li class="prod-delivery-period-contents etc-pdd-info">
+								ㆍ<span>쿠팡맨 배송 지역 : 주문 및 결제 완료 후, 1-2일 이내 도착</span>
+		                </li>
+		                <li class="prod-delivery-period-contents">
+		                    ㆍ쿠팡맨 미배송 지역 : 주문 및 결제 완료 후, 2-3일 이내 도착
+		                    <p class="prod-delivery-period__notice">
+		                            - 도서 산간 지역 등은 하루가 더 소요될 수 있습니다.
+		                    </p>
+		                </li>
+		                <li class="prod-delivery-period-contents">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</li>
+		            </ul>
+		        </td>
+		    </tr>
+		    </tbody>
 		</table>
+		
+		<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
+		<table class="table table-bordered">
+		    <colgroup>
+		        <col width="160px">
+		        <col width="*">
+		    </colgroup>
+		    <tbody>
+		    <tr>
+		        <th>교환/반품 비용</th>
+		        <td>
+		            5,000원<br>- 단, 고객 변심의 경우에만 발생<br>- 부분반품 시, 남은금액이 무료배송 조건을 유지하면 일부 반품비용이 부과
+		        </td>
+		    </tr>
+		    <tr>
+		        <th>교환/반품 신청 기준일</th>
+		            <td>
+		                <p>ㆍ단순변심에 의한 로켓배송 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용 고객부담)</p>
+		                <p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터<br>
+		                    <span class="prod-delivery-return-policy__limit-list__indent">30일 이내에 청약철회 가능</span>
+		                </p>
+		            </td>
+		    </tr>
+		    </tbody>
+		</table>
+		
+		
+		<h5 class="prod-delivery-return-policy-title">교환/반품 제한사항</h5>
+		<ul class="prod-delivery-return-policy__limit-list">
+		    <li>ㆍ주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
+		    <li>ㆍ고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
+		    <li>ㆍ세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
+		    <li>ㆍ모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로 요청하는 경우</li>
+		    <li>ㆍ제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
+		</ul>
+        <div class="product-item__table product-seller">
+            <p class="prod-delivery-return-policy-title">판매자 정보</p>
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="150px">
+                        <col width="*">
+                    </colgroup>
+                    <tbody><tr>
+                        <th>판매자</th>
+                        <td>TryTrip</td>
+                    </tr>
+                </tbody></table>
+
+                <p class="prod-minor-notice">
+                    미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인 또는 법정대리인이 취소할 수 있습니다.
+                </p>
+        </div>
+		
 	</div>
 </div>
 <script>

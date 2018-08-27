@@ -108,17 +108,8 @@
                 
                 <div class = "footer_menus">
                 	<div class = "footer_menus_inner">
-            	<a href = "${path}/shop/introMain.do">회사소개</a>
-            	<a href = "#">제휴문의</a>
-            	<a href = "#">이용약관</a>
-            	<a href = "#">개인정보보호방침</a>
-            	<a href = "#">AS/교환/반품</a>
-            	<a href = "#">고객센터</a>
-            	<span id = "SNS">FOLLOW US ON &nbsp;&nbsp;&nbsp;
-            	<i class="fab fa-instagram"></i>&nbsp;&nbsp;&nbsp;
-            	<i class="fab fa-twitter"></i>&nbsp; &nbsp;
-            	<i class="fab fa-facebook"></i>
-            	</span>
+            	<a href = "${pageContext.request.contextPath}/introMain.do">회사소개</a>
+            	<a href = "${pageContext.request.contextPath}/infoMain.do">고객센터</a>
             	</div>
             	
             </div>
@@ -233,7 +224,19 @@
     <option value="신한은행">신한은행</option>
   </select>
  
- 
+<script>
+	$(function(){
+		$('.selected').on('change',function(){
+			if($('.selected').val()=='국민은행'){
+				location.href="https://obank.kbstar.com/quics?page=obank#loading";
+			}else if($('.selected').val()=='농협'){
+				location.href="https://banking.nonghyup.com/nhbank.html";
+			}else{
+				location.href="https://bank.shinhan.com/index.jsp#010800000000";
+			}
+		});
+	});
+</script>
 
             		</div>
             		
@@ -328,29 +331,23 @@
             		</style>
             		<div class = "ft-icon">
             			<ul class = "bnb">
+            				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "#">
-            						<i class="fas fa-microphone ft_i" style = "padding-left:14px;"></i><span>공지사항</span>
+            					<a href = "${pageContext.request.contextPath}/question.do" onclick="return validate();">
+            						<i class="fas fa-comment" style= "padding-left:10px; padding-bottom:4px;"></i><span>문의</span>
             					</a>
             				
             				</li>
             				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "#">
-            						<i class="fas fa-comment" style= "padding-left:10px; padding-bottom:4px;"></i><span>상품문의</span>
-            					</a>
-            				
-            				</li>
-            				
-            				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "#">
+            					<a href = "${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}" onclick="return validate();">
             						<i class="fas fa-shopping-cart" style="padding-left:7px;"></i><span>장바구니</span>
             					</a>
             				
             				</li>
             				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "#">
+            					<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" onclick="return validate();">
             						<i class="fas fa-question" style = "padding-left : 12px;"></i><span>주문조회</span>
             					</a>
             				
@@ -359,7 +356,17 @@
             			
             			
             			</ul>
-            		
+            		<script>
+						function validate(){
+							if('${memberLoggedIn}'.length>0){
+								return true;
+							}else{
+								alert("로그인 후 이용해주세요.");
+								location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
+								return false;
+							}
+						}
+					</script>
             		
             		</div>
             	

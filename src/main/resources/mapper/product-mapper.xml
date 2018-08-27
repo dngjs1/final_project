@@ -16,6 +16,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		and x.product_delete='N'
 		order by product_code desc
 	</select>
  

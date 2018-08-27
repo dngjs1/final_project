@@ -92,6 +92,7 @@ public class MemberServiceImp implements MemberService {
 		
 		int check=0;
 		String tempPw = ""; //암호화 이전 비밀번호
+		// 임시비밀번호 생성
 		for (int i = 0; i < 12; i++) {
 			tempPw += (char) ((Math.random() * 26) + 97);
 		}
