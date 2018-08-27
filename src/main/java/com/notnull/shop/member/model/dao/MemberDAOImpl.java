@@ -228,6 +228,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.myPagePointTotalCount",member_id);
 	}
 
+	@Override
+	public List<Map> selectRefundList(SqlSessionTemplate sqlSession, String member_id, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectRefundList",member_id,rb);
+	}
+
+	@Override
+	public int RefundListCount(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.RefundListCount",member_id);
+	}
+
 
 
 

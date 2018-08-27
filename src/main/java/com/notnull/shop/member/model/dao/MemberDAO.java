@@ -72,4 +72,7 @@ public interface MemberDAO {
 	void updateQuestionStatus(SqlSessionTemplate sqlSession, int question_code);
 	
 	int myPagePointTotalCount(SqlSessionTemplate sqlSession, String member_id);
+	
+	List<Map> selectRefundList(SqlSessionTemplate sqlSession, String member_id, int cPage, int numPerPage);
+	int RefundListCount(SqlSessionTemplate sqlSession, String member_id);
 }

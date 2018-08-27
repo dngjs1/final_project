@@ -275,6 +275,18 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.myPagePointTotalCount(sqlSession,member_id);
 	}
 
+	@Override
+	public List<Map> selectRefundList(String member_id, int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectRefundList(sqlSession,member_id,cPage,numPerPage);
+	}
+
+	@Override
+	public int RefundListCount(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDAO.RefundListCount(sqlSession,member_id);
+	}
+
 
 
 

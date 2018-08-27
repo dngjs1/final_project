@@ -74,4 +74,8 @@ public interface MemberService {
 	List<Question> adminQuestionList();
 	int insertAnswer(Answer answer);
 	
+	List<Map> selectRefundList(String member_id,int cPage,int numPerPage);
+	
+	int RefundListCount(String member_id);
+	
 }
