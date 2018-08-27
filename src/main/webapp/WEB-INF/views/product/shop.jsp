@@ -48,7 +48,7 @@ span.star-prototype > * {
 	
 	<style>
 		.product_category {
-			margin : 50px 0;
+			
 			padding : 10px 0 15px;
 			background: #fff;
 			border-top : 1px solid #000;
@@ -98,7 +98,31 @@ span.star-prototype > * {
 		.ct_box a:hover {
 			background-color: #e0e0e0;
 		}
-	</style>
+	</style><!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
+	<div class = "view_type_box">
+		
+		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
+		
+		<div class = "view_type opacity" style="display:inline-block;">
+			<a href = "#" style = "background-color : 2e2e2e;">전체상품 </a>
+			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
+			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
+			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>
+			<a href ="${pageContext.request.contextPath}/reviewStarOrder.do">상품평점순</a>
+		</div>
+		<div class="add">
+			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
+				<input type="button" value="상품 추가" class='btn btn-outline-success' onclick='fn_goboardForm();'/>
+			</c:if>
+		</div>
+		<script>
+			function fn_goboardForm(){
+				location.href="${pageContext.request.contextPath}/productupload.do";
+			}
+		</script>
+		
+	</div><!-- 옵션 박스 div 끝 -->
+	
 	<div class = "product_category">
 		<div id = "category_list">
 		
@@ -131,8 +155,8 @@ span.star-prototype > * {
 	</div>
 	<style>
 		.view_type_box{
-			margin-top : 18px;
-			margin-bottom : 18px;
+			margin-top : 50px;
+			margin-bottom : 50px;
 			height : 68px;
 			border : 1px solid #e0e0e0;
 			background : #fff;
@@ -148,16 +172,18 @@ span.star-prototype > * {
 		.view_type_box .view_type{
 			float: left;
 			margin-right: 20px;
-			font-size : 12px;
+			font-size : 16px;
 			line-height : 68px;
+			font-weight:bold;
 		}
 		.view_type_box .view_type a:first-child {
 			background:none;
 		}
 		
 		.view_type_box .view_type a {
-			padding: 0 12px;
+			padding: 0 26px;
 			color : #000;		
+			text-decoration: none;
 		}
 		
 		.Seller_item_secion{
@@ -170,29 +196,7 @@ span.star-prototype > * {
 			margin-top: 13px;
 		}
 	</style>
-	<!-- 인기상품순  ~ 상품평점순까지 볼 수 있게 해주는 옵션 div 박스 시작 -->
-	<div class = "view_type_box">
-		
-		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
-		
-		<div class = "view_type opacity" style="display:inline-block;">
-			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
-			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
-			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>
-			<a href ="${pageContext.request.contextPath}/reviewStarOrder.do">상품평점순</a>
-		</div>
-		<div class="add">
-			<c:if test="${memberLoggedIn.member_level eq 'admin'}">
-				<input type="button" value="상품 추가" class='btn btn-outline-success' onclick='fn_goboardForm();'/>
-			</c:if>
-		</div>
-		<script>
-			function fn_goboardForm(){
-				location.href="${pageContext.request.contextPath}/productupload.do";
-			}
-		</script>
-		
-	</div><!-- 옵션 박스 div 끝 -->
+	
 	
 <!-- <script>
 
@@ -218,12 +222,29 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<!-- 상품 이미지에 마우스를 올렸을 때 나오는 부분 코드 끝 -->
+	<style>
+	.point_icon {
+					display : inline-block;
+					width : 18px;
+					height : 18px;
+					margin-top : -2px;
+					border-radius: 100%;
+					background : #b0c976;
+					color : #fff;
+					font-weight : bold;
+					font-size : 12px;
+					line-height: 18px;
+					
+					overflow: hidden;
+					vertical-align: middle;
+				}
 	
+	</style>
 				<!--갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
 				<div class="proudct-item-details">
 					<div class="product-title">
 						<a href="#" style="text-decoration: none;">
-							<span class="ml-2" style="font-size: 16px;">${image.product_name }</span>
+							<span class="ml-2" style="font-size: 20px; font-weight:bold;">${image.product_name }</span>
 						</a>
 					</div>
 		
@@ -235,7 +256,7 @@ $(document).ready(function(){
 						</div>
 						<div class="point col-5 ml-1" style="text-align: center">
 							<span class="item_font">
-								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : <B class="point${index}">${image.price }</B>P</B>
+								<span class="point_icon"><center>P</center></span><B> : <B class="point${index}">${image.price }</B>P</B>
 							</span>
 						</div>
 		
