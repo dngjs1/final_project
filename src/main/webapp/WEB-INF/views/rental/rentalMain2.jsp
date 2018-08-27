@@ -62,8 +62,10 @@
 	
 			.map_list, .map_list *{margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 			.map_list a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-			.map_list {position:relative;width:100%;height:500px;}
+			.map_list {position:absolute;min-width:100px;width:100%;height:500px;}
 			.list-item {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+			.item-type{position:absolute;width:250px;  z-index:1;}
+			.items{margin-top:174px}
 </style>
 <div class="container-fluid">
 	<div class="map-container">
@@ -73,56 +75,56 @@
 			<div class="map-content">
 	        <!-- search -->
 	        <div class="map-list" style="overflow: scroll;">
-	        	<c:forEach items="${list }" var="rental" varStatus="status">
-				<c:if test="${empty rental }">
-					상품이 존재하지 않습니다.
-				</c:if>
-				<c:if test="${status.index % 6 == 0 }">
 				<div class="list-item">
-				</c:if>
-				<c:if test="${status.first }">
-	        	<div class="item-type">
-	                <h4>카테고리</h4>
-	                <form action="${path }/shop/rentalSearch.do" method="post">
-	                	<label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
-						<button class="btn btn-primary" name="button" type="submit">카테고리 검색</button>
-	                </form>
-		                <br>
-		                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
-		                <button id="myBtn" onclick="search()">지역 검색</button>
-        		</div>
-				</c:if>
-					<div style="text-align: -webkit-center;">
-				      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
-					      <div class="thumbnail" style="overflow: hidden;">      
-					      	<c:choose>	 
-						      <c:when test="${rental.imgUrl == null }">
-						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-						      </c:when>
-						      <c:when test="${rental.imgUrl == './img' }">
-						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
-						      </c:when>
-					          <c:when test="${rental.imgUrl != null}">
-					          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
-					          </c:when>
-					        </c:choose>
-					      
-					      <div class="context">
-					      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
-					        <strong>[${rental.p_category_name }] ${rental.title }</strong>
-					        <p> ${rental.price } 원</p>
-					       </div>      
-					      </div>
-				        </a>
+					<div class="item-type">
+		                <h4>카테고리</h4>
+		                <form action="${path }/shop/rentalSearch.do" method="post">
+		                	<label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
+			                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
+			                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
+			                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
+							<button class="btn btn-primary" name="button" type="submit">카테고리 검색</button>
+		                </form>
+			                <br>
+			                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
+			                <button id="myBtn" onclick="search()">지역 검색</button>
+	        		</div>
+	        		<div class="items">
+		        	<c:forEach items="${list }" var="rental" varStatus="status">
+					<c:if test="${empty rental }">
+						상품이 존재하지 않습니다.
+					</c:if>
+						<div style="text-align: -webkit-center;">
+					      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
+						      <div class="thumbnail" style="overflow: hidden;">      
+						      	<c:choose>	 
+							      <c:when test="${rental.imgUrl == null }">
+							   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+							      </c:when>
+							      <c:when test="${rental.imgUrl == './img' }">
+							   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
+							      </c:when>
+						          <c:when test="${rental.imgUrl != null}">
+						          	<img src="${rental.imgUrl }" class="media-object" style="float:left; width:160px; height:100px;" alt="Rental">
+						          </c:when>
+						        </c:choose>
+						      
+						      <div class="context">
+						      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
+						        <strong>[${rental.p_category_name }] ${rental.title }</strong>
+						        <p> ${rental.price } 원</p>
+						       </div>      
+						      </div>
+					        </a>
+						</div>
+						<br>
+					<c:if test="${status.index % 10 == 9 }">
+					</c:if>
+					<c:if test="${status.last }">
+					${pageBar }
+					</c:if>
+					</c:forEach>
 					</div>
-					<br>
-				<c:if test="${status.index % 10 == 9 }">
-				</c:if>
-				</c:forEach>
-				${pageBar }
 				</div>
 			
 			</div>
@@ -182,7 +184,7 @@
 						map.panTo(moveLatLon);
 					}
 				}
-				<c:forEach items="${list2 }" var="rental" varStatus="status">
+				<c:forEach items="${list }" var="rental" varStatus="status">
 				 // 주소로 좌표를 검색합니다
 					geocoder.addressSearch('${rental.address}', function(result, status) {
 					    // 정상적으로 검색이 완료됐으면 

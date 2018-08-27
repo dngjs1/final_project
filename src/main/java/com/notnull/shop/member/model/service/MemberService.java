@@ -48,7 +48,9 @@ public interface MemberService {
 	
 	int updateManagement(Member m);
 	
-	List<PointLog> selectPointList(String member_id);
+	List<PointLog> selectPointList(String member_id, int cPage, int numPerPage);
+	int myPagePointTotalCount(String member_id);
+	
 	
 	int totalPoint(String member_id);
 	
@@ -58,7 +60,8 @@ public interface MemberService {
 	
 	int orderListCount(String member_id);
 	
-	List<Map> selectOrderList();
+	List<Map> selectOrderList(int cPage, int numPerPage);
+	int OrderListCount_Admin();
 	
 	int updateBuyStatus(BuyInfo buyInfo);
 	
@@ -70,5 +73,9 @@ public interface MemberService {
 	
 	List<Question> adminQuestionList();
 	int insertAnswer(Answer answer);
+	
+	List<Map> selectRefundList(String member_id,int cPage,int numPerPage);
+	
+	int RefundListCount(String member_id);
 	
 }

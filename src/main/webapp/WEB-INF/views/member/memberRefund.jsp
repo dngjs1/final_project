@@ -180,22 +180,13 @@ $(function(){
 					</tbody>
 				
 				</table>
-				<div class = "row">
-					<div class = "col-6">
-					${pageBar }
-					</div>
-				</div>
-				<br><br>
-				
 
-		
-		<div class = "row">
-			<div class = "col-6">
-			${pageBar }
-			</div>
 		</div>
+			<br>
+			${pageBar }
+	
 	</div>
-</div>
+
 	<style>
 	.search_btn {
 		width : 50px;

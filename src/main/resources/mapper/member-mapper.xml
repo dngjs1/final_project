@@ -126,6 +126,10 @@
  		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 	  	order by buy_date desc
  	</select>
+ 	<select id="OrderListCount_Admin" resultType="_int">
+ 		select count(*) from buy_info 
+ 	</select>
+ 	
  	
  	<update id="updateBuyStatus" parameterType="buyinfo">
  		update buy_info set buy_status=#{buy_status} where buy_code=#{buy_code}
@@ -161,5 +165,25 @@
  	
  	<select id="selectedAnswer" parameterType="_int" resultType="answer">
  		select * from answer where question_code =#{question_code}
+ 	</select>
+ 	
+ 	<select id="myPagePointTotalCount" parameterType="string" resultType="_int">
+ 		select count(*) from point_log where member_id = #{member_id}
+ 	</select>
+ 	
+ 	<select id="selectRefundList" parameterType="string" resultMap="selectOrderMap">
+ 	select p.product_code, p.product_name, po.option_size, b.buy_code, b.buy_quantity,
+ 		b.total_price, b.buy_date, b.buy_status, pi.new_p_img_path
+ 		from product p
+ 		join product_option po on (p.product_code=po.product_code)
+ 		join product_img pi on (p.product_code=pi.product_code)
+ 		join buy_info b on (po.product_option_code=b.product_option_code)
+ 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+	  	and member_id=#{member_id} and (buy_status ='R' or buy_status='SR')
+	  	order by buy_date desc
+ 	</select>
+ 	
+ 	<select id="RefundListCount" parameterType="string" resultType="_int">
+ 		select count(*) from buy_info where member_id=#{member_id} and (buy_status ='R' or buy_status='SR')
  	</select>
 </mapper>

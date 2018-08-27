@@ -282,6 +282,7 @@
 		
 		</table>
 	</div>
+	<br>
 	${pageBar }
 			
 <style>

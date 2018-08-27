@@ -136,8 +136,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id) {
-		return sqlSession.selectList("member.selectPointList",member_id);
+	public List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectPointList",member_id,rb);
 	}
 
 	@Override
@@ -164,8 +165,14 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public List<Map> selectOrderList(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("member.selectOrderList2");
+	public List<Map> selectOrderList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectOrderList2",null,rb);
+	}
+	@Override
+	public int OrderListCount_Admin(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.OrderListCount_Admin");
 	}
 
 	@Override
@@ -214,6 +221,26 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectedAnswer",question_code);
 	}
+
+	@Override
+	public int myPagePointTotalCount(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.myPagePointTotalCount",member_id);
+	}
+
+	@Override
+	public List<Map> selectRefundList(SqlSessionTemplate sqlSession, String member_id, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectRefundList",member_id,rb);
+	}
+
+	@Override
+	public int RefundListCount(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.RefundListCount",member_id);
+	}
+
+
 
 
 
