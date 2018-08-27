@@ -36,7 +36,7 @@ input[name="datetimes"]{cursor: pointer;}
 					
 					<input type="hidden" id="start_date" name="start_date" value="" />
 					<input type="hidden" id="end_date" name="end_date" value="" />
-					<span style="font-size:25px;font-weight:bold">${rental.title }</span><span style="float: right;">별점 들어갈부분</span><br>
+					<span style="font-size:25px;font-weight:bold">${rental.title }</span><br>
 					<span>판매자 : ${rental.member_id }</span><br>
 					<span>주소 : ${rental.address } ${rental.detail_address }</span>
 					<div style="font-size:20px;color:#B9062F;font-weight:bold"><span id="price">대여료 : ${rental.price } 원/24시간</span></div>

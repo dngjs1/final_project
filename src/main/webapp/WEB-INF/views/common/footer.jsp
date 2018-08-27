@@ -333,21 +333,21 @@
             			<ul class = "bnb">
             				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "${pageContext.request.contextPath}/question.do" onclick="return validate();">
+            					<a href = "${pageContext.request.contextPath}/question.do" onclick="return validate3();">
             						<i class="fas fa-comment" style= "padding-left:10px; padding-bottom:4px;"></i><span>문의</span>
             					</a>
             				
             				</li>
             				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}" onclick="return validate();">
+            					<a href = "${pageContext.request.contextPath}/cartView.do?member_id=${memberLoggedIn.member_id}" onclick="return validate3();">
             						<i class="fas fa-shopping-cart" style="padding-left:7px;"></i><span>장바구니</span>
             					</a>
             				
             				</li>
             				
             				<li style = "width:60px; padding-top: 10px;">
-            					<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" onclick="return validate();">
+            					<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" onclick="return validate3();">
             						<i class="fas fa-question" style = "padding-left : 12px;"></i><span>주문조회</span>
             					</a>
             				
@@ -357,7 +357,7 @@
             			
             			</ul>
             		<script>
-						function validate(){
+						function validate3(){
 							if('${memberLoggedIn}'.length>0){
 								return true;
 							}else{

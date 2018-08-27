@@ -30,8 +30,8 @@ public class RentalController {
 	@Autowired
 	private ProductService service2;
 	
-	@RequestMapping(value="/rentalSearch.do", method=RequestMethod.POST)
-	public String ListRentalSearch(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, @RequestParam(value="rentalSearch[]") String[] rentalSearch, Model model) {
+	@RequestMapping("/rentalSearch.do")
+	public String ListRentalSearch(HttpServletRequest req, @RequestParam(value="cPage",required=false,defaultValue="1") int cPage, String[] rentalSearch, Model model) {
 		List<Rental> list;
 		int numPerPage = 5;
 		
@@ -58,7 +58,7 @@ public class RentalController {
 		}
 
 		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalCount, "/shop/rentalMain.do");
-		
+		System.out.println("출력" + list);
 		model.addAttribute("list", list);
 		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("cPage", cPage);

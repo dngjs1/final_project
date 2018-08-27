@@ -28,6 +28,7 @@ public interface MemberService {
 	int findMemberPassword(String id, String email ) throws MessagingException;
 	
 	int idDuplicateCheck(String id);
+	int emailDuplicateCheck(String email);
 	
 	int memberUpdate(Member m);
 	
@@ -52,6 +53,11 @@ public interface MemberService {
 	int totalPoint(String member_id);
 	
 	List<Map> selectOrderList(String member_id);
+	
+	List<Map> selectOrderList(String member_id,int cPage,int numPerPage);
+	
+	int orderListCount(String member_id);
+	
 	List<Map> selectOrderList();
 	
 	int updateBuyStatus(BuyInfo buyInfo);
