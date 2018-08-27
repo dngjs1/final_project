@@ -42,6 +42,8 @@ public interface ProductDAO {
 	
 	List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name,int cPage,int numPerPage);
 	
+	List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name);
+	
 	int categorySortCount(SqlSessionTemplate sqlSession,String p_category_name);
 	
 	int insertProduct(SqlSessionTemplate sqlSession,Product product);

@@ -23,7 +23,7 @@
 }
 
 .title01 {
-	margin-top: 30px;
+	margin-top: 80px;
 	padding: 0 10px;
 	font-size : 20px;
 	line-height:30px;
@@ -173,27 +173,21 @@
 					</li>
 					
 					<li class = "submenu top">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath}/memberOrderTotal.do?member_id=${memberLoggedIn.member_id}" onclick="return validate2();" target = "_self">
 							<span class = "txt txt_margin_top">주문내역/배송조회</span>
 						</a>
 					</li>
 					
 					
 					<li class = "submenu">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath}/memberPoint.do?member_id=${memberLoggedIn.member_id}" onclick="return validate2();" target = "_self">
 							<span class = "txt">포인트 조회</span>
 						</a>
 					</li>
 					
 					<li class = "submenu">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath }/question.do" onclick="return validate2();" target = "_self">
 							<span class = "txt">나의 질문과 답변</span>
-						</a>
-					</li>
-					
-					<li class = "submenu btm">
-						<a href = "#" target = "_self">
-							<span class = "txt txt_margin_bottom">장바구니</span>
 						</a>
 					</li>
 					
@@ -203,33 +197,19 @@
 						</a>
 					</li>
 					
-					<li class = "submenu top">
-						<a href = "#" target ="_self">
-							<span class = "txt txt_margin_top">회원가입</span>
-						</a>
-					</li>
-					
 					<li class = "submenu">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath }/findMember.do" onclick="return validate();" target = "_self">
 							<span class = "txt">아이디찾기</span>
 						</a>
 					</li>
 					
 					<li class = "submenu btm">
-						<a href = "#" target = "_self">
+						<a href = "${pageContext.request.contextPath }/findMember.do" onclick="return validate();" target = "_self">
 							<span class = "txt txt_margin_bottom">비밀번호찾기</span>
 						</a>
 					</li>
-					
-					
-					
-					
-					
-					
-					
-		
 				</ul>
-			
+			<
 			</div>
 			<!-- 왼쪽 메뉴  : 끝 -->
 			<style>
@@ -434,50 +414,32 @@
 			<!-- 처음 보이는 고객센터 메인화면! 시작!! -->
 			<div class = "csmain">
 			
-			<table border = "0" cellspacing = "0" cellpadding = "0">
+			<table style="margin-top:70px;" border = "0" cellspacing = "0" cellpadding = "0">
 				<tbody>
 					<tr>
 						<td style = "width:50%">
 							<div style = "float:left" class = "subtit">자주이용하는 서비스</div>
 							
 							<ul class = "service_btns">
-								<li>
-									<a href = "#" class = "icon_1">
-										<span>나의쿠폰보기</span>
-									</a>
-								</li>
 								
 								<li>
-									<a href ="#" class = "icon_2">
-										<span>주문/배송조회</span>
-									</a>
-								</li>
-								
-								<li>
-									<a href = "#" class = "icon_3">
+									<a href = "${pageContext.request.contextPath}/memberRefund.do?member_id=${memberLoggedIn.member_id}" onclick="return validate2();" class = "icon_3">
 										<span>취소/교환/환불</span>
 									</a>
 								</li>
 								
 								<li>
-									<a href = "#" class = "icon_4">
+									<a href = "${pageContext.request.contextPath}/question.do" onclick="return validate2();" class = "icon_4">
 										<span>1:1 문의</span>
 									</a>
 								</li>
 								
 								<li>
-									<a href ="#" class = "icon_5">
+									<a href ="${pageContext.request.contextPath}/memberUpdate.do" onclick="return validate2();" class = "icon_5">
 										<span>회원정보수정</span>
 									</a>
 								</li>
-								
-								<li>
-									<a href = "#" class = "icon_6">
-										<span>나의 포인트 보기</span>
-									</a>
-								</li>
-								
-							
+						
 							</ul>
 						</td>
 						
@@ -488,7 +450,6 @@
 								font-weight: normal;
 								color:#121212;
 								margin-top : 10px;
-								
 								word-spacing: o.5pt;
 								float: right;
 							}
@@ -502,88 +463,83 @@
 								text-decoration: none;
 								font-size : 12px;
 							}
+							.cus_bottom {
+								text-align:center;
+								margin:0 auto;
+								width:117.5%;
+								height:160px;
+								background:url(./resources/images/member_background.gif);
+								background-repeat: no-repeat;
+								border:1px solid #d2d2d2;
+								box-sizing: border-box;
+								background-size: 100%;
+								background-position: 
+								
+							}
+							.cus_bottom .subtxt{
+								font:inherit;
+								font-size:25px;
+								font-weight: bold;
+								color:#ff483f;
+								margin-top: 10px;
+								margin-bottom:10px;
+								word-spacing:0.5pt;
+								text-align:center;
+							}
+							
+							.cus_bottom .maintit {
+								font:inherit;
+								font-size:24px;
+								font-weight:bold
+								color:#121212;
+								
+							}
 						</style>
-				<td valign = "top">
-					<div class = "row">
-					<div class = "col-auto mr-auto subtit">공지사항</div>
-					<div class = "col-auto more"><a href = "#">+ 더보기</a></div>
-					</div>
-				<ul style = "width:400px; clear:both; margin:10px;">
-					<li style = "list-style: none; text-align: left; line-height:40px;">
-						<a href = "#" class = "titleText12">[안내] 카드결제 안내 <span style="float:right;">2018.08.07</span></a>
-						
-					</li>
-					
-					<li style = "list-style:none; text-align:left; line-height:40px;">
-					
-						<a href = "#" class = "titleText12">[이벤트] 8월 포인트 적립 안내<span style = "float:right;">2018.08.10</span></a>
-					</li>
-				
-				</ul>
-				</td>
-				
-				
-				</tr>
-				<style>
-				
-				.cus_bottom {
-					margin:0 auto;
-					width:117.5%;
-					height:160px;
-					background:url(./resources/images/member_background.gif);
-					border:1px solid #d2d2d2;
-					box-sizing: border-box;
-					background-size: 100%;
-					background-position: 
-					
-				}
-					.cus_bottom .subtxt{
-						font:inherit;
-						font-size:25px;
-						font-weight: bold;
-						color:#ff483f;
-						margin-top: 10px;
-						margin-bottom:10px;
-						word-spacing:0.5pt;
-						text-align:center;
-					}
-					
-					.cus_bottom .maintit {
-						font:inherit;
-						font-size:24px;
-						font-weight:bold
-						color:#121212;
-						
-					}
-				</style>
-				<tr>
-				<td colspan = "2">
-					<div class = "cus_bottom">
-						<p class = "maintit" style = "padding-top:50px; padding-left: 80px;">
-							들어올 때는 맘대로지만 나갈때는?!
-							<a href = "#">
-							
-							<span class = "subtxt" style = "margin-left:10px;">
-							회원가입
-							</span>
-							
-							<span class = "titleText24">하러 가기</span>
+					<td>
+						<div class = "cus_bottom">
+							<p class = "maintit" style = "padding-top:30px;">
+								들어올 때는 맘대로지만 나갈때는?!
+								
+							</p>	
+							<a href = "${pageContext.request.contextPath}/memberAgree.do" onclick="return validate();">
+								<span class = "subtxt">
+								회원가입
+								</span>
 							</a>
-							</p>
-						<p style = "padding-left:80px; font-size:12px;">회원가입시 다양한 혜택을 누리실 수 있습니다. 지금 바로 확인하세요!</p>
-						
-					</div>
+								<span class = "titleText24">하러 가기</span>
+								
+							<p style = "margin-top:20px; font-size:12px;">회원가입시 다양한 혜택을 누리실 수 있습니다. 지금 바로 확인하세요!</p>
+							
+						</div>
 					</td>
-				</tr>
+
+				</tr>				
 				</tbody>
-			
-			
 			</table>
+			<script>
+				function validate(){
+					if('${memberLoggedIn}'.length<1){
+						return true;
+					}else{
+						alert("이미 가입된 회원입니다.");
+						return false;
+					}
+				}
+				function validate2(){
+					if('${memberLoggedIn}'.length>0){
+						return true;
+					}else{
+						alert("로그인 후 이용해주세요.");
+						location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
+						return false;
+					}
+				}
+			</script>
 			
 			
 			</div>
 			<div class = "title_div">
-				<h2 class = title01>
+				<h2 class = 'title01'>
 					자주 묻는 질문
 				</h2>
 			</div>
@@ -730,7 +686,7 @@
   						<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-id_pw-tab" >
   						
   						<span class = "search_icon fas fa-search"></span> 
-  						<em class = "qs">아이디/비밀먼호를 어떻게 찾을 수 있나요?</em>
+  						<em class = "qs">아이디/비밀번호를 어떻게 찾을 수 있나요?</em>
   						<div class = "answer">
   							<span class = "answer_icon fas fa-angle-right"></span> 상단에 ID/비밀번호 찾기를 누르시면 등록하신 이메일을 통해 찾으실 수 있습니다.
   						</div>
@@ -800,22 +756,20 @@
   						</div>
   						
   						<div class="tab-pane fade" id="nav-contact03" role="tabpanel" aria-labelledby="nav-contact-tab03">
-  							
-  							<span class = "search_icon fas fa-search"></span> 
-  						<em class = "qs">포인트란 무엇인가요?</em>
-  						<div class = "answer">
-  							<span class = "answer_icon fas fa-angle-right"></span> 
-  								상품 결제 시 현금(포인트1점 = 현금1원)처럼 사용하실 수 있습니다.
-  						</div>
-  						
-  						<span class = "search_icon fas fa-search"></span> 
-  						<em class = "qs">포인트는 어떻게 적립하나요?</em>
-  						<div class = "answer">
-  							<span class = "answer_icon fas fa-angle-right"></span> 
-  								구매후기 작성을 통해 적립하시거나 상품구매 시 1%를 적립해드립니다.
-  						</div>
-  						
-  						
+	  							
+	  							<span class = "search_icon fas fa-search"></span> 
+	  						<em class = "qs">포인트란 무엇인가요?</em>
+	  						<div class = "answer">
+	  							<span class = "answer_icon fas fa-angle-right"></span> 
+	  								상품 결제 시 현금(포인트1점 = 현금1원)처럼 사용하실 수 있습니다.
+	  						</div>
+	  						
+	  						<span class = "search_icon fas fa-search"></span> 
+	  						<em class = "qs">포인트는 어떻게 적립하나요?</em>
+	  						<div class = "answer">
+	  							<span class = "answer_icon fas fa-angle-right"></span> 
+	  								회원가입시 3000p 적립, 구매후기 200p 적립, 상품구매시 2%가 적립됩니다.
+	  						</div>  						
   						</div>
   						
 					</div> 

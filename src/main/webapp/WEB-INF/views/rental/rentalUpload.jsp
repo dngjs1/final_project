@@ -227,6 +227,7 @@ input[name="datetimes"]{cursor: pointer;}
     	var price=$("#price");
     	var datef=$('input[name="datetimes"]');
     	var address=$("sample6_address");
+    	var address2=$("sample6_address2");
      	if(phone.val()==0){
      		phone.focus();
      		return false;
@@ -238,6 +239,9 @@ input[name="datetimes"]{cursor: pointer;}
      		return false;
      	} else if(address.val()==0){
      		address.focus();
+     		return false;
+     	} else if(address2.val()==0){
+     		address2.focus();
      		return false;
      	} else if(datef.val()==0){
      		datef.focus();

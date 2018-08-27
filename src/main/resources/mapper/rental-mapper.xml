@@ -28,4 +28,25 @@
 		select * from rental where rental_obj_code=#{rental_obj_code}
 	</select>
 	
+	<select id="selectRentalSearchCount" resultType="_int" parameterType="hashmap">
+		select count(*) from rental_obj
+			<if test="array != '' and array != null">
+			where p_category_code in 
+			   <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+       	 			#{item}
+			   </foreach>
+			</if>
+	</select>
+	
+	<select id="rentalListSearch" resultType="rental" parameterType="hashmap">
+		select * from rental_obj join product_category using(p_category_code)
+			<if test="array != '' and array != null">
+			where p_category_code in 
+			   <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+       	 			#{item}
+			   </foreach>
+			</if>
+		 order by rental_obj_code desc
+	</select>
+	
 </mapper>

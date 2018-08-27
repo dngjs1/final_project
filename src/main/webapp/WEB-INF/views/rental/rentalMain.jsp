@@ -118,9 +118,9 @@
 	        	<div class="item-type">
 	                <h4>카테고리</h4>
 	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 카테고리2 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 카테고리2 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 카테고리2 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
+	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
 	                <br>
 	                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
 	                <button id="myBtn" onclick="search()">검색</button>
@@ -150,7 +150,7 @@
 				        </a>
 					</div>
 					<br>
-				<c:if test="${status.index % 6 == 5 }">
+				<c:if test="${status.index % 10 == 9 }">
 				</c:if>
 				</c:forEach>
 				${pageBar }
@@ -161,6 +161,7 @@
 			<c:if test="${memberLoggedIn != null }">
 				<a href="${path }/shop/rentalWrite.do"><button class="btn" id="mapadd">등록</button></a>
 			</c:if>
+			
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d47acf86cf9d33e239ad720ebd24f4a&libraries=services,clusterer,drawing"></script>
 			<script>
 					function enterkey() {
@@ -194,6 +195,20 @@
 			    });
 				function search(){
 					var input = document.getElementById("input").value;
+					var lists =[];
+					  $("input[name='rentalSearch']:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
+						   lists.push($(this).val());
+						  });
+						  
+						  $.ajax({
+							  type:"POST",
+							  data:{'rentalSearch':lists},
+							  url:"${path}/shop/rentalSearch.do",
+							   contentType:"application/x-www-form-urlencoded;charset=utf-8", //한글 깨짐 방지
+							   success:function(data){
+								   
+							   }
+						  });
 					if(input != "") {
 						geocoder.addressSearch(input, function(result, status){
 							 // 정상적으로 검색이 완료됐으면 

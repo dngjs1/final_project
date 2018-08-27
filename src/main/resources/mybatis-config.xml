@@ -25,5 +25,6 @@
 		<typeAlias type="com.notnull.shop.member.model.vo.PointLog" alias="pointLog"/>
 		<typeAlias type="com.notnull.shop.member.model.vo.Question" alias="question"/>
 		<typeAlias type="com.notnull.shop.member.model.vo.Answer" alias="answer"/>
+		
 	</typeAliases>
 </configuration>

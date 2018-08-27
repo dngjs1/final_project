@@ -21,4 +21,8 @@ public interface RentalDAO {
 
 	List<Rental> RentalListAll();
 
+	List<Rental> RentalListSearch(int cPage, int numPerPage, String[] rentalSearch);
+
+	int selectRentalSearchCount(String[] rentalSearch);
+
 }
