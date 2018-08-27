@@ -106,7 +106,7 @@ public class MemberController {
 	public String memberOrderTotal(String member_id,Model model,
 									HttpServletRequest request,
 										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
-		int numPerPage = 2;
+		int numPerPage = 7;
 		
 		List<Map> orderList = service.selectOrderList(member_id,cPage, numPerPage);
 		int totalCount = service.orderListCount(member_id);
