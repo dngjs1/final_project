@@ -219,12 +219,29 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<!-- 상품 이미지에 마우스를 올렸을 때 나오는 부분 코드 끝 -->
+	<style>
+	.point_icon {
+					display : inline-block;
+					width : 18px;
+					height : 18px;
+					margin-top : -2px;
+					border-radius: 100%;
+					background : #b0c976;
+					color : #fff;
+					font-weight : bold;
+					font-size : 12px;
+					line-height: 18px;
+					
+					overflow: hidden;
+					vertical-align: middle;
+				}
 	
+	</style>
 				<!--갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
 				<div class="proudct-item-details">
 					<div class="product-title">
 						<a href="#" style="text-decoration: none;">
-							<span class="ml-2" style="font-size: 16px;">${image.product_name }</span>
+							<span class="ml-2" style="font-size: 20px; font-weight:bold;">${image.product_name }</span>
 						</a>
 					</div>
 		
@@ -236,7 +253,7 @@ $(document).ready(function(){
 						</div>
 						<div class="point col-5 ml-1" style="text-align: center">
 							<span class="item_font">
-								<i class="fas fa-hand-holding-usd item_icon1"></i><B> : <B class="point${index}">${image.price }</B>P</B>
+								<span class="point_icon"><center>P</center></span><B> : <B class="point${index}">${image.price }</B>P</B>
 							</span>
 						</div>
 		
