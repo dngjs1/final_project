@@ -170,7 +170,6 @@ input[name="datetimes"]{cursor: pointer;}
     }
 </script>
   
-
     <script>
     $(document).ready(function() {
       $('#summernote').summernote({
