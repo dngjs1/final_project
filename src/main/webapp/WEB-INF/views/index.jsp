@@ -219,9 +219,14 @@ span.star-prototype > * {
 							<div id="carouselExampleControls" class="carousel slide"
 								data-ride="carousel">
 								<div class="carousel-inner" role="listbox">
-									<div class="carousel-item active">
+									<div class="carousel-item active hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 									<img class="d-block img-fluid"
 											src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }">
+									<div class="icons">
+										<a class="m-1"><i class="text-center fas fa-search"
+											data-toggle="tooltip" title="상품자세히 보기"></i></a> 
+									</div>
+									
 									</div>
 									
 								</div>
@@ -243,8 +248,6 @@ span.star-prototype > * {
 										<span class="star-prototype">${campList.review_star}</span>	
 									</div>
 
-
-
 								</div>
 
 							</div>
@@ -258,14 +261,12 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
@@ -312,14 +313,12 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
@@ -391,9 +390,13 @@ span.star-prototype > * {
 							<div id="carouselExampleControls" class="carousel slide"
 								data-ride="carousel">
 								<div class="carousel-inner" role="listbox">
-									<div class="carousel-item active">
+									<div class="carousel-item active hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 									<img class="d-block img-fluid"
 											src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }">
+									<div class="icons">
+										<a class="m-1"><i class="text-center fas fa-search"
+											data-toggle="tooltip" title="상품자세히 보기"></i></a> 
+									</div>
 									</div>
 									
 								</div>
@@ -430,14 +433,12 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a>
 							</div>
 						</div>
 
@@ -484,14 +485,12 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
@@ -566,9 +565,13 @@ span.star-prototype > * {
 							<div id="carouselExampleControls" class="carousel slide"
 								data-ride="carousel">
 								<div class="carousel-inner" role="listbox">
-									<div class="carousel-item active">
+									<div class="carousel-item active hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 									<img class="d-block img-fluid"
 											src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }">
+									<div class="icons">
+										<a class="m-1"><i class="text-center fas fa-search"
+											data-toggle="tooltip" title="상품자세히 보기"></i></a> 
+									</div>
 									</div>
 									
 								</div>
@@ -605,14 +608,12 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="` 보기"></i></a> 
 							</div>
 						</div>
 
@@ -659,14 +660,12 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
@@ -738,9 +737,13 @@ span.star-prototype > * {
 							<div id="carouselExampleControls" class="carousel slide"
 								data-ride="carousel">
 								<div class="carousel-inner" role="listbox">
-									<div class="carousel-item active">
+									<div class="carousel-item active hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
 									<img class="d-block img-fluid"
 											src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }">
+									<div class="icons">
+										<a class="m-1"><i class="text-center fas fa-search"
+											data-toggle="tooltip" title="상품자세히 보기"></i></a> 
+									</div>
 									</div>
 									
 								</div>
@@ -777,14 +780,12 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';" >
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
@@ -831,14 +832,12 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box">
+						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
 								<a class="m-1"><i class="text-center fas fa-search"
-									data-toggle="tooltip" title="상품자세히 보기"></i></a> <a class="m-1"><i
-									class="text-center fas fa-cart-plus" data-toggle="tooltip"
-									title="장바구니에 담기"></i></a>
+									data-toggle="tooltip" title="상품자세히 보기"></i></a> 
 							</div>
 						</div>
 
