@@ -71,10 +71,8 @@
 <c:if test="${!empty answer }">
 <div >
    
-		<div>
-        <hr style="border:2px solid #787878;   right:130px;"><br>      
-        </div> 
-        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 80%;">	  
+	
+        <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px; width: 100%;">	  
 	      
 
 			<tr class="tr1">

@@ -36,7 +36,7 @@
 .tr1 th{text-align:center;background-color:b5babd}
 .tr2 td{vertical-align:middle;text-align:center;}
 .button_btn {
-	width : 70px;
+	width : 130px;
 	height : 40px;
 	border: none;
 	background: #2D2E33;
