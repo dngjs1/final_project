@@ -34,17 +34,17 @@ span.star-prototype > * {
 	<div class="carousel-inner">
 		<div class="carousel-item active ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="첫번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="두번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="세번째 슬라이드 ">
 		</div>
 		

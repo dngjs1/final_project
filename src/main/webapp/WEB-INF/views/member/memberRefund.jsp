@@ -33,7 +33,7 @@ $(function(){
 					return false;
 				}else{
 					alert("환불요청이 취소되었습니다.");
-					buy_status.parent().parent().hide();
+					location.reload();
 				}
 			},
 			error:function(jpxhr,textStatus,errormsg){

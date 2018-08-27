@@ -1061,61 +1061,7 @@ $(function(){
 	var statusList = new Array(); 
 	var idList = new Array();
 	var codeList = new Array();
-
-		<c:if test="${flag =='true'}">
-		<table class='countCheck'>
-		<tr>
-		<td>
-		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-      <c:set var="doneLoop" value="false"/>
-      <c:forEach var="ycountLikeList" items="${ycountLikeList}" varStatus="status">      
-            <c:choose>          
-               <c:when test="${ycountLikeList.REVIEW_CODE eq review.review_code }">                        
-                  <c:out value="${ycountLikeList.CNT}"></c:out>
-               </c:when>
-               <c:otherwise>
-               	<c:if test="${status ==null }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-                  <c:if test="${status.first }">                     
-                  <c:out value="0"></c:out>
-                   </c:if>
-                   	<c:set var="doneLoop" value="true"/>
-               </c:otherwise>
-            </c:choose>
-      </c:forEach>     
-      			<c:if test="${empty ycountLikeList }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-		</td>
-		<td>
-		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-		<c:set var="doneLoop2" value="false"/>
-      <c:forEach var="ncountLikeList" items="${ncountLikeList}" varStatus="status">      
-            <c:choose>          
-               <c:when test="${ncountLikeList.REVIEW_CODE eq review.review_code }">                        
-                  <c:out value="${ncountLikeList.CNT}"></c:out>
-               </c:when>
-               <c:otherwise>
-                  <c:if test="${status.first }">                     
-                  <c:out value="0"></c:out>
-                   </c:if>
-                   	<c:set var="doneLoop2" value="true"/>
-               </c:otherwise>
-            </c:choose>
-      </c:forEach>   
-      			<c:if test="${empty ncountLikeList }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-		</td>
-		</tr>
-		</table>			
-		</c:if>
-
+	
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
@@ -1337,15 +1283,6 @@ $('.star-prototype').generateStars();
 				  		<%}
 				        else
 				        {%>
-				        	<%-- <tr class='level2'>
-				        		<td>
-				        			<sub><%=productQuestion.getMember_id()%></sub>
-				        			<sub><%=productQuestion.getQuestion_date()%></sub>
-				        			<br>
-				        			<%=productQuestion.getP_question_content()%>
-				        		</td>
-				        		<td></td>
-				        	</tr> --%>
 				        	
 				        	<tr class='level2' style = "border:1px solid #ddd; background : #f3f3f3;">
 				        		<td style = "width:10%;height:140px; text-align: center;color:#000; padding:14px 14px 10px 14px; vertical-align: middle; font-weight:bold; font-size:16px;">
@@ -1445,15 +1382,7 @@ $('.star-prototype').generateStars();
 		        <th>배송기간</th>
 		        <td colspan="3">
 		            <ul>
-		                <li class="prod-delivery-period-contents etc-pdd-info">
-								ㆍ<span>쿠팡맨 배송 지역 : 주문 및 결제 완료 후, 1-2일 이내 도착</span>
-		                </li>
-		                <li class="prod-delivery-period-contents">
-		                    ㆍ쿠팡맨 미배송 지역 : 주문 및 결제 완료 후, 2-3일 이내 도착
-		                    <p class="prod-delivery-period__notice">
-		                            - 도서 산간 지역 등은 하루가 더 소요될 수 있습니다.
-		                    </p>
-		                </li>
+		                <li class="prod-delivery-period-contents">ㆍ도서 산간 지역 등은 하루가 더 소요될 수 있습니다.</li>
 		                <li class="prod-delivery-period-contents">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</li>
 		            </ul>
 		        </td>
@@ -1477,7 +1406,7 @@ $('.star-prototype').generateStars();
 		    <tr>
 		        <th>교환/반품 신청 기준일</th>
 		            <td>
-		                <p>ㆍ단순변심에 의한 로켓배송 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용 고객부담)</p>
+		                <p>ㆍ단순변심에 의한 배송 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용 고객부담)</p>
 		                <p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터<br>
 		                    <span class="prod-delivery-return-policy__limit-list__indent">30일 이내에 청약철회 가능</span>
 		                </p>
