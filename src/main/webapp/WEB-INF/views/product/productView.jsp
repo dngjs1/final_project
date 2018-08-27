@@ -1061,61 +1061,7 @@ $(function(){
 	var statusList = new Array(); 
 	var idList = new Array();
 	var codeList = new Array();
-
-		<c:if test="${flag =='true'}">
-		<table class='countCheck'>
-		<tr>
-		<td>
-		<i class="far fa-thumbs-up like" style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-      <c:set var="doneLoop" value="false"/>
-      <c:forEach var="ycountLikeList" items="${ycountLikeList}" varStatus="status">      
-            <c:choose>          
-               <c:when test="${ycountLikeList.REVIEW_CODE eq review.review_code }">                        
-                  <c:out value="${ycountLikeList.CNT}"></c:out>
-               </c:when>
-               <c:otherwise>
-               	<c:if test="${status ==null }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-                  <c:if test="${status.first }">                     
-                  <c:out value="0"></c:out>
-                   </c:if>
-                   	<c:set var="doneLoop" value="true"/>
-               </c:otherwise>
-            </c:choose>
-      </c:forEach>     
-      			<c:if test="${empty ycountLikeList }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-		</td>
-		<td>
-		<i class="far fa-thumbs-down dislike"  style="cursor:pointer; font-size:25px; color:#bebebe"></i>
-		</td>
-		<td>
-		<c:set var="doneLoop2" value="false"/>
-      <c:forEach var="ncountLikeList" items="${ncountLikeList}" varStatus="status">      
-            <c:choose>          
-               <c:when test="${ncountLikeList.REVIEW_CODE eq review.review_code }">                        
-                  <c:out value="${ncountLikeList.CNT}"></c:out>
-               </c:when>
-               <c:otherwise>
-                  <c:if test="${status.first }">                     
-                  <c:out value="0"></c:out>
-                   </c:if>
-                   	<c:set var="doneLoop2" value="true"/>
-               </c:otherwise>
-            </c:choose>
-      </c:forEach>   
-      			<c:if test="${empty ncountLikeList }">                    
-                  <c:out value="0"></c:out>
-                   </c:if>
-		</td>
-		</tr>
-		</table>			
-		</c:if>
-
+	
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
