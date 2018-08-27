@@ -766,8 +766,6 @@ span.star-prototype > * {
   </div>
   <div id="section2" class="container tab-pane fade">
  <br>		
- <input type="button" value="테스트" onclick="fn_productReview()"/>
- <hr>
  <h4 >상품평</h4>
  <script>
 	function fn_productReview(){
