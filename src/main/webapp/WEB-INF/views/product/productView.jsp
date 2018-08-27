@@ -1061,6 +1061,7 @@ $(function(){
 	var statusList = new Array(); 
 	var idList = new Array();
 	var codeList = new Array();
+
 		<c:if test="${flag =='true'}">
 		<table class='countCheck'>
 		<tr>
@@ -1114,11 +1115,13 @@ $(function(){
 		</tr>
 		</table>			
 		</c:if>
+
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
 		codeList.push("${item.review_code}");
 	</c:forEach>
+
 
 	for(var i=0;i<reviewLength;i++){
 		var y_count=0;
@@ -1358,11 +1361,10 @@ $('.star-prototype').generateStars();
 				        		</td>
 				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
 				        			<sub><%=productQuestion.getMember_id()%></sub><br><br>
-				        		 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
-				        			</td>
-				        			<td>
-				        			
-				        			</td>
+				        			 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
+				        		</td>
+			        			<td>
+			        			</td>
 				        			
 				        	
 				     	<% }
