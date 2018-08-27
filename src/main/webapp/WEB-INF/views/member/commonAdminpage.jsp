@@ -177,18 +177,7 @@
 					</li>
 					
 					
-					<li>
-						<a>
-							<span class = "txt">나의 질문과 답변</span>
-						</a>
-					</li>
-					
-					<li>
-						<a>
-							<span class = "txt">상품Q&A</span>
-
-						</a>
-					</li>
+		
 
 
 				</ul>

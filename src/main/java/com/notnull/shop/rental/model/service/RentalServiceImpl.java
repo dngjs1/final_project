@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.notnull.shop.rental.model.dao.RentalDAO;
 import com.notnull.shop.rental.model.vo.Rental;
+import com.notnull.shop.rental.model.vo.RentalPerson;
 
 @Service
 public class RentalServiceImpl implements RentalService{
@@ -34,5 +35,22 @@ public class RentalServiceImpl implements RentalService{
 	public Rental getRental(int rental_obj_code) {
 		return dao.getRental(rental_obj_code);
 	}
+
+	@Override
+	public int insertRentalPerson(RentalPerson rentalPerson) {
+		return dao.insertRentalPerson(rentalPerson);
+		
+	}
+
+	@Override
+	public List<RentalPerson> selectRentalPerson(int rental_obj_code) {
+		return dao.selectRentalPerson(rental_obj_code);
+	}
+
+	@Override
+	public List<Rental> RentalListAll() {
+		return dao.RentalListAll();
+	}
+
 
 }

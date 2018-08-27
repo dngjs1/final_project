@@ -79,7 +79,7 @@ input[name="datetimes"]{cursor: pointer;}
 				<td>
 					<input class="form-control" name="post_no" style="width: 40%; display: inline-block;" type="text" id="sample6_postcode" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input class="form-control" name="address" type="text" id="sample6_address" placeholder="주소">
+					<input class="form-control" name="address" type="text" id="sample6_address" placeholder="주소" readonly="readonly">
 					<input class="form-control" name="detail_address" type="text" id="sample6_address2" placeholder="상세주소">
 				</td>
 			</tr>
@@ -220,8 +220,34 @@ input[name="datetimes"]{cursor: pointer;}
     function bbsWrite() {
     	var content = $('#summernote').summernote("code");
     	$('#content').val(content);
-     
-    	document.getElementById('hiddenBtn').click();
+    	var content2 = $("#content");
+    	
+    	var phone=$("#phone");
+    	var title=$("#title");
+    	var price=$("#price");
+    	var datef=$('input[name="datetimes"]');
+    	var address=$("sample6_address");
+     	if(phone.val()==0){
+     		phone.focus();
+     		return false;
+     	} else if(title.val()==0) {
+     		title.focus();
+     		return false;
+     	} else if(price.val()==0) {
+     		price.focus();
+     		return false;
+     	} else if(address.val()==0){
+     		address.focus();
+     		return false;
+     	} else if(datef.val()==0){
+     		datef.focus();
+     		return false;
+     	} else if(content2.val()==0) {
+     		content2.focus();
+     		return false;
+     	} else {
+     		document.getElementById('hiddenBtn').click();
+     	}
     	
     }
     </script>
