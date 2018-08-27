@@ -150,7 +150,7 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
 		
-		return "/common/msg";
+		return "/common/enrollMsg";
 	}
 	
 	//ModelAndView 이용 
