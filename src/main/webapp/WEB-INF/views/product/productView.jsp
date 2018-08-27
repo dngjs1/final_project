@@ -1362,9 +1362,11 @@ $('.star-prototype').generateStars();
 				        		
 				        		</td>
 				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
-				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        			<sub><%=productQuestion.getMember_id()%></sub><br><br>
+				        		 <button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>
 				        			</td>
 				        			<td>
+				        			
 				        			</td>
 				        			
 				        	
@@ -1452,7 +1454,7 @@ $(document).on("click",".input",function(){
 	var member_id=$('#member_id').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else{
 		
 		$.ajax({
@@ -1485,7 +1487,7 @@ $(document).on("click",".delete",function(e){
 	
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin' || member_id==writer){
 		
 		$.ajax({
@@ -1519,7 +1521,7 @@ $(document).on("click",".answer",function(e){
 	var member_level=$('#member_level').val();
 	if(member_id==null||member_id.length<1){
 		alert("로그인 후 이용해주시기 바랍니다.");
-		e.preventDefault();
+		location.href="${pageContext.request.contextPath}/memberLoginBefore.do";
 	}else if(member_level=='admin'){
 		$.ajax({
 			

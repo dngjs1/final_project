@@ -40,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProductList(sqlSession,cPage,numPerPage);
 	}
 	
+	
 	@Override
 	public int productListCount() {
 		return productDAO.productListCount(sqlSession);
@@ -232,6 +233,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<ProductListJoin> categorySort(String p_category_name) {
+		return productDAO.categorySort(sqlSession,p_category_name);
+	}
+	
+	@Override
 	public int categorySortCount(String p_category_name) {
 		return productDAO.categorySortCount(sqlSession,p_category_name);
 	}
@@ -390,7 +396,6 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteReview(int review_code) {
 		return productDAO.deleteReview(sqlSession,review_code);
 	}
-
 	
 	
 }

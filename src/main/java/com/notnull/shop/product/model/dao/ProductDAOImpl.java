@@ -35,6 +35,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.selectProductList",null,rb);
 	}
 	
+	
 	@Override
 	public int productListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("product.productListCount");
@@ -152,6 +153,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name, int cPage, int numPerPage) {
 		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
 		return sqlSession.selectList("product.categorySort",p_category_name,rb);
+	}
+	
+	@Override
+	public List<ProductListJoin> categorySort(SqlSessionTemplate sqlSession,String p_category_name) {
+		return sqlSession.selectList("product.categorySort",p_category_name);
 	}
 
 	@Override
@@ -291,7 +297,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public int deleteReview(SqlSessionTemplate sqlSession, int review_code) {
 		return sqlSession.delete("product.deleteReview",review_code);
 	}
-
 	
 	
 }
