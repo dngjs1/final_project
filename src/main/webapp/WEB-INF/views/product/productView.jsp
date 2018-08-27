@@ -1337,15 +1337,6 @@ $('.star-prototype').generateStars();
 				  		<%}
 				        else
 				        {%>
-				        	<%-- <tr class='level2'>
-				        		<td>
-				        			<sub><%=productQuestion.getMember_id()%></sub>
-				        			<sub><%=productQuestion.getQuestion_date()%></sub>
-				        			<br>
-				        			<%=productQuestion.getP_question_content()%>
-				        		</td>
-				        		<td></td>
-				        	</tr> --%>
 				        	
 				        	<tr class='level2' style = "border:1px solid #ddd; background : #f3f3f3;">
 				        		<td style = "width:10%;height:140px; text-align: center;color:#000; padding:14px 14px 10px 14px; vertical-align: middle; font-weight:bold; font-size:16px;">
