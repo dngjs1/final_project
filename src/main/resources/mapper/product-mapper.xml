@@ -21,7 +21,7 @@
 	</select>
  
  	<select id="productListCount" resultType="_int">
-		select count(*) from product 	
+		select count(*) from product  where product_delete='N'	
  	</select>
  
  
@@ -46,6 +46,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		and x.product_delete='N'
 		order by review_star desc nulls last
  	</select>
  	
@@ -58,6 +59,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		and x.product_delete='N'
 		order by price desc  
  	</select>
  	
@@ -69,6 +71,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		and x.product_delete='N'
 		order by price asc  
  	</select>
  
@@ -81,6 +84,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code)
+		and x.product_delete='N'
 		order by write_date desc  
  	</select>
  
@@ -93,6 +97,7 @@
         inner join product_category z
         on  x.p_category_code=z.p_category_code
 		where p_img_code in (select min(p_img_code) from product_img group by product_code) and p_category_name=#{p_category_name}
+		and x.product_delete='N'
 		order by product_code desc
  	</select>
  	
@@ -101,7 +106,7 @@
 		from product x
 		inner join product_category y
 		on x.p_category_code=y.p_category_code
-		where p_category_name=#{p_category_name}
+		where p_category_name=#{p_category_name} and x.product_delete='N'
  	</select>
  
  	<select id="selectCategoryList" resultType="productCategory">
