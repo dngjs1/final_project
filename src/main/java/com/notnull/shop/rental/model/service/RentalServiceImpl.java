@@ -1,6 +1,7 @@
 package com.notnull.shop.rental.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,36 @@ public class RentalServiceImpl implements RentalService{
 	@Override
 	public int selectRentalSearchCount(String[] rentalSearch) {
 		return dao.selectRentalSearchCount(rentalSearch);
+	}
+
+	@Override
+	public List<Map> selectOrderList(String member_id, int cPage, int numPerPage) {
+		return dao.selectOrderList(member_id,cPage,numPerPage);
+	}
+
+	@Override
+	public int orderListCount(String member_id) {
+		return dao.orderListCount(member_id);
+	}
+
+	@Override
+	public List<Map> selectOrderList2(String member_id, int cPage, int numPerPage) {
+		return dao.selectOrderList2(member_id,cPage,numPerPage);
+	}
+
+	@Override
+	public int orderListCount2(String member_id) {
+		return dao.orderListCount2(member_id);
+	}
+
+	@Override
+	public List<Map> selectOrderList3(String member_id, int cPage, int numPerPage) {
+		return dao.selectOrderList3(member_id,cPage,numPerPage);
+	}
+
+	@Override
+	public int orderListCount3(String member_id) {
+		return dao.orderListCount3(member_id);
 	}
 
 
