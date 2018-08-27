@@ -97,9 +97,9 @@ input[name="datetimes"]{cursor: pointer;}
 				  result2 = (end-start)%(1000*3600*24);
 				  if(result2 != 0 ) {
 					  if(result2>0 && result2<=8){
-						  $("#del_price").text(price*result+price*0.5+"원");
+						  $("#del_price").text(Math.round(price*result+price*0.5)+"원");
 					  } else{
-						  $("#del_price").text(price*result+"원");
+						  $("#del_price").text(Math.round(price*result)+"원");
 					  }
 				  } else{
 					  $("#del_price").text(price+"원");

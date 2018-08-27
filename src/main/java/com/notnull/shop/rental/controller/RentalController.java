@@ -64,7 +64,7 @@ public class RentalController {
 		model.addAttribute("cPage", cPage);
 		model.addAttribute("totalCount",totalCount);
 		
-		return "rental/rentalMain";
+		return "rental/rentalMain2";
 	}
 	
 	//리스트
