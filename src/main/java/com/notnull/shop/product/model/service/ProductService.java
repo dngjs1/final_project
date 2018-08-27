@@ -27,7 +27,9 @@ public interface ProductService {
 	
 	int productListCount();
 	
-	List<ProductListJoin> searchProduct(String searchName);
+	List<ProductListJoin> searchProduct(String searchName,int cPage,int numPerPage);
+	
+	int searchProductCount(String searchName);
 	
 	List<ProductListJoin> reviewStarOrder(int cPage,int numPerPage);
 	

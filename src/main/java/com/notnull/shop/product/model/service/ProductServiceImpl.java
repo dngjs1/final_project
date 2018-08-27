@@ -47,9 +47,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductListJoin> searchProduct(String searchName) {
-		return productDAO.searchProduct(sqlSession,searchName);
+	public List<ProductListJoin> searchProduct(String searchName,int cPage,int numPerPage ) {
+		return productDAO.searchProduct(sqlSession,searchName,cPage,numPerPage);
 	}
+	
+	@Override
+	public int searchProductCount(String searchName) {
+		return productDAO.searchProductCount(sqlSession,searchName);
+	}
+	
 
 
 	@Override
@@ -396,6 +402,6 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteReview(int review_code) {
 		return productDAO.deleteReview(sqlSession,review_code);
 	}
-	
+
 	
 }

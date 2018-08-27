@@ -1,7 +1,7 @@
 package com.notnull.shop.common;
 
-public class PageCreateSort{
-	public String getPageBar(int cPage, int numPerPage, int totalCount, String url,String p_category_name)
+public class PageCreateByName{
+	public String getPageBar(int cPage, int numPerPage, int totalCount, String url,String searchName)
 	{
 		String pageBar="";
 		int pageSize=5;
@@ -54,13 +54,11 @@ public class PageCreateSort{
 		
 		pageBar+="<script>";
 		pageBar+="function fn_paging(cPage,numPerPage){";
-		pageBar+="location.href='"+url+"?p_category_name="+p_category_name+"&cPage='+cPage;";	
+		pageBar+="location.href='"+url+"?searchName="+searchName+"&cPage='+cPage;";	
 		pageBar+="}";
 		pageBar+="</script>";
 		
-		
-		
-		
+	
 		
 		return pageBar;
 		

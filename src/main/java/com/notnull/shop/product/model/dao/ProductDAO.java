@@ -30,7 +30,9 @@ public interface ProductDAO {
 	
 	int productListCount(SqlSessionTemplate sqlSession);
 	
-	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName);
+	List<ProductListJoin> searchProduct(SqlSessionTemplate sqlSession,String searchName,int cPage,int numPerPage );
+	
+	int searchProductCount(SqlSessionTemplate sqlSession,String searchName);
 	
 	List<ProductListJoin> reviewStarOrder(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	

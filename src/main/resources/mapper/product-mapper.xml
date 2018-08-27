@@ -34,10 +34,23 @@
         on  x.p_category_code=z.p_category_code
 		where (p_img_code in (select min(p_img_code) from product_img group by product_code)
         and product_name like '%'||#{searchName}||'%') or  (p_img_code in (select min(p_img_code) from product_img group by product_code) and p_category_name=#{searchName})
+		and x.product_delete='N'
 		order by product_code desc
 	</select>
  
  
+ 	<select id="searchProductCount" resultType="_int">
+ 		select count(x.product_code)
+		from product x
+		inner join product_img y
+		on x.product_code = y.product_code 
+        inner join product_category z
+        on  x.p_category_code=z.p_category_code
+		where (p_img_code in (select min(p_img_code) from product_img group by product_code)
+        and product_name like '%'||#{searchName}||'%') or  (p_img_code in (select min(p_img_code) from product_img group by product_code) and p_category_name=#{searchName}) 
+        and x.product_delete='N'
+ 	</select>
+ 	
  	<select id="reviewStarOrder" resultMap="productListJoinMap">
  	select x.product_code,x.product_name, y.new_p_img_path, x.price, (select round(avg(z.review_star),3) from product_review z where x.product_code= z.product_code) review_star ,  x.product_delete,z.p_category_code,z.p_category_name
 		from product x
