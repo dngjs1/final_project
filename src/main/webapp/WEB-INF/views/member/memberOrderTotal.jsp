@@ -274,7 +274,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+						<td colspan="5"><b>주문내역이 없습니다.</b></td>
 					</tr>
 				</c:otherwise>
 				</c:choose>
@@ -464,43 +464,7 @@
  	  	</div>
  	  
  	  </div>
-	
-			              
-			        <!-- <table class="table table-bordered tb-basic border-left-0 border-right-0" style="font-size:13px;">	
-			             
-					<tr class="tr1">
-						<th style="text-align: center;border-left:none;">내용</th>
-						<td>	
-						<input type="text" class="form-control" name="review_content" id="review_content" required>
-						</td>
-					</tr>
-					<tr class="tr1">
-						<th style="text-align: center;border-left:none;">별점</th>
-						<td>	
-						
-						<div class="starRev">
-						  <span class="starR">1</span>
-						  <span class="starR">2</span>
-						  <span class="starR">3</span>
-						  <span class="starR">4</span>
-						  <span class="starR">5</span>
-						</div>
-						<input type="hidden" class="form-control" name="review_star" id="review_star" required>
-						
-						</td>
-					</tr>
-			        </table> -->
-			        
-			        <!-- <hr style="border:2px solid #787878">
-			        <h4>상품 사진</h4>
-			        <div id="fileDiv1">
-				       	<input multiple="multiple" type="file" accept=".jpg, .png" class="addfile1" name="file_1" />
-				        <button type="button" class="btn btn-danger" name="delete1">삭제하기</button>
-	        		</div>
-	        		<br>
-			        <button type="button" class="btn btn-primary" id="add1">사진 추가하기</button>
-		        </div>
--->	
+
 				<style>
 					.cancel_btn {
 						width : 134px;

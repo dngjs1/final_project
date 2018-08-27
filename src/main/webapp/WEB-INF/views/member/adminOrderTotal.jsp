@@ -195,7 +195,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+						<td colspan="5"><b>주문내역이 없습니다.</b></td>
 					</tr>
 				</c:otherwise>
 				</c:choose>
