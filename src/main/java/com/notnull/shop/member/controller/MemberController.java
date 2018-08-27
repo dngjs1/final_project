@@ -83,22 +83,49 @@ public class MemberController {
 		return "member/memberEnrollEnd2";
 	}
 	
-	@RequestMapping("/memberPoint.do")
-	public String memberPoint(String member_id,Model model) {
-		List<PointLog> pointList=service.selectPointList(member_id);
-		int sum=0;
-		for(PointLog point:pointList) {
-			sum+=point.getPoint_increase();
-		}
-		model.addAttribute("sum_point",sum);
+	@RequestMapping("memberPoint.do")
+	public String memberPoint(String member_id,Model model,
+								@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		int numPerPage = 7;
+		
+		List<PointLog> pointList=service.selectPointList(member_id,cPage,numPerPage);
+		int totalCount = service.myPagePointTotalCount(member_id);
+		
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"memberPoint.do",member_id);
+		
+		
+//		int sum=0;
+//		for(PointLog point:pointList) {
+//			sum+=point.getPoint_increase();
+//		model.addAttribute("sum_point",sum);
+//		}
+		
 		model.addAttribute("pointList",pointList);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
 		return "member/memberPoint";
 	}
 	
-	@RequestMapping("/memberRefund.do")
-	public String memberRefund(String member_id,Model model) {
-		List<Map> orderList = service.selectOrderList(member_id);
+	@RequestMapping("memberRefund.do")
+	public String memberRefund(String member_id,Model model,
+						@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		
+		int numPerPage = 7;
+		
+		List<Map> orderList = service.selectOrderList(member_id,cPage, numPerPage);
+		int totalCount = service.orderListCount(member_id);
+		
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"memberRefund.do",member_id);
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
 		model.addAttribute("orderList",orderList);
+		
 		return "member/memberRefund";
 	}
 	
@@ -106,7 +133,7 @@ public class MemberController {
 	public String memberOrderTotal(String member_id,Model model,
 									HttpServletRequest request,
 										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
-		int numPerPage = 2;
+		int numPerPage = 7;
 		
 		List<Map> orderList = service.selectOrderList(member_id,cPage, numPerPage);
 		int totalCount = service.orderListCount(member_id);
@@ -116,7 +143,6 @@ public class MemberController {
 		
 		model.addAttribute("totalPoint",totalPoint);
 		model.addAttribute("orderList",orderList);
-		
 		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("cPage", cPage);
 		model.addAttribute("totalCount", totalCount);
@@ -124,10 +150,24 @@ public class MemberController {
 		return "member/memberOrderTotal";
 	}
 	
-	@RequestMapping("/adminOrderTotal.do")
-	public String adminOrderTotal(String member_id,Model model) {
-		List<Map> orderList = service.selectOrderList();
+	@RequestMapping("adminOrderTotal.do")
+	public String adminOrderTotal(String member_id,Model model,
+									HttpServletRequest request,
+										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage){
+		
+		//넘퍼페이지수정
+		int numPerPage = 7;
+		List<Map> orderList = service.selectOrderList(cPage,numPerPage);
+		int totalCount = service.OrderListCount_Admin();
+		
+		String pageBar = new PageCreate().getPageBar(cPage,numPerPage,totalCount,"adminOrderTotal.do");
+		
 		model.addAttribute("orderList",orderList);
+		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+		
 		return "member/adminOrderTotal";
 	}
 	

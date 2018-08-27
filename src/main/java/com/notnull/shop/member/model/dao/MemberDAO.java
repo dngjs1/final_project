@@ -47,7 +47,7 @@ public interface MemberDAO {
 	
 	int updateManagement(SqlSessionTemplate sqlSession, Member m);
 	
-	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id);
+	List<PointLog> selectPointList(SqlSessionTemplate sqlSession,String member_id, int cPage, int numPerPage);
 	
 	int totalPoint(SqlSessionTemplate sqlSession, String member_id);
 	
@@ -57,7 +57,8 @@ public interface MemberDAO {
 	
 	List<Map> selectOrderList(SqlSessionTemplate sqlSession,String member_id);
 	
-	List<Map> selectOrderList(SqlSessionTemplate sqlSession);
+	List<Map> selectOrderList(SqlSessionTemplate sqlSession,int cPage, int numPerPage);
+	int OrderListCount_Admin(SqlSessionTemplate sqlSession);
 	
 	int updateBuyStatus(SqlSessionTemplate sqlSession,BuyInfo buyInfo);
 	
@@ -69,4 +70,6 @@ public interface MemberDAO {
 	List<Question> adminQuestionList(SqlSessionTemplate sqlSession);
 	int insertAnswer(SqlSessionTemplate sqlSession, Answer answer);
 	void updateQuestionStatus(SqlSessionTemplate sqlSession, int question_code);
+	
+	int myPagePointTotalCount(SqlSessionTemplate sqlSession, String member_id);
 }

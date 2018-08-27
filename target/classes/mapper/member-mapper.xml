@@ -126,6 +126,10 @@
  		where p_img_code in (select min(p_img_code) from product_img group by product_code)
 	  	order by buy_date desc
  	</select>
+ 	<select id="OrderListCount_Admin" resultType="_int">
+ 		select count(*) from buy_info 
+ 	</select>
+ 	
  	
  	<update id="updateBuyStatus" parameterType="buyinfo">
  		update buy_info set buy_status=#{buy_status} where buy_code=#{buy_code}
@@ -161,5 +165,9 @@
  	
  	<select id="selectedAnswer" parameterType="_int" resultType="answer">
  		select * from answer where question_code =#{question_code}
+ 	</select>
+ 	
+ 	<select id="myPagePointTotalCount" parameterType="string" resultType="_int">
+ 		select count(*) from point_log where member_id = #{member_id}
  	</select>
 </mapper>
