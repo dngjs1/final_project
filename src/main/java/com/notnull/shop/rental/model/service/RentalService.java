@@ -21,4 +21,8 @@ public interface RentalService {
 
 	public List<Rental> RentalListAll();
 
+	public List<Rental> RentalListSearch(int cPage, int numPerPage, String[] rentalSearch);
+
+	public int selectRentalSearchCount(String[] rentalSearch);
+
 }

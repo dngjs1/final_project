@@ -56,4 +56,17 @@ public class RentalDAOImpl implements RentalDAO {
 		return sqlSession.selectList(ra+"rentalList");
 	}
 
+
+	@Override
+	public List<Rental> RentalListSearch(int cPage, int numPerPage, String[] rentalSearch) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList(ra+"rentalListSearch", rentalSearch, rb);
+	}
+
+	@Override
+	public int selectRentalSearchCount(String[] rentalSearch) {
+		return sqlSession.selectOne(ra+"selectRentalSearchCount", rentalSearch);
+	}
+
+
 }

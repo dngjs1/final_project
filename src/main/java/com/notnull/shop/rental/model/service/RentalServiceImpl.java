@@ -52,5 +52,15 @@ public class RentalServiceImpl implements RentalService{
 		return dao.RentalListAll();
 	}
 
+	@Override
+	public List<Rental> RentalListSearch(int cPage, int numPerPage, String[] rentalSearch) {
+		return dao.RentalListSearch(cPage, numPerPage, rentalSearch);
+	}
+
+	@Override
+	public int selectRentalSearchCount(String[] rentalSearch) {
+		return dao.selectRentalSearchCount(rentalSearch);
+	}
+
 
 }
