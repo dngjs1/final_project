@@ -145,7 +145,7 @@
 								<td scope="col">
 									<span class="qContent"> ${list.question_content}</span>
 								</td>
-								<td scope="col" style = "font-weight:bold;">${list.status=='Y'?'답변완료':'답변미완료'}</td>
+								<td scope="col" style = "font-weight: bold;">${list.status=='Y'?'답변완료':'답변미완료'}</td>
 								<td class="question_code">${list.question_code }<td>
 							</tr>
 						</c:forEach>	

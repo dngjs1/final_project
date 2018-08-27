@@ -54,7 +54,7 @@
 				.order_board th {
 					padding: 21px 0;
 					background: #b5babd;
-					color : #fff;
+					color : #black;
 					font-weight: bold;
 					text-align: center;
 					border-left : 1px solid #eaeaea;

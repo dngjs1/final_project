@@ -39,6 +39,8 @@ public interface ProductService {
 	
 	List<ProductListJoin> categorySort(String p_category_name,int cPage,int numPerPage);
 	
+	List<ProductListJoin> categorySort(String p_category_name);
+	
 	int categorySortCount(String p_category_name);
 	
 	int insertProduct(Product product,List<ProductImg> productImgList,List<ProductDetailImg> productDetailImgList,List<ProductOption> productOptionList);

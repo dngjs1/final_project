@@ -55,7 +55,7 @@
 				.order_board th {
 					padding: 21px 0;
 					background: #b5babd;
-					color : #fff;
+					color : #black;
 					font-weight: bold;
 					text-align: center;
 					border-left : 1px solid #eaeaea;
@@ -159,14 +159,20 @@
 	width : 50px;
 	height : 30px;
 	border: none;
-	background: #b5babd;
-	color : #fff;
+	border-color : #28a745;
+	color : #28a745;
+	border-radius : .25rem;
 	font-size : 15px;
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
 	cursor:pointer;
 	float:right;
+}
+
+.search_btn:hover {
+	background-color : #28a745;
+	color : black;
 }
 </style>
 				
@@ -177,9 +183,9 @@
 				
 				
 				
-				<div class = "col-3" style = "margin-left : 20px;">
+				<div class = "col-3">
 					<input type="text" name="searchInfo" id="searchInfo" style="border:solid #b5babd; font-size:15px" placeholder="ID 검색" /> 
-					<button type="button" onclick="searchMember()" class="search_btn">검색</button>
+					<button type="button" onclick="searchMember()" class="search_btn"><i class ="fas fa-search"></i></button>
 				</div>
 				
 				<div class = "col-6">
