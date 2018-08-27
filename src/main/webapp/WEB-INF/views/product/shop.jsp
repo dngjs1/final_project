@@ -197,14 +197,6 @@ span.star-prototype > * {
 		}
 	</style>
 	
-	
-<!-- <script>
-
-$(document).ready(function(){
-	sell_price = parseInt($('#price').text());
-	$("#price").text(sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-});
-</script> -->
 
 	<div class = "row">
 		<c:set var="index" value="0"/>
@@ -260,7 +252,7 @@ $(document).ready(function(){
 							</span>
 						</div>
 		
-					</div>
+					</div><input type="hidden" class="listLength" value="${fn:length(list)}"/>
 		
 					<div class="product-detail" style="background-color: #fafafa">
 		

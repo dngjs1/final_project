@@ -232,14 +232,13 @@ span.star-prototype > * {
 								</div>
 							
 							</div>
-							
-
-
 							<div class="card-block mt-4 ml-2 mr-2  mt-4 mb-4">
 								<h4 class="card-title">${campList.product_name }</h4>
 							</div>
 							<div class="price ml-2 mt-2 mb-4">
-								<span style="font-size: 20px; font-weight: bold;">${campList.price }원</span>
+								<span style="font-size: 20px; font-weight: bold;">
+									<fmt:formatNumber value="${campList.price }" type="currency"/>
+								</span>
 							</div>
 							<div class="product-detail" style="background-color: #fafafa">
 
@@ -248,10 +247,11 @@ span.star-prototype > * {
 										<span class="star-prototype">${campList.review_star}</span>	
 									</div>
 
+
+
 								</div>
 
 							</div>
-
 						</div>
 					</div>
 				</c:if>
@@ -272,22 +272,19 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
-								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${campList.product_name}</span></a>
+								<a href="#" title="신발" style="text-decoration: none;">
+								<span
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${campList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${campList.price }</span>
-								</div>
-								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${campList.price }" type="currency"/>
+									</span>
 								</div>
 
 							</div>
@@ -324,23 +321,20 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${campList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${campList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${campList.price }</span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${campList.price }" type="currency"/>
+									</span>
 								</div>
 								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
-								</div>
 
 							</div>
 							
@@ -409,7 +403,9 @@ span.star-prototype > * {
 								<h4 class="card-title">${swimList.product_name }</h4>
 							</div>
 							<div class="price ml-2 mt-2 mb-4">
-								<span style="font-size: 20px; font-weight: bold;">${swimList.price }원</span>
+								<span style="font-size: 20px; font-weight: bold;">
+									<fmt:formatNumber value="${swimList.price }" type="currency"/>
+								</span>
 							</div>
 							<div class="product-detail" style="background-color: #fafafa">
 
@@ -444,23 +440,20 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${swimList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${swimList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${swimList.price }</span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${swimList.price }" type="currency"/>
+									</span>
 								</div>
 								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
-								</div>
 
 							</div>
 							
@@ -496,23 +489,20 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${swimList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${swimList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${swimList.price }</span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${swimList.price }" type="currency"/>
+									</span>
 								</div>
 								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
-								</div>
 
 							</div>
 							
@@ -584,7 +574,9 @@ span.star-prototype > * {
 								<h4 class="card-title">${climbList.product_name }</h4>
 							</div>
 							<div class="price ml-2 mt-2 mb-4">
-								<span style="font-size: 20px; font-weight: bold;">${climbList.price }원</span>
+								<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${climbList.price }" type="currency"/>
+									</span>
 							</div>
 							<div class="product-detail" style="background-color: #fafafa">
 
@@ -619,22 +611,18 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${climbList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${climbList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${climbList.price }</span>
-								</div>
-								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${climbList.price }" type="currency"/>
+									</span>
 								</div>
 
 							</div>
@@ -671,24 +659,19 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${climbList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${climbList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${climbList.price }</span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${climbList.price }" type="currency"/>
+									</span>
 								</div>
-								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
-								</div>
-
 							</div>
 							
 							<!-- 평점 등록부분 -->
@@ -756,7 +739,9 @@ span.star-prototype > * {
 								<h4 class="card-title">${fishList.product_name }</h4>
 							</div>
 							<div class="price ml-2 mt-2 mb-4">
-								<span style="font-size: 20px; font-weight: bold;">${fishList.price }원</span>
+								<span style="font-size: 20px; font-weight: bold;">
+									<fmt:formatNumber value="${fishList.price }" type="currency"/>
+								</span>
 							</div>
 							<div class="product-detail" style="background-color: #fafafa">
 
@@ -791,23 +776,21 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${fishList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${fishList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
+							
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${fishList.price }</span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${fishList.price }" type="currency"/>
+									</span>
 								</div>
-								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
-								</div>
+
 
 							</div>
 							
@@ -843,22 +826,18 @@ span.star-prototype > * {
 
 
 						<!--4개의 갤러리 이미지 중 첫 번째 갤러리 타이틀 등록 코드부분  -->
-						<div class="proudct-item-details">
+						<div class="product-item-details">
 							<div class="product-title">
 								<a href="#" title="신발" style="text-decoration: none;"><span
-									class="ml-2" style="font-size: 16px;">${fishList.product_name}</span></a>
+									class="ml-2" style="font-size: 20px; font-weight:bold;">${fishList.product_name}</span></a>
 							</div>
 							<div class="row">
 							
 							<!-- 가격 등록부분 -->
 								<div class="price col-6 ml-2">
-									<span style="font-size: 20px; font-weight: bold;">${fishList.price }</span>
-								</div>
-								
-							<!-- 포인트 등록부분 -->
-								<div class="point col-5 ml-1" style="text-align: center">
-									<span class="item_font"><i
-										class="fas fa-hand-holding-usd item_icon1"></i><B> : 25P</B></span>
+									<span style="font-size: 20px; font-weight: bold;">
+										<fmt:formatNumber value="${fishList.price }" type="currency"/>
+									</span>
 								</div>
 
 							</div>
