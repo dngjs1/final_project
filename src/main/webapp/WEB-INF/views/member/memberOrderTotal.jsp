@@ -537,7 +537,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <script>
 $(function(){
 	$("#review_star").val("0");
