@@ -117,13 +117,16 @@
 				<c:if test="${status.first }">
 	        	<div class="item-type">
 	                <h4>카테고리</h4>
-	                <label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
-	                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
-	                <br>
-	                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
-	                <button id="myBtn" onclick="search()">검색</button>
+	                <form action="${path }/shop/rentalSearch.do" method="post">
+	                	<label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
+		                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
+		                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
+		                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
+						<button class="btn btn-primary" name="button" type="submit">카테고리 검색</button>
+	                </form>
+		                <br>
+		                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
+		                <button id="myBtn" onclick="search()">지역 검색</button>
         		</div>
 				</c:if>
 					<div style="text-align: -webkit-center;">
@@ -194,21 +197,6 @@
 			        minLevel: 6 // 클러스터 할 최소 지도 레벨 
 			    });
 				function search(){
-					var input = document.getElementById("input").value;
-					var lists =[];
-					  $("input[name='rentalSearch']:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
-						   lists.push($(this).val());
-						  });
-						  
-						  $.ajax({
-							  type:"POST",
-							  data:{'rentalSearch':lists},
-							  url:"${path}/shop/rentalSearch.do",
-							   contentType:"application/x-www-form-urlencoded;charset=utf-8", //한글 깨짐 방지
-							   success:function(data){
-								   
-							   }
-						  });
 					if(input != "") {
 						geocoder.addressSearch(input, function(result, status){
 							 // 정상적으로 검색이 완료됐으면 
