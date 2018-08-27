@@ -711,13 +711,13 @@ span.star-prototype > * {
 <script>
 /* 스크롤 고정 */
 $( document ).ready( function() {
-	var jbOffset = $( '.aaaa' ).offset();
+	var jbOffset = $( '.fix-nav' ).offset();
 	$( window ).scroll( function() {
 		if ( $( document ).scrollTop() > jbOffset.top ) {
-			$( '.aaaa' ).addClass( 'jbFixed' );
+			$( '.fix-nav' ).addClass( 'jbFixed' );
 		}
 		else {
-			$( '.aaaa' ).removeClass( 'jbFixed' );
+			$( '.fix-nav' ).removeClass( 'jbFixed' );
 		}
 	});
 });
@@ -725,7 +725,7 @@ $( document ).ready( function() {
 
 <div class="container">
 
-  <ul class="nav nav-tabs aaaa" role="tablist">
+  <ul class="nav nav-tabs fix-nav" role="tablist">
   
      <li class="nav-item">
        <a class="nav-link active link01" data-toggle="tab" href="#section1">상품 상세</a>

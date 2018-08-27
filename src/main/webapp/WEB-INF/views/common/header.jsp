@@ -9,14 +9,14 @@
 <c:set var='path' value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-
+<link rel="shortcut icon" type="image⁄x-icon" href="resources/images/title_logo.png">
 <link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic|Ubuntu|Merienda|Fredericka+the+Great" rel="stylesheet">
 <!-- footer css외부참조파일 -->
 <link rel="stylesheet" href="resources/css/index.css" type="text/css">
 <link rel="stylesheet" href="resources/css/footer.css" type="text/css">
 
 <!-- index css 외부참조파일 -->
-  <title>파이널프로젝트 index</title>
+  <title>Try Trip - 여행쇼핑몰</title>
   <!-- meta tags 필요 -->
   <meta charset="utf-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
@@ -34,8 +34,6 @@
   <script src="./resources/js/main.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  <!-- 카카오 로그인 버튼을 위한 개발자 자바스크립트 추가 -->
-  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
  
   <style>
     .container {
@@ -44,36 +42,6 @@
     }
   </style>
 </head>
-
-
-   <!-- 로그인 창을 뜨게하는 모달 구성 -->   
-  <%--  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" 
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-         <!--로그인폼 : https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-          <form action="${pageContext.request.contextPath}/memberLogin.do" method="post">
-         <div class="modal-body">
-             <input type="text" class="form-control" name="member_id" placeholder="아이디" required>
-             <br />
-             <input type="password" class="form-control" name="member_pw" placeholder="비밀번호" required>
-         </div>
-         <div class="modal-footer">
-           <button type="submit" class="btn btn-outline-success" >로그인</button>
-           <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
-         </div>
-        </form>
-       </div>
-     </div>
-   </div> --%>
-
-
 
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style = "font-family: 'Nanum Gothic','Ubuntu',sans-serif;">
@@ -775,15 +743,15 @@
       					</li>
       					
       					<li>
-      						<a href = "${path}/product.do">판매메뉴</a>
+      						<a href = "${path}/product.do">여행용품</a>
       					</li>
       					
       					<li>
-      						<a href = "${path}/rentalMain.do">대여메뉴</a>
+      						<a href = "${path}/rentalMain.do">물품대여</a>
       					</li>
       					
       					<li>
-      						<a href = "${path}/introMain.do">사이트소개</a>
+      						<a href = "${path}/introMain.do">회사소개</a>
       					</li>
       					
       					<li>
