@@ -129,6 +129,9 @@ span.star-prototype > * {
 .product-rating{
 	margin-bottom:8px;
 }
+.img_div{
+	min-height:305px;
+}
 </style>
 
 <div id="container">
@@ -249,7 +252,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 					<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -298,7 +301,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 						<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -417,7 +420,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 					<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -466,7 +469,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 						<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -588,7 +591,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 					<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -636,7 +639,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 						<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -753,7 +756,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 					<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';" >
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';" >
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -803,7 +806,7 @@ $(window).scroll(function() {
 					<div class="col-4">
 						<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
