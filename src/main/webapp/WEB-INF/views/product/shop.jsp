@@ -104,7 +104,7 @@ span.star-prototype > * {
 		<!-- 총 상품 수 보여주는 카운팅 <p> 시작 -->
 		
 		<div class = "view_type opacity" style="display:inline-block;">
-			<a href = "#" style = "background-color : 2e2e2e;">전체상품 </a>
+			<a href = "${path}/product.do" style = "background-color : 2e2e2e;">전체상품 </a>
 			<a href ="${pageContext.request.contextPath}/writeDateOrder.do">신상품순</a>
 			<a href ="${pageContext.request.contextPath}/lowPriceOrder.do">낮은가격순</a>
 			<a href ="${pageContext.request.contextPath}/highPriceOrder.do">높은가격순</a>

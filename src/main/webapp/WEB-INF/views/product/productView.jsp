@@ -1061,10 +1061,7 @@ $(function(){
 	var statusList = new Array(); 
 	var idList = new Array();
 	var codeList = new Array();
-<<<<<<< HEAD
 
-=======
->>>>>>> Super_branch2
 		<c:if test="${flag =='true'}">
 		<table class='countCheck'>
 		<tr>
@@ -1118,20 +1115,14 @@ $(function(){
 		</tr>
 		</table>			
 		</c:if>
-<<<<<<< HEAD
 
-=======
->>>>>>> Super_branch2
 	<c:forEach items="${likeList}" var="item">
 		statusList.push("${item.like_status}");
 		idList.push("${item.member_id}");
 		codeList.push("${item.review_code}");
 	</c:forEach>
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> Super_branch2
+
 	for(var i=0;i<reviewLength;i++){
 		var y_count=0;
 		var total_count=0;
