@@ -221,12 +221,15 @@ input[name="datetimes"]{cursor: pointer;}
     	$('#content').val(content);
     	var content2 = $("#content");
     	
+    	var checkContent=$("#summernote");
+    	
     	var phone=$("#phone");
     	var title=$("#title");
     	var price=$("#price");
     	var datef=$('input[name="datetimes"]');
-    	var address=$("sample6_address");
-    	var address2=$("sample6_address2");
+    	var addresspost=$("#sample6_postcode");
+    	var address=$("#sample6_address");
+    	var address2=$("#sample6_address2");
      	if(phone.val()==0){
      		phone.focus();
      		return false;
@@ -237,7 +240,7 @@ input[name="datetimes"]{cursor: pointer;}
      		price.focus();
      		return false;
      	} else if(address.val()==0){
-     		address.focus();
+     		addresspost.focus();
      		return false;
      	} else if(address2.val()==0){
      		address2.focus();
@@ -245,8 +248,9 @@ input[name="datetimes"]{cursor: pointer;}
      	} else if(datef.val()==0){
      		datef.focus();
      		return false;
-     	} else if(content2.val()==0) {
-     		content2.focus();
+     	} else if(checkContent.val()==0) {
+     		alert("상품 이미지 및 내용을 입력해 주십시오.")
+     		checkContent.focus();
      		return false;
      	} else {
      		document.getElementById('hiddenBtn').click();
