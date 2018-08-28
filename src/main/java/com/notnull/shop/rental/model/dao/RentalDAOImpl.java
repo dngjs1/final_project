@@ -1,6 +1,7 @@
 package com.notnull.shop.rental.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -66,6 +67,39 @@ public class RentalDAOImpl implements RentalDAO {
 	@Override
 	public int selectRentalSearchCount(String[] rentalSearch) {
 		return sqlSession.selectOne(ra+"selectRentalSearchCount", rentalSearch);
+	}
+
+	@Override
+	public List<Map> selectOrderList(String member_id, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList(ra+"selectOrderList",member_id,rb);
+	}
+
+	@Override
+	public int orderListCount(String member_id) {
+		return sqlSession.selectOne(ra+"orderListCount",member_id);
+	}
+
+	@Override
+	public List<Map> selectOrderList2(String member_id, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList(ra+"selectOrderList2",member_id,rb);
+	}
+
+	@Override
+	public int orderListCount2(String member_id) {
+		return sqlSession.selectOne(ra+"orderListCount2",member_id);
+	}
+
+	@Override
+	public List<Map> selectOrderList3(String member_id, int cPage, int numPerPage){
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList(ra+"selectOrderList3",member_id,rb);
+	}
+
+	@Override
+	public int orderListCount3(String member_id) {
+		return sqlSession.selectOne(ra+"orderListCount3",member_id);
 	}
 
 
