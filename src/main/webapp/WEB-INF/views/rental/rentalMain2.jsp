@@ -82,7 +82,7 @@
 			.map_list, .map_list *{margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 			.map_list a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 			.map_list {position:absolute;min-width:100px;width:100%;height:500px;}
-			.list-item {position:absolute;top:0;left:0;bottom:0;width:265px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;margin-right:7px;}
+			.list-item {position:absolute;top:0;left:0;bottom:0;width:300px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;margin-right:7px;}
 			.item-type{position:absolute;width:250px;  z-index:1;}
 			.items{margin-top:139px}
 </style>
