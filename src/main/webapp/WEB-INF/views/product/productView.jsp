@@ -123,10 +123,10 @@ span.star-prototype > * {
 	
 	<style>
 		.sub_images {
-			margin-left : 16px;
+			margin-left : 8px;
 		}
 		.sub_images:hover {
-		box-shadow: 10px 10px 20px #b4b2b2;
+		box-shadow: 5px 5px 10px #b4b2b2;
 		
 		
 		
@@ -164,7 +164,7 @@ span.star-prototype > * {
   		
   		<c:if test="${vs.index>=0}">
   		
-  		<div class = "sub_images" style = "float:left; padding-right:19px;">
+  		<div class = "sub_images" style = "float:left; padding-right:16px;">
   		<img width="60px" height="60px"  src="${path }/resources/upload/productImg/${imgList.new_p_img_path }" alt="상세상품"
   			 onmouseover="javascript:changeImg('${path}/resources/upload/productImg/${imgList.new_p_img_path }');"/>
   		</div>
