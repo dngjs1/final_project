@@ -183,6 +183,7 @@
 			        minLevel: 6 // 클러스터 할 최소 지도 레벨 
 			    });
 				function search(){
+					var input = $("#input").val();
 					if(input != "") {
 						geocoder.addressSearch(input, function(result, status){
 							 // 정상적으로 검색이 완료됐으면 
@@ -191,6 +192,8 @@
 									map.setLevel(3);
 									map.panTo(moveLatLon);
 						     } else{
+						    	 alert(input);
+						    	 alert(status);
 						    	 alert("잘못된 주소입니다.");
 						    	 return;
 						     }
