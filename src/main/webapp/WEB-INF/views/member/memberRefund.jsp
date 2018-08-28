@@ -33,7 +33,7 @@ $(function(){
 					return false;
 				}else{
 					alert("환불요청이 취소되었습니다.");
-					buy_status.parent().parent().hide();
+					location.reload();
 				}
 			},
 			error:function(jpxhr,textStatus,errormsg){
@@ -173,7 +173,7 @@ $(function(){
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="5"><b>최근 주문내역이 없습니다.</b></td>
+								<td colspan="5"><b>환불 내역이 없습니다.</b></td>
 							</tr>
 						</c:otherwise>
 						</c:choose>

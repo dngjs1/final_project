@@ -232,6 +232,8 @@
 
 .opensright .ranges {
     margin-left: 0
+    float:right;
+    margin-right:16%;
 }
 
 .opensleft .ranges {

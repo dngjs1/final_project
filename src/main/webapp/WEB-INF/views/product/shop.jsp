@@ -257,7 +257,7 @@ span.star-prototype > * {
 					<div class="product-detail" style="background-color: #fafafa">
 		
 						<div class="row mt-2 mb-2">
-							<div class="product-rating col-6 ml-2 mt-1 ">
+							<div class="product-rating col-6 ml-2 mt-1" style="margin-bottom:8px;">
 							
 								<span class="star-prototype">${image.review_star}</span>			
 							

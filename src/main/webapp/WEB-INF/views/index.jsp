@@ -34,17 +34,17 @@ span.star-prototype > * {
 	<div class="carousel-inner">
 		<div class="carousel-item active ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="첫번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="두번째 슬라이드 ">
 		</div>
 		<div class="carousel-item ">
 			<img class="d-block w-100 "
-				src="http://img2.travelmate.co.kr/img/event/0908/packtravel2_1100_04.jpg"
+				src="./resources/images/main_view.jpg"
 				style="width:1210px; height: 350px;" alt="세번째 슬라이드 ">
 		</div>
 		
@@ -126,6 +126,12 @@ span.star-prototype > * {
 	border-radius: 0px;
 	font-size: 11px;
 }
+.product-rating{
+	margin-bottom:8px;
+}
+.img_div{
+	min-height:305px;
+}
 </style>
 
 <div id="container">
@@ -138,74 +144,59 @@ span.star-prototype > * {
 <!-- 슬라이드 다음 최신 상품순 정렬하는 메뉴 코드 시작 -->
 <!-- 왼쪽 여백 메뉴 시작<스크롤 스파이 부분> -->
 <script>
-	$(document).ready(function() {
 
-		$('#hover2').popover({
-			content : "가방",
-			trigger : "hover",
-			placement : "right"
-		});
-		$('#hover3').popover({
-			content : "셔츠",
-			trigger : "hover",
-			placement : "right"
-		});
+$(window).scroll(function() {
+	var $el = $('.show-on-scroll');
 
-	});
+	if ($(this).scrollTop() >= 549)
+		$el.addClass('shown');
+	else
+		$el.removeClass('shown');
+});
 
-	$(window).scroll(function() {
-		var $el = $('.show-on-scroll');
-
-		if ($(this).scrollTop() >= 549)
-			$el.addClass('shown');
-		else
-			$el.removeClass('shown');
-	});
-	
-	
-	
 </script>
 
 <div class="container">
 
 	<div class="row">
 		<div class="col-1">
-			<nav class="col-1  show-on-scroll" id="myScrollspy">
+			<nav class="col-1 show-on-scroll" id="myScrollspy">
 				<ul class="nav nav-pills flex-column "
 					style="border: 1px solid; background-color: #fafafa">
 					
-					<li class="nav-item"><a class="nav-link" href="#section2"><i
-							class="fab fa-free-code-camp"><b> Camp_Item</b></i></a></li>
+					<li class="nav-item"><a class="nav-link" href="#section1" title="캠프">
+						<i class="fab fa-free-code-camp"><b> 캠핑</b></i>
+					</a></li>
 							
-							<li class="nav-item"><a class="nav-link active"
-						href="#section1" title="수영"><i class="fas fa-swimmer">
-								Swim_Item</i></a></li>
-								
-								
-					<!-- <li class="nav-item"><a class="nav-link" href="#section3"><i
-							class="fas fa-fish"></i><b> 낚시</b></a></li> -->
+					<li class="nav-item"><a class="nav-link active" href="#section2" title="수영">
+						<i class="fas fa-swimmer"><b> 수영</b></i>
+					</a></li>
+							
+					<li class="nav-item"><a class="nav-link active" href="#section3" title="등산">
+						<i class="fab fa-asymmetrik"><b> 등산</b></i>
+					</a></li>
+							
+					<li class="nav-item"><a class="nav-link active" href="#section4" title="낚시">
+						<i class="fas fa-fish"><b> 낚시</b></i>
+					</a></li>
+					
 				</ul>
 			</nav>
 		</div>
 
-
-		<div id="#section1">
-			<!-- 왼쪽 리모콘 기능을 활용하기 위한 빈 공간 -->
-		</div>
-	
 		<div class="col-10 Main-Category-View">
 		
 		
 			<!-- 각 카테고리 별 시작 세션 부분 -->
 			
 			<!-- 캠프 카테고리 시작 -->
-			<div id = "section2">
+			<div id = "section1">
 				<!-- 왼쪽 내비게이션을 위한 빈 div여백 -->
 			</div>
 			<div class="menu_section">
 
 				<div>
-					<h1 class="item_title">Camp Item</h1>
+					<h1 class="item_title">Camping Item</h1>
 				</div>
 
 				<div id="menu_sider"></div>
@@ -261,7 +252,7 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -310,7 +301,7 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='campList' items='${campList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${campList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${campList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -365,12 +356,12 @@ span.star-prototype > * {
 			</div>
 			
 			<!-- 수영 카테고리 시작 -->
-			<div id = "section1">
+			<div id = "section2">
 				<!-- 왼쪽 내비게이션을 위한 빈 div여백 -->
 			</div>
 			<div class="menu_section">
 				<div>
-					<h1 class="item_title">Swim Item</h1>
+					<h1 class="item_title">Swimming Item</h1>
 				</div>
 
 				<div id="menu_sider"></div>
@@ -429,7 +420,7 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -478,7 +469,7 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='swimList' items='${swimList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${swimList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${swimList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -536,7 +527,7 @@ span.star-prototype > * {
 			</div>
 			
 			<!-- 등산 카테고리 시작 -->
-			<div id = "section1">
+			<div id = "section3">
 				<!-- 왼쪽 내비게이션을 위한 빈 div여백 -->
 			</div>
 			<div class="menu_section">
@@ -600,7 +591,7 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -648,7 +639,7 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='climbList' items='${climbList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${climbList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${climbList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -701,7 +692,7 @@ span.star-prototype > * {
 			</div>
 			
 			<!-- 낚시 카테고리 시작 -->
-			<div id = "section1">
+			<div id = "section4">
 				<!-- 왼쪽 내비게이션을 위한 빈 div여백 -->
 			</div>
 			<div class="menu_section">
@@ -765,7 +756,7 @@ span.star-prototype > * {
 					<div class="col-4">
 					<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${0<vs.index and vs.index<3 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';" >
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';" >
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -815,7 +806,7 @@ span.star-prototype > * {
 					<div class="col-4">
 						<c:forEach var='fishList' items='${fishList }' varStatus="vs">
 					<c:if test="${2<vs.index and vs.index<5 }">
-						<div class="hover-box" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
+						<div class="hover-box img_div" onclick="location.href='${pageContext.request.contextPath }/productView.do?product_code=${fishList.product_code}';">
 							<img src="${pageContext.request.contextPath }/resources/upload/productImg/${fishList.new_p_img_path }" alt="camp-2.jpg"
 								class="img-thumbnail" />
 							<div class="icons">
@@ -846,7 +837,7 @@ span.star-prototype > * {
 							<div class="product-detail" style="background-color: #fafafa">
 	
 								<div class="row mt-2 mb-2">
-									<div class="product-rating col-6 ml-2 mt-1 ">
+									<div class="product-rating col-6 ml-2 mt-1">
 										<span class="star-prototype">${fishList.review_star}</span>	
 									</div>						
 								</div>
