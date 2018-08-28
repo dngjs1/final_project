@@ -184,7 +184,7 @@
 				
 				
 				<div class = "col-3">
-					<input type="text" name="searchInfo" id="searchInfo" style="border:solid #b5babd; font-size:15px" placeholder="ID 검색" /> 
+					<input type="text" name="searchInfo" id="searchInfo" style="border:solid #b5babd; text-indent:10px;font-size:15px" placeholder="ID 검색" /> 
 					<button type="button" onclick="searchMember()" class="search_btn"><i class ="fas fa-search"></i></button>
 				</div>
 				

@@ -411,7 +411,7 @@
       	
       		<div class = "all">	
       			<!-- 전체카테고리 버튼-->
-      			<div class = "all_categories"></div>
+      			<!-- <div class = "all_categories"></div> -->
       			<!-- 전체테고리 버튼 end -->
       			
       			<script type = "text/javascript">
