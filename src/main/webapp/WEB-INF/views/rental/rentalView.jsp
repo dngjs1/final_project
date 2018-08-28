@@ -57,7 +57,7 @@ input[name="datetimes"]{cursor: pointer;}
 					<!-- 상품명 -->
 					<h1 class = "product_name1" style = "box-sizing:border-box;padding-right:150px; font-weight:bold;font-size:30px; color:#2e2e2e;">${rental.title }</h1>
 					<!-- 가격 -->
-					<div style="font-size:42px;color:#2e2e2e;font-weight:bold"><span id="price">${rental.price } 원</span>
+					<div style="font-size:42px;color:#2e2e2e;font-weight:bold"><span id="price">${rental.price }원 </span>
 					
 					</div>
 					<!-- 밑 줄 표시 div -->
@@ -98,29 +98,34 @@ input[name="datetimes"]{cursor: pointer;}
 					<hr>
 					
 					
-						<span id="del_price" style="color:#148CFF; font-size:25px; float: right;">--원</span>
-					<div>
+						<span id="del_price" style="color:#2e2e2e; font-weight:bold; padding-top:5px; font-size:42px; float: right;">Total : --원</span>
+					<div style = "height:100px;">
 						<span>
+					
 						<button class = "borrow_item" name="button" type="button" onclick="buy();">
-							<span class = "buy_icon far fa-credit-card"></span>대여신청
+							<span class = "buy_icon far fa-credit-card"></span>  대여신청
 						</button>
-						<button id="hiddenBtn"  type="submit" style="display: none;"></button>
+						
 						</span>
 						
 						
 					</div>
+					<div>
+					<button id="hiddenBtn"  type="submit" style="display: none;"></button>
+					</div>
 					<style>
 					.borrow_item {
-					width:194px;
-					height:70px;
+					position:relative;
+					width:220px;
+					height:85px;
 					background:#2D2E33;
 					color : #fff;
-					font-size : 18px;
+					font-size : 29px;
 					line-height: 55px;
 					text-align: ceneter;
 					font-weight: bold;
-					float:right;
-					margin-top:70px;
+					float:left;
+					
 					
 					}
 					
@@ -145,8 +150,8 @@ input[name="datetimes"]{cursor: pointer;}
     	
 				</div>	
 	</div>
-	
-	<div id="rental_content" style = "margin-top:10%; border:1px solid #2e2e2e;" >
+	<h2 style = "border-bottom: 2px solid #ddd; padding-bottom:1%;"><b>상품 이미지 및 정보보기</b></h2>
+	<div id="rental_content" style = "margin-top:5%;" >
 		${rental.content }
 	</div>
 </div>
@@ -173,12 +178,12 @@ input[name="datetimes"]{cursor: pointer;}
 				  result2 = (end-start)%(1000*3600*24);
 				  if(result2 != 0 ) {
 					  if(result2>0 && result2<=8){
-						  $("#del_price").text(Math.round(price*result+price*0.5)+"원");
+						  $("#del_price").text("Total: "+ Math.round(price*result+price*0.5)+"원");
 					  } else{
-						  $("#del_price").text(Math.round(price*result)+"원");
+						  $("#del_price").text("Total : "+ Math.round(price*result)+"원");
 					  }
 				  } else{
-					  $("#del_price").text(price+"원");
+					  $("#del_price").text("Total : "+ price+"원");
 				  }
 			});
 	  $('input[name="datetimes"]').change(function(){

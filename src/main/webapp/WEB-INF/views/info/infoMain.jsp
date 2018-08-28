@@ -254,18 +254,18 @@
 				
 					<li class = "cs_center_li">
 					<span>
-						Design by<br><strong>진근형</strong>
+						<b>Design by</b><br><strong>진근형</strong>
 						<span class = "white_space"></span>
 					</span>
-					<strong>02-222-2222</strong>
+					<strong>비밀~</strong>
 					
 					<li class = "time_info_li">
 						<span>
-							평일 <strong>10:30 ~ 17:30</strong>
+							평일 <strong>9시 ~ 17시</strong>
 							<br>
-							런치 <strong>11:30 ~ 13:00</strong>
+							런치 <strong>11시 ~ 13시</strong>
 							<br>
-							토/일/공휴일은 휴무
+							공휴일 휴무
 						</span>
 					</li>
 				</ul>
