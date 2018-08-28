@@ -83,7 +83,7 @@
 			.map_list a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 			.map_list {position:absolute;min-width:100px;width:100%;height:500px;}
 			.list-item {position:absolute;top:0;left:0;bottom:0;width:300px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;margin-right:7px;}
-			.item-type{position:absolute;width:250px;  z-index:1;}
+			.item-type{position:absolute;width:259px;  z-index:1;}
 			.items{margin-top:139px}
 </style>
 <div class="container-fluid">
@@ -106,7 +106,7 @@
 		                </form>
 			                
 			                <input id="input" onkeyup="enterkey()" type="text" placeholder="주소를 검색하세요." style = "width:175px; margin-bottom:10px; font-size:12px; color:black; border:2px solid #ffa409; text-indent:3px; background-color:white;">
-			                <button id="myBtn" onclick="search()"style ="background-color: #ffa409; color:black; outline:none; font-weight:bold; width:71px;">지역 검색</button>
+			                <button id="myBtn" onclick="search()"style ="background-color: #ffa409; color:black; outline:none; font-weight:bold; width:78px;">지역 검색</button>
 	        		</div>
 	        		<div class="items">
 		        	<c:forEach items="${list }" var="rental" varStatus="status">
