@@ -50,7 +50,8 @@
 				        			<%=productQuestion.getP_question_content()%>
 				        		</td>
 				        		<td style = "width:10%; text-align: center; font-weight: bold; font-size:20px;">
-				        			<sub><%=productQuestion.getMember_id()%></sub>
+				        			<sub><%=productQuestion.getMember_id()%></sub><br><br>
+									<button class="btn btn-outline-dark btn-sm delete" value="<%=productQuestion.getP_question_code()%>">삭제</button>				        			
 				        		</td>
 				        		<td></td>
 				        	</tr>
