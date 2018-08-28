@@ -358,6 +358,7 @@ $(function(){
 	 var pw = $("member_pw").val()
 	 var reg_pwd = /^.*(?=.{8,12})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
 	 if(!reg_pwd.test(pw)){
+		 alert("형식에 맞게 비밀번호를 입력하세요.");
 		  $("#member_pw").val("");
 		  $("#member_pw").focus();
 		  return false;
