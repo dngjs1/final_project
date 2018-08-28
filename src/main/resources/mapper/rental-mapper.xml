@@ -81,7 +81,7 @@
  	
  	<resultMap type="map" id="selectOrderMap3"></resultMap>
  	<select id="selectOrderList3" parameterType="string" resultMap="selectOrderMap3">
-        select o.rental_obj_code, o.title, o.phone, o.address, o.detail_address, r.start_date, r.end_date
+        select o.rental_obj_code, o.title, o.phone, o.address, o.detail_address, r.member_id, r.start_date, r.end_date
         from rental r
         join rental_obj o on (o.rental_obj_code = r.rental_obj_code)
         where r.member_id=#{member_id}
