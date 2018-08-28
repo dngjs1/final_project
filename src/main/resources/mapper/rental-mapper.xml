@@ -49,4 +49,48 @@
 		 order by rental_obj_code desc
 	</select>
 	
+ 	<resultMap type="map" id="selectOrderMap"></resultMap>
+ 	<select id="selectOrderList" parameterType="string" resultMap="selectOrderMap">
+ 		select *
+ 		from rental_obj 
+ 		where member_id=#{member_id}
+ 		order by rental_obj_code desc
+ 	</select>
+	
+ 	<select id="orderListCount" resultType="_int" parameterType="string">
+ 		select count(*) from rental_obj where member_id=#{member_id}
+ 	</select>
+ 	
+ 		
+ 	<resultMap type="map" id="selectOrderMap2"></resultMap>
+ 	<select id="selectOrderList2" parameterType="string" resultMap="selectOrderMap2">
+ 		select o.rental_obj_code, o.title, r.member_id, m.phone, r.start_date, r.end_date
+ 		from rental_obj o
+ 		join rental r on (o.rental_obj_code = r.rental_obj_code)
+ 		join member m on (m.member_id = r.member_id)
+ 		where o.member_id=#{member_id}
+ 		order by o.rental_obj_code desc
+ 	</select>
+	
+ 	<select id="orderListCount2" resultType="_int" parameterType="string">
+ 		select count(*)
+	    from rental_obj o
+	    join rental r on (r.rental_obj_code=o.rental_obj_code)
+	    where o.member_id=#{member_id}
+ 	</select>
+ 	
+ 	<resultMap type="map" id="selectOrderMap3"></resultMap>
+ 	<select id="selectOrderList3" parameterType="string" resultMap="selectOrderMap3">
+        select o.rental_obj_code, o.title, o.phone, o.address, o.detail_address, r.start_date, r.end_date
+        from rental r
+        join rental_obj o on (o.rental_obj_code = r.rental_obj_code)
+        where r.member_id=#{member_id}
+        order by o.rental_obj_code desc
+ 	</select>
+	
+ 	<select id="orderListCount3" resultType="_int" parameterType="string">
+ 		select count(*)
+	    from rental
+	    where member_id=#{member_id}
+ 	</select>
 </mapper>

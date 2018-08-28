@@ -209,6 +209,30 @@
 					</li>
 					
 					<li>
+						<a>
+							<span class = "txt">대여정보</span>
+						</a>
+					</li>
+					
+					<li class = "submenu top">
+						<a href = "${pageContext.request.contextPath}/rentalOrder.do?member_id=${memberLoggedIn.member_id}" target="_self">
+							<span class = "txt txt_margin_top">대여 등록 목록</span>
+						</a>
+					</li>
+					
+					<li class = "submenu">
+						<a href = "${pageContext.request.contextPath}/rentalBuy.do?member_id=${memberLoggedIn.member_id}" target = "_self">
+							<span class = "txt txt_margin_bottom">대여 신청 목록</span>
+						</a>
+					</li>
+					
+					<li class = "submenu">
+						<a href = "${pageContext.request.contextPath}/rentalRegister.do?member_id=${memberLoggedIn.member_id}" target = "_self">
+							<span class = "txt txt_margin_bottom">대여 요청 목록</span>
+						</a>
+					</li>
+					
+					<li>
 						<a href="${pageContext.request.contextPath }/question.do">
 							<span class = "txt">1:1 문의</span>
 						</a>

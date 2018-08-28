@@ -55,9 +55,9 @@ public class MemberServiceImp implements MemberService {
 		
 		memberDAO.createAuthKey(sqlSession,m.getEmail(), key); // 인증키 DB저장
 		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[SHOP 서비스 이메일 인증]");
+		sendMail.setSubject("[Try Trip 인증메일]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://"+ip+":9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_self'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1>Try Trip 메일인증</h1>").append("<a href='http://"+ip+":9191/shop/emailConfirm.do?email=").append(m.getEmail()).append("&key=").append(key).append("' target='_self'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("euichan", "shop TEST");
 		sendMail.setTo(m.getEmail());
 		sendMail.send();
@@ -105,7 +105,7 @@ public class MemberServiceImp implements MemberService {
 			check = memberDAO.tempPassword(sqlSession, id, encodedPw);
 	
 			MailHandler sendMail = new MailHandler(mailSender);
-			sendMail.setSubject("[SHOP 임시비밀번호 발급]");
+			sendMail.setSubject("[Try Trip 임시비밀번호 발급]");
 			sendMail.setText(id+"님의 임시비밀번호는 "+tempPw+" 입니다");			
 		//	sendMail.setFrom("euichan", "shop TEST");
 			sendMail.setTo(email);

@@ -114,13 +114,36 @@
 				$("input[name=agreePrivacy]").prop("checked",true);
 				$("#Privacy").addClass("on");
 				
-				}
+			}
 			else{
 				$("input[name=agreePrivacy]").prop("checked",false);
 				$("#Privacy").removeClass("on");
 			}
 			}); 
 		});
+	
+	$(function(){
+	 	$("#agreeLicensing").click(function(){
+			if( ($("#agreePrivacy").prop("checked")) && ($("#agreeLicensing").prop("checked")) ){
+				$("#Allchecking").addClass("on");
+			}else{
+				
+				$("#Allchecking").removeClass("on");
+			}
+	 	});
+	});
+	
+	$(function(){
+	 	$("#agreePrivacy").click(function(){
+			if( ($("#agreePrivacy").prop("checked")) && ($("#agreeLicensing").prop("checked")) ){
+				$("#Allchecking").addClass("on");
+			}else{
+				
+				$("#Allchecking").removeClass("on");
+			}
+	 	});
+	});
+	
 		
 	
 </script>
@@ -560,7 +583,7 @@
 						</div>
 						
 						<div class = "con-right" style = "padding-top:10px">
-							<label for = "checkall" class = "cklabel ck_mail">
+							<label for = "checkall" id = "Allchecking"class = "cklabel ck_mail ">
 							
 							<div class = "far fa-check-circle" id = "iconfont">
 							

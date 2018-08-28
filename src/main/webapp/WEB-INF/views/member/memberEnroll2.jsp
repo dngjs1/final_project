@@ -209,6 +209,15 @@ $(function(){
           $('#idDuplicateCheck').val(0);
           return;
        }
+   
+  	   for (i = 0; i < $(this).val().trim().length; i++) {
+         ch = $(this).val().trim().charAt(i)
+         if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')&&!(ch >= 'A' && ch <= 'Z')) {
+             $('#idCheck').html("아이디는 대소문자, 숫자만 입력가능합니다.");
+             $('#idDuplicateCheck').val(0);
+             return;
+         	}
+     	}
         
        $.ajax({
           url:"${pageContext.request.contextPath}/checkIdDuplicate.do",
@@ -290,7 +299,7 @@ $(function(){
 <!-- 유효성검사  -->
 <script>
 $(function(){
-	
+		 
 	$("#member_pw2").blur(function(){
 		var p1=$("#member_pw").val(), p2=$("#member_pw2").val();
 		if(p1!=p2){
@@ -303,7 +312,11 @@ $(function(){
 	
 });
 
+
+
+
  function validate(){
+	 
 	var userId = $("#member_id");
 	if(userId.val().trim().length<4){
 		alert("아이디는 최소 4자리이상이어야 합니다.");
@@ -318,13 +331,40 @@ $(function(){
 		return false;
 	}
 	
+	var getName= RegExp(/^[가-힣]+$/);
+	if(!getName.test($("#member_name").val())){
+	        alert("이름을 한글로 입력하세요.");
+	        $("#member_name").val("");
+	        $("#member_name").focus();
+	        return false;
+      }
+	
 	var idEmail = $("#emailDuplicateCheck");
 	if($("#emailDuplicateCheck").val()==0) {
 		alert("중복된 이메일 주소입니다. 다시 입력하세요.")
 		$("#emailDuplicateCheck").focus();
 		return false;
 	}
-
+	
+	var phone = /^\d{3}\d{3,4}\d{4}$/;
+	if (!phone.test($('#phone').val())) {
+	      alert("잘못된 휴대폰 번호입니다.");
+	      $("#phone").val("");
+	      $("#phone").focus();
+	      return false
+	}
+	
+	
+	 var pw = $("member_pw").val()
+	 var reg_pwd = /^.*(?=.{8,12})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+	 if(!reg_pwd.test(pw)){
+		 alert("형식에 맞게 비밀번호를 입력하세요.");
+		  $("#member_pw").val("");
+		  $("#member_pw").focus();
+		  return false;
+	 }
+	
+	
 	
 	return true;
 } 
@@ -501,6 +541,8 @@ $(function(){
                 <p class="example" id="error">이 아이디는 사용할 수 없습니다.</p>
                 <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value=0 />
 				<p class = "example" id = "length">4글자 이상을 입력하세요</p>
+				<p class = "example" id = "idCheck"></p>
+				
 			</li>
 			<!-- 이름 입력 -->
 			<li>
@@ -510,7 +552,7 @@ $(function(){
 			<!-- 비밀번호 입력 -->
 			<li>
 				<input type = "password" id = "member_pw" name = "member_pw" class = "text" placeholder="*비밀번호 입력" style = " width:100%; border:solid gray" tabindex = "3" required>
-				<p class = "example" id = "rePassResult2">8 ~ 12 영문과 숫자(또는 한글 숫자)조합</p>
+				<p class = "example" id = "rePassResult2">8 ~ 12 영문과 숫자 조합</p>
 			</li>
 			<!-- 비밀번호 확인 -->
 			<li>

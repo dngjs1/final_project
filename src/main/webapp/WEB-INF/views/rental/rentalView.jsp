@@ -41,9 +41,9 @@ input[name="datetimes"]{cursor: pointer;}
    
 <div class="container">
 	<p style="margin-left:5px;font-size:12px">카테고리 : <span style="color:#148CFF;">${rental.p_category_name }</span></p>
-	<div class="row" style="height:700px">
+	<div class="row" style="height:900px">
 		<div class="col-6">
-			<img style="width:100%; height:645px;" alt="텐트" src="${rental.imgUrl }">
+			<img style="width:100%; height:751px;" alt="텐트" src="${rental.imgUrl }">
 		</div>
 		<div class="col-6">
 			<div style="margin-left:10px">
@@ -57,7 +57,9 @@ input[name="datetimes"]{cursor: pointer;}
 					<!-- 상품명 -->
 					<h1 class = "product_name1" style = "box-sizing:border-box;padding-right:150px; font-weight:bold;font-size:30px; color:#2e2e2e;">${rental.title }</h1>
 					<!-- 가격 -->
-					<div style="font-size:42px;color:#2e2e2e;font-weight:bold"><span id="price">${rental.price } 원</span></div>
+					<div style="font-size:42px;color:#2e2e2e;font-weight:bold"><span id="price">${rental.price } 원</span>
+					
+					</div>
 					<!-- 밑 줄 표시 div -->
 					<div class = "d_line">
 					
@@ -96,8 +98,16 @@ input[name="datetimes"]{cursor: pointer;}
 					<hr>
 					
 					
-					<div>
 						<span id="del_price" style="color:#148CFF; font-size:25px; float: right;">--원</span>
+					<div>
+						<span>
+						<button class = "borrow_item" name="button" type="button" onclick="buy();">
+							<span class = "buy_icon far fa-credit-card"></span>대여신청
+						</button>
+						<button id="hiddenBtn"  type="submit" style="display: none;"></button>
+						</span>
+						
+						
 					</div>
 					<style>
 					.borrow_item {
@@ -109,30 +119,34 @@ input[name="datetimes"]{cursor: pointer;}
 					line-height: 55px;
 					text-align: ceneter;
 					font-weight: bold;
-					margin-right:-43px;
+					float:right;
+					margin-top:70px;
+					
 					}
 					
 					.buy_icon {
 						display : inline-block;
-						margin:-5px 5px 0 0;
+						
 						font-size: 35px;
 						vertical-align: middle;
 					}
 					</style>
-					<div style="float: right;">
-						<button class = "borrow_item" name="button" type="button" onclick="buy();">
-							<span class = "buy_icon far fa-credit-card"></span>
-						대여신청</button> 
-						<button id="hiddenBtn"  type="submit" style="display: none;"></button>
-					</div>
 					
 					
+					
+					
+						
                 </form>
+                
 	    	</div>
     	</div>
+    	
+    	<div style = "float:right; margin-left:1033px; padding-top:1px;">
+    	
+				</div>	
 	</div>
 	
-	<div  id="rental_content" style = "margin-top:10%; border:1px solid #2e2e2e;" >
+	<div id="rental_content" style = "margin-top:10%; border:1px solid #2e2e2e;" >
 		${rental.content }
 	</div>
 </div>

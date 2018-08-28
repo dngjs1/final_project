@@ -2,6 +2,7 @@ package com.notnull.shop.rental.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.notnull.shop.common.PageCreate;
+import com.notnull.shop.common.PageCreateById;
 import com.notnull.shop.product.model.service.ProductService;
 import com.notnull.shop.product.model.vo.ProductCategory;
 import com.notnull.shop.rental.model.service.RentalService;
@@ -192,5 +194,65 @@ public class RentalController {
 		
 		return "/common/msg";
 	}
+
+	@RequestMapping("/rentalOrder.do")
+	public String rentalOrder(String member_id,Model model,
+									HttpServletRequest request,
+										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 7;
+		
+		//대여자가 등록한
+		List<Map> orderList = service.selectOrderList(member_id,cPage, numPerPage);
+		int totalCount = service.orderListCount(member_id);
+
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"rentalOrder.do",member_id);
+
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
 	
+		return "rental/rentalOrder";
+	}
+	
+	@RequestMapping("/rentalBuy.do")
+	public String rentalBuy(String member_id,Model model,
+									HttpServletRequest request,
+										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 7;
+
+		//대여자껄 등록 신청한
+		List<Map> orderList = service.selectOrderList2(member_id,cPage, numPerPage);
+		int totalCount = service.orderListCount2(member_id);
+
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"rentalBuy.do",member_id);
+		
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+	
+		return "rental/rentalBuy";
+	}
+
+	@RequestMapping("/rentalRegister.do")
+	public String rentalRegister(String member_id,Model model,
+									HttpServletRequest request,
+										@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		int numPerPage = 7;
+
+		//내가 대여한 목록
+		List<Map> orderList = service.selectOrderList3(member_id,cPage, numPerPage);
+		int totalCount = service.orderListCount3(member_id);
+
+		String pageBar = new PageCreateById().getPageBar(cPage,numPerPage,totalCount,"rentalRegister.do",member_id);
+		
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("totalCount", totalCount);
+	
+		return "rental/rentalRegister";
+	}
+		
 }
