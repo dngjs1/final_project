@@ -476,7 +476,7 @@ public class MemberController {
 		System.out.println("2 : " +m.getMember_pw());
 
 		String msg ="";
-		String loc ="memberOrderTotal.do";
+		String loc ="memberOrderTotal.do?member_id="+m.getMember_id();
 		
 		int result = service.memberUpdate(m);
 		

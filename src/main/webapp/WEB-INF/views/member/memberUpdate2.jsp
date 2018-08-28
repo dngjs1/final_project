@@ -200,7 +200,7 @@
 			&nbsp;회원정보수정
 		</h1>
 		<p class = "warnt"><b></b></p>
-		<form name = "frm" method="post" enctype = "multipart/form-data" onsubmit='return validate();' action="${pageContext.request.contextPath}/memberUpdateEnd.do" >
+		<form name = "frm" method="post" enctype = "multipart/form-data" onsubmit='return validate();' action="${pageContext.request.contextPath}/memberUpdateEnd.do?member_id+'${memberLoggedIn.member_id}" >
 			<ul class = "join_list">
 			<!-- 4글자 이상 입력 -->
 			<li>
