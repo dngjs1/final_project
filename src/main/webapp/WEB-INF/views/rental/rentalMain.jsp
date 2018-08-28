@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
    <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -63,7 +63,27 @@
 			.map_list, .map_list *{margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 			.map_list a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 			.map_list {position:relative;width:100%;height:500px;}
-			.list-item {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+			.list-item {position:absolute;top:0;left:0;bottom:0;width:265px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;margin-right:7px;}
+			
+			.category_label{
+				color : #333333;
+				font-weight : bold;
+				font-size: 13px;
+				padding-left:15px;
+			}
+			.search_btn {
+				display:inline-block;
+				background : #E2758C;
+				border:none;
+				color : lavenderblush;
+				width:217px;
+				font-size: 14px;
+				font-weight: bold;
+				text-align: center;
+				box-sizing: border-box;
+				margin-left:15px;
+				cursor:pointer;
+			}
 </style>
 <div class="container-fluid">
 	<div class="map-container">
@@ -82,22 +102,22 @@
 				</c:if>
 				<c:if test="${status.first }">
 	        	<div class="item-type">
-	                <h4>카테고리</h4>
+	                <h4 style = "font-size:20px; font-weight:bold;">카테고리</h4>
 	                <form action="${path }/shop/rentalSearch.do" method="post">
-	                	<label><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
-		                <label><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
-						<button class="btn btn-primary" name="button" type="submit">카테고리 검색</button>
+	                	<label class ="category_label"><input type="checkbox" name="rentalSearch" value="p1" checked /> 캠핑 </label>
+		                <label class ="category_label"><input type="checkbox" name="rentalSearch" value="p2" checked /> 등산 </label>
+		                <label class ="category_label"><input type="checkbox" name="rentalSearch" value="p3" checked /> 낚시 </label>
+		                <label class ="category_label"><input type="checkbox" name="rentalSearch" value="p4" checked /> 수영 </label>
+						<button class="search_btn" name="button" type="submit">카테고리 검색</button>
 	                </form>
-		                <br>
-		                <input id="input" onkeyup="enterkey()" type="text" placeholder="이동하고싶은 주소를 검색하세요.">
-		                <button id="myBtn" onclick="search()">지역 검색</button>
+		                
+		                <input id="input" onkeyup="enterkey()" type="text" placeholder="주소를 검색하세요." style = "width:180px; margin-bottom:10px; font-size:12px; color:black; border:2px solid #ffa409; text-indent:3px; background-color:white;">
+		                <button id="myBtn" onclick="search()" style ="background-color: #ffa409; color:black; outline:none; font-weight:bold; width:71px;">지역 검색</button>
         		</div>
 				</c:if>
 					<div style="text-align: -webkit-center;">
 				      	<a href="./rentalDetail.do?rental_obj_code=${rental.rental_obj_code }">
-					      <div class="thumbnail" style="overflow: hidden;">      
+					      <div class="thumbnail" style="overflow: hidden; box-shadow:4px 4px 3px #a5a5a5;">      
 					      	<c:choose>	 
 						      <c:when test="${rental.imgUrl == null }">
 						   		<img src="https://placehold.it/160x100?text=Not Image" class="media-object" alt="Rental" style="float:left">
@@ -112,8 +132,8 @@
 					      
 					      <div class="context">
 					      	<h4 class="desc_content" style="color: white; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;"></h4>
-					        <strong>[${rental.p_category_name }] ${rental.title }</strong>
-					        <p> ${rental.price } 원</p>
+					        <p style = "line-height:3; font-size:14px;"><strong>[${rental.p_category_name }] ${rental.title }</strong></p>
+					        <p style = "color:#ff7800; line-height:0; font-size:14px; font-weight:bold;"> ${rental.price } 원</p>
 					       </div>      
 					      </div>
 				        </a>
