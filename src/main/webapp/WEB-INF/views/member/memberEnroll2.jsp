@@ -360,6 +360,7 @@ $(function(){
 	 if(!reg_pwd.test(pw)){
 		 alert("형식에 맞게 비밀번호를 입력하세요.");
 		  $("#member_pw").val("");
+		  $("#member_pw2").val("");
 		  $("#member_pw").focus();
 		  return false;
 	 }
